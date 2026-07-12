@@ -1,0 +1,6 @@
+theme: default
+markmap_depth: 2
+toc_placeholder: true
+auto_layout_detect: true
+slide_ratio: "16:9"
+asset_mode: cdn
