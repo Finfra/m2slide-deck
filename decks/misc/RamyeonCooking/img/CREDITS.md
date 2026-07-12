@@ -4,5 +4,5 @@ Openverse(https://openverse.org)로 수집한 CC BY 2.0 이미지. 저작자 표
 
 | 파일 | 용도 | 저작자 | 라이선스 | 출처 |
 | :--- | :--- | :--- | :--- | :--- |
-| kramen_01.jpg | 준비물(신라면) | bigbirdz | CC BY 2.0 | https://www.flickr.com/photos/7765825@N03/4491758635 |
+| kramen_01.jpg | 준비물(양은냄비) | The Marmot | CC BY 2.0 | https://www.flickr.com/photos/38142119@N00/48633671857 |
 | pot_01.jpg | 물 끓이기 | jronaldlee | CC BY 2.0 | https://www.flickr.com/photos/37176760@N06/4579611880 |

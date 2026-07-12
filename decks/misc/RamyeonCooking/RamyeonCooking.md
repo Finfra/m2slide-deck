@@ -23,12 +23,12 @@ release_date: 2026-07-12
 :::
 :::
 ::: {.column width="48%"}
-![라면](./img/kramen_01.jpg)
+![양은냄비](./img/kramen_01.jpg)
 :::
 :::
 
 ::: source
-이미지: bigbirdz, CC BY 2.0 (Flickr)
+이미지: The Marmot, CC BY 2.0 (Flickr)
 :::
 
 ---
