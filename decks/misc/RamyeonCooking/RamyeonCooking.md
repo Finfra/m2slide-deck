@@ -103,8 +103,6 @@ release_date: 2026-07-12
 
 ## 4단계 · 고명과 마무리
 
-::: columns
-::: {.column width="55%"}
 ::: cards
 * **계란**
   - 풀어 넣으면 국물이 부드러워짐
@@ -113,17 +111,6 @@ release_date: 2026-07-12
   - 마지막에 넣어 향과 색을 살림
 * **치즈·김치**
   - 취향껏 추가해 변주
-:::
-:::
-::: {.column width="45%"}
-![고명 얹은 라면](./img/ramenegg_01.jpg)
-
-![대파](./img/scallion_01.jpg)
-:::
-:::
-
-::: source
-이미지: goblinbox · katerha, CC BY 2.0 (Flickr)
 :::
 
 ---
@@ -143,20 +130,9 @@ release_date: 2026-07-12
 
 ## 완성
 
-::: columns
-::: {.column width="48%"}
 * 불을 끄고 바로 그릇에 담아 냄새를 살림
 * 국물부터 한 입 — 오늘의 한 그릇 완성
 * 같은 순서를 반복하면 언제나 같은 맛
-:::
-::: {.column width="52%"}
-![완성된 라면](./img/cover_01.jpg)
-:::
-:::
-
-::: source
-이미지: goblinbox, CC BY 2.0 (Flickr)
-:::
 
 ---
 
