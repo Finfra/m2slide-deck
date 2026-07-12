@@ -1,0 +1,43 @@
+# ── macOS ─────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.DocumentRevisions-V100
+.TemporaryItems
+Icon
+
+
+# ── m2slide 빌드 산출물 (재생성 가능 — m2slide.sh 로 재빌드) ──
+# 각 덱의 slide/ 는 markdown 소스에서 재생성되는 빌드 출력. PR 은 소스 공유가 원칙.
+**/slide/
+# EPUB·PDF 도 빌드 산출물 (재생성 가능)
+*.epub
+*.pdf
+
+# ppt2m2slide 역변환 중간 산출물 (원본 pptx 로 재생성)
+**/_pipeline/
+# refs/ 리서치 스크랩 (배포 자산 아님)
+**/refs/
+# graphify 지식 그래프 (재생성)
+graphify-out/
+# 증분 갱신 마커
+**/.needs_update
+
+# ── 런타임/캐시 ────────────────────────────────────────
+node_modules/
+__pycache__/
+*.pyc
+
+# ── 에디터 ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*~
+
+# ── 대용량 미디어 (git 미추적 — 외부 호스팅 참조) ──────
+*.mp4
+*.mov

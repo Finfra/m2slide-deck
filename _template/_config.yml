@@ -1,0 +1,13 @@
+# m2slide 덱 설정 예시 (필요한 키만 남기고 편집)
+# 전체 옵션: m2slide 저장소 _config.org.yml 참조
+
+theme: default                 # theme/{name}/ — 미설정 시 default
+theme_default_layout: contents # 슬라이드 기본 layout
+
+# markmap TOC 초기 펼침 깊이
+markmap_depth: 2
+
+# cover 슬라이드 자동 주입 (메타는 슬라이드 소스 frontmatter 에서 채움)
+cover_enabled: false
+
+# palette: default             # default | warm | cool | mono
