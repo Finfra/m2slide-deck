@@ -6,7 +6,7 @@ type: ppt
 release_date: 2026-07-12
 ---
 
-## :fa-basket-shopping: 준비물
+## 준비물
 
 ::: columns
 ::: {.column width="52%"}
@@ -23,13 +23,17 @@ release_date: 2026-07-12
 :::
 :::
 ::: {.column width="48%"}
-![라면과 고명](./img/noodles_01.jpg)
+![라면](./img/kramen_01.jpg)
 :::
+:::
+
+::: source
+이미지: bigbirdz, CC BY 2.0 (Flickr)
 :::
 
 ---
 
-## :fa-diagram-project: 전체 흐름
+## 전체 흐름
 
 ::: htmlart process
 * 물 550ml 끓이기
@@ -45,7 +49,7 @@ release_date: 2026-07-12
 
 ---
 
-## :fa-fire: 1단계 · 물 끓이기
+## 1단계 · 물 끓이기
 
 ::: columns
 ::: {.column width="55%"}
@@ -60,9 +64,13 @@ release_date: 2026-07-12
 :::
 :::
 
+::: source
+이미지: jronaldlee, CC BY 2.0 (Flickr)
+:::
+
 ---
 
-## :fa-bowl-food: 2단계 · 스프 먼저
+## 2단계 · 스프 먼저
 
 ::: columns
 ::: {.column width="50%"}
@@ -79,21 +87,21 @@ release_date: 2026-07-12
 
 ---
 
-## :fa-clock: 3단계 · 면과 시간
+## 3단계 · 면과 시간
 
 ::: htmlart timeline
-* **0초** — 면 투입, 타이머 시작
-* **2분** — 중간 젓기, 면을 풀어 고르게
-* **4분 30초** — 완성, 쫄깃한 식감
-* **5분** — 푹 익힘, 부드러운 식감
+* 0초 · 면 투입
+* 2분 · 중간 젓기
+* 4분 30초 · 완성
+* 5분 · 푹 익힘
 :::
 
-* 면을 넣는 순간 타이머 시작
-* 젓가락으로 면을 들었다 놓으며 공기와 접촉시키면 더 탱탱해짐
+* 면을 넣는 순간 타이머 시작 — **4분 30초**가 기준
+* 젓가락으로 들었다 놓으며 공기와 접촉시키면 더 탱탱해짐
 
 ---
 
-## :fa-egg: 4단계 · 고명과 마무리
+## 4단계 · 고명과 마무리
 
 ::: columns
 ::: {.column width="55%"}
@@ -108,15 +116,19 @@ release_date: 2026-07-12
 :::
 :::
 ::: {.column width="45%"}
-![반숙 계란](./img/egg_01.jpg)
+![고명 얹은 라면](./img/ramenegg_01.jpg)
 
 ![대파](./img/scallion_01.jpg)
 :::
 :::
 
+::: source
+이미지: goblinbox · katerha, CC BY 2.0 (Flickr)
+:::
+
 ---
 
-## :fa-trophy: 실패하지 않는 3원칙
+## 실패하지 않는 3원칙
 
 ::: htmlart pyramid
 * 시간 엄수 — 4분 30초
@@ -129,7 +141,7 @@ release_date: 2026-07-12
 
 ---
 
-## :fa-mug-hot: 완성
+## 완성
 
 ::: columns
 ::: {.column width="48%"}
@@ -142,10 +154,21 @@ release_date: 2026-07-12
 :::
 :::
 
+::: source
+이미지: goblinbox, CC BY 2.0 (Flickr)
+:::
+
 ---
 
-## :fa-camera: 이미지 출처
+## 라면, 한 그릇의 철학
 
-* 표지·면·냄비·계란·파 사진 — **Openverse** (CC BY 2.0)
-* 저작자: goblinbox · L.A. Foodie · jronaldlee · simpleprovisions · katerha
-* 상세 출처·라이선스: `img/CREDITS.md`
+::: cards
+* **"면발은 기다려주지 않는다"**
+  - 3분의 미학 — 타이밍이 곧 맛
+* **"국물이 답이다"**
+  - 스프 반, 정성 반
+* **"라면 앞에서는 모두가 평등하다"**
+  - 새벽 두 시의 위로 한 젓가락
+:::
+
+> 잘 끓인 라면 한 그릇이면, 오늘 하루도 충분하다 🍜
