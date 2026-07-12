@@ -6,3 +6,4 @@ Openverse(https://openverse.org)로 수집한 CC BY 2.0 이미지. 저작자 표
 | :--- | :--- | :--- | :--- | :--- |
 | kramen_01.jpg | 준비물(양은냄비) | The Marmot | CC BY 2.0 | https://www.flickr.com/photos/38142119@N00/48633671857 |
 | pot_01.jpg | 물 끓이기 | jronaldlee | CC BY 2.0 | https://www.flickr.com/photos/37176760@N06/4579611880 |
+| ramyeon_pot_zimage.png | 완성된 한 그릇(hero) | AI 생성 (mflux Z-Image-Turbo, seed 25, 로컬) | — (저작권 프리, 로컬 생성물) | prj55 DeviceManagement `_doc_base/mflux/tests/05_zimage-turbo_korean.png` |
