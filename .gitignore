@@ -27,6 +27,13 @@ graphify-out/
 # 증분 갱신 마커
 **/.needs_update
 
+# ── nPTiR 작업 산출물 (프로젝트별 로컬 작업) ──────────
+# _doc_arch 는 설계 결정 SSOT이므로 추적
+# _doc_work 는 이슈별 작업 산출물 (휘발성)
+# _doc_base 는 프로젝트 원천 자료 (조건부 추적)
+_doc_work/
+_doc_base/
+
 # ── 런타임/캐시 ────────────────────────────────────────
 node_modules/
 __pycache__/
