@@ -51,4 +51,7 @@ m2slide-deck/
 ## 라이선스·기여
 
 * 기여 규칙: [CONTRIBUTING.md](./CONTRIBUTING.md)
-* 각 덱의 저작권은 해당 덱 `README.md` 에 명시
+* 저장소 기본 라이선스: [LICENSE.md](./LICENSE.md)
+    - 덱 콘텐츠(슬라이드 원고·이미지) — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) · 비상업 자유 이용, 상업 이용은 별도 허락(`finfra@gmail.com`)
+    - 빌드 스크립트·템플릿 코드 — MIT
+* 각 덱의 저작권은 해당 덱 저자에게 있다. 덱 `README.md` 에 라이선스를 명시하면 **그 명시가 기본값보다 우선**한다 (ex: [RamyeonCooking](./decks/misc/RamyeonCooking/README.md) — CC BY 4.0)

@@ -21,4 +21,4 @@
 
 ## 라이선스
 
-{예: CC BY 4.0 / MIT / All rights reserved}
+{비워 두면 저장소 기본값 CC BY-NC-SA 4.0 적용 — [LICENSE.md](../../../LICENSE.md). 다르게 하려면 여기에 명시 (ex: CC BY 4.0 / MIT)}
