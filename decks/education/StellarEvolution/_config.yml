@@ -1,0 +1,9 @@
+theme: default_dark
+theme_default_layout: contents      # 슬라이드 기본 layout
+cover_enabled: true                 # 첫 슬라이드 위치에 cover 자동 주입 (frontmatter title/subtitle 사용)
+cover_layout: _cover
+markmap_depth: 2                    # Markmap 초기 펼침 깊이
+agenda_card_mode: true              # agenda.html(/n/a) 을 markmap 대신 카드 그리드로 렌더
+asset_mode: cdn                     # docs 발행용 CDN (vendor 미포함)
+
+contents_balance: center
