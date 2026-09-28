@@ -1,0 +1,93 @@
+graphify — 코드베이스를 Knowledge Graph로
+Claude Code 유저를 위한 15분 입문
+
+들어가며 — 왜 graphify인가
+파일 수백 개에 모듈 의존성이 복잡하게 얽혀 있는 대규모 코드베이스에서
+"A와 B가 어떻게 연결돼 있지?" 라는 질문이 생기면 grep으로는 한계가 있습니다.
+그리고 파일 전체를 엘엘엠에 올리면 컨텍스트 창을 낭비하는 토큰 폭탄이 됩니다.
+
+graphify가 해결하는 문제
+graphify는 코드와 문서 전체를 사전 분석해서 knowledge graph로 캐싱합니다.
+질의할 때는 필요한 노드만 가져오기 때문에 토큰을 최소화할 수 있습니다.
+또한 EXTRACTED와 INFERRED edge를 통해 숨겨진 연결도 발견할 수 있습니다.
+
+graphify란 무엇인가
+graphify는 임의의 폴더, repo, 유알엘을 입력받아 커뮤니티 검출과 knowledge graph를 생성하는 CLI 도구입니다.
+3대 산출물로는 인터랙티브 시각화용 graph.html, GraphRAG 백엔드용 graph.json,
+그리고 자연어 보고서인 GRAPH_REPORT.md가 있습니다.
+
+Obsidian Graph와 graphify의 비교
+Obsidian Graph는 wikilink 기반의 명시적 링크만 추출하고 마크다운 노트가 대상인 반면,
+graphify는 임의 파일, repo, 유알엘을 대상으로 의미 추출과 추론을 통해 관계를 찾아냅니다.
+Obsidian은 GUI 시각화 방식이고, graphify는 CLI query, path, explain 방식으로 탐색합니다.
+
+핵심 개념: edge 신뢰도
+graphify의 edge는 신뢰도에 따라 세 종류로 나뉩니다.
+명시적 참조에서 추출된 EXTRACTED는 신뢰도가 높고,
+문맥 기반으로 추론된 INFERRED는 평균 신뢰도가 0.7입니다.
+그리고 불명확한 경우는 AMBIGUOUS로 분류됩니다.
+
+설치 & 첫 빌드
+graphify는 Claude Code 슬래시 명령으로 바로 실행할 수 있어서 별도 설치가 필요 없습니다.
+현재 폴더는 /graphify . 로, 특정 경로는 /graphify 경로로,
+GitHub repo는 /graphify URL 형식으로 실행합니다.
+
+첫 빌드 흐름
+/graphify . 를 실행하면 파일 스캔, 노드와 엣지 추출, 커뮤니티 검출을 거쳐
+graphify-out/ 폴더에 graph.html, graph.json, GRAPH_REPORT.md가 생성됩니다.
+최초 빌드만 토큰을 소비하고, 이후에는 graphify update . 로 AST-only 무비용 업데이트가 됩니다.
+
+토큰 절약 — 절대 하지 말 것
+graph.json은 수백 KB이므로 절대 직접 Read하면 안 됩니다.
+GRAPH_REPORT.md도 300줄이 넘기 때문에 bash로 섹션을 발췌하는 방식만 허용됩니다.
+graph.html 역시 직접 Read는 금지입니다.
+
+권장 탐색 패턴
+그래프 탐색은 graphify query, graphify path, graphify explain 명령을 사용합니다.
+GRAPH_REPORT의 특정 섹션은 sed 명령으로 발췌하는 방식을 권장합니다.
+허용되는 직접 Read 대상은 100줄 이하인 GRAPH_REPORT.brief.md와
+wiki/index.md, 그리고 1~2개의 wiki 커뮤니티 파일입니다.
+
+CLI 실전: 세 가지 핵심 명령
+첫 번째로 graphify query에 질문을 넣으면 BFS 그래프 탐색으로 자연어 질의가 가능합니다.
+두 번째로 graphify path A B는 두 개념 사이의 최단 경로를 찾아줍니다.
+세 번째로 graphify explain 개념명은 해당 노드를 자연어로 설명해줍니다.
+
+query 사용 예시
+아키텍처나 의존성 질문은 예를 들어 "generate-slides.js가 어떤 모듈을 사용하나?"처럼 물어볼 수 있습니다.
+관계 질문은 "theme과 layout의 관계는?"처럼 작성하면 되고,
+기능 위치 질문도 "슬라이드 변환 핵심 함수는 어디?"처럼 자연어로 가능합니다.
+일반 grep이 파일 위치만 찾는 반면, graphify query는 관계 맥락까지 설명해줍니다.
+
+path & explain 사용 예시
+graphify path로 두 개념을 연결하면 단계별 연결 경로를 보여줍니다.
+예를 들어 Info.md에서 agenda-designer, AGENDA.md를 거쳐
+generate-slides.js → slide/index.html 순서로 연결 경로가 나타납니다.
+graphify explain으로 layout-selector를 조회하면
+해당 agent가 하는 일, 관련 파일, 의존 데이터까지 자세히 설명해줍니다.
+
+실전 워크플로
+신규 프로젝트에 합류했을 때는 먼저 /graphify . 로 그래프를 빌드합니다.
+그 다음 GRAPH_REPORT.md에서 필요한 섹션을 발췌해서 전체 구조를 파악합니다.
+아키텍처 질문은 graphify query, 두 개념 연결은 graphify path,
+개념 이해가 필요할 때는 graphify explain을 사용합니다.
+마지막으로 실제 필요한 파일만 타겟으로 Read하면 됩니다.
+
+업데이트 정책
+코드를 수정한 뒤에는 graphify update . 를 실행하면 AST-only로 무비용 업데이트됩니다.
+또는 post-commit hook에 graphify update . 를 추가해서 자동화할 수도 있습니다.
+전체 재빌드는 비용이 크기 때문에 반드시 --update 증분 플래그를 사용해야 합니다.
+구조화된 wiki가 필요하다면 --wiki 옵션을 추가하면 됩니다.
+
+정리 & 다음 단계
+오늘은 graphify가 무엇인지, 그리고 어떻게 활용하는지 살펴봤습니다.
+코드와 문서를 knowledge graph로 변환하고 EXTRACTED와 INFERRED edge로 관계를 파악하며,
+Obsidian과 달리 명시적 링크 없이도 의미 기반 추출이 된다는 점을 확인했습니다.
+토큰 절약 전략으로는 graph.json과 GRAPH_REPORT.md를 직접 Read하지 않고
+graphify query, path, explain CLI를 경유하는 방식을 배웠습니다.
+
+다음 단계
+지금 작업 중인 프로젝트에 바로 적용하려면 /graphify . 를 실행해보세요.
+더 짧은 명령을 원하면 /gq 질문 형식의 graphify query 래퍼를 사용할 수 있습니다.
+50줄 요약 리포트가 필요하면 /graphify-brief 주제 명령을 활용하세요.
+고급 기능으로는 다중 repo를 단일 그래프로 통합하는 Cross-repo merge도 있습니다.
