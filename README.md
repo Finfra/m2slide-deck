@@ -15,6 +15,7 @@ m2slide-deck/
 ├── decks/              # 실제 덱 프로젝트 (카테고리별 2단계)
 │   ├── tech/           # 기술
 │   ├── ai/             # AI·ML
+│   ├── agentic-ai/     # Agentic AI — AI 에이전트·에이전틱 코딩·AI 활용 강의
 │   ├── business/       # 비즈니스
 │   ├── education/      # 교육·강의
 │   └── misc/           # 기타

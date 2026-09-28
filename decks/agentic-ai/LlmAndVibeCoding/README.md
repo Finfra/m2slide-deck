@@ -1,7 +1,7 @@
 # LLM 툴 진화와 바이브 코딩 세대 구분
 
 * 저자: 남중구 (핀프라)
-* 카테고리: education
+* 카테고리: agentic-ai (Agentic AI)
 * 요약: AI 코딩 도구의 발전 과정과 바이브 코딩(VibeCoding) 개념을 소개하는 30분 강연 자료
 * 발행본: https://finfra.github.io/m2slide/LlmAndVibeCoding/
 * 원고 이력: 2026-09-28 이전 이력은 [Finfra/m2slide](https://github.com/Finfra/m2slide) 저장소 `Projects/LlmAndVibeCoding/` 에 있음
@@ -10,7 +10,7 @@
 
 ```bash
 # m2slide 저장소에서
-./m2slide.sh /경로/m2slide-deck/decks/education/LlmAndVibeCoding
+./m2slide.sh /경로/m2slide-deck/decks/agentic-ai/LlmAndVibeCoding
 
 # 이 저장소를 m2slide 안 Projects_deck/ 로 clone 했다면 덱 이름만으로 된다
 ./m2slide.sh LlmAndVibeCoding

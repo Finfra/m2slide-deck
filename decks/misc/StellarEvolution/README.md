@@ -1,7 +1,7 @@
 # 항성의 진화 — 탄생에서 죽음까지
 
 * 저자: (원고에 미기재)
-* 카테고리: education
+* 카테고리: misc
 * 요약: 질량이 가르는 별의 운명
 * 발행본: https://finfra.github.io/m2slide/StellarEvolution/
 * 원고 이력: 이 저장소가 첫 버전 관리 (2026-09-28 이관)
@@ -10,7 +10,7 @@
 
 ```bash
 # m2slide 저장소에서
-./m2slide.sh /경로/m2slide-deck/decks/education/StellarEvolution
+./m2slide.sh /경로/m2slide-deck/decks/misc/StellarEvolution
 
 # 이 저장소를 m2slide 안 Projects_deck/ 로 clone 했다면 덱 이름만으로 된다
 ./m2slide.sh StellarEvolution

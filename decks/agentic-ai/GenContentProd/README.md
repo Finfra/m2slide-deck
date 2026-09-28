@@ -1,19 +1,19 @@
-# AI과정 부록 - 기초 지식편
+# AI Prompt Engineering으로 시작하는 AI기반 문서작성 실습
 
 * 저자: 남중구 (핀프라)
-* 카테고리: education
-* 요약: AI 활용을 위한 기초 지식
-* 발행본: https://finfra.github.io/m2slide/BasicKnowledgeForAI_small/
-* 원고 이력: 2026-09-28 이전 이력은 [Finfra/m2slide](https://github.com/Finfra/m2slide) 저장소 `Projects/BasicKnowledgeForAI_small/` 에 있음
+* 카테고리: agentic-ai (Agentic AI)
+* 요약: Prompt Engineering 기초부터 Prompt-to-Publish 파이프라인까지
+* 발행본: https://finfra.github.io/m2slide/GenContentProd/
+* 원고 이력: 2026-09-28 이전 이력은 [Finfra/m2slide](https://github.com/Finfra/m2slide) 저장소 `Projects/GenContentProd/` 에 있음
 
 ## 빌드
 
 ```bash
 # m2slide 저장소에서
-./m2slide.sh /경로/m2slide-deck/decks/education/BasicKnowledgeForAI_small
+./m2slide.sh /경로/m2slide-deck/decks/agentic-ai/GenContentProd
 
 # 이 저장소를 m2slide 안 Projects_deck/ 로 clone 했다면 덱 이름만으로 된다
-./m2slide.sh BasicKnowledgeForAI_small
+./m2slide.sh GenContentProd
 ```
 
 빌드 결과는 `slide/index.html` (git 미추적, 로컬 생성).
@@ -21,6 +21,7 @@
 ## 구성
 
 * `markdown/` — 슬라이드 소스 (chapter mode — `AGENDA.md` + 챕터 `.md`)
+* `img/` — 이미지 자산 (`./img/...` 로 참조)
 * `_config.yml` — theme·layout 등 m2slide 설정
 * `Info.md` — 기획 메타 (청중·분량·빌드 옵션 등)
 
