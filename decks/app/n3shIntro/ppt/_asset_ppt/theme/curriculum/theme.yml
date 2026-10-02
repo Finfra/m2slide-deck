@@ -1,0 +1,34 @@
+# curriculum 테마 — 수치의 SSOT. 문서는 이 값을 설명만 한다. (prj42#Issue336)
+#
+# ⚠️ 사본을 만들지 않는다. 코드가 이 파일을 읽는다.
+#    실측값이 나오면 여기에 적는다 — 코드에 박지 않는다.
+# layouts 스키마 SSOT: prj3 _doc_arch/ig-maker-design.md §12 (여기는 값만 선언)
+
+meta:
+  name: curriculum
+  base: image          # 원본(n3shIntro 슬라이드 6 캡처, 1300x650) 실측 추출
+
+canvas:
+  unit: mm
+  w: 338.67            # 16:9
+  h: 190.5
+  orientation: landscape
+
+margin:
+  l: 10.0
+  w: 318.67
+  split: 0.5
+
+palette:
+  # 원본(1.png) + m2slide default_lec 테마 실측 — 골드 타이틀 밴드 · 단계색 3종
+  accent: {navy: "#F5C518", band: "#F5C518", green: "#2ECC71", purple: "#B9A3E9", gold: "#F6D32D"}
+
+layouts:               # 레이아웃 카탈로그 — ig-maker 4-⓪ 이 여기서 하나를 고른다
+  content:             # 덱 장표 표준 — 테마가 타이틀 밴드·footer 를 그린다
+    title_band: true
+    footer: true
+    content_box: {x: 10.0, y: 28.0, w: 318.67, h: 150.0}
+  canvas:              # 전면 — 독립 인포그래픽(원본이 자체 타이틀 체계를 가질 때)
+    title_band: false
+    footer: false
+    content_box: {x: 0, y: 0, w: 338.67, h: 190.5}

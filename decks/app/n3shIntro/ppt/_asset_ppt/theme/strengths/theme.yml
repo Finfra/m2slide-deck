@@ -1,0 +1,28 @@
+# strengths 테마 — 수치의 SSOT. 문서는 이 값을 설명만 한다.
+#
+# ⚠️ 사본을 만들지 않는다. 코드가 이 파일을 읽는다.
+#    실측값이 나오면 여기에 적는다 — 코드에 박지 않는다.
+
+meta:
+  name: strengths
+  base: image          # potx(조직 템플릿 실측) / image(원본 추출) / builtin(내장)
+
+canvas:
+  unit: mm
+  w: 338.67          # 16:9. A4 세로는 216 x 303
+  h: 190.5
+  orientation: landscape
+
+margin:
+  l: 10.0
+  w: 318.67
+  split: 0.5
+
+palette:            # ⚠️ 비어 있으면 내장 기본색으로 나간다 — 원본 실측색을 채울 것
+  # 원본(strengths-src.png, 장표1) 실측 — 카드 제목 밴드 골드/옐로우 단색.
+  # 원본에 green/orange/purple 계열 강조색이 없어 그 슬롯은 내장 기본값 유지(지어내지 않음).
+  accent: {navy: "#F5C518", band: "#F5C518"}
+
+# 아래를 정의하지 않으면 내장 기본값이 쓰인다(깊은 병합).
+# font:   {family: "Malgun Gothic", title: 27, body: 9.5}
+# layout: {gap: 3.5, blocks: [{id: title, h: 19.0}]}

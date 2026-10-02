@@ -1,0 +1,4 @@
+# ig-maker 경로 4키 (prj42#Issue335 — n3sh before·after 실증)
+ppt_root: ppt/curriculum
+publish:  img/
+# asset_root 기본값 = {ppt_root}/_asset_ppt → 상향 탐색으로 ppt/_asset_ppt 공유

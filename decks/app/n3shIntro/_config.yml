@@ -1,0 +1,5 @@
+theme: default_lec
+cover_enabled: true
+markmap_depth: 2
+theme_default_layout: contents
+guide_line: false
