@@ -16,6 +16,7 @@ m2slide-deck/
 │   ├── tech/           # 기술
 │   ├── ai/             # AI·ML
 │   ├── agentic-ai/     # Agentic AI — AI 에이전트·에이전틱 코딩·AI 활용 강의
+│   ├── app/            # 앱·도구 소개 — 제품 소개 덱 (m2slide /p/ «📱 앱» 구역과 대응)
 │   ├── business/       # 비즈니스
 │   ├── education/      # 교육·강의
 │   └── misc/           # 기타

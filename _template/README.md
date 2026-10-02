@@ -1,7 +1,7 @@
 # {덱 제목}
 
 * 저자: {이름}
-* 카테고리: {tech / ai / agentic-ai / business / education / misc}
+* 카테고리: {tech / ai / agentic-ai / app / business / education / misc}
 * 요약: {한두 문장으로 이 덱이 무엇을 다루는지}
 
 ## 빌드
