@@ -48,3 +48,6 @@ __pycache__/
 # ── 대용량 미디어 (git 미추적 — 외부 호스팅 참조) ──────
 *.mp4
 *.mov
+
+# prj3#Issue1096 — 업무 접수대장은 제품 git 이력 밖 (request-rules)
+/Request.md
