@@ -1,0 +1,29 @@
+theme: default_lec
+theme_default_layout: contents
+head_left: d2       # 좌 = 소제목(절) — 키노트 원본의 좌상단
+head_right: d1      # 우 = 최상위 목차(N일차) — 키노트 원본의 우상단
+head_number: short  # 좌 슬롯의 일차 접두 제거 — `1-2.` 를 `2.` 로 렌더 (우측 「1일차」와 중복 회피)
+palette: default
+slide_ratio: "4:3"
+cover_enabled: true
+toc_card_mode: false
+cards_placeholder: false
+markmap_depth: 2
+chapter_markmap_depth: 3  # 절이 H2 로 내려가 트리가 3단 — markmap_depth+1 권장값
+auto_layout_detect: true
+nav_indicator: both
+# 화면 전환 — 즉시 넘김 (2026.09.28: 1일차 PDF 수업에서 장 넘김 피로 → m2slide 강의 전환)
+#   기본값 convex(3D 회전)·배경 zoom 이 장마다 재생되어 눈이 피곤했다. 장 번호에는 영향 없음
+animation:
+  default_transition: none
+  default_transition_speed: fast
+  default_background_transition: none
+style:
+  global:
+    # 콘텐츠측 팔레트 슬롯 — theme/default_lec 무수정. 상세는 css/lec-tokens.css 헤더 주석.
+    # 🚫 slide_css: 로 바꾸지 말 것 (cfg.themeName 이 null 이 되어 레이아웃·theme-img 가 날아감)
+    # font_import 상대경로는 m2slide 루트 기준(lib/generate-slides.js) — 덱 자신의 css/ 를 가리키고 slide/css/ 로 복사된다
+    font_import:
+      - Projects_deck/decks/agentic-ai/DesignRndAI/css/lec-tokens.css
+  theContents:
+    media_container_enlarge: fit
