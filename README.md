@@ -20,7 +20,7 @@ m2slide-deck/
 │   ├── business/       # 비즈니스
 │   ├── education/      # 교육·강의
 │   └── misc/           # 기타
-├── docs/               # GitHub Pages 배포 산출물 (git doc)
+├── docs/               # GitHub Pages 갤러리 (index.html) — 사이트 루트
 ├── _template/          # 새 덱 스캐폴드 (복사해서 시작)
 │   ├── README.md       # 덱 문서 템플릿 (모든 덱은 README 기본 지원)
 │   ├── _config.yml     # m2slide 설정 예시
@@ -45,6 +45,13 @@ m2slide-deck/
    ./m2slide.sh /경로/m2slide-deck/decks/tech/MyDeck
    ```
 5. commit → push → **Pull Request** 생성
+
+## 웹 사이트 (GitHub Pages)
+
+* 갤러리: https://finfra.github.io/m2slide-deck/ — [m2slide 본체 사이트](https://finfra.github.io/m2slide/) 와 서로 링크로 연결된다
+* 구성: `docs/index.html`(갤러리) + 추적된 덱 빌드본 `decks/<카테고리>/<덱>/slide/` 가 `/<덱>/` 으로 합쳐 배포된다 — [pages.yml](./.github/workflows/pages.yml) (`main` push 시 자동)
+* 덱을 웹으로 열려면 그 덱의 `slide/` 를 `.gitignore` 예외로 추적하고(ex: DesignRndAI), 갤러리 `docs/index.html` 에 카드를 추가한다. 그렇지 않은 덱은 원고(GitHub)만 공개된다
+* 이미 [m2slide 사이트](https://finfra.github.io/m2slide/) 에 발행된 이전 덱은 갤러리 카드가 그쪽 주소로 연결된다
 
 ## 덱 문서(git doc) 기본 지원
 

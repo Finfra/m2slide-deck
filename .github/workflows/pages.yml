@@ -1,0 +1,49 @@
+name: Deploy gallery to GitHub Pages
+
+# docs/ (갤러리 index.html) + 추적된 덱 빌드본(decks/<카테고리>/<덱>/slide/) 을 한 사이트로 묶어 배포한다.
+# 덱의 slide/ 가 git 에 추적돼 있을 때만 /<덱>/ 으로 노출된다 (.gitignore 예외 — 현재 DesignRndAI).
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'decks/**/slide/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r docs/. _site/
+          for idx in decks/*/*/slide/index.html; do
+            [ -f "$idx" ] || continue
+            slide_dir=$(dirname "$idx")
+            deck=$(basename "$(dirname "$slide_dir")")
+            echo "publish: $deck <- $slide_dir"
+            rm -rf "_site/$deck"
+            cp -r "$slide_dir" "_site/$deck"
+          done
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
