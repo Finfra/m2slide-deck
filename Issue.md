@@ -5,7 +5,7 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 
 # Issue Management
 
-* Issue HWM: 1
+* Issue HWM: 2
 ## 📋 상태 요약
 - 신규 등록: nPTiR 스캐폴드 생성 완료
 
@@ -20,6 +20,14 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 ## 📗 선택
 
 ## ✅ 완료
+
+## Issue2: GitHub Pages 갤러리 사이트 신설 — finfra.github.io/m2slide-deck + m2slide 사이트와 상호 링크 (등록: 2026-10-19, 해결: 2026-10-19, commit: e677a35) ✅
+* 목적: m2slide-deck 에 웹 페이지가 없어 DesignRndAI 등 덱을 브라우저로 열 수 없었다. m2slide 본체 사이트(finfra.github.io/m2slide)처럼 갤러리를 두고 두 사이트를 서로 링크로 잇는다
+* 상세:
+    - `docs/index.html` 갤러리(11덱·카테고리 3구역) — 이 사이트에서 호스팅하는 덱은 `/<덱>/`, m2slide 사이트에 발행된 이전 덱은 그쪽 주소, 웹 미발행 덱은 원고(GitHub)만
+    - `.github/workflows/pages.yml` — `docs/` + 추적된 `decks/*/*/slide/` 를 `_site/<덱>/` 으로 합쳐 배포. repo Pages `build_type=workflow` 로 활성화
+    - m2slide 쪽(5d81346, main): `docs/index.html` 헤더 «📦 덱 갤러리» 버튼 + DesignRndAI 카드(m2slide-deck 사이트로 연결)
+* 결과: ego-browser 확인 — 갤러리 11카드·«← m2slide 본체 사이트» 링크, DesignRndAI 목차(index)·1일차(93장·mg 캔버스 4·깨진 이미지 0), m2slide 사이트 헤더·카드 링크 동작
 
 ## Issue1: 라이선스 프로파일 B 적용 — repo 기본 CC BY-NC-SA 4.0 신설, 덱별 오버라이드 허용 (등록: 2026-09-27, 해결: 2026-09-27, commit: 126aa13) ✅
 * 목적: 규정이 "덱별 README 에 명시" 뿐이라 repo 기본값이 없다(무표기 = All rights reserved). 덱 콘텐츠는 비상업만 무료로 두어 남이 유료 강의 재료로 쓰는 것을 막는다
