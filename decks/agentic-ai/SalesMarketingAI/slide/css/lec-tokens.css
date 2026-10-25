@@ -1,0 +1,144 @@
+/* lec-tokens.css — 강의 덱 색 체계 (콘텐츠측 팔레트 슬롯)
+ *
+ * 목적: theme/default_lec 를 수정하지 않고 m2slide 팔레트 슬롯만 덮는다.
+ * 배선: _config.yml 의 style.global.font_import 에 이 파일의 절대경로를 건다.
+ *       generate-slides.js 가 slide/css/lec-tokens.css 로 복사하고 <link> 를 건다.
+ *
+ * 주입 순서 (lib/html-builder.js 1049~1058행):
+ *   reset → reveal → highlight → base.css(inline) → palette(inline) → [이 파일] → custom.css(테마)
+ *   테마 slide.css 는 --m2-accent-* 를 「소비만」 하고 정의하지 않으므로(var(--m2-accent-5, …))
+ *   여기서 :root 로 덮으면 뒤에 오는 테마 CSS 와 충돌하지 않고 그대로 적용된다.
+ *
+ * 🚫 _config.yml 의 slide_css: 로 바꾸지 말 것 — cfg.themeName 이 null 이 되어
+ *    default_lec 레이아웃 14종과 theme-img 배경 자산이 함께 날아간다 (lib/config.js 203~206행).
+ *
+ * 설계 SSOT: 디자인 시스템 아티팩트 "강의 덱 색 체계"
+ *   https://claude.ai/artifact/Et7YVQncPPDDuR3oc8bGhX
+ */
+
+:root {
+  /* ── 팔레트 슬롯 — m2slide 가 실제로 물리는 것 ─────────────────────── */
+
+  /* 카드 제목 밴드(--m2-card-title-bg). 테마 식별 노랑 --kn-accent 와 같은 값으로 맞춘다. */
+  --m2-accent-1: #f5c518;   /* brand-fill */
+
+  /* 본문 볼드 강조 + 챕터 번호. 테마는 var(--m2-accent-5, #C82506) 로 빨강을 의도했으나
+   * base.css 기본값 #2ECC71(민트 녹색)이 물려 1일차 strong 225개 중 205개가 녹색으로 렌더됐다.
+   * brand-fill 의 잉크 짝(#7A6000)으로 바꿔 머리말 밑줄·카드 밴드와 같은 계열로 읽히게 한다.
+   * 흰 배경 6.00:1 · tint-brand(#FFF6D5) 위 5.54:1 — 둘 다 WCAG AA 본문 통과. */
+  --m2-accent-5: #7a6000;   /* ink-brand */
+
+  --m2-text: #111111;
+  --m2-bg:   #ffffff;
+
+  /* ── 의미 토큰 — 원고 이관(20-migration) 이후 참조용 ────────────────
+   * 아직 원고가 hex 를 직접 쓰고 있어 지금은 선언만 해 둔다. */
+  --ink-body:  #222222;
+  --ink-title: #111111;
+  --ink-brand: #7a6000;   /* 강조 */
+  --ink-ok:    #0365c0;   /* 정상·기준·합격 */
+  --ink-bad:   #c82506;   /* 이상·초과·불합격 */
+  --ink-warn:  #8a5200;   /* 경계·주의 (구 #E0A800 2.15:1 미달 교정) */
+  --ink-aux:   #0e7a63;   /* 보조 계열 (구 #16A085 3.28:1) */
+  --ink-mute:  #5b6b6c;   /* 중립·보류 (구 #7F8C8D 3.48:1) */
+
+  --tint-brand: #fff6d5;
+  --tint-ok:    #eaf2fb;
+  --tint-bad:   #fceae7;  /* 신설 — 빨강 틴트가 없어 「이상」을 배경으로 못 썼다 */
+  --tint-warn:  #ffe9b8;  /* 신설 */
+  --tint-aux:   #e4f4f0;  /* 신설 */
+  --tint-mute:  #f5f5f5;
+
+  --line:      #555555;
+  --line-soft: #d9d9d9;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+ * ig (htmlart) — 2026.09.20 추가
+ * ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* 팔레트 슬롯 2·3·4·6 — 원고의 블록 속성 `{.accent-N}` 이 소비한다.
+   * (components.css 가 --htmlart-accent-N 으로 alias 하지만 그 alias 자체는
+   *  어디서도 안 읽힌다. 실제 소비는 markdown.js 424~435행의 .accent-N →
+   *  style="--htmlart-accent:var(--m2-accent-N)" inline 경로뿐이다.)
+   * 따라서 지금 화면은 안 바뀌고, 원고가 계열을 골라 쓸 수 있게 되는 준비다. */
+  --m2-accent-2: #0365c0;   /* ink-ok   — 정상·기준 계열 */
+  --m2-accent-3: #8a5200;   /* ink-warn — 경계 계열 */
+  --m2-accent-4: #0e7a63;   /* ink-aux  — 보조 계열 */
+  --m2-accent-6: #c82506;   /* ink-bad  — 이상 계열 */
+
+  /* htmlart 노드 박스의 불투명 배경 (d3 연결선이 박스 뒤로 가려지게 — Issue195).
+   * components.css 223행이 var(--m2-surface, #f4f4f5) 로 읽는다. */
+  --m2-surface: #f5f5f5;    /* tint-mute */
+}
+
+/* ⚠️ 아래 변수들은 `.reveal .m2-htmlart` 에 정의돼 있어 :root 로는 못 이긴다.
+ * 게다가 테마 custom.css 가 이 파일보다 뒤에 실리므로 동일 specificity 도 진다.
+ * 실측으로 확인한 해법 — :root 접두로 한 단계 올리면 이긴다 (!important 불필요). */
+
+:root .reveal .m2-htmlart {
+  --htmlart-box-border: #d9d9d9;   /* line-soft — 구 rgba(0,0,0,.16) 과 사실상 동값, 토큰화만 */
+  --htmlart-arrow:      #555555;   /* line — mermaid lineColor 와 통일 (구 rgba(0,0,0,.5)) */
+}
+
+/* compare 머리·부제. 원고의 compare 6블록은 「옳음↔틀림」 대립이 아니라
+ * 병렬 제시다(텍스트 LLM/비전 LLM, 정의/목적 …). 그래서 좌우를 같은 색으로 두고,
+ * 이 덱에서 빨강이 뜻하는 「이상·불합격」과 겹치지 않게 브랜드 계열로 옮긴다. */
+:root .reveal .htmlart-compare {
+  --htmlart-compare-sub:        #5b6b6c;  /* ink-mute  — 구 #e67e22 주황 */
+  --htmlart-compare-head-left:  #7a6000;  /* ink-brand — 구 #c0392b 벽돌빨강 */
+  --htmlart-compare-head-right: #7a6000;  /* ink-brand — 좌우 동색 유지(병렬이므로) */
+  --htmlart-compare-divider:    #d9d9d9;  /* line-soft */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+ * 레이아웃 — htmlart 좌우 배치의 글 칼럼 잘림 교정 (2026.09.20)
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * 증상: 전수 계측(446장) 결과 12장이 본문 중간에서 잘려 있었다. 원인은 전부
+ *       하나 — `.htmlart-side-rest` 가 `flex:1 1 0` + `overflow:hidden` 이라
+ *       글이 칼럼 높이를 넘으면 경고 없이 잘린다(components.css 311~322행).
+ *       6일차 19장은 불릿 3개가 문장 중간에서 끊기고 4번째는 아예 사라졌다.
+ *
+ * 왜 여백 키로 안 되나: `--slide-outer-padding`·`--slide-inner-padding` 은
+ *       이미 `0px` 이고, 셋(+ title_contents_gap)을 전부 0 으로 해도 잘림은
+ *       199/188px 그대로였다. 여백 문제가 아니라 칼럼 폭 배분 문제다.
+ *
+ * 실측 비교 (6일차 3·19·52장, 기준선 129/281/31px):
+ *   폭 1.4          → 0/183/0      글자 .92em      → 0/110/0
+ *   폭 1.4 + .92em  → 0/21/0       폭 1.8 + .88em  → 0/0/0   ← 채택
+ * 전 6일차 12장 전수 재검증에서 12장 모두 0px.
+ *
+ * 부작용 범위: `.htmlart-side` 는 htmlart_dispatch.client.js 의
+ *       relayoutSquished() 가 「세로로 눌렸다」고 판정한 장에만 붙는다.
+ *       클래스가 없는 장은 1px 도 안 바뀐다(테마 주석이 보증하는 계약).
+ */
+
+:root .reveal section[class*="layout-"] .contents-body.htmlart-side > .htmlart-side-rest {
+  flex: 1.8 1 0;
+  font-size: 0.88em;
+}
+:root .reveal section[class*="layout-"] .contents-body.htmlart-side > .m2-htmlart {
+  flex: 1 1 0;
+}
+
+/* ── exercise 좌우 칼럼의 번호 도해 눌림 교정 (Issue51-E · 2026.10.10) ──
+ * 증상: `#layout-exercise-small` 의 `::: columns` 에서 오른쪽 이미지가 가로로 긴 캡처(예: 6일차
+ *       verify-p6-3, 900x410)이면 칼럼 높이가 이미지에 맞춰 낮아지고, 왼쪽 `htmlart numbered`
+ *       가 flex 항목이라 31px 로 줄어 번호 3개가 50px 아이콘으로 쪼그라든다(전체 207/214).
+ * 교정: 칼럼 안의 htmlart 는 줄지 않게(shrink 0) — svg 가 viewBox 비율대로 제 높이를 갖고 칼럼이 늘어난다.
+ * 범위: 눌리지 않은 장은 1px 도 안 바뀐다(이미 제 높이면 shrink 가 일어나지 않음). 디자인 값은 건드리지 않음 */
+:root .reveal section[class*="layout-exercise"] .m2-col > .m2-htmlart {
+  flex: 0 0 auto;
+}
+
+/* ── svg-direct 도해는 캡처가 아니다 (Issue36 · 2026.09.28) ─────────────
+ * `.reveal .media-container img` 가 모든 이미지에 캡처용 2px 테두리를 두른다.
+ * img/diag-*.png 는 vg(svg-direct)로 그린 도해라 테두리가 붙으면 스크린샷처럼 보인다.
+ * 파일명 접두 `diag-` 로만 가른다 — 캡처·주석본(-annot)은 그대로 테두리를 유지한다. */
+:root .reveal section img[src*="img/diag-"] {
+  border: 0;
+  border-radius: 0;
+}
+

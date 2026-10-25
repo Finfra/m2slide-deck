@@ -16,6 +16,8 @@ Icon
 **/slide/
 # 예외 — DesignRndAI 는 장표별 확인을 위해 빌드본(slide/)까지 올린다 (prj42a#Req1 후속, 2026.10.17 사용자 지시)
 !decks/agentic-ai/DesignRndAI/slide/
+# 예외 — SalesMarketingAI 도 같은 이유로 빌드본을 올린다 (prj42a#Req2, 2026.10.25 공개 승인)
+!decks/agentic-ai/SalesMarketingAI/slide/
 # EPUB·PDF 도 빌드 산출물 (재생성 가능)
 *.epub
 *.pdf

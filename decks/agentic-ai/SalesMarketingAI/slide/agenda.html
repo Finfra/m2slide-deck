@@ -1,0 +1,1624 @@
+<!doctype html>
+<html lang="ko" class="ratio-4-3" style="--slide-ratio: 1.3333; --slide-outer-padding: 0px; --slide-inner-padding: 0px;">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>[영업·마케팅] 생성형 AI 고객·콘텐츠·해외영업 자동화 — Agenda</title>
+<script>
+    // Issue110/125: visibility 가드 — body 파싱 전 documentElement에 클래스 부여
+    try {
+      document.documentElement.classList.add('m2-initial-loading');
+      var s = location.search;
+      if (s.indexOf('back=1') !== -1 || s.indexOf('fwd=1') !== -1 || s.indexOf('last=1') !== -1) {
+        document.documentElement.classList.add('m2-cross-loading');
+      }
+    } catch (e) {}
+  </script>
+<script>
+    // Issue263: Safari 감지 → 렌더링 오류 가능 경고 오버레이
+    (function () {
+      try {
+        var ua = navigator.userAgent;
+        var isSafari = /safari/i.test(ua) && !/chrome|chromium|crios|edg|fxios|android/i.test(ua);
+        var forced = location.search.indexOf('safari-warn=1') !== -1;
+        if (!isSafari && !forced) return;
+        if (!forced && window.sessionStorage && sessionStorage.getItem('m2SafariWarned')) return;
+        function show() {
+          if (document.getElementById('m2-safari-warning')) return;
+          var ov = document.createElement('div');
+          ov.id = 'm2-safari-warning';
+          ov.setAttribute('style', 'position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);font-family:-apple-system,BlinkMacSystemFont,\'Apple SD Gothic Neo\',sans-serif;');
+          var box = document.createElement('div');
+          box.setAttribute('style', 'max-width:480px;margin:1rem;padding:1.6rem 1.8rem;background:#fff;color:#222;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.35);line-height:1.6;');
+          box.innerHTML = '<div style="font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;">⚠️ Safari 브라우저 감지</div>'
+            + '<div style="font-size:0.92rem;">Safari에서는 일부 슬라이드 요소(목차 마인드맵 등)가 정상적으로 렌더링되지 않을 수 있습니다. 정확한 표시가 필요하면 Chrome 계열 브라우저 사용을 권장합니다.</div>'
+            + '<div style="text-align:right;margin-top:1.2rem;"><button id="m2-safari-warning-ok" style="padding:0.45rem 1.2rem;border:none;border-radius:8px;background:#2d7a5f;color:#fff;font-size:0.92rem;cursor:pointer;">계속 보기</button></div>';
+          ov.appendChild(box);
+          document.body.appendChild(ov);
+          document.getElementById('m2-safari-warning-ok').addEventListener('click', function () {
+            try { sessionStorage.setItem('m2SafariWarned', '1'); } catch (e) {}
+            if (ov.parentNode) ov.parentNode.removeChild(ov);
+          });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
+        else show();
+      } catch (e) {}
+    })();
+  </script>
+<style data-m2slide-base="true">
+/* =========================================================================
+   m2slide base.css — 모든 테마 공통 기본 스타일 (Issue64 도입)
+   - 주입 방식: html-builder.js가 inline <style data-m2slide-base="true">로 주입
+   - 설계 SSOT (원칙·정책·공식·금지): _doc_design/css.md
+   - 본 파일은 모든 슬라이드의 골격(레이아웃·컴포넌트·반응형·CSS 변수 기본값) 제공
+   - 테마는 색상·이미지·시각 언어만 theme/{name}/slide.css로 추가
+
+   본 파일 목차:
+     §1  @import (외부 폰트 CDN)
+     §2  :root CSS 변수 기본값 (1.b 정책: _config.yml 명시값 전체 흡수)
+     §3  Reveal.js 변수 보정 (--r-* sky.css 의존 제거용)
+     §4  공통 레이아웃 (*, .outline-title, .title, Flex 컨테이너)
+     §5  컴포넌트 (lists, tables, media-container 4 enlarge modes, graph-scroll)
+     §6  특수 슬라이드 (title-slide, chapter-list)
+     §7  다분할 레이아웃 (m2-cols/columns, m2-rows/rows)
+     §8  디버깅 (guide-line-mode)
+     §9  Layout 골격 (cover/contents/contents-full/split-image-text/chapter-toc/chapter/exercise/exercise-small/blank/closing/toc)
+     §10 Layout-* 공통 (padding, header 정렬, list markers ●─▶•)
+     §11 반응형 (cover-title clamp 공식 — _doc_design/css.md §3 근거)
+     §12 Standalone agenda.html (Issue69 — reveal.js 컨텍스트 외 ratio fit + letterbox)
+   ========================================================================= */
+
+/* =========================================================================
+   1. @import — 외부 폰트 (CDN)
+   ========================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+
+/* Issue260: webfontworld/gmarket CDN 사망(404) → projectnoonnu noonfonts CDN @font-face 교체.
+   font-weight 100 900 범위 선언 — h1/h2의 700·900 요청에도 synthetic bold(faux-bold 뭉개짐) 방지. */
+@font-face {
+  font-family: 'GmarketSansBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================================
+   2. :root — CSS 변수 기본값 (1.b 정책: _config.yml 명시값 전체 흡수)
+   - 사용자가 _config.yml에 명시한 값 = 본 :root 기본값
+   - 사용자는 기본값에서 벗어나는 값만 _config.yml에 명시
+   - <body style="..."> 인라인이 더 높은 specificity로 override
+   ========================================================================= */
+:root {
+  /* ─────────────────────────────────────────────────────────────────────
+     m2 컬러 팔레트 9 슬롯 (Issue210) — Accent 1-6 + Text + Bg + Surface
+     설계 SSOT: _doc_arch/color-palette.md
+     카탈로그: data/palettes/catalog.yml (default 팔레트와 일치)
+     theme/{name}/palettes/{palette}.css 가 :root override 로 교체.
+     기존 --kn-* 변수는 신규 슬롯 alias 로 회귀 0 보증.
+     ───────────────────────────────────────────────────────────────────── */
+  --m2-accent-1: #F5C518;          /* default 팔레트 — 기존 --kn-accent 값 */
+  --m2-accent-2: #4ABDAC;
+  --m2-accent-3: #FC4A1A;
+  --m2-accent-4: #7B68EE;
+  --m2-accent-5: #2ECC71;
+  --m2-accent-6: #E74C3C;
+  --m2-text: #111111;
+  --m2-bg: #ffffff;
+  --m2-surface: #f4f4f5;
+
+  /* 기존 --kn-* 변수 호환 alias — theme/slide.css 가 override 가능 (회귀 0 보증) */
+  --kn-accent: var(--m2-accent-1);
+  --kn-text: var(--m2-text);
+
+  /* Global */
+  --global-font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+  /* Main Title (개요/표지 큰 제목) */
+  --main-title-font-family: 'GmarketSansBold', sans-serif;
+  --main-title-font-size: 2em;
+  --main-title-font-weight: 400;
+  --main-title-color: #333333;
+  --main-title-align: center;
+  --main-title-padding: 40px 0 20px 0;
+
+  /* Outline Title (목차/개요 제목) */
+  --outline-title-font-family: 'GmarketSansBold', sans-serif;
+  --outline-title-font-size: 2em;
+  --outline-title-font-weight: 600;
+  --outline-title-color: #000000;
+  --outline-title-align: center;
+  --outline-title-padding: 0;
+
+  /* Outline Title Sub (개요 부제) */
+  --outline-title-sub-font-family: 'GmarketSansBold', sans-serif;
+  --outline-title-sub-font-size: 0.5em;
+  --outline-title-sub-font-weight: 100;
+  --outline-title-sub-color: #666666;
+  --outline-title-sub-align: right;
+  --outline-title-sub-padding: 5px;
+
+  /* Title (슬라이드 제목) */
+  --title-font-family: 'GmarketSansBold', sans-serif;
+  --title-font-size: 1.5em;
+  --title-font-weight: 50;
+  --title-color: #000000;
+  --title-align: center;
+  --title-padding: 1%;
+
+  /* Content (theContents 본문) */
+  --content-font-family: 'Nanum Gothic Coding', monospace;
+  --content-font-size: 1em;
+  --content-color: #000000;
+  --content-align: left;
+  --content-padding: 1%;
+
+  /* Layout 변수 */
+  --title-contents-gap-pct: 0;
+
+  /* Slide 기하 (Issue63 + Issue65) — slide_ratio 기반 크기 체계
+     - --slide-ratio: width/height 무차원 비율 (16:9 → 1.7778, 3:2 → 1.5, fill → auto)
+     - --slide-outer-padding: 슬라이드↔뷰포트 대칭 패딩 (CSS length)
+     - --slide-inner-padding: 콘텐츠↔슬라이드 경계 대칭 패딩 (CSS length)
+     - 본 변수는 _config.yml slide_ratio/slide_outer_padding/slide_inner_padding로 override
+     - JS↔CSS 동기화 의무 (1.b 정책): lib/config.js createDefaultConfig 기본값과 동일 유지
+     - 기하 관계: contents_width = contents_height × var(--slide-ratio)
+  */
+  --slide-ratio: 1.7778;
+  --slide-outer-padding: 0px;
+  --slide-inner-padding: 0px;
+}
+
+/* =========================================================================
+   3. Reveal.js 변수 보정 (sky.css 의존 제거 후 누락 방지)
+   - slide.css 9.2에서 이관
+   ========================================================================= */
+.reveal {
+  --r-main-font-size: 40px;
+  --r-heading1-size: 3.77em;
+  --r-heading2-size: 2.11em;
+  --r-heading3-size: 1.55em;
+  --r-heading4-size: 1em;
+  --r-heading-text-transform: none;
+  --r-heading-font-weight: 700;
+  background: #ffffff;
+  color: inherit;
+  font-family: var(--global-font-family);
+  font-size: var(--r-main-font-size);
+}
+
+.reveal .slides {
+  color: inherit;
+}
+
+/* =========================================================================
+   4. 공통 레이아웃 (Layout Utilities) — slide.css §1·§2 이관
+   ========================================================================= */
+* {
+  box-sizing: border-box;
+}
+
+.reveal .outline-title {
+  font-family: var(--outline-title-font-family, var(--global-font-family, inherit));
+  font-size: var(--outline-title-font-size, 2.5em);
+  color: var(--outline-title-color, inherit);
+  text-align: var(--outline-title-align, center);
+  padding: var(--outline-title-padding, 0);
+  text-transform: none;
+  font-weight: var(--outline-title-font-weight, 700);
+}
+
+.reveal .title {
+  font-family: var(--title-font-family, var(--global-font-family, inherit));
+  font-size: var(--title-font-size, 1.6em);
+  color: var(--title-color, inherit);
+  text-align: var(--title-align, center);
+  padding: var(--title-padding, 0);
+  text-transform: none;
+  font-weight: var(--title-font-weight, 700);
+}
+
+/* Issue90: title_contents_gap을 모든 *-title 클래스에 일관 적용 (JS 타이밍 독립).
+   기존엔 .reveal .title에만 적용되어 chapter 모드(.contents-title 사용 시) 무효였음.
+   cover-title은 표지 디자인 padding이 제어하므로 제외. */
+.reveal .title,
+.reveal .contents-title,
+.reveal .chapter-title,
+.reveal .chapter-toc-title,
+.reveal .toc-title,
+.reveal .blank-title,
+.reveal .closing-title,
+.reveal .exercise-title {
+  margin-bottom: calc(var(--title-contents-gap-pct, 0) * 0.01em);
+}
+
+/* Issue250: layout 제목 클래스 공통 폰트 SSOT.
+   --main-title-font-family(기본 GmarketSansBold)를 모든 layout headline 제목에 적용.
+   이 SSOT가 없으면 각 theme 의 §3 공유 title 블록이 font-family 를 빠뜨릴 때
+   .reveal 의 --global-font-family(Pretendard 미로드) → 시스템 폰트로 폴백되는 회귀 발생.
+   .title(슬라이드 소제목)은 위 .reveal .title 룰에서 --title-font-family 로 별도 처리. */
+.reveal .cover-title,
+.reveal .contents-title,
+.reveal .chapter-title,
+.reveal .chapter-toc-title,
+.reveal .toc-title,
+.reveal .blank-title,
+.reveal .closing-title,
+.reveal .summary-title,
+.reveal .exercise-title,
+.reveal section[class*="layout-"] h1 {
+  font-family: var(--main-title-font-family, 'GmarketSansBold', sans-serif);
+}
+
+/* 공통 Flex Column 패턴 */
+.reveal pre,
+.reveal .slides section,
+.reveal .theContents,
+.reveal .media-container,
+.graph-scroll,
+.reveal section.title-slide {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 전체 크기 헬퍼
+   - Issue63: ratio-16-9/ratio-3-2는 Reveal.js fixed dimensions로 자동 비율 fit (CSS 개입 불필요)
+   - ratio-fill만 100%/100% 명시 적용 (비율 무제약)
+*/
+.reveal.ratio-fill .slides,
+.reveal .slides section,
+.reveal .media-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* 슬라이드 컨테이너 */
+.reveal .slides {
+  display: block;
+}
+
+.reveal.ratio-fill .slides {
+  inset: 0;
+  transform: none;
+}
+
+/* Issue63 + Issue: outer padding (슬라이드↔뷰포트 대칭).
+   - body에 padding 적용 + box-sizing: border-box로 Reveal scaling 영역(body content box) 축소
+   - Reveal.js가 측정하는 viewport 크기 자체가 줄어들어 4면 균등 inset + 자동 fit
+   - 기존 .reveal { inset } 방식은 left/top만 밀려나고 scale은 원본 viewport 기준이라 right/bottom 오버플로
+   - 0이면 효과 없음 (기존과 동일)
+   - A안(애니메이션 outer padding 영역까지 가시화):
+     html/body/.reveal/.slides 의 overflow를 visible로 풀어 슬라이드 transition 시
+     section이 .reveal 영역(=padding 안쪽)을 벗어나도 body padding 영역에 paint 되도록 함.
+*/
+html,
+body {
+  overflow: visible !important;
+}
+body {
+  padding: var(--slide-outer-padding, 0) !important;
+  box-sizing: border-box !important;
+}
+.reveal,
+.reveal .slides {
+  overflow: visible !important;
+}
+/* .reveal 를 visible 로 열면 reveal.js 가 부모 클리핑에 의존하던 배경 레이어
+   (.reveal .backgrounds)까지 함께 un-clip 되어, 세로 스택 슬라이드의
+   .slide-background(높이 = 슬라이드높이 × 스택수, ex 11520px)가 문서 밖으로
+   삐져나와 /n/ deck 모드에서 페이지 전체 세로 스크롤을 유발한다.
+   fade 트랜지션은 .slides 안에서 일어나므로 배경 레이어만 다시 클리핑해도 무영향. */
+.reveal .backgrounds {
+  overflow: hidden !important;
+}
+
+/* Issue215: ESC overview 모드에서 우리 CSS의 size·overflow 강제를 모두 해제.
+   - Issue109 visible 강제 + Issue63 height:100% + theme min-height:100% 결합으로
+     overview 그리드 모드에서 section들이 풀사이즈 적층 또는 viewport 밖 이탈
+   - .reveal.overview 클래스는 ESC 진입 시 reveal.js가 자동 부착
+   - overview 모드에서는 reveal.js 기본 grid 동작에 위임 (우리 강제 해제)
+   Issue220: `.reveal.overview .slides`에 `overflow: hidden`을 부여하면 reveal.js Overview가
+   sections를 `.slides` box(1920px width) 밖 좌표(translate3d 1990/3980/...px)에 transform 배치하는데
+   clip되어 1장만 시각 paint. `.reveal.overview`(viewport 루트)는 hidden 유지, `.slides`만 visible로 분리. */
+.reveal.overview {
+  overflow: hidden !important;
+}
+.reveal.overview .slides {
+  overflow: visible !important;
+}
+.reveal.overview .slides section,
+.reveal.overview .slides section[class*="layout-"] {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* 개별 슬라이드 섹션
+   - Flexbox Column 레이아웃 (공통 패턴 §3에서 display:flex 적용)
+   - Issue63 후속 수정: height/max-height/overflow override를 ratio-fill 한정으로 분리.
+     Reveal.js fixed dimensions 모드(16:9/3:2)에서는 Reveal이 1080px(또는 1280px) 논리 높이를 설정해야
+     transform: scale 비율 fit이 정상 동작함. 기존 height:auto !important가 이를 깨뜨려 height-bound 시
+     슬라이드가 콘텐츠 높이로 축소되는 버그 발생 → 본 수정에서 ratio-fill로 한정.
+*/
+.reveal .slides section {
+  padding: var(--slide-inner-padding, 0);
+  margin: 0;
+  top: 0;
+  left: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* ratio-fill 모드 전용: 비율 무제약 viewport 채움 + 콘텐츠 overflow 시 스크롤 */
+.reveal.ratio-fill .slides section {
+  height: auto !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+}
+
+/* 콘텐츠 컨테이너
+   - 남은 세로 공간을 모두 차지 (flex-grow: 1)
+   - 내용이 넘치면 스크롤 (overflow-y: auto)
+   - min-height: 0은 flex item이 내용물 크기보다 작아질 수 있게 함 (스크롤 동작 필수)
+   - max-height: 100% 추가로 부모 높이를 넘지 않도록 제한
+*/
+.reveal .theContents {
+  /* flex properties removed to allow natural flow */
+  overflow-wrap: break-word;
+  /* Prevent horizontal scroll for long words */
+  word-wrap: break-word;
+  font-family: var(--content-font-family, inherit);
+  font-size: var(--content-font-size, 1em);
+  color: var(--content-color, inherit);
+  text-align: var(--content-align, left);
+  padding: var(--content-padding, 0);
+}
+
+/* Preformatted Text */
+.reveal pre {
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.reveal pre code {
+  overflow: auto;
+  max-height: none;
+  text-align: left;
+}
+
+/* =========================================================================
+   5. 컴포넌트 (Components) — slide.css §3 이관
+   ========================================================================= */
+/* 리스트 */
+.reveal ul,
+.reveal ol {
+  display: block;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+/* Nested lists
+   Issue72: !important 제거 — layout-* 셀렉터(higher specificity)가 자연 override */
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ul,
+.reveal ol ol {
+  display: block;
+  margin-left: 1.5em;
+  margin-top: 0.2em;
+  font-size: 90%;
+}
+
+/* Custom Bullet Styles */
+.reveal li.bullet-dot {
+  list-style-type: disc;
+}
+
+.reveal li.bullet-dash {
+  list-style-type: "- ";
+}
+
+/* 표 */
+.reveal table {
+  width: auto;
+  min-width: 50%;
+  max-width: 90%;
+  border-collapse: collapse;
+  margin: 0.5em auto;
+}
+.reveal table th,
+.reveal table td {
+  padding: 0.4em 1em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  vertical-align: middle;
+}
+.reveal table thead th {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.06);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+}
+.reveal table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Issue 22: 테이블 내 이미지 크기 자동 조절 */
+.reveal table img {
+  max-height: 1.5em;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* 이미지 및 다이어그램 */
+.reveal .media-container {
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+/* Default (Original) Mode - controlled by body class */
+.reveal .media-container img,
+.reveal .media-container svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* 1. Original: 원본 크기 유지 (단, 화면 넘지 않음) */
+.media-enlarge-original .reveal .media-container img,
+.media-enlarge-original .reveal .media-container svg {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* 2. Width: 너비 최대화 (단, contents 영역 높이 초과 금지) */
+.media-enlarge-width .reveal .media-container img,
+.media-enlarge-width .reveal .media-container svg {
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: 100% !important;   /* 세로 긴 이미지가 contents 영역 넘지 않도록 클램프 (object-fit:contain 으로 letterbox) */
+  object-fit: contain !important;
+}
+
+/* 3. Height: 높이 최대화 */
+/* Issue: `display: flex !important` 가 모든 section 에 적용되면 reveal.js 가 비활성
+   슬라이드에 inline 으로 부여하는 `display: none` 을 덮어서 cross-page 전환 직후
+   다중 슬라이드가 한 프레임 겹쳐 paint 되는 잔상이 발생. `section.present` 한정으로
+   변경하여 활성 슬라이드만 flex 레이아웃을 강제. height/overflow 도 동일 한정. */
+.media-enlarge-height .reveal .slides section.present {
+  /* Issue63: 100vh → 100% (parent .slides는 ratio 모드에서 Reveal이 1080px 논리 높이 설정,
+     fill 모드에서는 viewport 채움). 100vh는 ratio 모드에서 transform scale 비율 fit을 깨뜨림. */
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow-y: hidden !important;
+  overflow-x: auto !important;
+}
+
+.media-enlarge-height .reveal .theContents {
+  flex-grow: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.media-enlarge-height .reveal .media-container,
+.media-enlarge-height .graph-scroll {
+  height: auto !important;
+  min-height: 0 !important;
+  flex-grow: 1 !important;
+}
+
+.media-enlarge-height .reveal .media-container img,
+.media-enlarge-height .reveal .media-container svg,
+.media-enlarge-height .graph-scroll img,
+.media-enlarge-height .graph-scroll svg {
+  height: 100% !important;
+  width: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+/* 4. Fit: 화면에 꽉 차게 맞춤 (스크롤 없음) */
+/* Issue: `section.present` 한정 (위 height 모드와 동일 사유 — cross-page 잔상 차단) */
+.media-enlarge-fit .reveal .slides section.present {
+  /* Issue63: 100vh → 100% (ratio 모드 transform scale 비율 fit 보존, 동일 사유) */
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.media-enlarge-fit .reveal .theContents {
+  flex-grow: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.media-enlarge-fit .reveal .media-container,
+.media-enlarge-fit .graph-scroll {
+  height: 100% !important;
+  min-height: 0 !important;
+  flex-grow: 1 !important;
+  overflow: hidden !important;
+}
+
+.media-enlarge-fit .reveal .media-container img,
+.media-enlarge-fit .reveal .media-container svg,
+.media-enlarge-fit .graph-scroll img,
+.media-enlarge-fit .graph-scroll svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+/* Handle nested flex layouts (e.g. columns) in fit mode */
+.media-enlarge-fit .reveal .theContents div {
+  flex-grow: 1 !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Hide empty paragraphs that might interfere with flex layout */
+.media-enlarge-fit .reveal .theContents>p:empty {
+  display: none !important;
+}
+
+.graph-scroll {
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.graph-scroll svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================================
+   6. 특수 슬라이드 (Special Slides) — slide.css §4 이관
+   ========================================================================= */
+/* 제목 슬라이드 (개요) */
+.reveal section.title-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* 챕터 제목 오버레이
+   - 슬라이드 우측 상단에 현재 챕터 제목을 고정 표시
+   - data-chapter-title 속성 값을 content로 사용
+   - pointer-events: none으로 클릭 이벤트가 뒤쪽 슬라이드에 전달되도록 함
+*/
+.reveal section[data-chapter-title]::after {
+  content: attr(data-chapter-title);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: var(--outline-title-sub-font-family, var(--global-font-family, inherit));
+  font-size: var(--outline-title-sub-font-size, 1em);
+  color: var(--outline-title-sub-color, inherit);
+  pointer-events: none;
+  z-index: 10;
+  text-transform: none;
+  font-weight: var(--outline-title-sub-font-weight, 500);
+  text-shadow: -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000;
+}
+
+/* 챕터 목록 */
+.chapter-list {
+  font-size: 0.8em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px 24px;
+  width: 100%;
+  align-self: stretch;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.chapter-list li {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* 카드형 챕터 목록 (toc_placeholder_new 실험) */
+.chapter-list.chapter-list--cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.chapter-list--cards .chapter-card {
+  flex: 0 1 calc((100% - 16px * 2) / 3);
+  min-width: 240px;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  list-style: none;
+}
+
+.chapter-list--cards .chapter-card::marker {
+  content: "";
+}
+
+.chapter-list--cards .chapter-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.chapter-list--cards .chapter-card a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.9em;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* =========================================================================
+   7. 다분할 레이아웃 (Multi-column / Multi-row) — slide.css §6 이관
+   - Issue34: 좌/우, 상/하, N분할, 그리드
+   - 클래스 alias: .m2-cols/.columns, .m2-col/.column, .m2-rows/.rows, .m2-row/.row
+   ========================================================================= */
+.reveal .m2-cols,
+.reveal .columns {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;   /* top-align — 좌·우 column 콘텐츠 양 다를 때 위쪽 정렬 (center → 짧은 column이 중간에 떠 어색) */
+  justify-content: space-between;
+  gap: 4%;
+  width: 100%;
+  /* Issue96: contents-body(flex column) 안에서 남은 높이 채워서 nested rows가
+     비율대로 분할될 수 있도록 함. 자연 콘텐츠는 영향 없음 (children 자연 크기 유지) */
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Issue96: rows가 중첩될 때만 column 박스를 풀-height로 stretch.
+   단순 image+text 2-col은 기존 center 정렬 유지 (image 수직 중앙) */
+.reveal .m2-cols:has(.m2-rows),
+.reveal .m2-cols:has(.rows),
+.reveal .columns:has(.m2-rows),
+.reveal .columns:has(.rows) {
+  align-items: stretch;
+}
+
+.reveal .m2-col,
+.reveal .column {
+  flex: 1;
+  min-width: 0;
+  /* Issue96: 내부 .m2-rows가 flex item으로 작동하여 column 높이를 채울 수 있도록
+     flex 컨테이너로 변환. 자연 콘텐츠(텍스트/이미지)는 동일하게 top-down 스택 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Issue95: .m2-rows가 부모 .contents-body(flex column) 의 남은 높이를 채우고,
+   .m2-row가 균등(또는 인라인 height 비례)으로 분할되도록 flex 보강 */
+.reveal .m2-rows,
+.reveal .rows {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.reveal .m2-row,
+.reveal .row {
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 0;
+  /* Issue95: 행 내부 콘텐츠(텍스트+미디어)가 세로로 쌓이고, .media-container가
+     남은 높이를 채워서 이미지/SVG가 행 경계를 넘지 않도록 flex column 컨테이너로 동작 */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Issue95: .m2-row 내부의 .media-container가 남은 높이를 채우도록.
+   기존 `.contents-body > .media-container` 규칙(theme/default/slide.css)은
+   contents-body 직속 자식만 매칭하므로 row 내부에서는 적용되지 않음 */
+.reveal .m2-row > .media-container,
+.reveal .row > .media-container {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.reveal .m2-row > .media-container img,
+.reveal .m2-row > .media-container svg,
+.reveal .row > .media-container img,
+.reveal .row > .media-container svg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.reveal .card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.reveal .m2-cols img,
+.reveal .columns img,
+.reveal .m2-rows img,
+.reveal .rows img {
+  max-width: 100%;
+  /* slide 영역 초과 방지 — Reveal.js 논리 높이는 720/683px,
+     scale 변환 후 viewport vh와 다름. min(...)로 vh + 절대 px 양쪽 가드 */
+  max-height: min(60vh, 500px);
+  height: auto;
+  object-fit: contain;
+}
+
+/* m2-col 안의 <p><img></p> wrapper도 flex column 안에서 column 높이 초과 방지 */
+.reveal .m2-col > p,
+.reveal .column > p {
+  min-height: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* =========================================================================
+   8. 디버깅 (Debugging) — slide.css §7 이관
+   ========================================================================= */
+/* Guide Line Mode */
+.guide-line-mode .reveal .slides section {
+  border: 5px solid rgba(255, 0, 0, 0.5) !important;
+  background-color: rgba(255, 0, 0, 0.05) !important;
+}
+
+.guide-line-mode .reveal h1,
+.guide-line-mode .reveal h2,
+.guide-line-mode .reveal h3 {
+  border: 3px solid rgba(0, 255, 0, 0.5) !important;
+  background-color: rgba(0, 255, 0, 0.05) !important;
+}
+
+.guide-line-mode .reveal .theContents {
+  border: 3px solid rgba(0, 0, 255, 0.5) !important;
+  background-color: rgba(0, 0, 255, 0.05) !important;
+}
+
+/* =========================================================================
+   9. Layout 타입별 골격 (Layout Skeletons) — slide.css §8 이관
+   ========================================================================= */
+
+/* === 공통 header/body 구조 === */
+.reveal section[class*="layout-"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Issue415: 좁은 화면(폭 435 미만)의 reveal 스크롤 뷰는 `.reveal-viewport.reveal-scroll .scroll-page section
+   { display:block !important }` 로 위 flex 를 덮어쓴다. 그러면 -body 가 남는 높이를 못 채워 flex:1 로
+   크기를 받는 htmlArt(process·pie 등)가 높이 0 이 된다(아이폰 실기기 보고, WebKit 실측 h=0).
+   스크롤 뷰에서만 발동하는 선택자라 PC 페이지 뷰는 무변경. 사용자 컨펌 2026-09-24 (base.css 가드) */
+.reveal-viewport.reveal-scroll .scroll-page section[class*="layout-"] {
+  display: flex !important;
+}
+
+.reveal section[class*="layout-"] > div[class$="-header"] {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.reveal section[class*="layout-"] > div[class$="-body"] {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Issue360: padding 은 '기본값' 이므로 명시도 0(:where) + 세로만 선언한다.
+   구 `padding: 1em 0`(0-3-2)은 아래 layout 별 규칙(0-3-1)과 theme 의 0-3-1 선언을
+   전부 이겨서, base 가 스스로 적은 1.5em 조차 한 번도 적용된 적이 없었다.
+   그 충돌을 우회한 흔적이 이미 둘 있다 — layout-chapter 의 `.slides` 4-class 선택자와
+   _blank 의 !important. 같은 함정을 두 번 밟았다는 뜻이라 규칙 쪽을 고친다.
+   가로는 아예 선언하지 않는다: theme 의 `5%` 같은 가로 선언이 자연히 살아야 하고,
+   기본값으로 가로 여백을 강제할 이유도 없다. flex/overflow 는 레이아웃 골격이라
+   명시도를 그대로 둔다(내려가면 closing-body 의 flex-grow:0 등이 되살아나 배치가 바뀐다). */
+:where(.reveal section[class*="layout-"] > div[class$="-body"]) {
+  padding-block: 1em;
+}
+
+/* === Accent line (divider) — 공통 골격, 색상은 theme에서 override === */
+.reveal section[class*="layout-"] > div[class*="-divider"],
+.reveal section[class*="layout-"] .reveal [class*="-divider"] {
+  height: 3px;
+  background: currentColor;
+  margin: 0.5em 0;
+  opacity: 0.6;
+}
+
+/* 1. Cover Layout */
+.reveal section.layout-_cover {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-_cover .cover-header {
+  padding: 2em 0 1em 0;
+}
+
+.reveal section.layout-_cover .cover-title {
+  font-size: 3.2em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-_cover .cover-visual {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.reveal section.layout-_cover .cover-visual img,
+.reveal section.layout-_cover .cover-visual svg {
+  max-width: 90%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
+}
+
+.reveal section.layout-_cover .cover-meta {
+  flex-shrink: 0;
+  padding: 1em 0;
+  font-size: 1.2em;
+}
+
+/* 2. Contents Layout */
+.reveal section.layout-_contents {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-_contents .contents-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-_contents .contents-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-_contents .contents-divider {
+  width: 40%;
+  margin: 0.5em 0 0 0;
+}
+
+.reveal section.layout-_contents .contents-body {
+  /* Issue360: 구 `padding: 1.5em 0` → `padding-block: 1em`. 전자는 범용 규칙(0-3-2)에
+     눌려 한 번도 적용된 적이 없는 미검증 값이었고, 실제 기준은 줄곧 1em 이었다.
+     가로는 선언하지 않는다 — theme 의 가로 선언이 살아야 한다. 이 규칙(0-3-1)은
+     theme 의 낮은 명시도 부분 선언(ex: `padding-top: 0`, 0-0-4)을 이겨야 하므로
+     :where 기본값에 맡기지 않고 여기 명시한다. theme 의 0-3-1 선언은 나중 로드라 이긴다. */
+  padding-block: 1em;
+}
+
+.reveal section.layout-_contents ul,
+.reveal section.layout-_contents ol {
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* 2.2 Contents-Full Layout (전체 높이 활용) */
+.reveal section.layout-contents-full {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-contents-full .contents-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-contents-full .contents-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-contents-full .contents-divider {
+  width: 40%;
+  margin: 0.5em 0 0 0;
+}
+
+.reveal section.layout-contents-full .contents-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  /* Issue360: 구 `1.5em 0` 은 범용 규칙에 눌려 적용된 적 없는 미검증 값. 기준은 1em 이다.
+     가로는 theme 몫이라 선언하지 않는다. 이 자리에 두는 이유는 위 §9 주석 참조. */
+  padding-block: 1em;
+}
+
+.reveal section.layout-contents-full ul,
+.reveal section.layout-contents-full ol {
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* 3. Split/Image-Text Layout */
+.reveal section.layout-split-image-text {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-split-image-text .split-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-split-image-text .split-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-split-image-text .split-divider {
+  width: 40%;
+  margin: 0.5em 0 0 0;
+}
+
+.reveal section.layout-split-image-text .split-row {
+  display: flex;
+  gap: 2.5em;
+  align-items: flex-start;
+  flex-grow: 1;
+  min-height: 0;
+  padding: 1em 0;
+}
+
+.reveal section.layout-split-image-text .split-left,
+.reveal section.layout-split-image-text .split-right {
+  flex: 1;
+  min-width: 0;
+}
+
+.reveal section.layout-split-image-text .split-left img,
+.reveal section.layout-split-image-text .split-right img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 4. Chapter TOC Layout */
+.reveal section.layout-chapter-toc {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-chapter-toc .chapter-toc-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-chapter-toc .chapter-toc-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-chapter-toc .chapter-toc-divider {
+  width: 40%;
+  margin: 0.5em 0 0 0;
+}
+
+.reveal section.layout-chapter-toc .chapter-toc-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  /* Issue360: 구 `1.5em 0` 은 범용 규칙에 눌려 적용된 적 없는 미검증 값. 기준은 1em 이다.
+     가로는 theme 몫이라 선언하지 않는다. 이 자리에 두는 이유는 위 §9 주석 참조. */
+  padding-block: 1em;
+}
+
+/* 5. Chapter Layout */
+.reveal section.layout-chapter {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-chapter .chapter-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-chapter .chapter-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-chapter .chapter-divider {
+  width: 40%;
+  margin: 0.5em 0 0 0;
+}
+
+.reveal section.layout-chapter .chapter-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  /* Issue360: 구 `1.5em 0` 은 범용 규칙에 눌려 적용된 적 없는 미검증 값. 기준은 1em 이다.
+     가로는 theme 몫이라 선언하지 않는다. 이 자리에 두는 이유는 위 §9 주석 참조. */
+  padding-block: 1em;
+}
+
+/* 6. Exercise Layout */
+.reveal section.layout-exercise {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-exercise .exercise-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-exercise .exercise-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-exercise .exercise-divider {
+  width: 40%;
+  margin: 0.5em 0 0 0;
+}
+
+.reveal section.layout-exercise .exercise-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  /* Issue360: 구 `1.5em 0` 은 범용 규칙에 눌려 적용된 적 없는 미검증 값. 기준은 1em 이다.
+     가로는 theme 몫이라 선언하지 않는다. 이 자리에 두는 이유는 위 §9 주석 참조. */
+  padding-block: 1em;
+}
+
+/* 6.2 Exercise-Small Layout */
+.reveal section.layout-exercise-small {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-exercise-small .exercise-header {
+  padding: 1em 0;
+}
+
+.reveal section.layout-exercise-small .exercise-title {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-exercise-small .exercise-divider {
+  width: 30%;
+  margin: 0.3em 0 0 0;
+  height: 2px;
+}
+
+.reveal section.layout-exercise-small .exercise-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 1em 0;
+}
+
+/* 8. Blank Layout */
+.reveal section.layout-_blank {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-_blank .blank-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-_blank .blank-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-_blank .blank-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  /* Issue360: 구 `1.5em 0` 은 범용 규칙에 눌려 적용된 적 없는 미검증 값. 기준은 1em 이다.
+     가로는 theme 몫이라 선언하지 않는다. 이 자리에 두는 이유는 위 §9 주석 참조. */
+  padding-block: 1em;
+}
+
+/* image-only / full-video 자동 감지 시 풀스크린 미디어 표시 (공통 패턴) */
+/* 특이도 (0,3,2) — L1129 `.reveal section[class*="layout-"]` (0,2,2) 와 충돌 회피.
+   두 클래스(`.layout-_blank` + `.layout-_blank--full-*`) 동시 매칭으로 source order 의존 제거 */
+.reveal section.layout-_blank.layout-_blank--full-image,
+.reveal section.layout-_blank.layout-_blank--full-video {
+  padding: 0;
+}
+.reveal section.layout-_blank--full-image .blank-header,
+.reveal section.layout-_blank--full-video .blank-header {
+  display: none;
+}
+.reveal section.layout-_blank--full-image .blank-body,
+.reveal section.layout-_blank--full-video .blank-body {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.reveal section.layout-_blank--full-image .blank-body p,
+.reveal section.layout-_blank--full-video .blank-body p,
+.reveal section.layout-_blank--full-video .blank-body .media-container {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reveal section.layout-_blank--full-image .blank-body img,
+.reveal section.layout-_blank--full-video .blank-body video {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* 9. Closing Layout */
+.reveal section.layout-closing {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2em;
+}
+
+.reveal section.layout-closing .closing-header {
+  margin-bottom: 1em;
+}
+
+.reveal section.layout-closing .closing-title {
+  font-size: 3.2em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-closing .closing-body {
+  flex-grow: 0;
+  padding: 1em 0;
+  font-size: 1.3em;
+}
+
+/* TOC (목차) Layout */
+.reveal section.layout-toc {
+  justify-content: flex-start;
+}
+
+.reveal section.layout-toc .toc-header {
+  padding: 1.5em 0;
+}
+
+.reveal section.layout-toc .toc-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reveal section.layout-toc .toc-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
+  /* Issue360: 구 `1.5em 0` 은 범용 규칙에 눌려 적용된 적 없는 미검증 값. 기준은 1em 이다.
+     가로는 theme 몫이라 선언하지 않는다. 이 자리에 두는 이유는 위 §9 주석 참조. */
+  padding-block: 1em;
+}
+
+.reveal section.layout-toc .toc-markmap {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+
+/* =========================================================================
+   10. Layout-* 공통 패딩 + 헤더 정렬 + 리스트 마커 — slide.css §9.5·§9.6 이관
+   - 두 테마 동일 마커 사용 → Common 분류 (사용자 결정)
+   - 색상은 var(--kn-text)가 아닌 currentColor/inherit 사용 → theme이 자유롭게 설정
+   ========================================================================= */
+/* layout-* 슬라이드 공통 패딩
+   주의: position 속성을 설정하지 말 것. reveal.js 기본 position:absolute 가
+   pseudo-element 의 positioned ancestor 역할을 이미 수행하며, 여기서 relative 로
+   덮으면 슬라이드 스택이 깨져 자동 layout 슬라이드가 viewport 밖으로 밀려남 (Issue54). */
+.reveal section[class*="layout-"] {
+  padding: 28px 56px 56px 56px;
+}
+
+/* 본문 영역 헤더 정렬: 제목은 가운데 정렬을 기본으로 함 */
+.reveal section[class*="layout-"] > div[class$="-header"] {
+  text-align: center;
+  align-items: center;
+}
+
+/* 리스트 — 레벨별 마커 차별화 */
+.reveal section[class*="layout-"] ul,
+.reveal section[class*="layout-"] ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.reveal section[class*="layout-"] ul > li,
+.reveal section[class*="layout-"] ol > li {
+  position: relative;
+  padding-left: 1.4em;
+  line-height: 1.7;
+  margin: 0.18em 0;
+}
+
+/* L1: ● */
+.reveal section[class*="layout-"] ul > li::before {
+  content: "●";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: currentColor;
+  font-size: 0.8em;
+}
+
+/* L2: ─ (em dash) */
+.reveal section[class*="layout-"] ul ul > li::before {
+  content: "─";
+  font-size: 0.95em;
+}
+
+/* L3: ▶ */
+.reveal section[class*="layout-"] ul ul ul > li::before {
+  content: "▶";
+  font-size: 0.7em;
+  top: 0.18em;
+}
+
+/* L4·L5: • (작은 점) */
+.reveal section[class*="layout-"] ul ul ul ul > li::before,
+.reveal section[class*="layout-"] ul ul ul ul ul > li::before {
+  content: "•";
+  font-size: 0.9em;
+}
+
+/* 들여쓰기 누적
+   Issue72: !important 제거 — 본 셀렉터 specificity (0,1,1,2)가 base nested list (0,0,1,2)보다 높아 자연 우선 */
+.reveal section[class*="layout-"] ul ul {
+  margin-left: 1.2em;
+  font-size: 100%; /* 글로벌의 90% 축소 무시 — 가독성 우선 */
+}
+
+/* =========================================================================
+   11. 반응형 (Responsive) — cover-title clamp 공식 (Issue62)
+   - 공식 근거: _doc_design/css.md §3.2
+   - 30자 한·영 혼합 가정, 5vw = 100/(30 × 0.6)
+   ========================================================================= */
+.reveal section.layout-_cover .cover-title {
+  font-size: clamp(1.2em, 5vw, 3.4em);
+}
+
+/* =========================================================================
+   12. Standalone agenda.html — ratio fit + letterbox (Issue69)
+   - reveal.js 컨텍스트 없는 standalone 페이지에서 cfg.slideRatio 기반 ratio fit
+   - body.agenda-page = letterbox 컨테이너 (cover의 .reveal 흰색 bg와 일관성 확보)
+   - .agenda-frame   = ratio 박스 (var(--slide-ratio) 활용 min() 공식)
+   - html.ratio-fill = frame이 viewport 채움 (auto 산술 불가 회피용 override)
+   ========================================================================= */
+body.agenda-page {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Issue271: 하드코딩 #ffffff → var(--m2-bg) 로 테마 배경 반응 (standalone agenda letterbox). 미정의 시 #ffffff fallback */
+  background: var(--m2-bg, #ffffff);
+  overflow: hidden;
+  font-family: var(--global-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif);
+}
+.agenda-frame {
+  /* outer padding 반영: viewport 단위에서 좌우/상하 padding 합계만큼 차감 */
+  width: min(
+    calc(100vw - 2 * var(--slide-outer-padding, 0px)),
+    calc((100vh - 2 * var(--slide-outer-padding, 0px)) * var(--slide-ratio))
+  );
+  height: min(
+    calc(100vh - 2 * var(--slide-outer-padding, 0px)),
+    calc((100vw - 2 * var(--slide-outer-padding, 0px)) / var(--slide-ratio))
+  );
+  /* Issue271: 하드코딩 #ffffff → var(--m2-bg) 로 테마 배경 반응 (ratio frame). 미정의 시 #ffffff fallback */
+  background: var(--m2-bg, #ffffff);
+  overflow: hidden;
+  position: relative;
+}
+html.ratio-fill .agenda-frame {
+  width: calc(100vw - 2 * var(--slide-outer-padding, 0px));
+  height: calc(100vh - 2 * var(--slide-outer-padding, 0px));
+}
+.agenda-frame .layout-_toc,
+.agenda-frame .layout-_agenda {
+  padding: 24px;
+  box-sizing: border-box;
+  height: 100%;
+}
+.agenda-frame .toc-mindmap-svg {
+  width: 100%;
+  height: calc(100% - 200px);
+  display: block;
+}
+.agenda-frame .toc-markmap {
+  padding: 12px 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Issue234 — source slot (출처·인용) 기본 스타일 (모든 theme 공통)
+ * `::: source ...출처... :::` fenced div → 슬라이드 하단 가운데 작은 글씨
+ * theme/{name}/slide.css 가 색·강조 override 가능 (font-size·position 등 보존 권장)
+ * ────────────────────────────────────────────────────────────────────────── */
+.reveal .m2-source {
+  position: absolute;
+  bottom: -0.3em;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.28em;
+  font-style: italic;
+  color: var(--m2-text, #111);
+  opacity: 0.55;
+  pointer-events: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 1em;
+  box-sizing: border-box;
+}
+.reveal .m2-source p {
+  margin: 0;
+  line-height: 1.4;
+}
+.reveal .m2-source a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.reveal .m2-source a::after {
+  content: ' (' attr(href) ')';
+  margin-left: 0.3em;
+  font-style: normal;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+</style>
+<style data-m2slide-palette="default">
+
+</style>
+<style>
+    /* Issue110/125: visibility 가드 — Reveal·agenda 양쪽 컨테이너 적용 */
+    html.m2-initial-loading .reveal,
+    html.m2-initial-loading .agenda-frame,
+    html.m2-cross-loading .reveal,
+    html.m2-cross-loading .agenda-frame,
+    body.m2-cross-loading .reveal,
+    body.m2-cross-loading .agenda-frame { visibility: hidden; }
+</style>
+<style data-m2slide-print="agenda">
+/* Issue402: agenda 가 PDF 에 들어간다 — 다운로드 버튼은 웹 UI 이지 인쇄물의 일부가 아니다.
+   base.css·theme 를 건드리지 않고 이 페이지에만 건다(base.css 는 전 프로젝트 공유라 가드 대상). */
+@media print { .toc-page-downloads { display: none !important; } }
+</style>
+<link rel="stylesheet" href="css/custom.css?v=1792931527831">
+</head>
+<body class="agenda-page" data-nav-indicator="both">
+<div class="agenda-frame">
+<div class="layout-_agenda">
+  <header class="toc-page-header">
+    <h1 class="toc-page-title">Agenda</h1>
+    <div class="toc-page-meta">남중구 (핀프라)</div>
+  </header>
+  <div class="toc-markmap">
+    <svg class="toc-mindmap-svg"></svg>
+  </div>
+  
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script>
+<script>
+(function(){
+  const tocData = {"content":"","children":[{"content":"<a href=\"01-day1.html\">1일차 — 생성형 AI 영업·마케팅 활용과 프롬프트</a>","children":[{"content":"<a href=\"01-day1.html#/1\">6일 강의 흐름 — 묻기에서 넓히기까지</a>","children":[]},{"content":"<a href=\"01-day1.html#/2\">1일차 — 생성형 AI 영업·마케팅 활용과 프롬프트</a>","children":[]},{"content":"<a href=\"01-day1.html#/4\">묻기 — 한 줄 질문이 고유한 답으로</a>","children":[]},{"content":"<a href=\"01-day1.html#/5\">1-0. 여는 절 — 6일 강의 흐름과 초기 설정</a>","children":[]},{"content":"<a href=\"01-day1.html#/6\">6일 동안 쓰는 도구와 제출 위치</a>","children":[]},{"content":"<a href=\"01-day1.html#/7\">🙋 실습 P1-0-1 — Edge·한글 설정과 ChatGPT 로그인</a>","children":[]},{"content":"<a href=\"01-day1.html#/8\">🙋 실습 P1-0-2 — Google 로그인과 2단계 인증</a>","children":[]},{"content":"<a href=\"01-day1.html#/9\">1-1. LLM 개념과 제조 B2B 영업·마케팅 적용 영역(조사·콘텐츠·제안·응대·분석), 보안·할루시네이션</a>","children":[]},{"content":"<a href=\"01-day1.html#/10\">LLM 의 정체 — 다음 낱말을 잇는 모델</a>","children":[]},{"content":"<a href=\"01-day1.html#/11\">적용 영역 5종 — 조사·콘텐츠·제안·응대·분석</a>","children":[]},{"content":"<a href=\"01-day1.html#/12\">LLM 이 틀리는 세 가지 방식 — 지어냄·낡음·오독</a>","children":[]},{"content":"<a href=\"01-day1.html#/13\">🖥️ 시연 — 할루시네이션 실연</a>","children":[]},{"content":"<a href=\"01-day1.html#/14\">보안 — 올리면 안 되는 것 세 묶음 5종</a>","children":[]},{"content":"<a href=\"01-day1.html#/15\">맡기는 선 — 맡김 · 초안만 · 사람이 정함</a>","children":[]},{"content":"<a href=\"01-day1.html#/16\">1-2. ChatGPT/Claude/Gemini 비교, 영업·마케팅 프롬프트, 브랜드 톤·문체 조절</a>","children":[]},{"content":"<a href=\"01-day1.html#/17\">세 도구 비교 — 같은 질문, 다른 답</a>","children":[]},{"content":"<a href=\"01-day1.html#/18\">🖥️ 시연 — ChatGPT·Claude·Gemini 3분할 비교</a>","children":[]},{"content":"<a href=\"01-day1.html#/19\">결론 — 도구는 용도로 고름</a>","children":[]},{"content":"<a href=\"01-day1.html#/20\">1줄 프롬프트와 6요소 프롬프트 — 같은 일, 다른 결과</a>","children":[]},{"content":"<a href=\"01-day1.html#/21\">프롬프트 6요소 — 페르소나·맥락·예시·형식·톤·과제</a>","children":[]},{"content":"<a href=\"01-day1.html#/22\">브랜드 톤 3종 — 격식·친근·간결</a>","children":[]},{"content":"<a href=\"01-day1.html#/23\">🙋 실습 P1-1-1 — 내 첫 프롬프트 쓰고 빠진 요소 세기</a>","children":[]},{"content":"<a href=\"01-day1.html#/24\">🙋 실습 P1-1-2 — 6요소로 고쳐 쓰고 톤 3종 받기</a>","children":[]},{"content":"<a href=\"01-day1.html#/25\">✅ 검증 P1-1 — 빠진 요소 개수 확인</a>","children":[]},{"content":"<a href=\"01-day1.html#/26\">1-3. 우리 제품·고객·시장 정보를 반영한 맥락 프롬프트 작성</a>","children":[]},{"content":"<a href=\"01-day1.html#/27\">맥락 카드 — 제품·고객·시장 각 5줄</a>","children":[]},{"content":"<a href=\"01-day1.html#/28\">1-4. 자사 제품 핵심 가치 제안(Value Proposition) 자동 정리</a>","children":[]},{"content":"<a href=\"01-day1.html#/29\">가치 제안 한 문장 틀 — 고객·문제·해결·증거</a>","children":[]},{"content":"<a href=\"01-day1.html#/30\">🙋 실습 P1-2-1 — 맥락 카드 없이 묻고 붙여서 다시 묻기</a>","children":[]},{"content":"<a href=\"01-day1.html#/31\">🙋 실습 P1-2-2 — 가치 제안 한 문장으로 정리</a>","children":[]},{"content":"<a href=\"01-day1.html#/32\">✅ 검증 P1-2 — 늘어난 고유 사실 세기</a>","children":[]},{"content":"<a href=\"01-day1.html#/33\">1-5. 닫는 절 — 1일차 정리</a>","children":[]},{"content":"<a href=\"01-day1.html#/34\">확인 질문 정답 공개 — 결과 세기</a>","children":[]},{"content":"<a href=\"01-day1.html#/35\">결론 — 맥락과 6요소가 2일차 조사로 이어짐</a>","children":[]}]},{"content":"<a href=\"02-day2.html\">2일차 — 시장·고객·경쟁사 조사 자동화</a>","children":[{"content":"<a href=\"02-day2.html#/1\">2일차 — 시장·고객·경쟁사 조사 자동화</a>","children":[]},{"content":"<a href=\"02-day2.html#/3\">조사하기 — 출처를 단 조사가 브리핑으로</a>","children":[]},{"content":"<a href=\"02-day2.html#/4\">2-0. 여는 절 — 1일차 연결과 설치·로그인</a>","children":[]},{"content":"<a href=\"02-day2.html#/5\">VSCode 란 — 파일을 열고 고치는 무료 편집기</a>","children":[]},{"content":"<a href=\"02-day2.html#/6\">VSCode 와 Codex — 2일차는 로그인까지</a>","children":[]},{"content":"<a href=\"02-day2.html#/7\">🙋 Practice P2-0-1 — VSCode 열기와 Codex 로그인</a>","children":[]},{"content":"<a href=\"02-day2.html#/8\">마크다운이란 — 기호로 서식을 적는 글 파일</a>","children":[]},{"content":"<a href=\"02-day2.html#/9\">마크다운 문법 ① — 제목·목록·강조·인용·구분선</a>","children":[]},{"content":"<a href=\"02-day2.html#/10\">마크다운 문법 ② — 링크·이미지·코드 블록</a>","children":[]},{"content":"<a href=\"02-day2.html#/11\">마크다운 문법 ③ — 표는 세로선 한 줄이 한 행임</a>","children":[]},{"content":"<a href=\"02-day2.html#/12\">🙋 Practice P2-0-2 — 마크다운 파일 만들고 미리보기 열기</a>","children":[]},{"content":"<a href=\"02-day2.html#/13\">2-1. Perplexity·웹 검색 활용 시장 동향·산업 트렌드 조사·요약</a>","children":[]},{"content":"<a href=\"02-day2.html#/14\">조사용 AI 는 두 부류 — 검색 결합형과 대화형</a>","children":[]},{"content":"<a href=\"02-day2.html#/15\">조사 프롬프트 — 범위·기간·출처 형식부터 정함</a>","children":[]},{"content":"<a href=\"02-day2.html#/16\">🔴 출처 링크가 달려도 틀릴 수 있음 — 열어서 확인함</a>","children":[]},{"content":"<a href=\"02-day2.html#/17\">🖥️ 시연 — Perplexity 로 부품 시장 동향 조사와 출처표</a>","children":[]},{"content":"<a href=\"02-day2.html#/18\">2-2. 잠재 고객(바이어)·타깃 기업 리스트업, 니즈 가설 도출</a>","children":[]},{"content":"<a href=\"02-day2.html#/19\">후보 발굴과 니즈 가설 — 좁힌 뒤 가설로 적음</a>","children":[]},{"content":"<a href=\"02-day2.html#/20\">🖥️ 시연 — 바이어 리스트업과 니즈 가설 표</a>","children":[]},{"content":"<a href=\"02-day2.html#/21\">2-3. 경쟁사 제품·가격·포지셔닝 비교표 자동 작성</a>","children":[]},{"content":"<a href=\"02-day2.html#/22\">비교표의 뼈대 — 같은 축에 같은 단위로 맞춤</a>","children":[]},{"content":"<a href=\"02-day2.html#/23\">🔴 같은 값, 다른 단위 — Kg/cm² 와 N/mm²</a>","children":[]},{"content":"<a href=\"02-day2.html#/24\">🙋 Practice P2-1-1 — 카탈로그 PDF 찾기와 비교표 받기</a>","children":[]},{"content":"<a href=\"02-day2.html#/25\">🙋 Practice P2-1-2 — 비교표.md 로 저장하고 환산값 검산</a>","children":[]},{"content":"<a href=\"02-day2.html#/26\">2-4. 고객사 정보(DART·뉴스·홈페이지) AI 요약, 영업 사전 브리핑</a>","children":[]},{"content":"<a href=\"02-day2.html#/27\">세 출처의 성격 — 공시·뉴스·홈페이지</a>","children":[]},{"content":"<a href=\"02-day2.html#/28\">사전 브리핑 5항목과 쓰기 전 검증 — 출처·문장·날짜</a>","children":[]},{"content":"<a href=\"02-day2.html#/29\">🖥️ 시연 — 회사 조사 스킬로 동명 업체 가려내고 판올림까지</a>","children":[]},{"content":"<a href=\"02-day2.html#/30\">🙋 Practice P2-2-1 — 브리핑틀의 5항목 채우기</a>","children":[]},{"content":"<a href=\"02-day2.html#/31\">🙋 Practice P2-2-2 — 출처 링크 열어 O·X 표시</a>","children":[]},{"content":"<a href=\"02-day2.html#/32\">2-5. 닫는 절 — 2일차 정리</a>","children":[]},{"content":"<a href=\"02-day2.html#/33\">2일차 결론 — 확인 뒤에 씀</a>","children":[]},{"content":"<a href=\"02-day2.html#/34\">🎬 다음 시간 예고 — 상담 메모를 페인포인트 표로</a>","children":[]}]},{"content":"<a href=\"03-day3.html\">3일차 — 영업 제안서·견적·페인포인트 분석</a>","children":[{"content":"<a href=\"03-day3.html#/1\">3일차 — 영업 제안서·견적·페인포인트 분석</a>","children":[]},{"content":"<a href=\"03-day3.html#/3\">제안하기 — 상담 메모가 제안서 한 벌로</a>","children":[]},{"content":"<a href=\"03-day3.html#/4\">3-0. 여는 절 — 상담 메모에서 제안서까지 오는 길</a>","children":[]},{"content":"<a href=\"03-day3.html#/5\">🔴 Codex 가 처음 일하는 날 — 승인 화면에서 읽을 것</a>","children":[]},{"content":"<a href=\"03-day3.html#/6\">🙋 Practice P3-0-1 — pandoc 과 AGENTS.md 규칙을 Codex 로 확인</a>","children":[]},{"content":"<a href=\"03-day3.html#/7\">🖥️ 시연 — 상담 메모를 말로 남기기</a>","children":[]},{"content":"<a href=\"03-day3.html#/8\">3-1. 고객 페인포인트 분석, 솔루션·차별점·기대효과 구조화</a>","children":[]},{"content":"<a href=\"03-day3.html#/9\">🔗 2일차 브리핑 틀을 한솔건기(가상)에 그대로 적용</a>","children":[]},{"content":"<a href=\"03-day3.html#/10\">페인포인트란 — 고객이 겪는 불편과 업무에 드는 비용</a>","children":[]},{"content":"<a href=\"03-day3.html#/11\">한솔건기(가상) 상담 메모 3건과 페인포인트 표의 5열</a>","children":[]},{"content":"<a href=\"03-day3.html#/12\">페인포인트에서 솔루션·차별점·기대효과로 한 줄씩 잇기</a>","children":[]},{"content":"<a href=\"03-day3.html#/13\">차별점은 고객의 불편과 우리 강점이 겹치는 자리</a>","children":[]},{"content":"<a href=\"03-day3.html#/14\">🙋 Practice P3-1-1 — Day3 폴더를 열고 Codex 에게 메모 읽히기</a>","children":[]},{"content":"<a href=\"03-day3.html#/15\">🙋 Practice P3-1-2 — 페인포인트 표 만들기와 근거 칸 대조</a>","children":[]},{"content":"<a href=\"03-day3.html#/16\">✅ 검증 P3-1 — 메모에 없는 내용이 들어간 칸 세기</a>","children":[]},{"content":"<a href=\"03-day3.html#/17\">3-2. 제조 고객용 영업 제안서 자동 작성(배경·솔루션·레퍼런스·가격)</a>","children":[]},{"content":"<a href=\"03-day3.html#/18\">제안서의 네 덩어리 — 배경, 솔루션, 레퍼런스, 가격</a>","children":[]},{"content":"<a href=\"03-day3.html#/19\">제안서는 마크다운으로 쓰고 pandoc 이 양식에 입힘</a>","children":[]},{"content":"<a href=\"03-day3.html#/20\">🙋 Practice P3-2-1 — 페인포인트 표로 제안서 초안 만들기</a>","children":[]},{"content":"<a href=\"03-day3.html#/21\">🙋 Practice P3-2-2 — pandoc 으로 .docx 변환과 양식 대조</a>","children":[]},{"content":"<a href=\"03-day3.html#/22\">✅ 검증 P3-2 — 양식과 다른 제목 세기</a>","children":[]},{"content":"<a href=\"03-day3.html#/23\">3-3. 견적 회신·조건 협의·후속 액션 메일, 어조 조절</a>","children":[]},{"content":"<a href=\"03-day3.html#/24\">어조는 상대와 단계가 정함 — 관계 거리와 협상 긴장</a>","children":[]},{"content":"<a href=\"03-day3.html#/25\">🖥️ 시연 — 같은 견적 회신을 두 가지 어조로 받아 비교</a>","children":[]},{"content":"<a href=\"03-day3.html#/26\">🖥️ 시연 — 조건 협의 뒤 제안서를 _v1.0.1 로 판올림</a>","children":[]},{"content":"<a href=\"03-day3.html#/27\">3-4. 원페이지 제안 요약, 의사결정자용 핵심 메시지 정리</a>","children":[]},{"content":"<a href=\"03-day3.html#/28\">의사결정자가 보는 세 가지 — 효과, 위험, 다음 단계</a>","children":[]},{"content":"<a href=\"03-day3.html#/29\">🖥️ 시연 — 제안서를 원페이지와 핵심 메시지 3줄로</a>","children":[]},{"content":"<a href=\"03-day3.html#/30\">🖥️ 시연 — 원페이지를 인포그래픽 폴더로 저장</a>","children":[]},{"content":"<a href=\"03-day3.html#/31\">🔗 4일차 준비 — Chrome + CDP 란, 밖에서 들어가는 문</a>","children":[]},{"content":"<a href=\"03-day3.html#/32\">🙋 Practice P3-0-2 — Chrome 을 CDP 로 열고 Codex 로 읽기</a>","children":[]},{"content":"<a href=\"03-day3.html#/33\">3-5. 닫는 절 — 정답과 3일차 정리</a>","children":[]},{"content":"<a href=\"03-day3.html#/34\">🔗 차별점 한 줄과 4일차 이후로 이어지는 길</a>","children":[]}]},{"content":"<a href=\"04-day4.html\">4일차 — 제품 콘텐츠·마케팅 자료 자동화</a>","children":[{"content":"<a href=\"04-day4.html#/1\">4일차 — 제품 콘텐츠·마케팅 자료 자동화</a>","children":[]},{"content":"<a href=\"04-day4.html#/3\">알리기 — 차별점 한 줄이 홈페이지와 SNS 로</a>","children":[]},{"content":"<a href=\"04-day4.html#/4\">4-0. 여는 절 — Netlify 가입과 3일차 제안서 연결</a>","children":[]},{"content":"<a href=\"04-day4.html#/5\">🙋 실습 P4-0-1 — Netlify 가입과 이메일 인증</a>","children":[]},{"content":"<a href=\"04-day4.html#/6\">🔗 3일차 제안서의 차별점이 4일차 소재가 됨</a>","children":[]},{"content":"<a href=\"04-day4.html#/7\">🔴 배포 주소는 공개로 바꾸면 누구나 열 수 있음</a>","children":[]},{"content":"<a href=\"04-day4.html#/8\">🔴 Codex 가 멈추면 — 재시도 1회, 대체 도구, 예시 파일</a>","children":[]},{"content":"<a href=\"04-day4.html#/9\">4-1. 제품 소개 초안과 사양→마케팅 문구 변환</a>","children":[]},{"content":"<a href=\"04-day4.html#/10\">사양에서 효익까지 — 숫자를 문장으로 바꾸는 3단</a>","children":[]},{"content":"<a href=\"04-day4.html#/11\">🔴 문장은 바뀌어도 수치는 바뀌면 안 됨</a>","children":[]},{"content":"<a href=\"04-day4.html#/12\">🙋 실습 P4-1-1 — Codex 에 시안 홈페이지 요청</a>","children":[]},{"content":"<a href=\"04-day4.html#/13\">🙋 실습 P4-1-1 — 프롬프트 원문</a>","children":[]},{"content":"<a href=\"04-day4.html#/14\">🙋 실습 P4-1-2 — 시안 열어 보고 사양 8항목 대조</a>","children":[]},{"content":"<a href=\"04-day4.html#/15\">✅ 검증 P4-1 — 사양 수치를 원본과 대조</a>","children":[]},{"content":"<a href=\"04-day4.html#/16\">4-2. 블로그·뉴스레터·보도자료와 SEO 키워드 반영</a>","children":[]},{"content":"<a href=\"04-day4.html#/17\">같은 소재, 세 가지 글 — 독자와 분량이 다름</a>","children":[]},{"content":"<a href=\"04-day4.html#/18\">SEO 키워드는 글의 어디에 들어가는가</a>","children":[]},{"content":"<a href=\"04-day4.html#/19\">🖥️ 시연 — 블로그·뉴스레터·보도자료와 SEO 키워드</a>","children":[]},{"content":"<a href=\"04-day4.html#/20\">4-3. 링크드인·인스타 채널별 톤과 배포 주소</a>","children":[]},{"content":"<a href=\"04-day4.html#/21\">링크드인과 인스타 — 같은 소식, 다른 톤</a>","children":[]},{"content":"<a href=\"04-day4.html#/22\">🙋 실습 P4-2-1 — Netlify 에 site 폴더 끌어 놓아 배포</a>","children":[]},{"content":"<a href=\"04-day4.html#/23\">🙋 실습 P4-2-2 — SNS 게시물 2종에 배포 주소 넣기</a>","children":[]},{"content":"<a href=\"04-day4.html#/24\">🙋 실습 P4-2-2 — 프롬프트 원문</a>","children":[]},{"content":"<a href=\"04-day4.html#/25\">4-4. 전시회·세미나 안내문과 발표 스크립트</a>","children":[]},{"content":"<a href=\"04-day4.html#/26\">10분 발표 스크립트 — 시간으로 나누어 씀</a>","children":[]},{"content":"<a href=\"04-day4.html#/27\">🖥️ 시연 — 전시회 안내문과 발표 스크립트</a>","children":[]},{"content":"<a href=\"04-day4.html#/28\">4-5. 공개 웹 표 수집 — 5일차 재료 (cdp + CSV)</a>","children":[]},{"content":"<a href=\"04-day4.html#/29\">수집 전 확인 넷 — 약관·robots·속도·로그인 뒤</a>","children":[]},{"content":"<a href=\"04-day4.html#/30\">🖥️ 시연 — cdp 한 줄로 영업 후보 가려내기</a>","children":[]},{"content":"<a href=\"04-day4.html#/31\">🙋 실습 P4-3-1 — «더 보기» 를 누르고 표 전체를 CSV 로 저장</a>","children":[]},{"content":"<a href=\"04-day4.html#/32\">🙋 실습 P4-3-1 — 프롬프트 원문</a>","children":[]},{"content":"<a href=\"04-day4.html#/33\">4-6. 닫는 절 — 4일차 정리</a>","children":[]},{"content":"<a href=\"04-day4.html#/34\">🎬 4일차 결론과 다음 시간 예고</a>","children":[]}]},{"content":"<a href=\"05-day5.html\">5일차 — AI 이미지·슬라이드·영상 콘텐츠</a>","children":[{"content":"<a href=\"05-day5.html#/1\">5일차 — AI 이미지·슬라이드·영상 콘텐츠</a>","children":[]},{"content":"<a href=\"05-day5.html#/3\">꾸미기 — 같은 제품을 슬라이드·사진·차트로</a>","children":[]},{"content":"<a href=\"05-day5.html#/4\">5-0. 여는 절 — 같은 제품을 슬라이드와 사진으로</a>","children":[]},{"content":"<a href=\"05-day5.html#/5\">5일차 시간표 — 실습 시간 120분 보장</a>","children":[]},{"content":"<a href=\"05-day5.html#/6\">5일차에 쓰는 도구 — 계정과 한도</a>","children":[]},{"content":"<a href=\"05-day5.html#/7\">🙋 실습 P5-0-1 — 세 서비스 로그인 재확인</a>","children":[]},{"content":"<a href=\"05-day5.html#/8\">5-1. 같은 아웃라인을 슬라이드 도구 3탭에</a>","children":[]},{"content":"<a href=\"05-day5.html#/9\">ChatGPT 슬라이드 기능 현황 — 2026.10 기준</a>","children":[]},{"content":"<a href=\"05-day5.html#/10\">Gamma 크레딧을 아껴 쓰는 규칙</a>","children":[]},{"content":"<a href=\"05-day5.html#/11\">🙋 실습 P5-1-1 — 아웃라인을 세 도구에 넣고 생성 시작</a>","children":[]},{"content":"<a href=\"05-day5.html#/12\">🙋 실습 P5-1-2 — 수정 지시 한 줄로 고치고 세 결과 비교하기</a>","children":[]},{"content":"<a href=\"05-day5.html#/13\">✅ 검증 P5-1 — 글자를 고칠 수 없는 장 세기</a>","children":[]},{"content":"<a href=\"05-day5.html#/14\">5-2. 제품 비주얼·배너·썸네일 — 이미지 생성</a>","children":[]},{"content":"<a href=\"05-day5.html#/15\">상업적 사용 정책 — 쓰기 전에 확인할 것 넷</a>","children":[]},{"content":"<a href=\"05-day5.html#/16\">🖥️ 시연 — 배너를 만들면 한글이 깨지는 장면</a>","children":[]},{"content":"<a href=\"05-day5.html#/17\">🖥️ 시연 — Napkin 으로 구조·흐름 도식 만들기</a>","children":[]},{"content":"<a href=\"05-day5.html#/18\">5-3. 제품 사진 보정·배경 처리 — Codex 로 도구 셋팅</a>","children":[]},{"content":"<a href=\"05-day5.html#/19\">🙋 실습 P5-2-1 — Codex 에게 Python 과 Pillow 셋팅 시키기</a>","children":[]},{"content":"<a href=\"05-day5.html#/20\">🙋 실습 P5-2-2 — 사진 10장 일괄 처리와 결과표 확인</a>","children":[]},{"content":"<a href=\"05-day5.html#/21\">✅ 검증 P5-2 — 처리 후 1200px 이 아닌 사진 세기</a>","children":[]},{"content":"<a href=\"05-day5.html#/22\">🖥️ 시연 — 사진에 문구 넣기와 배경 제거는 Codex 경로로</a>","children":[]},{"content":"<a href=\"05-day5.html#/23\">상세페이지 구성 — 첫 화면부터 문의까지</a>","children":[]},{"content":"<a href=\"05-day5.html#/24\">5-4. 후보 데이터 정리와 차트 — CSV 에서 엑셀로</a>","children":[]},{"content":"<a href=\"05-day5.html#/25\">🙋 실습 P5-3-1 — CSV 중복을 지우고 xlsx 로, 차트 2개 만들기</a>","children":[]},{"content":"<a href=\"05-day5.html#/26\">✅ 검증 P5-3 — OEM 연매출 합계 읽기</a>","children":[]},{"content":"<a href=\"05-day5.html#/27\">5-5. AI 영상·숏폼 입문 — 도구의 세 층</a>","children":[]},{"content":"<a href=\"05-day5.html#/28\">숏폼 영상의 구성 — 15초 안에 넣을 것</a>","children":[]},{"content":"<a href=\"05-day5.html#/29\">🙋 실습 P5-4-1 — 모션 그래픽 만들어줘 한 줄로 영상 받기</a>","children":[]},{"content":"<a href=\"05-day5.html#/30\">✅ 검증 P5-4 — 영상 길이와 깨진 글자 세기</a>","children":[]},{"content":"<a href=\"05-day5.html#/31\">저작권·브랜드 가이드 — 영상에 쓰기 전에 확인할 것</a>","children":[]},{"content":"<a href=\"05-day5.html#/32\">5-6. 닫는 절 — 5일차 정리와 정답 공개</a>","children":[]},{"content":"<a href=\"05-day5.html#/33\">5일차 확인 질문 정답 공개</a>","children":[]},{"content":"<a href=\"05-day5.html#/34\">🔗 6일차로 이어지는 자리</a>","children":[]}]},{"content":"<a href=\"06-day6.html\">6일차 — 해외영업·고객 데이터 분석·CRM 자동화</a>","children":[{"content":"<a href=\"06-day6.html#/1\">6일차 — 해외영업·고객 데이터 분석·CRM 자동화</a>","children":[]},{"content":"<a href=\"06-day6.html#/3\">넓히기 — 번역 · 표 · 워크플로로</a>","children":[]},{"content":"<a href=\"06-day6.html#/4\">6-0. 여는 절 — 번역·표·워크플로로 이어지는 6일차</a>","children":[]},{"content":"<a href=\"06-day6.html#/5\">6-1. 영문 영업 메일·제안서와 수출 문의 응대</a>","children":[]},{"content":"<a href=\"06-day6.html#/6\">비즈니스 영어 어조 — 정중함의 세 단계</a>","children":[]},{"content":"<a href=\"06-day6.html#/7\">DeepL 은 보조 — 역번역으로 어긋난 곳 찾기</a>","children":[]},{"content":"<a href=\"06-day6.html#/8\">6-2. 해외 바이어 발굴·후속 메일·다국어 카탈로그</a>","children":[]},{"content":"<a href=\"06-day6.html#/9\">🖥️ 시연 — 바이어 발굴 목록과 전시회 후속 메일</a>","children":[]},{"content":"<a href=\"06-day6.html#/10\">다국어 카탈로그 — 폴더째 번역하는 순서와 glossary</a>","children":[]},{"content":"<a href=\"06-day6.html#/11\">🙋 Practice P6-1-1 — 카탈로그 폴더 번역과 glossary 적용</a>","children":[]},{"content":"<a href=\"06-day6.html#/12\">🙋 Practice P6-1-2 — 문의 메일 3통 응대 초안과 역번역</a>","children":[]},{"content":"<a href=\"06-day6.html#/13\">✅ 확인·복구 P6-1 — glossary 와 다르게 번역된 용어 세기</a>","children":[]},{"content":"<a href=\"06-day6.html#/14\">6-3. 엑셀·CRM 영업 데이터 AI 정리와 전환율 분석</a>","children":[]},{"content":"<a href=\"06-day6.html#/15\">CRM 정리의 세 함정 — 중복·표기 흔들림·과잉 병합</a>","children":[]},{"content":"<a href=\"06-day6.html#/16\">접수 트렌드 — 월별 접수 건수와 차트 요청법</a>","children":[]},{"content":"<a href=\"06-day6.html#/17\">🙋 Practice P6-2-1 — 중복 제거와 단계 표기 통일</a>","children":[]},{"content":"<a href=\"06-day6.html#/18\">🙋 Practice P6-2-2 — 전환율 계산과 월별 차트</a>","children":[]},{"content":"<a href=\"06-day6.html#/19\">✅ 확인·복구 P6-2 — 남은 행 수와 전환율</a>","children":[]},{"content":"<a href=\"06-day6.html#/20\">6-4. 5일차 후보분석으로 쓰는 근거 제안</a>","children":[]},{"content":"<a href=\"06-day6.html#/21\">🙋 Practice P6-4-1 — 1차 타깃을 고르고 원페이지 제안 쓰기</a>","children":[]},{"content":"<a href=\"06-day6.html#/22\">✅ 확인·복구 P6-4 — 1차 타깃 곳 수와 틀린 숫자 세기</a>","children":[]},{"content":"<a href=\"06-day6.html#/23\">6-5. n8n 리드 분류와 GPTs 종료·대안</a>","children":[]},{"content":"<a href=\"06-day6.html#/24\">GPTs 대안 세 가지 — 프로젝트·플러그인·Gems</a>","children":[]},{"content":"<a href=\"06-day6.html#/25\">n8n — 정해진 규칙으로 도는 워크플로</a>","children":[]},{"content":"<a href=\"06-day6.html#/26\">🙋 Practice P6-3-1 — n8n 체험 가입과 워크플로 가져오기</a>","children":[]},{"content":"<a href=\"06-day6.html#/27\">🙋 Practice P6-3-2 — 규칙 3줄 보기와 실행</a>","children":[]},{"content":"<a href=\"06-day6.html#/28\">✅ 확인·복구 P6-3 — 테스트 리드 5건의 A 등급 수</a>","children":[]},{"content":"<a href=\"06-day6.html#/29\">🖥️ 시연 — n8n AI 분류 1건</a>","children":[]},{"content":"<a href=\"06-day6.html#/30\">6-6. 닫는 절 — 과제 카드·6일 회고·로그아웃</a>","children":[]},{"content":"<a href=\"06-day6.html#/31\">6일차 확인 질문 정답 공개</a>","children":[]},{"content":"<a href=\"06-day6.html#/32\">과제 카드의 수단 — 대화는 프로젝트, 규칙은 n8n</a>","children":[]},{"content":"<a href=\"06-day6.html#/33\">🙋 Practice 과제 — 우리 부서 과제 카드 작성</a>","children":[]},{"content":"<a href=\"06-day6.html#/34\">🙋 Practice 마무리 — 6일 회고와 로그아웃 6곳</a>","children":[]}]}]};
+  function init() {
+    if (!window.markmap) { return setTimeout(init, 50); }
+    const svg = document.querySelector('.toc-mindmap-svg');
+    // agenda_card_mode: markmap svg 없음 → 가드 즉시 해제 (2초 fallback 대기로 인한 blank 방지)
+    if (!svg) { requestAnimationFrame(m2ReleaseCrossGuard); return; }
+    /* Issue414: markmap 의 maxInitialScale 기본값은 **2** 라, 컨테이너가 커져도
+    스케일이 2 에서 멈춘다. 덱은 1920 폭으로 설계되는데 브라우저 창(1280 내외)에서
+    맞춰 보면 그럴듯해 보이고, PDF·대형 화면(1920×1440)에서는 **같은 크기 그대로**
+    남아 박스의 43% 만 채운다(실측 2026-09-21: 박스 1872 / 콘텐츠 798).
+    즉 **렌더 결과가 뷰포트 크기에 의존**하는 것이 결함의 본체다.
+    상한을 올려 fitRatio 가 판정하게 하면 어느 크기에서나 같은 비율로 찬다.
+    ⚠️ 무한대로 열지 않는다 — 항목이 1~2개뿐인 덱에서 글자가 터무니없이 커진다.
+       6 은 1920 폭에서 6항목이 요구하는 4.5 에 여유를 둔 값이다. */
+    const opts = window.markmap.deriveOptions({ initialExpandLevel: 2, maxInitialScale: 6 });
+    window.mm = window.markmap.Markmap.create(svg, opts, tocData);
+    /* Issue414 후속: 컨테이너가 나중에 커지면 **다시 fit** 한다.
+       decktape 는 page.goto() 를 먼저 하고 page.setViewport() 를 나중에 한다
+       (decktape.js 292행 → 360행). 그래서 markmap 은 기본 800x600 에서 fit 하고
+       그 뒤 뷰포트가 1920x1440 으로 커져도 그대로 굳어 박스의 일부만 채운다.
+       덱 TOC 슬라이드는 autoFit + refitMarkmap 재시도가 이 자리를 덮고 있었으나
+       agenda 페이지에는 없었다 — 그래서 agenda 만 작게 나왔다.
+       ⚠️ resize 이벤트에 기대지 않는다. 뷰포트 변경이 이벤트로 오지 않는 경로가
+          있어(CDP Emulation) 박스 자체를 관찰하는 편이 확실하다. */
+    var _box = svg.parentNode;
+    if (_box && window.ResizeObserver) {
+      var _t;
+      new ResizeObserver(function(){
+        clearTimeout(_t);
+        _t = setTimeout(function(){ try { window.mm.fit(); } catch (e) {} }, 60);
+      }).observe(_box);
+    }
+    // Issue110: cross-page 가드 해제 (markmap 렌더 후 다음 frame)
+    requestAnimationFrame(m2ReleaseCrossGuard);
+  }
+  function m2ReleaseCrossGuard(){
+      // Issue122: cross-page navigation(?fwd=1/?back=1/?last=1)으로 진입한 경우만 fade-in 적용.
+      // M2_CROSS_GUARD_HEAD_HTML이 cross-page 시그널 진입 시에만 m2-cross-loading class를 부여하므로
+      // 이 클래스 보유 여부로 cross-page 여부 판정 → 단순 페이지 리프레쉬·새 탭 진입은 fade-in 미발동.
+      var wasCrossLoading = document.documentElement.classList.contains('m2-cross-loading')
+                         || document.body.classList.contains('m2-cross-loading');
+      document.documentElement.classList.remove('m2-cross-loading');
+      document.body.classList.remove('m2-cross-loading');
+      // Issue125: m2-initial-loading 가드도 함께 해제 (모든 첫 로드의 visibility 차단 풀기).
+      document.documentElement.classList.remove('m2-initial-loading');
+      if (!wasCrossLoading) return;
+      // Issue120: 가드 해제 직후 body에 .m2-cross-loaded 부여 → CSS @keyframes m2-page-fade-in 250ms 재생.
+      // animationend 후 class 제거(once). CSS selector가 없는 경우(default_background_transition: none)에는 효과 없음.
+      try {
+        document.body.classList.add('m2-cross-loaded');
+        document.body.addEventListener('animationend', function _m2FadeEnd(e){
+          if (e.animationName === 'm2-page-fade-in') {
+            document.body.classList.remove('m2-cross-loaded');
+            document.body.removeEventListener('animationend', _m2FadeEnd);
+          }
+        });
+      } catch (_) {}
+    }
+  // Issue110: markmap CDN 로드 실패·지연에도 무한 가드 방지 — 2초 후 강제 해제
+  setTimeout(m2ReleaseCrossGuard, 2000);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+// Issue87 (2026-05-04 swap): agenda 키 핸들러 (key_navigation.md 매트릭스)
+//   ←/↑ (parent) → Cover (cover_enabled=true) / 동작 없음 (cover_enabled=false)
+//   →/↓ (child)/Space → 첫 챕터 TOC(Chapter) / 첫 H1 anchor·본문(Single)
+//   ⇤/⇥ (sibling) → 동작 없음 (Agenda는 메타 페이지, sibling 없음)
+//   ⇞ PgUp → 무시 (자기 페이지)
+//   ⇟ PgDown → LAST_CHAPTER?last=1 (Chapter) / index.html?last=1 (Single)
+(function(){
+  function m2NavWithSignal(url, signal){
+      var hashIdx = url.indexOf('#');
+      var base = hashIdx === -1 ? url : url.slice(0, hashIdx);
+      var hash = hashIdx === -1 ? '' : url.slice(hashIdx);
+      var sep = base.indexOf('?') === -1 ? '?' : '&';
+      return base + sep + signal + hash;
+    }
+  const _tocData = {"content":"","children":[{"content":"<a href=\"01-day1.html\">1일차 — 생성형 AI 영업·마케팅 활용과 프롬프트</a>","children":[{"content":"<a href=\"01-day1.html#/1\">6일 강의 흐름 — 묻기에서 넓히기까지</a>","children":[]},{"content":"<a href=\"01-day1.html#/2\">1일차 — 생성형 AI 영업·마케팅 활용과 프롬프트</a>","children":[]},{"content":"<a href=\"01-day1.html#/4\">묻기 — 한 줄 질문이 고유한 답으로</a>","children":[]},{"content":"<a href=\"01-day1.html#/5\">1-0. 여는 절 — 6일 강의 흐름과 초기 설정</a>","children":[]},{"content":"<a href=\"01-day1.html#/6\">6일 동안 쓰는 도구와 제출 위치</a>","children":[]},{"content":"<a href=\"01-day1.html#/7\">🙋 실습 P1-0-1 — Edge·한글 설정과 ChatGPT 로그인</a>","children":[]},{"content":"<a href=\"01-day1.html#/8\">🙋 실습 P1-0-2 — Google 로그인과 2단계 인증</a>","children":[]},{"content":"<a href=\"01-day1.html#/9\">1-1. LLM 개념과 제조 B2B 영업·마케팅 적용 영역(조사·콘텐츠·제안·응대·분석), 보안·할루시네이션</a>","children":[]},{"content":"<a href=\"01-day1.html#/10\">LLM 의 정체 — 다음 낱말을 잇는 모델</a>","children":[]},{"content":"<a href=\"01-day1.html#/11\">적용 영역 5종 — 조사·콘텐츠·제안·응대·분석</a>","children":[]},{"content":"<a href=\"01-day1.html#/12\">LLM 이 틀리는 세 가지 방식 — 지어냄·낡음·오독</a>","children":[]},{"content":"<a href=\"01-day1.html#/13\">🖥️ 시연 — 할루시네이션 실연</a>","children":[]},{"content":"<a href=\"01-day1.html#/14\">보안 — 올리면 안 되는 것 세 묶음 5종</a>","children":[]},{"content":"<a href=\"01-day1.html#/15\">맡기는 선 — 맡김 · 초안만 · 사람이 정함</a>","children":[]},{"content":"<a href=\"01-day1.html#/16\">1-2. ChatGPT/Claude/Gemini 비교, 영업·마케팅 프롬프트, 브랜드 톤·문체 조절</a>","children":[]},{"content":"<a href=\"01-day1.html#/17\">세 도구 비교 — 같은 질문, 다른 답</a>","children":[]},{"content":"<a href=\"01-day1.html#/18\">🖥️ 시연 — ChatGPT·Claude·Gemini 3분할 비교</a>","children":[]},{"content":"<a href=\"01-day1.html#/19\">결론 — 도구는 용도로 고름</a>","children":[]},{"content":"<a href=\"01-day1.html#/20\">1줄 프롬프트와 6요소 프롬프트 — 같은 일, 다른 결과</a>","children":[]},{"content":"<a href=\"01-day1.html#/21\">프롬프트 6요소 — 페르소나·맥락·예시·형식·톤·과제</a>","children":[]},{"content":"<a href=\"01-day1.html#/22\">브랜드 톤 3종 — 격식·친근·간결</a>","children":[]},{"content":"<a href=\"01-day1.html#/23\">🙋 실습 P1-1-1 — 내 첫 프롬프트 쓰고 빠진 요소 세기</a>","children":[]},{"content":"<a href=\"01-day1.html#/24\">🙋 실습 P1-1-2 — 6요소로 고쳐 쓰고 톤 3종 받기</a>","children":[]},{"content":"<a href=\"01-day1.html#/25\">✅ 검증 P1-1 — 빠진 요소 개수 확인</a>","children":[]},{"content":"<a href=\"01-day1.html#/26\">1-3. 우리 제품·고객·시장 정보를 반영한 맥락 프롬프트 작성</a>","children":[]},{"content":"<a href=\"01-day1.html#/27\">맥락 카드 — 제품·고객·시장 각 5줄</a>","children":[]},{"content":"<a href=\"01-day1.html#/28\">1-4. 자사 제품 핵심 가치 제안(Value Proposition) 자동 정리</a>","children":[]},{"content":"<a href=\"01-day1.html#/29\">가치 제안 한 문장 틀 — 고객·문제·해결·증거</a>","children":[]},{"content":"<a href=\"01-day1.html#/30\">🙋 실습 P1-2-1 — 맥락 카드 없이 묻고 붙여서 다시 묻기</a>","children":[]},{"content":"<a href=\"01-day1.html#/31\">🙋 실습 P1-2-2 — 가치 제안 한 문장으로 정리</a>","children":[]},{"content":"<a href=\"01-day1.html#/32\">✅ 검증 P1-2 — 늘어난 고유 사실 세기</a>","children":[]},{"content":"<a href=\"01-day1.html#/33\">1-5. 닫는 절 — 1일차 정리</a>","children":[]},{"content":"<a href=\"01-day1.html#/34\">확인 질문 정답 공개 — 결과 세기</a>","children":[]},{"content":"<a href=\"01-day1.html#/35\">결론 — 맥락과 6요소가 2일차 조사로 이어짐</a>","children":[]}]},{"content":"<a href=\"02-day2.html\">2일차 — 시장·고객·경쟁사 조사 자동화</a>","children":[{"content":"<a href=\"02-day2.html#/1\">2일차 — 시장·고객·경쟁사 조사 자동화</a>","children":[]},{"content":"<a href=\"02-day2.html#/3\">조사하기 — 출처를 단 조사가 브리핑으로</a>","children":[]},{"content":"<a href=\"02-day2.html#/4\">2-0. 여는 절 — 1일차 연결과 설치·로그인</a>","children":[]},{"content":"<a href=\"02-day2.html#/5\">VSCode 란 — 파일을 열고 고치는 무료 편집기</a>","children":[]},{"content":"<a href=\"02-day2.html#/6\">VSCode 와 Codex — 2일차는 로그인까지</a>","children":[]},{"content":"<a href=\"02-day2.html#/7\">🙋 Practice P2-0-1 — VSCode 열기와 Codex 로그인</a>","children":[]},{"content":"<a href=\"02-day2.html#/8\">마크다운이란 — 기호로 서식을 적는 글 파일</a>","children":[]},{"content":"<a href=\"02-day2.html#/9\">마크다운 문법 ① — 제목·목록·강조·인용·구분선</a>","children":[]},{"content":"<a href=\"02-day2.html#/10\">마크다운 문법 ② — 링크·이미지·코드 블록</a>","children":[]},{"content":"<a href=\"02-day2.html#/11\">마크다운 문법 ③ — 표는 세로선 한 줄이 한 행임</a>","children":[]},{"content":"<a href=\"02-day2.html#/12\">🙋 Practice P2-0-2 — 마크다운 파일 만들고 미리보기 열기</a>","children":[]},{"content":"<a href=\"02-day2.html#/13\">2-1. Perplexity·웹 검색 활용 시장 동향·산업 트렌드 조사·요약</a>","children":[]},{"content":"<a href=\"02-day2.html#/14\">조사용 AI 는 두 부류 — 검색 결합형과 대화형</a>","children":[]},{"content":"<a href=\"02-day2.html#/15\">조사 프롬프트 — 범위·기간·출처 형식부터 정함</a>","children":[]},{"content":"<a href=\"02-day2.html#/16\">🔴 출처 링크가 달려도 틀릴 수 있음 — 열어서 확인함</a>","children":[]},{"content":"<a href=\"02-day2.html#/17\">🖥️ 시연 — Perplexity 로 부품 시장 동향 조사와 출처표</a>","children":[]},{"content":"<a href=\"02-day2.html#/18\">2-2. 잠재 고객(바이어)·타깃 기업 리스트업, 니즈 가설 도출</a>","children":[]},{"content":"<a href=\"02-day2.html#/19\">후보 발굴과 니즈 가설 — 좁힌 뒤 가설로 적음</a>","children":[]},{"content":"<a href=\"02-day2.html#/20\">🖥️ 시연 — 바이어 리스트업과 니즈 가설 표</a>","children":[]},{"content":"<a href=\"02-day2.html#/21\">2-3. 경쟁사 제품·가격·포지셔닝 비교표 자동 작성</a>","children":[]},{"content":"<a href=\"02-day2.html#/22\">비교표의 뼈대 — 같은 축에 같은 단위로 맞춤</a>","children":[]},{"content":"<a href=\"02-day2.html#/23\">🔴 같은 값, 다른 단위 — Kg/cm² 와 N/mm²</a>","children":[]},{"content":"<a href=\"02-day2.html#/24\">🙋 Practice P2-1-1 — 카탈로그 PDF 찾기와 비교표 받기</a>","children":[]},{"content":"<a href=\"02-day2.html#/25\">🙋 Practice P2-1-2 — 비교표.md 로 저장하고 환산값 검산</a>","children":[]},{"content":"<a href=\"02-day2.html#/26\">2-4. 고객사 정보(DART·뉴스·홈페이지) AI 요약, 영업 사전 브리핑</a>","children":[]},{"content":"<a href=\"02-day2.html#/27\">세 출처의 성격 — 공시·뉴스·홈페이지</a>","children":[]},{"content":"<a href=\"02-day2.html#/28\">사전 브리핑 5항목과 쓰기 전 검증 — 출처·문장·날짜</a>","children":[]},{"content":"<a href=\"02-day2.html#/29\">🖥️ 시연 — 회사 조사 스킬로 동명 업체 가려내고 판올림까지</a>","children":[]},{"content":"<a href=\"02-day2.html#/30\">🙋 Practice P2-2-1 — 브리핑틀의 5항목 채우기</a>","children":[]},{"content":"<a href=\"02-day2.html#/31\">🙋 Practice P2-2-2 — 출처 링크 열어 O·X 표시</a>","children":[]},{"content":"<a href=\"02-day2.html#/32\">2-5. 닫는 절 — 2일차 정리</a>","children":[]},{"content":"<a href=\"02-day2.html#/33\">2일차 결론 — 확인 뒤에 씀</a>","children":[]},{"content":"<a href=\"02-day2.html#/34\">🎬 다음 시간 예고 — 상담 메모를 페인포인트 표로</a>","children":[]}]},{"content":"<a href=\"03-day3.html\">3일차 — 영업 제안서·견적·페인포인트 분석</a>","children":[{"content":"<a href=\"03-day3.html#/1\">3일차 — 영업 제안서·견적·페인포인트 분석</a>","children":[]},{"content":"<a href=\"03-day3.html#/3\">제안하기 — 상담 메모가 제안서 한 벌로</a>","children":[]},{"content":"<a href=\"03-day3.html#/4\">3-0. 여는 절 — 상담 메모에서 제안서까지 오는 길</a>","children":[]},{"content":"<a href=\"03-day3.html#/5\">🔴 Codex 가 처음 일하는 날 — 승인 화면에서 읽을 것</a>","children":[]},{"content":"<a href=\"03-day3.html#/6\">🙋 Practice P3-0-1 — pandoc 과 AGENTS.md 규칙을 Codex 로 확인</a>","children":[]},{"content":"<a href=\"03-day3.html#/7\">🖥️ 시연 — 상담 메모를 말로 남기기</a>","children":[]},{"content":"<a href=\"03-day3.html#/8\">3-1. 고객 페인포인트 분석, 솔루션·차별점·기대효과 구조화</a>","children":[]},{"content":"<a href=\"03-day3.html#/9\">🔗 2일차 브리핑 틀을 한솔건기(가상)에 그대로 적용</a>","children":[]},{"content":"<a href=\"03-day3.html#/10\">페인포인트란 — 고객이 겪는 불편과 업무에 드는 비용</a>","children":[]},{"content":"<a href=\"03-day3.html#/11\">한솔건기(가상) 상담 메모 3건과 페인포인트 표의 5열</a>","children":[]},{"content":"<a href=\"03-day3.html#/12\">페인포인트에서 솔루션·차별점·기대효과로 한 줄씩 잇기</a>","children":[]},{"content":"<a href=\"03-day3.html#/13\">차별점은 고객의 불편과 우리 강점이 겹치는 자리</a>","children":[]},{"content":"<a href=\"03-day3.html#/14\">🙋 Practice P3-1-1 — Day3 폴더를 열고 Codex 에게 메모 읽히기</a>","children":[]},{"content":"<a href=\"03-day3.html#/15\">🙋 Practice P3-1-2 — 페인포인트 표 만들기와 근거 칸 대조</a>","children":[]},{"content":"<a href=\"03-day3.html#/16\">✅ 검증 P3-1 — 메모에 없는 내용이 들어간 칸 세기</a>","children":[]},{"content":"<a href=\"03-day3.html#/17\">3-2. 제조 고객용 영업 제안서 자동 작성(배경·솔루션·레퍼런스·가격)</a>","children":[]},{"content":"<a href=\"03-day3.html#/18\">제안서의 네 덩어리 — 배경, 솔루션, 레퍼런스, 가격</a>","children":[]},{"content":"<a href=\"03-day3.html#/19\">제안서는 마크다운으로 쓰고 pandoc 이 양식에 입힘</a>","children":[]},{"content":"<a href=\"03-day3.html#/20\">🙋 Practice P3-2-1 — 페인포인트 표로 제안서 초안 만들기</a>","children":[]},{"content":"<a href=\"03-day3.html#/21\">🙋 Practice P3-2-2 — pandoc 으로 .docx 변환과 양식 대조</a>","children":[]},{"content":"<a href=\"03-day3.html#/22\">✅ 검증 P3-2 — 양식과 다른 제목 세기</a>","children":[]},{"content":"<a href=\"03-day3.html#/23\">3-3. 견적 회신·조건 협의·후속 액션 메일, 어조 조절</a>","children":[]},{"content":"<a href=\"03-day3.html#/24\">어조는 상대와 단계가 정함 — 관계 거리와 협상 긴장</a>","children":[]},{"content":"<a href=\"03-day3.html#/25\">🖥️ 시연 — 같은 견적 회신을 두 가지 어조로 받아 비교</a>","children":[]},{"content":"<a href=\"03-day3.html#/26\">🖥️ 시연 — 조건 협의 뒤 제안서를 _v1.0.1 로 판올림</a>","children":[]},{"content":"<a href=\"03-day3.html#/27\">3-4. 원페이지 제안 요약, 의사결정자용 핵심 메시지 정리</a>","children":[]},{"content":"<a href=\"03-day3.html#/28\">의사결정자가 보는 세 가지 — 효과, 위험, 다음 단계</a>","children":[]},{"content":"<a href=\"03-day3.html#/29\">🖥️ 시연 — 제안서를 원페이지와 핵심 메시지 3줄로</a>","children":[]},{"content":"<a href=\"03-day3.html#/30\">🖥️ 시연 — 원페이지를 인포그래픽 폴더로 저장</a>","children":[]},{"content":"<a href=\"03-day3.html#/31\">🔗 4일차 준비 — Chrome + CDP 란, 밖에서 들어가는 문</a>","children":[]},{"content":"<a href=\"03-day3.html#/32\">🙋 Practice P3-0-2 — Chrome 을 CDP 로 열고 Codex 로 읽기</a>","children":[]},{"content":"<a href=\"03-day3.html#/33\">3-5. 닫는 절 — 정답과 3일차 정리</a>","children":[]},{"content":"<a href=\"03-day3.html#/34\">🔗 차별점 한 줄과 4일차 이후로 이어지는 길</a>","children":[]}]},{"content":"<a href=\"04-day4.html\">4일차 — 제품 콘텐츠·마케팅 자료 자동화</a>","children":[{"content":"<a href=\"04-day4.html#/1\">4일차 — 제품 콘텐츠·마케팅 자료 자동화</a>","children":[]},{"content":"<a href=\"04-day4.html#/3\">알리기 — 차별점 한 줄이 홈페이지와 SNS 로</a>","children":[]},{"content":"<a href=\"04-day4.html#/4\">4-0. 여는 절 — Netlify 가입과 3일차 제안서 연결</a>","children":[]},{"content":"<a href=\"04-day4.html#/5\">🙋 실습 P4-0-1 — Netlify 가입과 이메일 인증</a>","children":[]},{"content":"<a href=\"04-day4.html#/6\">🔗 3일차 제안서의 차별점이 4일차 소재가 됨</a>","children":[]},{"content":"<a href=\"04-day4.html#/7\">🔴 배포 주소는 공개로 바꾸면 누구나 열 수 있음</a>","children":[]},{"content":"<a href=\"04-day4.html#/8\">🔴 Codex 가 멈추면 — 재시도 1회, 대체 도구, 예시 파일</a>","children":[]},{"content":"<a href=\"04-day4.html#/9\">4-1. 제품 소개 초안과 사양→마케팅 문구 변환</a>","children":[]},{"content":"<a href=\"04-day4.html#/10\">사양에서 효익까지 — 숫자를 문장으로 바꾸는 3단</a>","children":[]},{"content":"<a href=\"04-day4.html#/11\">🔴 문장은 바뀌어도 수치는 바뀌면 안 됨</a>","children":[]},{"content":"<a href=\"04-day4.html#/12\">🙋 실습 P4-1-1 — Codex 에 시안 홈페이지 요청</a>","children":[]},{"content":"<a href=\"04-day4.html#/13\">🙋 실습 P4-1-1 — 프롬프트 원문</a>","children":[]},{"content":"<a href=\"04-day4.html#/14\">🙋 실습 P4-1-2 — 시안 열어 보고 사양 8항목 대조</a>","children":[]},{"content":"<a href=\"04-day4.html#/15\">✅ 검증 P4-1 — 사양 수치를 원본과 대조</a>","children":[]},{"content":"<a href=\"04-day4.html#/16\">4-2. 블로그·뉴스레터·보도자료와 SEO 키워드 반영</a>","children":[]},{"content":"<a href=\"04-day4.html#/17\">같은 소재, 세 가지 글 — 독자와 분량이 다름</a>","children":[]},{"content":"<a href=\"04-day4.html#/18\">SEO 키워드는 글의 어디에 들어가는가</a>","children":[]},{"content":"<a href=\"04-day4.html#/19\">🖥️ 시연 — 블로그·뉴스레터·보도자료와 SEO 키워드</a>","children":[]},{"content":"<a href=\"04-day4.html#/20\">4-3. 링크드인·인스타 채널별 톤과 배포 주소</a>","children":[]},{"content":"<a href=\"04-day4.html#/21\">링크드인과 인스타 — 같은 소식, 다른 톤</a>","children":[]},{"content":"<a href=\"04-day4.html#/22\">🙋 실습 P4-2-1 — Netlify 에 site 폴더 끌어 놓아 배포</a>","children":[]},{"content":"<a href=\"04-day4.html#/23\">🙋 실습 P4-2-2 — SNS 게시물 2종에 배포 주소 넣기</a>","children":[]},{"content":"<a href=\"04-day4.html#/24\">🙋 실습 P4-2-2 — 프롬프트 원문</a>","children":[]},{"content":"<a href=\"04-day4.html#/25\">4-4. 전시회·세미나 안내문과 발표 스크립트</a>","children":[]},{"content":"<a href=\"04-day4.html#/26\">10분 발표 스크립트 — 시간으로 나누어 씀</a>","children":[]},{"content":"<a href=\"04-day4.html#/27\">🖥️ 시연 — 전시회 안내문과 발표 스크립트</a>","children":[]},{"content":"<a href=\"04-day4.html#/28\">4-5. 공개 웹 표 수집 — 5일차 재료 (cdp + CSV)</a>","children":[]},{"content":"<a href=\"04-day4.html#/29\">수집 전 확인 넷 — 약관·robots·속도·로그인 뒤</a>","children":[]},{"content":"<a href=\"04-day4.html#/30\">🖥️ 시연 — cdp 한 줄로 영업 후보 가려내기</a>","children":[]},{"content":"<a href=\"04-day4.html#/31\">🙋 실습 P4-3-1 — «더 보기» 를 누르고 표 전체를 CSV 로 저장</a>","children":[]},{"content":"<a href=\"04-day4.html#/32\">🙋 실습 P4-3-1 — 프롬프트 원문</a>","children":[]},{"content":"<a href=\"04-day4.html#/33\">4-6. 닫는 절 — 4일차 정리</a>","children":[]},{"content":"<a href=\"04-day4.html#/34\">🎬 4일차 결론과 다음 시간 예고</a>","children":[]}]},{"content":"<a href=\"05-day5.html\">5일차 — AI 이미지·슬라이드·영상 콘텐츠</a>","children":[{"content":"<a href=\"05-day5.html#/1\">5일차 — AI 이미지·슬라이드·영상 콘텐츠</a>","children":[]},{"content":"<a href=\"05-day5.html#/3\">꾸미기 — 같은 제품을 슬라이드·사진·차트로</a>","children":[]},{"content":"<a href=\"05-day5.html#/4\">5-0. 여는 절 — 같은 제품을 슬라이드와 사진으로</a>","children":[]},{"content":"<a href=\"05-day5.html#/5\">5일차 시간표 — 실습 시간 120분 보장</a>","children":[]},{"content":"<a href=\"05-day5.html#/6\">5일차에 쓰는 도구 — 계정과 한도</a>","children":[]},{"content":"<a href=\"05-day5.html#/7\">🙋 실습 P5-0-1 — 세 서비스 로그인 재확인</a>","children":[]},{"content":"<a href=\"05-day5.html#/8\">5-1. 같은 아웃라인을 슬라이드 도구 3탭에</a>","children":[]},{"content":"<a href=\"05-day5.html#/9\">ChatGPT 슬라이드 기능 현황 — 2026.10 기준</a>","children":[]},{"content":"<a href=\"05-day5.html#/10\">Gamma 크레딧을 아껴 쓰는 규칙</a>","children":[]},{"content":"<a href=\"05-day5.html#/11\">🙋 실습 P5-1-1 — 아웃라인을 세 도구에 넣고 생성 시작</a>","children":[]},{"content":"<a href=\"05-day5.html#/12\">🙋 실습 P5-1-2 — 수정 지시 한 줄로 고치고 세 결과 비교하기</a>","children":[]},{"content":"<a href=\"05-day5.html#/13\">✅ 검증 P5-1 — 글자를 고칠 수 없는 장 세기</a>","children":[]},{"content":"<a href=\"05-day5.html#/14\">5-2. 제품 비주얼·배너·썸네일 — 이미지 생성</a>","children":[]},{"content":"<a href=\"05-day5.html#/15\">상업적 사용 정책 — 쓰기 전에 확인할 것 넷</a>","children":[]},{"content":"<a href=\"05-day5.html#/16\">🖥️ 시연 — 배너를 만들면 한글이 깨지는 장면</a>","children":[]},{"content":"<a href=\"05-day5.html#/17\">🖥️ 시연 — Napkin 으로 구조·흐름 도식 만들기</a>","children":[]},{"content":"<a href=\"05-day5.html#/18\">5-3. 제품 사진 보정·배경 처리 — Codex 로 도구 셋팅</a>","children":[]},{"content":"<a href=\"05-day5.html#/19\">🙋 실습 P5-2-1 — Codex 에게 Python 과 Pillow 셋팅 시키기</a>","children":[]},{"content":"<a href=\"05-day5.html#/20\">🙋 실습 P5-2-2 — 사진 10장 일괄 처리와 결과표 확인</a>","children":[]},{"content":"<a href=\"05-day5.html#/21\">✅ 검증 P5-2 — 처리 후 1200px 이 아닌 사진 세기</a>","children":[]},{"content":"<a href=\"05-day5.html#/22\">🖥️ 시연 — 사진에 문구 넣기와 배경 제거는 Codex 경로로</a>","children":[]},{"content":"<a href=\"05-day5.html#/23\">상세페이지 구성 — 첫 화면부터 문의까지</a>","children":[]},{"content":"<a href=\"05-day5.html#/24\">5-4. 후보 데이터 정리와 차트 — CSV 에서 엑셀로</a>","children":[]},{"content":"<a href=\"05-day5.html#/25\">🙋 실습 P5-3-1 — CSV 중복을 지우고 xlsx 로, 차트 2개 만들기</a>","children":[]},{"content":"<a href=\"05-day5.html#/26\">✅ 검증 P5-3 — OEM 연매출 합계 읽기</a>","children":[]},{"content":"<a href=\"05-day5.html#/27\">5-5. AI 영상·숏폼 입문 — 도구의 세 층</a>","children":[]},{"content":"<a href=\"05-day5.html#/28\">숏폼 영상의 구성 — 15초 안에 넣을 것</a>","children":[]},{"content":"<a href=\"05-day5.html#/29\">🙋 실습 P5-4-1 — 모션 그래픽 만들어줘 한 줄로 영상 받기</a>","children":[]},{"content":"<a href=\"05-day5.html#/30\">✅ 검증 P5-4 — 영상 길이와 깨진 글자 세기</a>","children":[]},{"content":"<a href=\"05-day5.html#/31\">저작권·브랜드 가이드 — 영상에 쓰기 전에 확인할 것</a>","children":[]},{"content":"<a href=\"05-day5.html#/32\">5-6. 닫는 절 — 5일차 정리와 정답 공개</a>","children":[]},{"content":"<a href=\"05-day5.html#/33\">5일차 확인 질문 정답 공개</a>","children":[]},{"content":"<a href=\"05-day5.html#/34\">🔗 6일차로 이어지는 자리</a>","children":[]}]},{"content":"<a href=\"06-day6.html\">6일차 — 해외영업·고객 데이터 분석·CRM 자동화</a>","children":[{"content":"<a href=\"06-day6.html#/1\">6일차 — 해외영업·고객 데이터 분석·CRM 자동화</a>","children":[]},{"content":"<a href=\"06-day6.html#/3\">넓히기 — 번역 · 표 · 워크플로로</a>","children":[]},{"content":"<a href=\"06-day6.html#/4\">6-0. 여는 절 — 번역·표·워크플로로 이어지는 6일차</a>","children":[]},{"content":"<a href=\"06-day6.html#/5\">6-1. 영문 영업 메일·제안서와 수출 문의 응대</a>","children":[]},{"content":"<a href=\"06-day6.html#/6\">비즈니스 영어 어조 — 정중함의 세 단계</a>","children":[]},{"content":"<a href=\"06-day6.html#/7\">DeepL 은 보조 — 역번역으로 어긋난 곳 찾기</a>","children":[]},{"content":"<a href=\"06-day6.html#/8\">6-2. 해외 바이어 발굴·후속 메일·다국어 카탈로그</a>","children":[]},{"content":"<a href=\"06-day6.html#/9\">🖥️ 시연 — 바이어 발굴 목록과 전시회 후속 메일</a>","children":[]},{"content":"<a href=\"06-day6.html#/10\">다국어 카탈로그 — 폴더째 번역하는 순서와 glossary</a>","children":[]},{"content":"<a href=\"06-day6.html#/11\">🙋 Practice P6-1-1 — 카탈로그 폴더 번역과 glossary 적용</a>","children":[]},{"content":"<a href=\"06-day6.html#/12\">🙋 Practice P6-1-2 — 문의 메일 3통 응대 초안과 역번역</a>","children":[]},{"content":"<a href=\"06-day6.html#/13\">✅ 확인·복구 P6-1 — glossary 와 다르게 번역된 용어 세기</a>","children":[]},{"content":"<a href=\"06-day6.html#/14\">6-3. 엑셀·CRM 영업 데이터 AI 정리와 전환율 분석</a>","children":[]},{"content":"<a href=\"06-day6.html#/15\">CRM 정리의 세 함정 — 중복·표기 흔들림·과잉 병합</a>","children":[]},{"content":"<a href=\"06-day6.html#/16\">접수 트렌드 — 월별 접수 건수와 차트 요청법</a>","children":[]},{"content":"<a href=\"06-day6.html#/17\">🙋 Practice P6-2-1 — 중복 제거와 단계 표기 통일</a>","children":[]},{"content":"<a href=\"06-day6.html#/18\">🙋 Practice P6-2-2 — 전환율 계산과 월별 차트</a>","children":[]},{"content":"<a href=\"06-day6.html#/19\">✅ 확인·복구 P6-2 — 남은 행 수와 전환율</a>","children":[]},{"content":"<a href=\"06-day6.html#/20\">6-4. 5일차 후보분석으로 쓰는 근거 제안</a>","children":[]},{"content":"<a href=\"06-day6.html#/21\">🙋 Practice P6-4-1 — 1차 타깃을 고르고 원페이지 제안 쓰기</a>","children":[]},{"content":"<a href=\"06-day6.html#/22\">✅ 확인·복구 P6-4 — 1차 타깃 곳 수와 틀린 숫자 세기</a>","children":[]},{"content":"<a href=\"06-day6.html#/23\">6-5. n8n 리드 분류와 GPTs 종료·대안</a>","children":[]},{"content":"<a href=\"06-day6.html#/24\">GPTs 대안 세 가지 — 프로젝트·플러그인·Gems</a>","children":[]},{"content":"<a href=\"06-day6.html#/25\">n8n — 정해진 규칙으로 도는 워크플로</a>","children":[]},{"content":"<a href=\"06-day6.html#/26\">🙋 Practice P6-3-1 — n8n 체험 가입과 워크플로 가져오기</a>","children":[]},{"content":"<a href=\"06-day6.html#/27\">🙋 Practice P6-3-2 — 규칙 3줄 보기와 실행</a>","children":[]},{"content":"<a href=\"06-day6.html#/28\">✅ 확인·복구 P6-3 — 테스트 리드 5건의 A 등급 수</a>","children":[]},{"content":"<a href=\"06-day6.html#/29\">🖥️ 시연 — n8n AI 분류 1건</a>","children":[]},{"content":"<a href=\"06-day6.html#/30\">6-6. 닫는 절 — 과제 카드·6일 회고·로그아웃</a>","children":[]},{"content":"<a href=\"06-day6.html#/31\">6일차 확인 질문 정답 공개</a>","children":[]},{"content":"<a href=\"06-day6.html#/32\">과제 카드의 수단 — 대화는 프로젝트, 규칙은 n8n</a>","children":[]},{"content":"<a href=\"06-day6.html#/33\">🙋 Practice 과제 — 우리 부서 과제 카드 작성</a>","children":[]},{"content":"<a href=\"06-day6.html#/34\">🙋 Practice 마무리 — 6일 회고와 로그아웃 6곳</a>","children":[]}]}]};
+  function firstHrefFromToc(node){
+    if (!node || !node.children || node.children.length === 0) return null;
+    for (const child of node.children) {
+      if (child && child.content && typeof child.content === 'string') {
+        const m = child.content.match(/href="([^"]+)"/);
+        if (m) return m[1];
+      }
+      const nested = firstHrefFromToc(child);
+      if (nested) return nested;
+    }
+    return null;
+  }
+  const AGENDA_MODE = 'chapter';
+  const AGENDA_LAST_CHAPTER = '06-day6.html';
+  const AGENDA_COVER_ENABLED = true;
+  const nextUrl = firstHrefFromToc(_tocData);
+  // Agenda 진입 시 hash #/N 있으면 deck으로 자동 redirect (agenda 는 reveal.js 없으므로 hash 무의미)
+  try {
+    const _hashMatch = location.hash.match(/^#\/(\d+)$/);
+    if (_hashMatch && nextUrl) {
+      const _baseUrl = nextUrl.split('#')[0];
+      const _target = _baseUrl + '#/' + _hashMatch[1];
+      window.location.replace(m2NavWithSignal(_target, 'fwd=1'));
+      return;
+    }
+  } catch (_e) {}
+  // Issue89: capture phase — 일관성 (agenda는 reveal.js 미사용이라 hijack 우려는 적으나 동일 패턴 유지)
+  document.addEventListener('keydown', function(e){
+    // ← / ↑ (parent) → Cover (cover_enabled=true에 한함)
+    // Issue92_1: ⌘+← 는 Home fallback (sibling, no-op)으로 아래에서 처리되므로 제외
+    if (((e.key === 'ArrowLeft' || e.keyCode === 37) && !e.metaKey) ||
+        e.key === 'ArrowUp' || e.keyCode === 38) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (AGENDA_COVER_ENABLED) window.location.href = 'index.html?back=1';
+      return;
+    }
+    // → / ↓ (child) / Space → 첫 챕터/첫 H1 anchor
+    // Issue92_1: ⌘+→ 는 End fallback (sibling, no-op)으로 아래에서 처리되므로 제외
+    if (((e.key === 'ArrowRight' || e.keyCode === 39) && !e.metaKey) ||
+        e.key === 'ArrowDown' || e.keyCode === 40 ||
+        e.key === ' ' || e.keyCode === 32) {
+      if (nextUrl) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        // Issue110: hash 포함 URL(single 모드 'index.html#/2')에서도 ?fwd=1을 hash 앞에 안전 주입
+        window.location.href = m2NavWithSignal(nextUrl, 'fwd=1');
+      }
+      return;
+    }
+    // Issue114: ⇤ Home → Cover (parent fall-up, cover_enabled=true 한정) / ⇥ End → 첫 챕터 TOC (child fall-down)
+    // Issue92: ',' (Comma) / '.' (Period) fallback / Issue92_1: ⌘+← / ⌘+→ fallback 동일 처리
+    if (e.key === 'Home' || e.keyCode === 36 || e.code === 'Comma' ||
+        (e.metaKey && e.key === 'ArrowLeft')) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (AGENDA_COVER_ENABLED) window.location.href = 'index.html?back=1';
+      return;
+    }
+    if (e.key === 'End' || e.keyCode === 35 || e.code === 'Period' ||
+        (e.metaKey && e.key === 'ArrowRight')) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (nextUrl) window.location.href = m2NavWithSignal(nextUrl, 'fwd=1');
+      return;
+    }
+    // ⇞ PgUp → 자기 페이지 무시
+    if (e.key === 'PageUp' || e.keyCode === 33) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      return;
+    }
+    // ⇟ PgDown → 마지막 페이지
+    if (e.key === 'PageDown' || e.keyCode === 34) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (AGENDA_MODE === 'chapter' && AGENDA_LAST_CHAPTER) {
+        window.location.href = AGENDA_LAST_CHAPTER + '?last=1';
+      } else if (AGENDA_MODE === 'single') {
+        window.location.href = 'index.html?last=1';
+      }
+      return;
+    }
+  }, true);
+})();
+</script>
+</body>
+</html>
