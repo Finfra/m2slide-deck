@@ -18,6 +18,8 @@ Icon
 !decks/agentic-ai/DesignRndAI/slide/
 # 예외 — SalesMarketingAI 도 같은 이유로 빌드본을 올린다 (prj42a#Req2, 2026.10.25 공개 승인)
 !decks/agentic-ai/SalesMarketingAI/slide/
+# 예외 — VSCodeMarkdownGit 도 같은 이유로 빌드본을 올린다 (prj42a#Req3, 2026.10.25 공개 승인)
+!decks/agentic-ai/VSCodeMarkdownGit/slide/
 # EPUB·PDF 도 빌드 산출물 (재생성 가능)
 *.epub
 *.pdf
