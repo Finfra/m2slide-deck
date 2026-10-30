@@ -13,6 +13,17 @@ release_date: 2026-07-06
 
 ---
 
+#id-mg-what
+#layout-_mg
+
+# fPM — Six Daily Pains, Six Features
+
+```mg
+src: mg/01-what
+```
+
+---
+
 # The fPM Map — at a Glance
 
 ![The fPM map — six automation layers (hub, dashboard, VSCode integration, cdf, pm-do, sshf) stacked on top of Claude Code, with SCAR as the foundation](./img/diagrams/fpm-system-map.svg)

@@ -21,6 +21,17 @@ release_date: 2026-07-02
 
 ---
 
+#id-mg-hub
+#layout-_mg
+
+# hub 모드 — 트리거 한 단어로 채팅이 문서·폼이 됨
+
+```mg
+src: mg/03-hub
+```
+
+---
+
 # ..show — 응답을 HTML 문서로
 
 ::: columns

@@ -22,6 +22,17 @@ release_date: 2026-07-02
 
 ---
 
+#id-mg-multi
+#layout-_mg
+
+# 다중 프로젝트 — 번호로 지목하고 순서는 depends 가
+
+```mg
+src: mg/05-multi
+```
+
+---
+
 # 번호 → 경로 레지스트리
 
 ::: columns

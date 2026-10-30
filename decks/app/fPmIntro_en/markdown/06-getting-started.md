@@ -21,6 +21,17 @@ release_date: 2026-07-06
 
 ---
 
+#id-mg-start
+#layout-_mg
+
+# Getting Started — From One-Line Install to First Hands-On
+
+```mg
+src: mg/06-start
+```
+
+---
+
 # One-Line Install
 
 * GitHub repository: **`github.com/Finfra/fpm`**

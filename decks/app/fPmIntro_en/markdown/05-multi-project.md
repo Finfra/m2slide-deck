@@ -22,6 +22,17 @@ release_date: 2026-07-06
 
 ---
 
+#id-mg-multi
+#layout-_mg
+
+# Multi-Project — Point by Number, Let depends Handle Order
+
+```mg
+src: mg/05-multi
+```
+
+---
+
 # Number → Path Registry
 
 ::: columns
