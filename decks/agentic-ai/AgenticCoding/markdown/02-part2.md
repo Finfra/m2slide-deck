@@ -41,6 +41,16 @@ release_date: 2026-07-12
 
 ---
 
+#layout-_mg
+
+# MD 파일 뷰어 — MVP에서 기능 개선까지
+
+```mg
+src: mg/05-project
+```
+
+---
+
 # 하네스 셋팅 절차 개요
 
 * 1단계: 작업 디렉토리 + git init

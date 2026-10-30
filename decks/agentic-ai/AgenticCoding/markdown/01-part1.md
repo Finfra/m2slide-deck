@@ -31,6 +31,16 @@ release_date: 2026-07-06
 
 ---
 
+#layout-_mg
+
+# 4시간 — 이론 1.5h → 미니 프로젝트 2.5h
+
+```mg
+src: mg/00-flow
+```
+
+---
+
 #layout-_chapter
 
 # Agentic Coding — Part1
@@ -117,6 +127,16 @@ release_date: 2026-07-06
 
 ---
 
+#layout-_mg
+
+# 4가지 개념 — 입문에서 졸업까지
+
+```mg
+src: mg/01-concepts
+```
+
+---
+
 # Agentic Coding의 흐름
 
 * 1턴 사이클: 사용자 의도 → Plan → Tool 실행(Bash·Edit·Read) → 검증
@@ -128,6 +148,16 @@ release_date: 2026-07-06
 * Part2 실습에서 직접 체험할 흐름
 
 ![Agentic Coding의 흐름](./img/AgenticCoding_v10_5.png)
+
+---
+
+#layout-_mg
+
+# Agentic Coding — 한 턴의 흐름
+
+```mg
+src: mg/02-loop
+```
 
 ---
 
@@ -428,6 +458,16 @@ John Gruber가 2005년 개발. 텍스트로 저장되어 용량이 적고 버전
 
 ---
 
+#layout-_mg
+
+# SCAR — 하네스의 핵심 4요소
+
+```mg
+src: mg/03-scar
+```
+
+---
+
 # PRD.md / tasks.md 소개
 
 
@@ -468,3 +508,13 @@ John Gruber가 2005년 개발. 텍스트로 저장되어 용량이 적고 버전
 * R (Report): 완료 회고 (_doc_work/report/)
 
 * Part2에서 1 사이클 직접 실습
+
+---
+
+#layout-_mg
+
+# nPTiR — 의도·과정·결과를 남김
+
+```mg
+src: mg/04-nptir
+```
