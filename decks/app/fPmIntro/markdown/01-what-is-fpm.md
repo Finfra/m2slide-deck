@@ -13,6 +13,17 @@ release_date: 2026-07-02
 
 ---
 
+#id-mg-what
+#layout-_mg
+
+# fPM — 매일 반복되는 불편 여섯, 기능 여섯
+
+```mg
+src: mg/01-what
+```
+
+---
+
 # fPM 전체 지도 — 한눈에
 
 ![fPM 전체 지도 — Claude Code 위에 hub·대시보드·VSCode 연동·cdf·pm-do·sshf 6개 자동화 레이어가 얹히고 SCAR가 토대를 이룸](./img/diagrams/fpm-system-map.svg)

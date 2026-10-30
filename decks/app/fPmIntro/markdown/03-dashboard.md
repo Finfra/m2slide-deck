@@ -23,6 +23,17 @@ release_date: 2026-07-02
 
 ---
 
+#id-mg-board
+#layout-_mg
+
+# ..board — 끝날 때까지 기다리지 않고 지금을 봄
+
+```mg
+src: mg/04-board
+```
+
+---
+
 # ..board — tmux runner + 실시간 push
 
 ::: columns

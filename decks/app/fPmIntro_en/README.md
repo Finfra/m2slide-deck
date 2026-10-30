@@ -24,6 +24,7 @@
 * `img/` — 이미지 자산 (`./img/...` 로 참조)
 * `_config.yml` — theme·layout 등 m2slide 설정
 * `Info.md` — 기획 메타
+* `mg/` — 모션그래픽 6장 (`#layout-_mg`, 16:9 · 1920×1080). 원본·문구 표·합성은 `fPmIntro/mg/_src/` — `node decks/app/fPmIntro/mg/_src/compose.js` 가 ko·en 두 덱을 함께 생성
 
 ## 라이선스
 

@@ -21,6 +21,17 @@ release_date: 2026-07-02
 
 ---
 
+#id-mg-start
+#layout-_mg
+
+# fPM 시작하기 — 원라인 설치에서 첫 실습까지
+
+```mg
+src: mg/06-start
+```
+
+---
+
 # 원라인 설치
 
 * GitHub 저장소: **`github.com/Finfra/fpm`**

@@ -23,6 +23,17 @@ release_date: 2026-07-06
 
 ---
 
+#id-mg-board
+#layout-_mg
+
+# ..board — See Where It Is Now, Don't Wait
+
+```mg
+src: mg/04-board
+```
+
+---
+
 # ..board — tmux Runner + Live Push
 
 ::: columns

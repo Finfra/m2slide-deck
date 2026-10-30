@@ -21,6 +21,17 @@ release_date: 2026-07-06
 
 ---
 
+#id-mg-hub
+#layout-_mg
+
+# Hub Mode — One Trigger Word Turns Chat into a Doc or a Form
+
+```mg
+src: mg/03-hub
+```
+
+---
+
 # ..show — Turn the Answer into an HTML Doc
 
 ::: columns
