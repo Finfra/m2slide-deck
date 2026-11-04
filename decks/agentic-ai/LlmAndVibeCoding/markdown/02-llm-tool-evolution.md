@@ -89,6 +89,16 @@ timeline
 
 ---
 
+#layout-_mg
+
+## LLM 코딩 툴의 진화 — 채팅 → IDE → CLI
+
+```mg
+src: mg/02-evolution
+```
+
+---
+
 ## 미래 전망
 
 **다음 진화 단계**

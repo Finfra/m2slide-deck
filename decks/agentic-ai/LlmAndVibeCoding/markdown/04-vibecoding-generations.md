@@ -47,6 +47,16 @@ graph LR
 
 ---
 
+#layout-_mg
+
+## 바이브 코딩 세대 구분 — IDE vs CLI
+
+```mg
+src: mg/05-generations
+```
+
+---
+
 ## 하이브리드 활용
 
 **프론트엔드 개발**
