@@ -430,7 +430,7 @@
 }
 
 /* ── License attribution badge (Issue292) ─────────────────────────────────
-   theme/LICENSE.md(테마 라이선스) 조건 — 첫 장·마지막 장에 항상 표기.
+   첫 장·마지막 장 "Powered by finfra.kr" 뱃지 — 기본 on (MIT 전환 후 의무 아닌 부탁, license_attribution: false 로 끔).
    설계 SSOT: _doc_arch/license-attribution.md
    - 위치: 하단 중앙, 상하단 노랑 가로선(section[class*="layout-"]::after, bottom:12px
      height:10px, z-index:100 — 본 파일 §2) "바깥"(아래)에 배치. 2026-07-15 사용자 시각
@@ -975,7 +975,7 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
      이 브러시는 `bottom:-6px` 로 head-bar 를 4px 넘어 **제목 박스 안까지** 내려온다.
      z-index:100 이면 제목 글자 위에 그려지고, 불투명 PNG 라 걸린 글자가 지워진다.
      한글·라틴은 그 띠까지 안 올라오지만 **이모지는 em 박스를 넘어 뻗어** 걸린다
-     (실측 1.design_rnd p39·p40·p42·p157 — `🙋`·`✅` 윗부분 소실).
+     (실측 prj60 1.design_rnd p39·p40·p42·p157 — `🙋`·`✅` 윗부분 소실).
      z 를 빼면 트리 순서대로 칠해진다 — head-bar 가 제목보다 앞에 있으므로
      **제목이 위**가 되고, 선은 글자 뒤로 지나간다. 레이아웃은 1px 도 안 움직인다.
      ⚠️ 제목 쪽 선택자를 늘려 올리는 방법은 쓰지 않는다 — layout 마다 제목이
@@ -1217,7 +1217,7 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
      이 브러시는 `bottom:-6px` 로 head-bar 를 4px 넘어 **제목 박스 안까지** 내려온다.
      z-index:100 이면 제목 글자 위에 그려지고, 불투명 PNG 라 걸린 글자가 지워진다.
      한글·라틴은 그 띠까지 안 올라오지만 **이모지는 em 박스를 넘어 뻗어** 걸린다
-     (실측 1.design_rnd p39·p40·p42·p157 — `🙋`·`✅` 윗부분 소실).
+     (실측 prj60 1.design_rnd p39·p40·p42·p157 — `🙋`·`✅` 윗부분 소실).
      z 를 빼면 트리 순서대로 칠해진다 — head-bar 가 제목보다 앞에 있으므로
      **제목이 위**가 되고, 선은 글자 뒤로 지나간다. 레이아웃은 1px 도 안 움직인다.
      ⚠️ 제목 쪽 선택자를 늘려 올리는 방법은 쓰지 않는다 — layout 마다 제목이
@@ -1854,7 +1854,7 @@ body.agenda-page .agenda-frame {
   display: none;
 }
 
-/* 4:3 덱의 머리말 축소분 보정 (__lec 2026.09.19 요구 — 레퍼런스 덱 대조).
+/* 4:3 덱의 머리말 축소분 보정 (__lec 2026.09.19 요구 — prj42 레퍼런스 덱 대조).
    4:3 은 1920×1440 이라 세로가 모자란 창에서 3:2(1920×1280) 대비 정확히 12.5% 더 축소된다
    (1440÷1280 = 1.125. 1600×900 창 실측 배율 0.6250 vs 0.7031, 머리말 화면 12.5px vs 14.1px).
    머리말은 0.5em 회색이라 그 축소가 "흐리고 작다"로 그대로 체감된다. 축소분만큼 되돌린다.

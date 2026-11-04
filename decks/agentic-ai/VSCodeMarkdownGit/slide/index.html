@@ -1429,7 +1429,7 @@ html.ratio-fill .agenda-frame {
 
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
-  <link rel="stylesheet" href="css/custom.css?v=1792932448446">
+  <link rel="stylesheet" href="css/custom.css?v=1793755807062">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1726,7 +1726,13 @@ html.ratio-fill .agenda-frame {
 <div class="media-container"><img src="./img/ig-01-three-q.png" alt="세 질문과 답하는 도구 — 어디 있나는 VS Code, 무엇을 시켰나는 Markdown, 무엇이 바뀌었나는 Git"></div></div>
 </section>
 
-<section data-slide-hash="#/4" class="layout-_contents">
+<section data-slide-hash="#/4" class="layout-_mg">
+  <h1 class="mg-title">세 질문 → 세 도구 → 하나의 습관</h1>
+  <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="14">{&quot;src&quot;:&quot;mg/04-flow&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1600,&quot;H&quot;:1200,&quot;DUR&quot;:14,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — VS Code·Markdown·Git 특강 모션그래픽 04-flow (세 질문 → 세 도구 → 하나의 습관) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s04-flow.js · 합성: node mg/_src/compose.js · 4:3 1600×1200\n(function (root) {\n// common.js — VSCodeMarkdownGit 덱 추가 mg(04~06) 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: AgenticCoding mg/_src/common.js — 판형은 4:3(1600×1200), 색은 이 덱의 기존 mg(01~03)와 같은 밝은 체계\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1600, H = 1200;\nvar X0 = 80, X1 = W - 80, CW = X1 - X0; // 본문 좌우 여백 80 — 본문 폭 1440\nvar C = {\n  bg: &#39;#FFFFFF&#39;, ink: &#39;#0F172A&#39;, sub: &#39;#334155&#39;, muted: &#39;#64748B&#39;, line: &#39;#CBD5E1&#39;, paper: &#39;#FFFFFF&#39;, panel: &#39;#F1F5F9&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#8A6400&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#2563EB&#39;, blueTint: &#39;#EAF1FD&#39;, red: &#39;#DC2626&#39;, redTint: &#39;#FDECEC&#39;, green: &#39;#16A34A&#39;, greenTint: &#39;#E6F6EC&#39;,\n  purple: &#39;#7C3AED&#39;, purpleTint: &#39;#F1EAFD&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = (o.alpha == null ? 1 : o.alpha);\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(15,23,42,0.12)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\n// 칸 폭 maxW 를 넘으면 글자 크기를 줄여 맞춘다 — 글꼴이 바뀌어도 잘리지 않게\nfunction fit(ctx, s, x, y, size, weight, color, align, maxW, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  var w = ctx.measureText(s).width;\n  if (maxW &amp;&amp; w &gt; maxW) size = Math.floor(size * maxW / w);\n  txt(ctx, s, x, y, size, weight, color, align, font);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(15,23,42,0.12)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// 둥근 알약 꼬리표 — 가운데 정렬 글자\nfunction pill(ctx, s, cx, cy, w, h, fill, color, size, weight) {\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  fit(ctx, s, cx, cy + 1, size, weight || 800, color, &#39;center&#39;, w - 24);\n}\n\n// ── 공통 틀: 머리(칩 + 제목) · 아래 한 줄 ────────────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  pill(ctx, chip, X0 + 100, 93, 200, 62, C.brand, C.ink, 34, 800);\n  fit(ctx, title, X0 + 228, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;, X1 - X0 - 228);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(X0, 148, CW * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  fit(ctx, s, W / 2, 1120 + (1 - p) * 12, 42, 800, color || C.brandInk, &#39;center&#39;, CW);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// 장면 ④ — 덱 전체 흐름 (원고 근거: 머리 주석의 시간 구획 0~5·5~17·17~29·29~44·44~50분 + «쌓이고 나면 답할 수 없는 세 질문» + «세 개가 맞물리는 그림»)\nvar NAME = &#39;vscode-md-git-04-flow&#39;, DUR = 14;\nvar TL = { bar0: 1.0, barStep: 0.5, q0: 4.0, qStep: 0.7, a0: 6.4, aStep: 0.5, join: 8.6, habit: 9.8, foot: 11.2 };\nvar PARTS = [ // [이름, 분 시작, 분 끝, 색, 바탕]\n  [&#39;문제&#39;, 0, 5, C.muted, C.panel],\n  [&#39;VS Code&#39;, 5, 17, C.blue, C.blueTint],\n  [&#39;Markdown&#39;, 17, 29, C.purple, C.purpleTint],\n  [&#39;Git&#39;, 29, 44, C.green, C.greenTint],\n  [&#39;돌파구&#39;, 44, 50, C.brandInk, C.tint],\n];\nvar QS = [ // [질문, 답 도구, 칸 번호]\n  [&#39;어디 있나&#39;, &#39;VS Code&#39;, 1],\n  [&#39;무엇을 시켰나&#39;, &#39;Markdown&#39;, 2],\n  [&#39;무엇이 바뀌었나&#39;, &#39;Git&#39;, 3],\n];\nvar BY = 230, BH = 110, BGAP = 8, PERMIN = (CW - BGAP * 4) / 50;\nvar QY = 480, QH = 300, QGAP = 60, QW = (CW - QGAP * 2) / 3;\nvar HY = 940;\nfunction partX(i) { return X0 + PARTS[i][1] * PERMIN + i * BGAP; }\nfunction partW(i) { return (PARTS[i][2] - PARTS[i][1]) * PERMIN; }\nfunction bar(ctx, T) {\n  for (var i = 0; i &lt; PARTS.length; i++) {\n    var a = TL.bar0 + TL.barStep * i, p = es(T, a, a + 0.6);\n    if (p &lt;= 0) continue;\n    var x = partX(i), w = partW(i), P = PARTS[i];\n    card(ctx, x, BY, w * p, BH, { fill: P[4], stroke: P[3], lw: 3, r: 16, shadow: 0 });\n    ctx.save();\n    ctx.globalAlpha = es(T, a + 0.3, a + 0.7);\n    fit(ctx, P[0], x + w / 2, BY + BH / 2, 36, 800, P[3], &#39;center&#39;, w - 20);\n    fit(ctx, P[1] + &#39;~&#39; + P[2] + &#39;분&#39;, x + w / 2, BY + BH + 36, 26, 600, C.muted, &#39;center&#39;, w);\n    ctx.restore();\n  }\n}\nfunction qx(k) { return X0 + k * (QW + QGAP); }\nfunction questions(ctx, T) {\n  for (var k = 0; k &lt; QS.length; k++) {\n    var a = TL.q0 + TL.qStep * k, p = es(T, a, a + 0.7);\n    if (p &lt;= 0) continue;\n    var q = QS[k], P = PARTS[q[2]], x = qx(k), y = QY + (1 - p) * 50;\n    // 시간 막대 칸 → 카드로 내려오는 연결선\n    ctx.save();\n    ctx.globalAlpha = p;\n    ctx.strokeStyle = rgba(P[3], 0.5); ctx.lineWidth = 3; ctx.setLineDash([8, 8]);\n    ctx.beginPath(); ctx.moveTo(partX(q[2]) + partW(q[2]) / 2, BY + BH + 60); ctx.lineTo(x + QW / 2, y); ctx.stroke();\n    ctx.setLineDash([]);\n    card(ctx, x, y, QW, QH, { stroke: P[3], lw: 3 });\n    pill(ctx, &#39;Q&#39; + (k + 1), x + 70, y + 54, 92, 50, P[4], P[3], 28, 800);\n    fit(ctx, q[0] + &#39;?&#39;, x + QW / 2, y + 140, 52, 800, C.ink, &#39;center&#39;, QW - 60);\n    ctx.restore();\n    var pa = es(T, TL.a0 + TL.aStep * k, TL.a0 + TL.aStep * k + 0.5);\n    if (pa &gt; 0) {\n      ctx.save();\n      ctx.globalAlpha = pa;\n      pill(ctx, q[1], x + QW / 2 - 30, QY + 232 + (1 - pa) * 16, 260, 70, P[3], &#39;#FFFFFF&#39;, 36, 800);\n      ctx.restore();\n      stamp(ctx, x + QW / 2 + 140, QY + 232, 30, pa, C.green);\n    }\n  }\n}\nfunction habit(ctx, T) {\n  var pj = es(T, TL.join, TL.join + 1.2);\n  if (pj &gt; 0) {\n    for (var k = 0; k &lt; QS.length; k++) {\n      var sx = qx(k) + QW / 2, sy = QY + QH;\n      arrow(ctx, sx, sy + 6, W / 2 + (k - 1) * 120, HY - 52, pj, rgba(PARTS[QS[k][2]][3], 0.75), 4);\n    }\n  }\n  var ph = es(T, TL.habit, TL.habit + 0.7);\n  if (ph &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = ph;\n  ctx.translate(W / 2, HY);\n  var s = lerp(0.8, 1, ph);\n  ctx.scale(s, s);\n  pill(ctx, &#39;AI 를 다루는 습관&#39;, 0, 0, 620, 96, C.brand, C.ink, 44, 800);\n  ctx.restore();\n}\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;50분&#39;, &#39;세 질문 → 세 도구 → 하나의 습관&#39;, 0.2);\n  bar(ctx, T);\n  questions(ctx, T);\n  habit(ctx, T);\n  footer(ctx, T, &#39;돌파구는 코딩 실력이 아니라, AI 를 다루는 습관&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
+</section>
+
+
+<section data-slide-hash="#/5" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">문제</div>
     <div class="contents-head-right"></div>
@@ -1759,13 +1765,13 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/5" class="layout-_mg">
+<section data-slide-hash="#/6" class="layout-_mg">
   <h1 class="mg-title">VS Code — 흩어진 파일을 한 화면에</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="10">{&quot;src&quot;:&quot;mg/01-vscode&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1600,&quot;H&quot;:1200,&quot;DUR&quot;:10,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 특강 챕터 오프닝 «VS Code» — 흩어진 파일을 한 화면에, AI 에게 바로 시킨다\n// 4:3 1600×1200 · 10초 · 결정론(Math.random·Date 금지 — 흩뿌림은 seed 고정 PRNG) · 시스템 글꼴만\n// 흐름: 제목 강타 → 파일 카드가 화면에 흩어짐 → 창이 열리며 탐색기로 정렬 → 네 영역 → AI 에게 요청 → 바뀐 줄 표시 → 실행 확인 → 한 줄 결론\n// 공통 머리(수학·배경·제목·결론)는 03-git 과 같은 상수 — 장면은 scene.js 한 파일만 읽히므로 복제한다\n(function (root) {\nvar W = 1600, H = 1200, DUR = 10;\nvar C = {\n  bg: &#39;#FFFFFF&#39;, panel: &#39;#F1F5F9&#39;, ink: &#39;#0F172A&#39;, muted: &#39;#64748B&#39;, line: &#39;#CBD5E1&#39;,\n  accent: &#39;#D49B00&#39;, green: &#39;#16A34A&#39;, red: &#39;#DC2626&#39;, blue: &#39;#2563EB&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction back(p) { if (p &lt;= 0) return 0; if (p &gt;= 1) return 1; var c = 1.70158; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); }\nfunction es(t, a, b) { return ease(seg(t, a, b)); }\nfunction eb(t, a, b) { return back(seg(t, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\nfunction mulberry32(a) {\n  return function () {\n    a |= 0; a = a + 0x6D2B79F5 | 0;\n    var r = Math.imul(a ^ a &gt;&gt;&gt; 15, 1 | a);\n    r = r + Math.imul(r ^ r &gt;&gt;&gt; 7, 61 | r) ^ r;\n    return ((r ^ r &gt;&gt;&gt; 14) &gt;&gt;&gt; 0) / 4294967296;\n  };\n}\n\n// ── 시간표 (초) — 화면·소리 공용 SSOT ──────────────────────────────────────\nvar T = {\n  slam: 0.15, lift: 1.4, tag: 2.0,\n  scatter: 2.2, frame: 3.3, fly: 3.4, regions: 4.3, code: 4.5,\n  ask: 5.0, typed: 6.2, insert: 6.4, applied: 7.4, run: 7.6, ok: 7.95, punch: 8.7,\n};\n\n// ── 공통: 배경 · 제목 · 한 줄 결론 ────────────────────────────────────────\nfunction drawBg(ctx) {\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n  var g = ctx.createRadialGradient(W / 2, H * 0.48, 0, W / 2, H * 0.48, 900);\n  g.addColorStop(0, rgba(C.accent, 0.07));\n  g.addColorStop(1, rgba(C.accent, 0));\n  ctx.fillStyle = g;\n  ctx.fillRect(0, 0, W, H);\n  ctx.fillStyle = rgba(C.ink, 0.05);\n  for (var x = 25; x &lt; W; x += 50) for (var y = 25; y &lt; H; y += 50) ctx.fillRect(x, y, 2, 2);\n}\nfunction drawRich(ctx, parts, cx, y, font) {\n  ctx.font = font;\n  ctx.textAlign = &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  var total = 0, i;\n  for (i = 0; i &lt; parts.length; i++) total += ctx.measureText(parts[i][0]).width;\n  var x = cx - total / 2;\n  for (i = 0; i &lt; parts.length; i++) {\n    ctx.fillStyle = parts[i][1];\n    ctx.fillText(parts[i][0], x, y);\n    x += ctx.measureText(parts[i][0]).width;\n  }\n}\nfunction drawTitle(ctx, t, word, tag) {\n  var a = seg(t, T.slam, T.slam + 0.3);\n  if (a &lt;= 0) return;\n  var s = lerp(1.9, 1, eb(t, T.slam, T.slam + 0.75));\n  var m = es(t, T.lift, T.lift + 0.8);\n  var size = lerp(300, 150, m);\n  ctx.save();\n  ctx.globalAlpha = a;\n  ctx.translate(W / 2, lerp(H * 0.47, 200, m));\n  ctx.scale(s, s);\n  ctx.fillStyle = C.ink;\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  ctx.textAlign = &#39;center&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(word, 0, 0);\n  var tw = ctx.measureText(word).width, u = es(t, T.slam + 0.5, T.slam + 1.1);\n  ctx.fillStyle = C.accent;\n  ctx.fillRect(-tw / 2 * u, size * 0.5, tw * u, size * 0.07);\n  ctx.restore();\n  var ta = seg(t, T.tag, T.tag + 0.6);\n  if (ta &gt; 0) {\n    ctx.save();\n    ctx.globalAlpha = ta;\n    drawRich(ctx, tag, W / 2, 320 + (1 - ta) * 16, &#39;600 36px &#39; + KR);\n    ctx.restore();\n  }\n}\nfunction drawPunch(ctx, t, parts) {\n  var a = es(t, T.punch, T.punch + 0.6);\n  if (a &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = a;\n  drawRich(ctx, parts, W / 2, 1070 + (1 - a) * 24, &#39;700 54px &#39; + KR);\n  ctx.restore();\n}\nfunction text(ctx, s, x, y, col, font, align, alpha) {\n  if (alpha &lt;= 0) return;\n  ctx.globalAlpha = alpha;\n  ctx.fillStyle = col;\n  ctx.font = font;\n  ctx.textAlign = align;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n  ctx.globalAlpha = 1;\n}\n\n// ── 창 배치 (네 영역) ─────────────────────────────────────────────────────\nvar WIN = { x: 160, y: 370, w: 1280, h: 540 }, BAR = 36;\nvar EXP_R = 420, AI_L = 1140, TERM_T = 760;\nvar FILES = [&#39;login.js&#39;, &#39;index.html&#39;, &#39;style.css&#39;, &#39;README.md&#39;, &#39;api.py&#39;, &#39;db.sql&#39;, &#39;app.js&#39;,\n             &#39;test.js&#39;, &#39;config.yml&#39;, &#39;utils.py&#39;, &#39;notes.md&#39;, &#39;main.py&#39;, &#39;server.js&#39;, &#39;logo.png&#39;];\nvar SCAT = (function () {\n  var r = mulberry32(20261106), out = [];\n  for (var i = 0; i &lt; FILES.length; i++) {\n    out.push({ x: 120 + r() * 1210, y: 390 + r() * 560, rot: (r() - 0.5) * 0.6 });\n  }\n  return out;\n})();\nvar CODE = [[90, 300], [60, 200], [90, 260], [0, 0], [60, 320], [90, 240], [60, 180]];   // [들여쓰기, 길이]\nvar ADD = [[90, 280], [120, 220], [90, 250]];\nvar LH = 30, CODE_Y = 450, INS_AT = 3;\n\nfunction drawFiles(ctx, t) {\n  for (var i = 0; i &lt; FILES.length; i++) {\n    var a = eb(t, T.scatter + i * 0.05, T.scatter + 0.4 + i * 0.05);\n    if (a &lt;= 0) continue;\n    var f = es(t, T.fly + i * 0.05, T.fly + 0.8 + i * 0.05);\n    var s = SCAT[i];\n    var w = lerp(160, 228, f), h = lerp(54, 26, f);\n    var cx = lerp(s.x + 80, 178 + 114, f), cy = lerp(s.y, 448 + i * 30, f);   // 카드 중심 — 끝은 탐색기 줄\n    var hl = i === 0 ? es(t, T.insert, T.insert + 0.4) : 0;\n    ctx.save();\n    ctx.translate(cx, cy);\n    ctx.rotate(lerp(s.rot, 0, f));\n    ctx.scale(a, a);\n    ctx.fillStyle = hl &gt; 0 ? rgba(C.accent, lerp(0, 0.28, hl)) : rgba(C.panel, lerp(1, 0, f));\n    rr(ctx, -w / 2, -h / 2, w, h, lerp(10, 5, f));\n    ctx.fill();\n    ctx.strokeStyle = rgba(C.ink, lerp(0.25, 0, f));\n    ctx.lineWidth = 2;\n    ctx.stroke();\n    ctx.fillStyle = hl &gt; 0 ? C.accent : C.ink;\n    ctx.font = (hl &gt; 0 ? &#39;700 &#39; : &#39;500 &#39;) + Math.round(lerp(24, 19, f)) + &#39;px &#39; + MONO;\n    ctx.textAlign = &#39;left&#39;;\n    ctx.textBaseline = &#39;middle&#39;;\n    ctx.fillText(FILES[i], -w / 2 + lerp(16, 12, f), 1);\n    ctx.restore();\n  }\n}\n\nfunction drawWindow(ctx, t) {\n  var wa = es(t, T.frame, T.frame + 0.6);\n  if (wa &lt;= 0) return;\n  ctx.globalAlpha = wa;\n  ctx.fillStyle = &#39;#F8FAFC&#39;;\n  rr(ctx, WIN.x, WIN.y, WIN.w, WIN.h, 18);\n  ctx.fill();\n  ctx.strokeStyle = C.line;\n  ctx.lineWidth = 3;\n  ctx.stroke();\n  ctx.fillStyle = C.panel;\n  rr(ctx, WIN.x, WIN.y, WIN.w, BAR, 18);\n  ctx.fill();\n  ctx.fillRect(WIN.x, WIN.y + BAR / 2, WIN.w, BAR / 2);\n  var dots = [C.red, C.accent, C.green];\n  for (var d = 0; d &lt; 3; d++) {\n    ctx.fillStyle = rgba(dots[d], 0.7);\n    ctx.beginPath(); ctx.arc(WIN.x + 26 + d * 24, WIN.y + BAR / 2, 7, 0, Math.PI * 2); ctx.fill();\n  }\n  ctx.globalAlpha = 1;\n  // 네 영역 구분선 + 이름\n  var ra = es(t, T.regions, T.regions + 0.5);\n  if (ra &lt;= 0) return;\n  ctx.globalAlpha = ra;\n  ctx.strokeStyle = C.line;\n  ctx.lineWidth = 2;\n  ctx.beginPath();\n  ctx.moveTo(EXP_R, WIN.y + BAR); ctx.lineTo(EXP_R, WIN.y + WIN.h);\n  ctx.moveTo(AI_L, WIN.y + BAR); ctx.lineTo(AI_L, WIN.y + WIN.h);\n  ctx.moveTo(EXP_R, TERM_T); ctx.lineTo(AI_L, TERM_T);\n  ctx.stroke();\n  ctx.globalAlpha = 1;\n  var lf = &#39;700 20px &#39; + KR;\n  text(ctx, &#39;① 탐색기&#39;, 178, WIN.y + BAR + 16, C.muted, lf, &#39;left&#39;, ra);\n  text(ctx, &#39;② 편집기&#39;, EXP_R + 18, WIN.y + BAR + 16, C.muted, lf, &#39;left&#39;, ra);\n  text(ctx, &#39;③ 터미널&#39;, EXP_R + 18, TERM_T + 20, C.muted, lf, &#39;left&#39;, ra);\n  text(ctx, &#39;④ AI&#39;, AI_L + 18, WIN.y + BAR + 16, C.muted, lf, &#39;left&#39;, ra);\n}\n\nfunction bar(ctx, x, y, w, col) {\n  ctx.fillStyle = col;\n  rr(ctx, x, y - 6, w, 12, 6);\n  ctx.fill();\n}\nfunction drawCode(ctx, t) {\n  var ca = es(t, T.code, T.code + 0.5);\n  if (ca &lt;= 0) return;\n  var ip = es(t, T.insert, T.insert + 0.5);\n  var gx = EXP_R + 20, x0 = EXP_R + 60;\n  ctx.globalAlpha = ca;\n  for (var i = 0; i &lt; CODE.length; i++) {\n    var y = CODE_Y + i * LH + (i &gt;= INS_AT ? ADD.length * LH * ip : 0);\n    text(ctx, String(i + 1), gx + 14, y, rgba(C.muted, 0.6), &#39;500 16px &#39; + MONO, &#39;right&#39;, ca);\n    ctx.globalAlpha = ca;\n    if (CODE[i][1] &gt; 0) {\n      bar(ctx, x0 + CODE[i][0] - 60, y, 46, rgba(C.blue, 0.55));\n      bar(ctx, x0 + CODE[i][0] - 4, y, CODE[i][1], rgba(C.ink, 0.2));\n    }\n  }\n  ctx.globalAlpha = 1;\n  for (var k = 0; k &lt; ADD.length; k++) {\n    var ka = es(t, T.insert + 0.2 + k * 0.15, T.insert + 0.5 + k * 0.15);\n    if (ka &lt;= 0) continue;\n    var yk = CODE_Y + (INS_AT + k) * LH;\n    ctx.globalAlpha = ka;\n    ctx.fillStyle = rgba(C.green, 0.14);\n    ctx.fillRect(EXP_R + 2, yk - LH / 2, AI_L - EXP_R - 4, LH);\n    ctx.fillStyle = C.green;\n    ctx.fillRect(EXP_R + 2, yk - LH / 2, 4, LH);\n    text(ctx, &#39;+&#39;, gx + 14, yk, C.green, &#39;700 20px &#39; + MONO, &#39;right&#39;, ka);\n    ctx.globalAlpha = ka;\n    bar(ctx, x0 + ADD[k][0] - 60, yk, lerp(0, ADD[k][1], ka), rgba(C.green, 0.85));\n    ctx.globalAlpha = 1;\n  }\n}\n\nfunction drawAI(ctx, t) {\n  var ba = eb(t, T.ask, T.ask + 0.4);\n  if (ba &lt;= 0) return;\n  var bx = AI_L + 16, by = WIN.y + BAR + 40, bw = WIN.x + WIN.w - 16 - bx, bh = 116;\n  ctx.save();\n  ctx.translate(bx + bw, by);\n  ctx.scale(ba, ba);\n  ctx.fillStyle = rgba(C.accent, 0.16);\n  rr(ctx, -bw, 0, bw, bh, 16);\n  ctx.fill();\n  ctx.strokeStyle = rgba(C.accent, 0.6);\n  ctx.lineWidth = 2;\n  ctx.stroke();\n  ctx.restore();\n  var msg = [&#39;로그인 화면을&#39;, &#39;추가해 줘&#39;];\n  var n = Math.floor(seg(t, T.ask + 0.3, T.typed) * (msg[0].length + msg[1].length));\n  var l1 = msg[0].substr(0, Math.min(n, msg[0].length));\n  var l2 = n &gt; msg[0].length ? msg[1].substr(0, n - msg[0].length) : &#39;&#39;;\n  text(ctx, l1, bx + 18, by + 38, C.ink, &#39;700 28px &#39; + KR, &#39;left&#39;, 1);\n  text(ctx, l2, bx + 18, by + 78, C.ink, &#39;700 28px &#39; + KR, &#39;left&#39;, 1);\n  var ra = es(t, T.applied, T.applied + 0.4);\n  if (ra &gt; 0) {\n    ctx.globalAlpha = ra;\n    ctx.fillStyle = rgba(C.green, 0.14);\n    rr(ctx, bx, by + bh + 22, bw, 64, 14);\n    ctx.fill();\n    ctx.globalAlpha = 1;\n    text(ctx, &#39;✓ 편집기에 반영함&#39;, bx + 18, by + bh + 54, C.green, &#39;700 24px &#39; + KR, &#39;left&#39;, ra);\n  }\n}\n\nfunction drawTerm(ctx, t) {\n  text(ctx, &#39;▶ 실행&#39;, EXP_R + 24, TERM_T + 66, C.muted, &#39;600 24px &#39; + KR, &#39;left&#39;, es(t, T.run, T.run + 0.3));\n  text(ctx, &#39;✓ 새 화면이 열림&#39;, EXP_R + 24, TERM_T + 106, C.green, &#39;700 26px &#39; + KR, &#39;left&#39;, es(t, T.ok, T.ok + 0.3));\n}\n\nfunction draw(ctx, t) {\n  ctx.save();\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  drawBg(ctx);\n  drawTitle(ctx, t, &#39;VS Code&#39;, [[&#39;질문 1  &#39;, C.accent], [&#39;그 코드가 어디에 있지?&#39;, C.muted]]);\n  drawWindow(ctx, t);\n  drawCode(ctx, t);\n  drawAI(ctx, t);\n  drawTerm(ctx, t);\n  drawFiles(ctx, t);\n  drawPunch(ctx, t, [[&#39;흩어진 파일을 &#39;, C.ink], [&#39;한 화면에&#39;, C.accent], [&#39; — AI 에게 바로 시킨다&#39;, C.ink]]);\n  ctx.restore();\n}\n\nroot.MG = {\n  NAME: &#39;vscode-md-git-01-vscode&#39;,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: T,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () {\n    var ev = [{ t: T.slam, type: &#39;thump&#39; }, { t: T.lift, type: &#39;whoosh&#39;, dur: 0.6 }];\n    for (var i = 0; i &lt; FILES.length; i += 2) ev.push({ t: Math.round((T.scatter + i * 0.05) * 1000) / 1000, type: &#39;tick&#39; });\n    ev.push({ t: T.fly, type: &#39;whoosh&#39;, dur: 0.8 });\n    for (var k = 0; k &lt; 6; k++) ev.push({ t: Math.round((T.ask + 0.3 + k * 0.15) * 1000) / 1000, type: &#39;key&#39;, seed: k + 1 });\n    ev.push({ t: T.insert + 0.2, type: &#39;pop&#39; });\n    ev.push({ t: T.ok, type: &#39;ding&#39;, gain: 0.6 });\n    return ev;\n  },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
 </section>
 
 
-<section data-slide-hash="#/6" class="layout-_contents">
+<section data-slide-hash="#/7" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1795,7 +1801,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/7" class="layout-_contents">
+<section data-slide-hash="#/8" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1826,7 +1832,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/8" class="layout-_contents">
+<section data-slide-hash="#/9" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1846,7 +1852,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/9" class="layout-_contents">
+<section data-slide-hash="#/10" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1867,7 +1873,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/10" class="layout-_contents">
+<section data-slide-hash="#/11" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1902,7 +1908,7 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/11" class="layout-_contents">
+<section data-slide-hash="#/12" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1939,7 +1945,13 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/12" class="layout-_contents">
+<section data-slide-hash="#/13" class="layout-_mg">
+  <h1 class="mg-title">세션을 나누면 맥락이 깨끗함</h1>
+  <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="14">{&quot;src&quot;:&quot;mg/05-session&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1600,&quot;H&quot;:1200,&quot;DUR&quot;:14,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — VS Code·Markdown·Git 특강 모션그래픽 05-session (대화 한 개 vs 기능별 세션) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s05-session.js · 합성: node mg/_src/compose.js · 4:3 1600×1200\n(function (root) {\n// common.js — VSCodeMarkdownGit 덱 추가 mg(04~06) 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: AgenticCoding mg/_src/common.js — 판형은 4:3(1600×1200), 색은 이 덱의 기존 mg(01~03)와 같은 밝은 체계\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1600, H = 1200;\nvar X0 = 80, X1 = W - 80, CW = X1 - X0; // 본문 좌우 여백 80 — 본문 폭 1440\nvar C = {\n  bg: &#39;#FFFFFF&#39;, ink: &#39;#0F172A&#39;, sub: &#39;#334155&#39;, muted: &#39;#64748B&#39;, line: &#39;#CBD5E1&#39;, paper: &#39;#FFFFFF&#39;, panel: &#39;#F1F5F9&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#8A6400&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#2563EB&#39;, blueTint: &#39;#EAF1FD&#39;, red: &#39;#DC2626&#39;, redTint: &#39;#FDECEC&#39;, green: &#39;#16A34A&#39;, greenTint: &#39;#E6F6EC&#39;,\n  purple: &#39;#7C3AED&#39;, purpleTint: &#39;#F1EAFD&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = (o.alpha == null ? 1 : o.alpha);\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(15,23,42,0.12)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\n// 칸 폭 maxW 를 넘으면 글자 크기를 줄여 맞춘다 — 글꼴이 바뀌어도 잘리지 않게\nfunction fit(ctx, s, x, y, size, weight, color, align, maxW, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  var w = ctx.measureText(s).width;\n  if (maxW &amp;&amp; w &gt; maxW) size = Math.floor(size * maxW / w);\n  txt(ctx, s, x, y, size, weight, color, align, font);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(15,23,42,0.12)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// 둥근 알약 꼬리표 — 가운데 정렬 글자\nfunction pill(ctx, s, cx, cy, w, h, fill, color, size, weight) {\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  fit(ctx, s, cx, cy + 1, size, weight || 800, color, &#39;center&#39;, w - 24);\n}\n\n// ── 공통 틀: 머리(칩 + 제목) · 아래 한 줄 ────────────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  pill(ctx, chip, X0 + 100, 93, 200, 62, C.brand, C.ink, 34, 800);\n  fit(ctx, title, X0 + 228, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;, X1 - X0 - 228);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(X0, 148, CW * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  fit(ctx, s, W / 2, 1120 + (1 - p) * 12, 42, 800, color || C.brandInk, &#39;center&#39;, CW);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// 장면 ⑤ — 대화 한 개 vs 기능별 세션 (원고 근거: «대화 한 개 vs 기능별 세션 분리» + «VS Code 정리» 세션을 나눔)\nvar NAME = &#39;vscode-md-git-05-session&#39;, DUR = 14;\nvar TL = { left: 0.8, m0: 1.3, mStep: 0.45, tangle: 4.6, lost: 6.2, right: 7.0, f0: 7.6, fStep: 0.3, ok: 10.2, foot: 11.4 };\nvar FEAT = [[&#39;①&#39;, C.blue, C.blueTint], [&#39;②&#39;, C.purple, C.purpleTint], [&#39;③&#39;, C.green, C.greenTint]];\nvar MSG = [0, 1, 0, 2, 1, 2, 0]; // 지시 순서 — 기능 번호\nvar PY = 200, PH = 840, PW = 680, LX = X0, RX = X1 - PW;\nvar LBX = LX + 60, LBW = 400, LBH = 62, LBY = 290, LSTEP = 80;\nvar CGAP = 20, CWID = (PW - 40 - CGAP * 2) / 3, RBH = 70, RSTEP = 92, RBY = 390;\nfunction panel(ctx, x, title, sub, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  card(ctx, x, PY + (1 - p) * 30, PW, PH, { fill: C.panel, stroke: C.line, r: 24, shadow: 0 });\n  txt(ctx, title, x + 40, PY + 50, 40, 800, color, &#39;left&#39;);\n  txt(ctx, sub, x + PW - 40, PY + 50, 28, 700, C.muted, &#39;right&#39;);\n  ctx.restore();\n}\nfunction bubble(ctx, x, y, w, h, f, s, alpha) {\n  var F = FEAT[f];\n  ctx.save();\n  ctx.globalAlpha = alpha;\n  card(ctx, x, y, w, h, { fill: F[2], stroke: F[1], lw: 3, r: 14, shadow: 0 });\n  fit(ctx, s, x + w / 2, y + h / 2, 28, 700, F[1], &#39;center&#39;, w - 24);\n  ctx.restore();\n}\nfunction order(i) { var n = 0; for (var j = 0; j &lt; i; j++) if (MSG[j] === MSG[i]) n++; return n; }\nfunction left(ctx, T) {\n  panel(ctx, LX, &#39;대화 한 개&#39;, &#39;한 줄기&#39;, es(T, TL.left, TL.left + 0.5), C.red);\n  // 꼬인 선 — 같은 기능 지시끼리 잇는다\n  var pt = es(T, TL.tangle, TL.tangle + 1.2);\n  if (pt &gt; 0) {\n    for (var i = 0; i &lt; MSG.length; i++) {\n      for (var j = i + 1; j &lt; MSG.length; j++) {\n        if (MSG[j] !== MSG[i]) continue;\n        var y1 = LBY + i * LSTEP + LBH / 2, y2 = LBY + j * LSTEP + LBH / 2, xr = LBX + LBW;\n        var bulge = 40 + MSG[i] * 50;\n        ctx.save();\n        ctx.strokeStyle = rgba(FEAT[MSG[i]][1], 0.8); ctx.lineWidth = 4;\n        ctx.beginPath();\n        ctx.moveTo(xr, y1);\n        var u = pt, xm = xr + bulge * 2.2;\n        ctx.bezierCurveTo(xm, lerp(y1, y2, 0.15 * u), xr + bulge * 0.4, lerp(y1, y2, 0.6 * u), xr, lerp(y1, y2, u));\n        ctx.stroke();\n        ctx.restore();\n        break;\n      }\n    }\n    ctx.save(); ctx.globalAlpha = pt;\n    txt(ctx, &#39;맥락이 뒤엉킴&#39;, LX + 40, 890, 34, 800, C.red, &#39;left&#39;);\n    ctx.restore();\n  }\n  var pl = es(T, TL.lost, TL.lost + 0.6);\n  for (var k = 0; k &lt; MSG.length; k++) {\n    var a = TL.m0 + TL.mStep * k, p = es(T, a, a + 0.4);\n    if (p &lt;= 0) continue;\n    var al = p * (k === 0 ? lerp(1, 0.25, pl) : 1);\n    bubble(ctx, LBX - (1 - p) * 30, LBY + k * LSTEP, LBW, LBH, MSG[k], &#39;기능 &#39; + FEAT[MSG[k]][0] + &#39; 지시 &#39; + (order(k) + 1), al);\n  }\n  if (pl &gt; 0) {\n    crossmark(ctx, LBX - 28, LBY + LBH / 2, 22, pl, C.red);\n    ctx.save(); ctx.globalAlpha = pl;\n    fit(ctx, &#39;앞의 지시를 AI 가 놓침&#39;, LX + 40, 950, 34, 800, C.red, &#39;left&#39;, PW - 80);\n    ctx.restore();\n  }\n}\nfunction right(ctx, T) {\n  var pr = es(T, TL.right, TL.right + 0.5);\n  panel(ctx, RX, &#39;기능별 세션&#39;, &#39;나눠서&#39;, pr, C.green);\n  if (pr &lt;= 0) return;\n  ctx.save(); ctx.globalAlpha = pr;\n  for (var c = 0; c &lt; 3; c++) {\n    var cx = RX + 20 + c * (CWID + CGAP);\n    ctx.strokeStyle = rgba(FEAT[c][1], 0.45); ctx.lineWidth = 2; ctx.setLineDash([6, 6]);\n    rr(ctx, cx, 290, CWID, 420, 16); ctx.stroke();\n    ctx.setLineDash([]);\n    fit(ctx, &#39;세션 &#39; + FEAT[c][0], cx + CWID / 2, 336, 30, 800, FEAT[c][1], &#39;center&#39;, CWID - 16);\n  }\n  ctx.restore();\n  // 지시가 왼쪽에서 제 칸으로 들어간다\n  for (var k = 0; k &lt; MSG.length; k++) {\n    var a = TL.f0 + TL.fStep * k, p = es(T, a, a + 0.7);\n    if (p &lt;= 0) continue;\n    var f = MSG[k], n = order(k);\n    var tx = RX + 20 + f * (CWID + CGAP) + 10, ty = RBY + n * RSTEP;\n    var sx = LBX + LBW - CWID, sy = LBY + k * LSTEP;\n    bubble(ctx, lerp(sx, tx, p), lerp(sy, ty, p), CWID - 20, RBH, f, &#39;지시 &#39; + (n + 1), Math.min(1, p * 2));\n  }\n  for (var c2 = 0; c2 &lt; 3; c2++) {\n    var ps = es(T, TL.ok + 0.25 * c2, TL.ok + 0.25 * c2 + 0.4);\n    stamp(ctx, RX + 20 + c2 * (CWID + CGAP) + CWID / 2, 770, 32, ps, C.green);\n  }\n  var pk = es(T, TL.ok, TL.ok + 0.6);\n  if (pk &gt; 0) {\n    ctx.save(); ctx.globalAlpha = pk;\n    txt(ctx, &#39;각자 맥락이 깨끗함&#39;, RX + 40, 890, 34, 800, C.green, &#39;left&#39;);\n    fit(ctx, &#39;무엇을 시켰는지 추적됨&#39;, RX + 40, 950, 34, 800, C.green, &#39;left&#39;, PW - 80);\n    ctx.restore();\n  }\n}\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;세션&#39;, &#39;대화 한 개 vs 기능별 세션&#39;, 0.2);\n  left(ctx, T);\n  right(ctx, T);\n  footer(ctx, T, &#39;기능마다 세션을 따로 엶 — 각자 맥락이 깨끗함&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
+</section>
+
+
+<section data-slide-hash="#/14" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1966,7 +1978,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/13" class="layout-_contents">
+<section data-slide-hash="#/15" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -1998,7 +2010,7 @@ html.ratio-fill .agenda-frame {
 <p><!-- [줄임] 시간이 모자라면 이 장부터 접음 --></p></div>
 </section>
 
-<section data-slide-hash="#/14" class="layout-_contents">
+<section data-slide-hash="#/16" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -2025,7 +2037,7 @@ html.ratio-fill .agenda-frame {
 <p><!-- [줄임] 시간이 모자라면 이 장을 접음 --></p></div>
 </section>
 
-<section data-slide-hash="#/15" class="layout-_contents">
+<section data-slide-hash="#/17" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">VS Code</div>
     <div class="contents-head-right"></div>
@@ -2060,13 +2072,13 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/16" class="layout-_mg">
+<section data-slide-hash="#/18" class="layout-_mg">
   <h1 class="mg-title">Markdown — 사람도 AI 도 같은 문서를 읽음</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="10">{&quot;src&quot;:&quot;mg/02-markdown&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1600,&quot;H&quot;:1200,&quot;DUR&quot;:10,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 특강 챕터 오프닝 «Markdown» — 기호 몇 개로, 사람도 AI 도 같은 문서를 읽는다\n// 4:3 1600×1200 · 10초 · 결정론(Math.random·Date 금지 — 모든 값은 t 의 함수) · 시스템 글꼴만\n// 흐름: 제목 강타 → 기호를 붙여 타이핑 → 한 줄씩 제목·목록·인용으로 변신 → «AI 가 읽음 / 사람이 읽음» → 같은 파일 하나 → 한 줄 결론\n// 공통 머리(수학·배경·제목·결론)는 03-git 과 같은 상수 — 장면은 scene.js 한 파일만 읽히므로 복제한다\n(function (root) {\nvar W = 1600, H = 1200, DUR = 10;\nvar C = {\n  bg: &#39;#FFFFFF&#39;, panel: &#39;#F1F5F9&#39;, ink: &#39;#0F172A&#39;, muted: &#39;#64748B&#39;, line: &#39;#CBD5E1&#39;,\n  accent: &#39;#D49B00&#39;, green: &#39;#16A34A&#39;, red: &#39;#DC2626&#39;, blue: &#39;#2563EB&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction back(p) { if (p &lt;= 0) return 0; if (p &gt;= 1) return 1; var c = 1.70158; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); }\nfunction es(t, a, b) { return ease(seg(t, a, b)); }\nfunction eb(t, a, b) { return back(seg(t, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n\n// ── 시간표 (초) — 화면·소리 공용 SSOT ──────────────────────────────────────\nvar T = {\n  slam: 0.15, lift: 1.4, tag: 2.0,\n  panels: 2.2, type: 2.6, typed: 4.6, conv: 4.9,\n  ai: 6.6, human: 7.0, same: 7.6, punch: 8.7,\n};\nvar CONV_GAP = 0.35, CONV_LEN = 0.6;\n\n// ── 공통: 배경 · 제목 · 한 줄 결론 ────────────────────────────────────────\nfunction drawBg(ctx) {\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n  var g = ctx.createRadialGradient(W / 2, H * 0.48, 0, W / 2, H * 0.48, 900);\n  g.addColorStop(0, rgba(C.accent, 0.07));\n  g.addColorStop(1, rgba(C.accent, 0));\n  ctx.fillStyle = g;\n  ctx.fillRect(0, 0, W, H);\n  ctx.fillStyle = rgba(C.ink, 0.05);\n  for (var x = 25; x &lt; W; x += 50) for (var y = 25; y &lt; H; y += 50) ctx.fillRect(x, y, 2, 2);\n}\nfunction drawRich(ctx, parts, cx, y, font) {\n  ctx.font = font;\n  ctx.textAlign = &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  var total = 0, i;\n  for (i = 0; i &lt; parts.length; i++) total += ctx.measureText(parts[i][0]).width;\n  var x = cx - total / 2;\n  for (i = 0; i &lt; parts.length; i++) {\n    ctx.fillStyle = parts[i][1];\n    ctx.fillText(parts[i][0], x, y);\n    x += ctx.measureText(parts[i][0]).width;\n  }\n}\nfunction drawTitle(ctx, t, word, tag) {\n  var a = seg(t, T.slam, T.slam + 0.3);\n  if (a &lt;= 0) return;\n  var s = lerp(1.9, 1, eb(t, T.slam, T.slam + 0.75));\n  var m = es(t, T.lift, T.lift + 0.8);\n  var size = lerp(300, 150, m);\n  ctx.save();\n  ctx.globalAlpha = a;\n  ctx.translate(W / 2, lerp(H * 0.47, 200, m));\n  ctx.scale(s, s);\n  ctx.fillStyle = C.ink;\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  ctx.textAlign = &#39;center&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(word, 0, 0);\n  var tw = ctx.measureText(word).width, u = es(t, T.slam + 0.5, T.slam + 1.1);\n  ctx.fillStyle = C.accent;\n  ctx.fillRect(-tw / 2 * u, size * 0.5, tw * u, size * 0.07);\n  ctx.restore();\n  var ta = seg(t, T.tag, T.tag + 0.6);\n  if (ta &gt; 0) {\n    ctx.save();\n    ctx.globalAlpha = ta;\n    drawRich(ctx, tag, W / 2, 320 + (1 - ta) * 16, &#39;600 36px &#39; + KR);\n    ctx.restore();\n  }\n}\nfunction drawPunch(ctx, t, parts) {\n  var a = es(t, T.punch, T.punch + 0.6);\n  if (a &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = a;\n  drawRich(ctx, parts, W / 2, 1070 + (1 - a) * 24, &#39;700 54px &#39; + KR);\n  ctx.restore();\n}\nfunction text(ctx, s, x, y, col, font, align, alpha) {\n  if (alpha &lt;= 0) return;\n  ctx.globalAlpha = alpha;\n  ctx.fillStyle = col;\n  ctx.font = font;\n  ctx.textAlign = align;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n  ctx.globalAlpha = 1;\n}\n\n// ── 두 패널: 적는 그대로(원문) · 보이는 모습(렌더) ──────────────────────────\nvar PL = { x: 130, y: 400, w: 640, h: 470 }, PR = { x: 830, y: 400, w: 640, h: 470 };\nvar RAW = [[&#39;#&#39;, &#39; 회원가입 기능&#39;], [&#39;-&#39;, &#39; 이메일로 가입&#39;], [&#39;-&#39;, &#39; 가입하면 환영 메일&#39;], [&#39;&gt;&#39;, &#39; 비밀번호는 암호화&#39;]];\nvar RAW_Y = [480, 570, 650, 740], OUT_Y = [482, 572, 640, 742];\nvar RAW_FONT = &#39;600 36px &#39; + MONO;\nvar TOTAL = (function () { var n = 0; for (var i = 0; i &lt; RAW.length; i++) n += RAW[i][0].length + RAW[i][1].length; return n; })();\n\nfunction convAt(i) { return T.conv + i * CONV_GAP; }\n\nfunction drawPanels(ctx, t) {\n  var a = es(t, T.panels, T.panels + 0.5);\n  if (a &lt;= 0) return;\n  var p = [PL, PR], lab = [&#39;적는 그대로&#39;, &#39;보이는 모습&#39;];\n  for (var k = 0; k &lt; 2; k++) {\n    var dy = (1 - a) * 30;\n    ctx.globalAlpha = a;\n    ctx.fillStyle = k === 0 ? &#39;#F8FAFC&#39; : C.panel;\n    rr(ctx, p[k].x, p[k].y + dy, p[k].w, p[k].h, 20);\n    ctx.fill();\n    ctx.strokeStyle = C.line;\n    ctx.lineWidth = 2;\n    ctx.stroke();\n    ctx.globalAlpha = 1;\n    text(ctx, lab[k], p[k].x + 24, p[k].y + 32 + dy, C.muted, &#39;700 22px &#39; + KR, &#39;left&#39;, a);\n  }\n  // 가운데 화살표\n  var ar = es(t, T.conv - 0.2, T.conv + 0.3);\n  if (ar &gt; 0) {\n    ctx.globalAlpha = ar;\n    ctx.fillStyle = C.accent;\n    ctx.beginPath();\n    ctx.moveTo(782, 610); ctx.lineTo(818, 635); ctx.lineTo(782, 660);\n    ctx.closePath();\n    ctx.fill();\n    ctx.globalAlpha = 1;\n  }\n}\n\nfunction drawRaw(ctx, t) {\n  var n = Math.floor(seg(t, T.type, T.typed) * TOTAL);\n  var used = 0, curX = -1, curY = 0;\n  ctx.font = RAW_FONT;\n  for (var i = 0; i &lt; RAW.length; i++) {\n    var sym = RAW[i][0], rest = RAW[i][1];\n    var len = sym.length + rest.length, k = clamp(n - used, 0, len);\n    used += len;\n    if (k &lt;= 0) continue;\n    var x = PL.x + 40, y = RAW_Y[i];\n    // 변신 순간 기호가 빛난다\n    var c0 = convAt(i), glow = seg(t, c0, c0 + 0.2) * (1 - seg(t, c0 + 0.4, c0 + 0.9));\n    ctx.font = RAW_FONT;\n    var sw = ctx.measureText(sym).width;\n    if (glow &gt; 0) {\n      ctx.fillStyle = rgba(C.accent, 0.35 * glow);\n      rr(ctx, x - 8, y - 26, sw + 16, 52, 10);\n      ctx.fill();\n    }\n    text(ctx, sym, x, y, C.accent, &#39;800 36px &#39; + MONO, &#39;left&#39;, 1);\n    var shown = rest.substr(0, k - sym.length);\n    if (k &gt; sym.length) text(ctx, shown, x + sw, y, C.ink, RAW_FONT, &#39;left&#39;, 1);\n    ctx.font = RAW_FONT;\n    curX = x + sw + (k &gt; sym.length ? ctx.measureText(shown).width : 0);\n    curY = y;\n  }\n  if (curX &gt;= 0 &amp;&amp; t &lt; T.conv &amp;&amp; Math.floor(t * 2.5) % 2 === 0) {\n    ctx.fillStyle = C.accent;\n    ctx.fillRect(curX + 4, curY - 22, 16, 44);\n  }\n}\n\nfunction drawRendered(ctx, t) {\n  var x = PR.x + 40;\n  for (var i = 0; i &lt; RAW.length; i++) {\n    var c0 = convAt(i), a = es(t, c0, c0 + CONV_LEN);\n    if (a &lt;= 0) continue;\n    var dx = (1 - a) * -70, y = OUT_Y[i], body = RAW[i][1].substr(1);\n    // 원문에서 건너오는 빛줄기\n    var st = seg(t, c0, c0 + 0.45);\n    if (st &gt; 0 &amp;&amp; st &lt; 1) {\n      ctx.globalAlpha = 0.6 * (1 - st);\n      ctx.fillStyle = C.accent;\n      ctx.fillRect(lerp(PL.x + 200, PR.x + 40, st), RAW_Y[i] - 2 + (y - RAW_Y[i]) * st, 120, 4);\n      ctx.globalAlpha = 1;\n    }\n    ctx.save();\n    ctx.translate(dx, 0);\n    if (i === 0) {\n      text(ctx, body, x, y, C.ink, &#39;800 50px &#39; + KR, &#39;left&#39;, a);\n      ctx.globalAlpha = a;\n      ctx.fillStyle = C.line;\n      ctx.fillRect(x, y + 38, 560, 3);\n    } else if (RAW[i][0] === &#39;-&#39;) {\n      ctx.globalAlpha = a;\n      ctx.fillStyle = C.accent;\n      ctx.beginPath(); ctx.arc(x + 10, y, 7, 0, Math.PI * 2); ctx.fill();\n      text(ctx, body, x + 34, y, C.ink, &#39;500 36px &#39; + KR, &#39;left&#39;, a);\n    } else {\n      ctx.globalAlpha = a;\n      ctx.fillStyle = C.accent;\n      ctx.fillRect(x, y - 30, 7, 60);\n      text(ctx, body, x + 28, y, C.muted, &#39;600 34px &#39; + KR, &#39;left&#39;, a);\n    }\n    ctx.restore();\n  }\n}\n\nfunction badge(ctx, s, cx, y, col, p) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.translate(cx, y);\n  ctx.scale(p, p);\n  ctx.font = &#39;800 30px &#39; + KR;\n  var w = ctx.measureText(s).width + 56;\n  ctx.fillStyle = rgba(col, 0.18);\n  rr(ctx, -w / 2, -30, w, 60, 30);\n  ctx.fill();\n  ctx.strokeStyle = col;\n  ctx.lineWidth = 3;\n  ctx.stroke();\n  ctx.fillStyle = col;\n  ctx.textAlign = &#39;center&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, 0, 1);\n  ctx.restore();\n}\nfunction drawReaders(ctx, t) {\n  var lx = PL.x + PL.w / 2, rx = PR.x + PR.w / 2, by = 912;\n  badge(ctx, &#39;AI 가 읽음&#39;, lx, by, C.green, eb(t, T.ai, T.ai + 0.45));\n  badge(ctx, &#39;사람이 읽음&#39;, rx, by, C.blue, eb(t, T.human, T.human + 0.45));\n  var sp = es(t, T.same, T.same + 0.6);\n  if (sp &lt;= 0) return;\n  var y = 968;\n  ctx.strokeStyle = rgba(C.ink, 0.45);\n  ctx.lineWidth = 3;\n  ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath();\n  ctx.moveTo(lx, by + 32); ctx.lineTo(lx, y);\n  ctx.lineTo(lerp(lx, (lx + rx) / 2, sp), y);\n  ctx.moveTo(rx, by + 32); ctx.lineTo(rx, y);\n  ctx.lineTo(lerp(rx, (lx + rx) / 2, sp), y);\n  ctx.stroke();\n  var la = seg(t, T.same + 0.4, T.same + 0.8);\n  if (la &gt; 0) {\n    ctx.globalAlpha = la;\n    ctx.fillStyle = C.bg;\n    rr(ctx, (lx + rx) / 2 - 150, y - 22, 300, 44, 22);   // 선 위에 얹는 바탕\n    ctx.fill();\n    ctx.globalAlpha = 1;\n  }\n  text(ctx, &#39;같은 .md 파일 하나&#39;, (lx + rx) / 2, y + 1, C.ink, &#39;700 28px &#39; + KR, &#39;center&#39;, la);\n}\n\nfunction draw(ctx, t) {\n  ctx.save();\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  drawBg(ctx);\n  drawTitle(ctx, t, &#39;Markdown&#39;, [[&#39;질문 2  &#39;, C.accent], [&#39;AI 에게 무엇을 시켰더라?&#39;, C.muted]]);\n  drawPanels(ctx, t);\n  drawRaw(ctx, t);\n  drawRendered(ctx, t);\n  drawReaders(ctx, t);\n  drawPunch(ctx, t, [[&#39;기호 몇 개로 — &#39;, C.ink], [&#39;사람도 AI 도&#39;, C.accent], [&#39; 같은 문서를 읽는다&#39;, C.ink]]);\n  ctx.restore();\n}\n\nroot.MG = {\n  NAME: &#39;vscode-md-git-02-markdown&#39;,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: T,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () {\n    var ev = [{ t: T.slam, type: &#39;thump&#39; }, { t: T.lift, type: &#39;whoosh&#39;, dur: 0.6 }];\n    for (var k = 0; k &lt; 12; k++) ev.push({ t: Math.round((T.type + k * (T.typed - T.type) / 12) * 1000) / 1000, type: &#39;key&#39;, seed: k + 1 });\n    for (var i = 0; i &lt; RAW.length; i++) ev.push({ t: Math.round(convAt(i) * 1000) / 1000, type: &#39;pop&#39; });\n    ev.push({ t: T.ai, type: &#39;click&#39; }, { t: T.human, type: &#39;click&#39; });\n    ev.push({ t: T.same + 0.4, type: &#39;ding&#39;, gain: 0.6 });\n    return ev;\n  },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
 </section>
 
 
-<section data-slide-hash="#/17" class="layout-_contents">
+<section data-slide-hash="#/19" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2096,7 +2108,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/18" class="layout-_contents">
+<section data-slide-hash="#/20" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2119,7 +2131,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/19" class="layout-_contents">
+<section data-slide-hash="#/21" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2165,7 +2177,7 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/20" class="layout-_contents">
+<section data-slide-hash="#/22" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2199,7 +2211,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/21" class="layout-_contents">
+<section data-slide-hash="#/23" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2233,7 +2245,7 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/22" class="layout-_contents">
+<section data-slide-hash="#/24" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2269,7 +2281,7 @@ html.ratio-fill .agenda-frame {
 <p><!-- [줄임] 시간이 모자라면 이 장을 접음 --></p></div>
 </section>
 
-<section data-slide-hash="#/23" class="layout-_contents">
+<section data-slide-hash="#/25" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2309,7 +2321,7 @@ html.ratio-fill .agenda-frame {
 <p><!-- [줄임] 어디에 쓰이나 장과 함께 접을 수 있음 --></p></div>
 </section>
 
-<section data-slide-hash="#/24" class="layout-_contents">
+<section data-slide-hash="#/26" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2334,7 +2346,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/25" class="layout-_contents">
+<section data-slide-hash="#/27" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2366,7 +2378,13 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/26" class="layout-_contents">
+<section data-slide-hash="#/28" class="layout-_mg">
+  <h1 class="mg-title">기준 문서가 먼저 — 요구사항에서 변경까지 한 사슬</h1>
+  <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="13">{&quot;src&quot;:&quot;mg/06-chain&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1600,&quot;H&quot;:1200,&quot;DUR&quot;:13,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — VS Code·Markdown·Git 특강 모션그래픽 06-chain (요구사항 → 설계 → 이슈 → 변경) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s06-chain.js · 합성: node mg/_src/compose.js · 4:3 1600×1200\n(function (root) {\n// common.js — VSCodeMarkdownGit 덱 추가 mg(04~06) 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: AgenticCoding mg/_src/common.js — 판형은 4:3(1600×1200), 색은 이 덱의 기존 mg(01~03)와 같은 밝은 체계\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1600, H = 1200;\nvar X0 = 80, X1 = W - 80, CW = X1 - X0; // 본문 좌우 여백 80 — 본문 폭 1440\nvar C = {\n  bg: &#39;#FFFFFF&#39;, ink: &#39;#0F172A&#39;, sub: &#39;#334155&#39;, muted: &#39;#64748B&#39;, line: &#39;#CBD5E1&#39;, paper: &#39;#FFFFFF&#39;, panel: &#39;#F1F5F9&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#8A6400&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#2563EB&#39;, blueTint: &#39;#EAF1FD&#39;, red: &#39;#DC2626&#39;, redTint: &#39;#FDECEC&#39;, green: &#39;#16A34A&#39;, greenTint: &#39;#E6F6EC&#39;,\n  purple: &#39;#7C3AED&#39;, purpleTint: &#39;#F1EAFD&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = (o.alpha == null ? 1 : o.alpha);\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(15,23,42,0.12)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\n// 칸 폭 maxW 를 넘으면 글자 크기를 줄여 맞춘다 — 글꼴이 바뀌어도 잘리지 않게\nfunction fit(ctx, s, x, y, size, weight, color, align, maxW, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  var w = ctx.measureText(s).width;\n  if (maxW &amp;&amp; w &gt; maxW) size = Math.floor(size * maxW / w);\n  txt(ctx, s, x, y, size, weight, color, align, font);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(15,23,42,0.12)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// 둥근 알약 꼬리표 — 가운데 정렬 글자\nfunction pill(ctx, s, cx, cy, w, h, fill, color, size, weight) {\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  fit(ctx, s, cx, cy + 1, size, weight || 800, color, &#39;center&#39;, w - 24);\n}\n\n// ── 공통 틀: 머리(칩 + 제목) · 아래 한 줄 ────────────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  pill(ctx, chip, X0 + 100, 93, 200, 62, C.brand, C.ink, 34, 800);\n  fit(ctx, title, X0 + 228, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;, X1 - X0 - 228);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(X0, 148, CW * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  fit(ctx, s, W / 2, 1120 + (1 - p) * 12, 42, 800, color || C.brandInk, &#39;center&#39;, CW);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// 장면 ⑥ — 기준 문서 사슬 (원고 근거: «요구사항 → 설계 → 이슈 → 변경» + «코드를 읽고 쓴 설계 문서의 함정» + «작업 하나 = 이슈 하나»)\nvar NAME = &#39;vscode-md-git-06-chain&#39;, DUR = 13;\nvar TL = { n0: 1.0, nStep: 0.8, first: 4.4, basis: 5.2, work: 6.2, sp0: 6.9, spStep: 0.3, back: 7.9, md: 9.0, foot: 10.4 };\nvar NODES = [ // [제목, 아래 글, 색, 바탕]\n  [&#39;요구사항&#39;, &#39;요구사항.md&#39;, C.blue, C.blueTint],\n  [&#39;설계&#39;, &#39;설계.md&#39;, C.purple, C.purpleTint],\n  [&#39;이슈&#39;, &#39;작업의 기록&#39;, C.brandInk, C.tint],\n  [&#39;변경&#39;, &#39;저장 지점&#39;, C.green, C.greenTint],\n];\nvar NY = 320, NH = 230, NW = 280, NGAP = (CW - NW * 4) / 3;\nvar WY = 740, SPX = [920, 1060, 1200], SPR = 30;\nfunction nx(i) { return X0 + i * (NW + NGAP); }\nfunction nodes(ctx, T) {\n  for (var i = 0; i &lt; NODES.length; i++) {\n    var a = TL.n0 + TL.nStep * i, p = es(T, a, a + 0.6);\n    if (i &gt; 0) arrow(ctx, nx(i - 1) + NW + 12, NY + NH / 2, nx(i) - 12, NY + NH / 2, es(T, a - 0.3, a + 0.1), C.muted, 5);\n    if (p &lt;= 0) continue;\n    var N = NODES[i], x = nx(i), y = NY + (1 - p) * 40;\n    var hi = i === 2 ? es(T, TL.basis, TL.basis + 0.5) : 0;\n    ctx.save();\n    ctx.globalAlpha = p;\n    card(ctx, x, y, NW, NH, { fill: N[3], stroke: N[2], lw: 3 + hi * 3 });\n    doc(ctx, x + NW / 2 - 40, y + 24, 80, 96, { stroke: N[2], rows: 3 });\n    fit(ctx, N[0], x + NW / 2, y + 160, 44, 800, C.ink, &#39;center&#39;, NW - 30);\n    fit(ctx, N[1], x + NW / 2, y + 202, 26, 600, N[2], &#39;center&#39;, NW - 30);\n    ctx.restore();\n  }\n}\nfunction flags(ctx, T) {\n  var pf = es(T, TL.first, TL.first + 0.6);\n  if (pf &gt; 0) {\n    ctx.save(); ctx.globalAlpha = pf;\n    var cx = nx(0) + NW / 2, cy = NY - 56 - (1 - pf) * 20;\n    pill(ctx, &#39;먼저 — 코드보다&#39;, cx, cy, 300, 58, C.ink, &#39;#FFFFFF&#39;, 28, 800);\n    ctx.fillStyle = C.ink;\n    ctx.beginPath(); ctx.moveTo(cx - 12, cy + 28); ctx.lineTo(cx + 12, cy + 28); ctx.lineTo(cx, cy + 42); ctx.closePath(); ctx.fill();\n    ctx.restore();\n  }\n  var pb = es(T, TL.basis, TL.basis + 0.6);\n  if (pb &gt; 0) {\n    ctx.save(); ctx.globalAlpha = pb;\n    var gx = nx(2) - NGAP / 2;\n    pill(ctx, &#39;근거&#39;, gx, NY + NH / 2 - 50, 96, 46, C.purple, &#39;#FFFFFF&#39;, 24, 800);\n    ctx.restore();\n  }\n}\nfunction work(ctx, T) {\n  var pw = es(T, TL.work, TL.work + 0.6);\n  if (pw &lt;= 0) return;\n  var ix = nx(2) + NW / 2, iy = NY + NH;\n  ctx.save(); ctx.globalAlpha = pw;\n  pill(ctx, &#39;작업 하나 = 이슈 하나&#39;, X0 + 200, WY, 400, 66, C.tint, C.brandInk, 32, 800);\n  ctx.restore();\n  // 이슈 → 작업\n  arrow(ctx, ix - 60, iy + 14, 700, WY - 44, pw, C.brandInk, 4);\n  var pk = es(T, TL.work + 0.3, TL.work + 0.8);\n  if (pk &gt; 0) {\n    ctx.save(); ctx.globalAlpha = pk;\n    card(ctx, 620, WY - 40, 180, 80, { fill: C.paper, stroke: C.brandInk, lw: 3, r: 16, shadow: 0 });\n    txt(ctx, &#39;작업&#39;, 710, WY, 34, 800, C.ink, &#39;center&#39;);\n    ctx.restore();\n  }\n  for (var s = 0; s &lt; SPX.length; s++) {\n    var a = TL.sp0 + TL.spStep * s, p = es(T, a, a + 0.35);\n    var px0 = s === 0 ? 800 : SPX[s - 1] + SPR;\n    arrow(ctx, px0 + 8, WY, SPX[s] - SPR - 8, WY, p, C.muted, 4);\n    if (p &lt;= 0) continue;\n    ctx.save();\n    ctx.globalAlpha = p;\n    ctx.fillStyle = C.green;\n    ctx.beginPath(); ctx.arc(SPX[s], WY, SPR * lerp(0.4, 1, p), 0, Math.PI * 2); ctx.fill();\n    ctx.restore();\n  }\n  var ps = es(T, TL.sp0 + 0.6, TL.sp0 + 1.2);\n  if (ps &gt; 0) {\n    ctx.save(); ctx.globalAlpha = ps;\n    txt(ctx, &#39;저장 지점&#39;, SPX[1], WY + 62, 28, 700, C.green, &#39;center&#39;);\n    ctx.restore();\n  }\n  // 저장 지점 → 이슈에 이어 둠 (되돌아오는 곡선)\n  var pr = es(T, TL.back, TL.back + 0.8);\n  if (pr &gt; 0) {\n    var x0 = SPX[2] + SPR + 6, y0 = WY, x3 = ix + 60, y3 = iy + 14;\n    ctx.save();\n    ctx.strokeStyle = C.brandInk; ctx.lineWidth = 4; ctx.setLineDash([10, 8]);\n    ctx.beginPath();\n    var N = 24;\n    for (var k = 0; k &lt;= N * pr; k++) {\n      var u = k / N, v = 1 - u;\n      var bx = v * v * v * x0 + 3 * v * v * u * (x0 + 160) + 3 * v * u * u * (x3 + 240) + u * u * u * x3;\n      var by = v * v * v * y0 + 3 * v * v * u * y0 + 3 * v * u * u * (y3 + 60) + u * u * u * y3;\n      if (k === 0) ctx.moveTo(bx, by); else ctx.lineTo(bx, by);\n    }\n    ctx.stroke();\n    ctx.setLineDash([]);\n    ctx.globalAlpha = es(T, TL.back + 0.5, TL.back + 1.0);\n    txt(ctx, &#39;이슈에 이어 둠&#39;, 1410, 590, 30, 800, C.brandInk, &#39;center&#39;);\n    ctx.restore();\n  }\n}\nfunction bracket(ctx, T) {\n  var p = es(T, TL.md, TL.md + 0.8);\n  if (p &lt;= 0) return;\n  var y = 900, xa = X0, xb = X1, xm = W / 2;\n  ctx.save();\n  ctx.globalAlpha = p;\n  ctx.strokeStyle = C.ink; ctx.lineWidth = 4; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath();\n  ctx.moveTo(lerp(xm, xa, p), y - 24); ctx.lineTo(lerp(xm, xa, p), y);\n  ctx.lineTo(lerp(xm, xb, p), y); ctx.lineTo(lerp(xm, xb, p), y - 24);\n  ctx.moveTo(xm, y); ctx.lineTo(xm, y + 20);\n  ctx.stroke();\n  pill(ctx, &#39;모두 Markdown 으로 남음&#39;, xm, y + 62, 520, 70, C.ink, &#39;#FFFFFF&#39;, 34, 800);\n  ctx.restore();\n}\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;사슬&#39;, &#39;요구사항 → 설계 → 이슈 → 변경&#39;, 0.2);\n  nodes(ctx, T);\n  flags(ctx, T);\n  work(ctx, T);\n  bracket(ctx, T);\n  footer(ctx, T, &#39;기준 문서가 있어야 이슈가 근거를 가짐&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
+</section>
+
+
+<section data-slide-hash="#/29" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2387,7 +2405,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/27" class="layout-_contents">
+<section data-slide-hash="#/30" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2419,7 +2437,7 @@ html.ratio-fill .agenda-frame {
 <p><!-- [줄임] 시간이 모자라면 이 장을 접음 --></p></div>
 </section>
 
-<section data-slide-hash="#/28" class="layout-_contents">
+<section data-slide-hash="#/31" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Markdown</div>
     <div class="contents-head-right"></div>
@@ -2448,13 +2466,13 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/29" class="layout-_mg">
+<section data-slide-hash="#/32" class="layout-_mg">
   <h1 class="mg-title">Git — 되돌아갈 수 있으니, 마음껏 시도함</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="10">{&quot;src&quot;:&quot;mg/03-git&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1600,&quot;H&quot;:1200,&quot;DUR&quot;:10,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 특강 챕터 오프닝 «Git» — 되돌아갈 수 있으니, 마음껏 시도한다\n// 4:3 1600×1200 · 10초 · 결정론(Math.random·Date 금지 — 모든 값은 t 의 함수) · 시스템 글꼴만\n// 흐름: 제목 강타 → 저장 지점 5개 → 5번 망가짐 → 3번으로 되감기 → 갈래(실험) → 합치기 → 한 줄 결론\n(function (root) {\nvar W = 1600, H = 1200, DUR = 10;\nvar C = {\n  bg: &#39;#FFFFFF&#39;, panel: &#39;#F1F5F9&#39;, ink: &#39;#0F172A&#39;, muted: &#39;#64748B&#39;, line: &#39;#CBD5E1&#39;,\n  accent: &#39;#D49B00&#39;, green: &#39;#16A34A&#39;, red: &#39;#DC2626&#39;, blue: &#39;#2563EB&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(t, a, b) { return clamp((t - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction back(p) { if (p &lt;= 0) return 0; if (p &gt;= 1) return 1; var c = 1.70158; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); }\nfunction es(t, a, b) { return ease(seg(t, a, b)); }\nfunction eb(t, a, b) { return back(seg(t, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\nfunction mix(a, b, p) { var x = hex(a), y = hex(b); return &#39;rgb(&#39; + Math.round(lerp(x[0], y[0], p)) + &#39;,&#39; + Math.round(lerp(x[1], y[1], p)) + &#39;,&#39; + Math.round(lerp(x[2], y[2], p)) + &#39;)&#39;; }\nfunction bez(p0, p1, p2, p3, u) {\n  var v = 1 - u;\n  return [v * v * v * p0[0] + 3 * v * v * u * p1[0] + 3 * v * u * u * p2[0] + u * u * u * p3[0],\n          v * v * v * p0[1] + 3 * v * v * u * p1[1] + 3 * v * u * u * p2[1] + u * u * u * p3[1]];\n}\n\n// ── 시간표 (초) — 화면·소리 공용 SSOT ──────────────────────────────────────\nvar T = {\n  slam: 0.15, lift: 1.4, tag: 2.0, line: 2.2,\n  c1: 2.6, c2: 3.0, c3: 3.4, c4: 3.8, c5: 4.2,\n  broke: 4.8, rewind: 5.6, back: 6.6,\n  branch: 6.8, b1: 7.3, b2: 7.7, merge: 8.0, merged: 8.4, punch: 8.7,\n};\n\n// ── 공통: 배경 · 제목 · 한 줄 결론 ────────────────────────────────────────\nfunction drawBg(ctx) {\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n  var g = ctx.createRadialGradient(W / 2, H * 0.48, 0, W / 2, H * 0.48, 900);\n  g.addColorStop(0, rgba(C.accent, 0.07));\n  g.addColorStop(1, rgba(C.accent, 0));\n  ctx.fillStyle = g;\n  ctx.fillRect(0, 0, W, H);\n  ctx.fillStyle = rgba(C.ink, 0.05);\n  for (var x = 25; x &lt; W; x += 50) for (var y = 25; y &lt; H; y += 50) ctx.fillRect(x, y, 2, 2);\n}\nfunction drawRich(ctx, parts, cx, y, font) {\n  ctx.font = font;\n  ctx.textAlign = &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  var total = 0, i;\n  for (i = 0; i &lt; parts.length; i++) total += ctx.measureText(parts[i][0]).width;\n  var x = cx - total / 2;\n  for (i = 0; i &lt; parts.length; i++) {\n    ctx.fillStyle = parts[i][1];\n    ctx.fillText(parts[i][0], x, y);\n    x += ctx.measureText(parts[i][0]).width;\n  }\n}\nfunction drawTitle(ctx, t, word, tag) {\n  var a = seg(t, T.slam, T.slam + 0.3);\n  if (a &lt;= 0) return;\n  var s = lerp(1.9, 1, eb(t, T.slam, T.slam + 0.75));\n  var m = es(t, T.lift, T.lift + 0.8);\n  var size = lerp(300, 150, m);\n  ctx.save();\n  ctx.globalAlpha = a;\n  ctx.translate(W / 2, lerp(H * 0.47, 200, m));\n  ctx.scale(s, s);\n  ctx.fillStyle = C.ink;\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  ctx.textAlign = &#39;center&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(word, 0, 0);\n  var tw = ctx.measureText(word).width, u = es(t, T.slam + 0.5, T.slam + 1.1);\n  ctx.fillStyle = C.accent;\n  ctx.fillRect(-tw / 2 * u, size * 0.5, tw * u, size * 0.07);\n  ctx.restore();\n  var ta = seg(t, T.tag, T.tag + 0.6);\n  if (ta &gt; 0) {\n    ctx.save();\n    ctx.globalAlpha = ta;\n    drawRich(ctx, tag, W / 2, 320 + (1 - ta) * 16, &#39;600 36px &#39; + KR);\n    ctx.restore();\n  }\n}\nfunction drawPunch(ctx, t, parts) {\n  var a = es(t, T.punch, T.punch + 0.6);\n  if (a &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = a;\n  drawRich(ctx, parts, W / 2, 1070 + (1 - a) * 24, &#39;700 54px &#39; + KR);\n  ctx.restore();\n}\n\n// ── Git 그래프 ────────────────────────────────────────────────────────────\nvar Y0 = 640, XS = [250, 470, 690, 910, 1130], YB = 440;\nvar BR1 = [[690, Y0], [810, Y0], [810, YB], [910, YB]];\nvar MG1 = [[1130, YB], [1230, YB], [1230, Y0], [1330, Y0]];\n\nfunction commit(ctx, x, y, r, col, alpha) {\n  if (r &lt;= 0) return;\n  ctx.globalAlpha = alpha;\n  ctx.fillStyle = col;\n  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();\n  ctx.fillStyle = C.bg;\n  ctx.beginPath(); ctx.arc(x, y, r * 0.42, 0, Math.PI * 2); ctx.fill();\n  ctx.globalAlpha = 1;\n}\nfunction label(ctx, text, x, y, col, alpha, font, align) {\n  if (alpha &lt;= 0) return;\n  ctx.globalAlpha = alpha;\n  ctx.fillStyle = col;\n  ctx.font = font || (&#39;600 30px &#39; + KR);\n  ctx.textAlign = align || &#39;center&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(text, x, y);\n  ctx.globalAlpha = 1;\n}\nfunction curve(ctx, pts, p, col, width) {\n  if (p &lt;= 0) return;\n  ctx.strokeStyle = col;\n  ctx.lineWidth = width;\n  ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath();\n  var n = 40, k;\n  for (k = 0; k &lt;= n; k++) {\n    var q = bez(pts[0], pts[1], pts[2], pts[3], p * k / n);\n    if (k === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]);\n  }\n  ctx.stroke();\n}\n\nfunction drawGit(ctx, t) {\n  var lp = es(t, T.line, T.line + 0.9);\n  if (lp &lt;= 0) return;\n  ctx.strokeStyle = C.line;\n  ctx.lineWidth = 8;\n  ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(170, Y0); ctx.lineTo(lerp(170, 1450, lp), Y0); ctx.stroke();\n\n  var rw = es(t, T.rewind, T.back);\n  var keys = [T.c1, T.c2, T.c3, T.c4, T.c5];\n  for (var i = 0; i &lt; 5; i++) {\n    var p = eb(t, keys[i], keys[i] + 0.45);\n    if (p &lt;= 0) continue;\n    var alpha = i &gt;= 3 ? lerp(1, 0.22, rw) : 1;\n    var col = C.accent, x = XS[i];\n    if (i === 4) {\n      var br = seg(t, T.broke, T.broke + 0.25);\n      col = mix(C.accent, C.red, br);\n      var shake = seg(t, T.broke, T.broke + 0.08) * (1 - seg(t, T.broke + 0.45, T.broke + 0.65));\n      x += Math.sin(t * 70) * 12 * shake;\n    }\n    commit(ctx, x, Y0, 30 * p, col, alpha);\n    label(ctx, &#39;저장 &#39; + (i + 1), XS[i], Y0 + 78, C.muted, seg(t, keys[i] + 0.1, keys[i] + 0.4) * alpha);\n  }\n  // 망가짐 — 금 간 표시\n  var bk = seg(t, T.broke, T.broke + 0.3);\n  if (bk &gt; 0) {\n    var ba = bk * lerp(1, 0.18, rw);\n    ctx.globalAlpha = ba;\n    ctx.strokeStyle = C.red;\n    ctx.lineWidth = 5;\n    ctx.beginPath();\n    ctx.moveTo(XS[4] - 22, Y0 - 44); ctx.lineTo(XS[4] - 4, Y0 - 62); ctx.lineTo(XS[4] + 6, Y0 - 46); ctx.lineTo(XS[4] + 24, Y0 - 66);\n    ctx.stroke();\n    ctx.globalAlpha = 1;\n    label(ctx, &#39;망가짐&#39;, XS[4], Y0 - 104, C.red, ba, &#39;800 40px &#39; + KR);\n  }\n  // 되감기 — 고리가 3번으로 돌아감\n  if (t &gt;= T.rewind) {\n    var rx = lerp(XS[4], XS[2], rw);\n    var fade = 1 - seg(t, T.back + 0.2, T.back + 0.8);\n    ctx.globalAlpha = 0.45 * fade;\n    ctx.strokeStyle = C.accent;\n    ctx.lineWidth = 12;\n    ctx.beginPath(); ctx.moveTo(rx, Y0); ctx.lineTo(XS[4], Y0); ctx.stroke();\n    ctx.globalAlpha = 1;\n    var pulse = t &gt; T.back ? 1 + 0.12 * Math.sin((t - T.back) * 6) * (1 - seg(t, T.back, T.back + 2)) : 1;\n    ctx.strokeStyle = C.accent;\n    ctx.lineWidth = 6;\n    ctx.beginPath(); ctx.arc(rx, Y0, 48 * pulse, 0, Math.PI * 2); ctx.stroke();\n    label(ctx, &#39;◀ 되돌리기&#39;, (XS[2] + XS[4]) / 2, Y0 - 34, C.accent, seg(t, T.rewind, T.rewind + 0.3) * fade, &#39;800 34px &#39; + KR);\n    label(ctx, &#39;잘 되던 시점&#39;, XS[2] + 10, Y0 - 100, C.accent, seg(t, T.back - 0.1, T.back + 0.3), &#39;800 36px &#39; + KR, &#39;right&#39;);\n  }\n  // 갈래(실험) — 3번에서 위로 갈라져 두 번 저장\n  var s1 = es(t, T.branch, T.b1), s2 = es(t, T.b1 + 0.05, T.b2), s3 = es(t, T.merge, T.merged);\n  curve(ctx, BR1, s1, C.blue, 8);\n  if (s2 &gt; 0) {\n    ctx.strokeStyle = C.blue; ctx.lineWidth = 8; ctx.lineCap = &#39;round&#39;;\n    ctx.beginPath(); ctx.moveTo(910, YB); ctx.lineTo(lerp(910, 1130, s2), YB); ctx.stroke();\n  }\n  curve(ctx, MG1, s3, C.green, 8);\n  commit(ctx, 910, YB, 30 * eb(t, T.b1, T.b1 + 0.45), C.blue, 1);\n  commit(ctx, 1130, YB, 30 * eb(t, T.b2, T.b2 + 0.45), C.blue, 1);\n  label(ctx, &#39;실험&#39;, 1020, YB - 64, C.blue, seg(t, T.b1, T.b1 + 0.4), &#39;800 36px &#39; + KR);\n  commit(ctx, 1330, Y0, 36 * eb(t, T.merged, T.merged + 0.5), C.green, 1);\n  label(ctx, &#39;합치기&#39;, 1330, Y0 + 82, C.green, seg(t, T.merged, T.merged + 0.4), &#39;800 34px &#39; + KR);\n}\n\nfunction draw(ctx, t) {\n  ctx.save();\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  drawBg(ctx);\n  drawTitle(ctx, t, &#39;Git&#39;, [[&#39;질문 3  &#39;, C.accent], [&#39;무엇이 언제 바뀌었지?&#39;, C.muted]]);\n  drawGit(ctx, t);\n  drawPunch(ctx, t, [[&#39;되돌아갈 수 있으니, &#39;, C.ink], [&#39;마음껏 시도&#39;, C.accent], [&#39;한다&#39;, C.ink]]);\n  ctx.restore();\n}\n\nroot.MG = {\n  NAME: &#39;vscode-md-git-03-git&#39;,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: T,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () {\n    return [\n      { t: T.slam, type: &#39;thump&#39; },\n      { t: T.lift, type: &#39;whoosh&#39;, dur: 0.6 },\n      { t: T.c1, type: &#39;pop&#39; }, { t: T.c2, type: &#39;pop&#39; }, { t: T.c3, type: &#39;pop&#39; },\n      { t: T.c4, type: &#39;pop&#39; }, { t: T.c5, type: &#39;pop&#39; },\n      { t: T.broke, type: &#39;alert&#39;, gain: 0.5 },\n      { t: T.rewind, type: &#39;whoosh&#39;, dur: 0.9 },\n      { t: T.b1, type: &#39;pop&#39; }, { t: T.b2, type: &#39;pop&#39; },\n      { t: T.merged, type: &#39;ding&#39;, gain: 0.6 },\n    ];\n  },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
 </section>
 
 
-<section data-slide-hash="#/30" class="layout-_contents">
+<section data-slide-hash="#/33" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2482,7 +2500,7 @@ html.ratio-fill .agenda-frame {
 </div></div>
 </section>
 
-<section data-slide-hash="#/31" class="layout-_contents">
+<section data-slide-hash="#/34" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2523,7 +2541,7 @@ html.ratio-fill .agenda-frame {
 </ul></div>
 </section>
 
-<section data-slide-hash="#/32" class="layout-_contents">
+<section data-slide-hash="#/35" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2548,7 +2566,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/33" class="layout-_contents">
+<section data-slide-hash="#/36" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2590,7 +2608,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </ul></div>
 </section>
 
-<section data-slide-hash="#/34" class="layout-_contents">
+<section data-slide-hash="#/37" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2611,7 +2629,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/35" class="layout-_contents">
+<section data-slide-hash="#/38" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2643,7 +2661,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </ul></div>
 </section>
 
-<section data-slide-hash="#/36" class="layout-_contents">
+<section data-slide-hash="#/39" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2677,7 +2695,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </ul></div>
 </section>
 
-<section data-slide-hash="#/37" class="layout-_contents">
+<section data-slide-hash="#/40" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2714,7 +2732,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </ul></div>
 </section>
 
-<section data-slide-hash="#/38" class="layout-_contents">
+<section data-slide-hash="#/41" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2737,7 +2755,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/39" class="layout-_contents">
+<section data-slide-hash="#/42" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2760,7 +2778,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </ul></div>
 </section>
 
-<section data-slide-hash="#/40" class="layout-_contents">
+<section data-slide-hash="#/43" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2789,7 +2807,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/41" class="layout-_contents">
+<section data-slide-hash="#/44" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
@@ -2829,7 +2847,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/42" class="layout-_contents">
+<section data-slide-hash="#/45" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -2856,7 +2874,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/43" class="layout-_contents">
+<section data-slide-hash="#/46" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -2876,7 +2894,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/44" class="layout-_contents">
+<section data-slide-hash="#/47" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -2907,7 +2925,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/45" class="layout-_contents">
+<section data-slide-hash="#/48" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -2929,7 +2947,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/46" class="layout-_contents">
+<section data-slide-hash="#/49" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -2968,7 +2986,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/47" class="layout-_contents">
+<section data-slide-hash="#/50" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -2996,7 +3014,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/48" class="layout-_contents">
+<section data-slide-hash="#/51" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">돌파구</div>
     <div class="contents-head-right"></div>
@@ -3018,7 +3036,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </table></div>
 </section>
 
-<section data-slide-hash="#/49" class="layout-_contents">
+<section data-slide-hash="#/52" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">부록</div>
     <div class="contents-head-right"></div>
@@ -3047,7 +3065,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/50" class="layout-_contents">
+<section data-slide-hash="#/53" class="layout-_contents">
   <div class="contents-head-bar">
     <div class="contents-head-left">부록</div>
     <div class="contents-head-right"></div>
@@ -3072,7 +3090,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 </div></div>
 </section>
 
-<section data-slide-hash="#/51" class="layout-_contents"><div class="m2-license-badge" data-m2-license="true">Powered by finfra.kr, Made by m2slide</div>
+<section data-slide-hash="#/54" class="layout-_contents"><div class="m2-license-badge" data-m2-license="true">Powered by finfra.kr, Made by m2slide</div>
   <div class="contents-head-bar">
     <div class="contents-head-left">부록</div>
     <div class="contents-head-right"></div>
@@ -3186,7 +3204,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   //   영문 장단어 클립을 막으려 넣은 것). 한글은 어절이 2~4자라 토큰이 짧아 `widthCap` 이
   //   걸리지 않고 폰트가 상한에 붙는다 → 큰 글자로 여러 줄 wrap → **세로로 넘쳐 잘린다.**
   //   `nodeBox` 는 div 와 foreignObject 양쪽에서 클리핑하므로 밖으로 새지 않고 **조용히**
-  //   사라진다(실측 2026-09-19 : process 17자 +16px · 제목8+부제30자 +67px).
+  //   사라진다(실측 2026-09-19 prj60: process 17자 +16px · 제목8+부제30자 +67px).
   //
   //   ⚠️ 연속 근사(fs ≤ √(innerW·innerH/(1.2·tot)))로는 부족하다 — 줄 수가 `ceil` 이라
   //      17자에서 41 → 40 으로 1px 만 내려가고 여전히 5줄이라 넘친다. 그래서 상한에서
@@ -3828,7 +3846,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     var gx=0,gy=0; centers.forEach(function(c){gx+=c[0];gy+=c[1];}); gx/=N; gy/=N;
     // Issue411: 제목 28px·부제 18px 고정 + 박스 높이 96 고정이라, 제목이 두 줄로 접히면
     //   내용이 박스를 넘친다. foreignObject 는 넘친 부분을 잘라내므로 **제목 윗줄이
-    //   반쯤 잘린 채 아랫줄과 겹쳐 보인다**(실측 1.design_rnd p382 「3일차 — 도구로 / 씀」).
+    //   반쯤 잘린 채 아랫줄과 겹쳐 보인다**(실측 prj60 1.design_rnd p382 「3일차 — 도구로 / 씀」).
     //   ⚠️ PDF 변환 탓이 아니다 — HTML 원본에서 픽셀 단위로 같은 증상이다.
     //   chevron(Issue391)이 쓴 fit 경로를 그대로 쓴다. fitFsFor 는 nodeBox 의 padding 12*2 를
     //   전제하므로 centerLabel(padding 6*2)에는 그 차 12 를 더해 넘긴다. 종전 28 은 상한으로
@@ -3947,7 +3965,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     var nodeW=204, nodeH=102, cW=240, cH=124;
     // Issue392: 박스가 콘텐츠에 비해 작으면 uniformTitleFs 가 하한(10px)까지 눌리고,
     //   **균일 폰트 계약 때문에 한 노드의 과밀이 나머지 전부를 끌어내린다.**
-    //   실측(1.design_rnd p16): 스포크 3 중 1개만 부제 2줄인데 셋 다 10px →
+    //   실측(prj60 1.design_rnd p16): 스포크 3 중 1개만 부제 2줄인데 셋 다 10px →
     //   화면 6.1px, 본문 44px 의 0.14 배로 판독 불가. 좌우 배치(배율 0.356→0.61)로도
     //   viewBox 안 비율은 그대로라 해소되지 않는다 — 고칠 자리는 **박스 크기**다.
     //   balance(Issue395)·timeline(Issue283)과 같은 처방: 콘텐츠 실측으로 박스를 키운다.
@@ -3996,7 +4014,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     var svg=mkSvg(el,W,H,'ha-chevron-svg');
     // Issue391: 제목 29px·부제 19px 고정이 htmlart 중 유일한 auto-fit 부재였다. 중간칸 라벨 폭은
     //   노치에 깎여 chW-2*tip(126.8) 뿐이라 공백 없는 한글 5자부터 넘치고, 넘친 글자는 다음
-    //   polygon 이 위에 그려져 덮인다(클리핑이 아니라 어떤 계측에도 안 잡혔다 — 실측 ).
+    //   polygon 이 위에 그려져 덮인다(클리핑이 아니라 어떤 계측에도 안 잡혔다 — 실측 prj60).
     //   가장 좁은 칸(중간칸) 폭으로 체인 전체를 균일 fit 한다 — 첫 칸(notch=0) 기준이면 여전히 넘친다.
     //   fitFsFor 는 nodeBox 의 padding 12*2 를 전제하므로 centerLabel(padding 6*2)에는 그 차 12 를
     //   더해 넘긴다 → innerW 가 실제 안쪽 폭 + 안전 8 과 같아진다. 종전 29 는 상한으로 남겨
@@ -4229,7 +4247,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     //   제목만 그리기 때문이다. `groups` 를 그대로 넘기면 `uniformTitleFs` 가
     //   Issue364 이후 `it.subs` 까지 합산 높이에 넣어(멤버 박스에 그려질 본문이다)
     //   250×82 안에 절대 안 들어간다고 판정하고 **하한 10px 로 무너진다.**
-    //   실발생 2026-09-19 #13·#31: 밴드 라벨만 좁쌀만 하게 렌더됨.
+    //   실발생 2026-09-19 prj63 #13·#31: 밴드 라벨만 좁쌀만 하게 렌더됨.
     //   uniformTitleFs 는 문자열 항목에 대해 subs=null 로 처리하므로 title 만 넘긴다.
     var labelFs=uniformTitleFs(groups.map(function(g){return g.title;}), labelW, memberH);
     var allMembers=groups.reduce(function(a,g){return a.concat(g.subs);},[]);
@@ -4288,7 +4306,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     var tabH=66, itemH=74, itemGap=8, panelPad=14, grpGap=28, padX=24, padY=22;
     var panelW=740;
     // Issue393: 탭 제목이 26px **고정**이라 라벨이 길면 사다리꼴 밖으로 넘쳐 패널 위에 걸친다
-    //   (실측 1.design_rnd p22 — 14.96em 라벨이 389 단위, tabW 300 을 89 초과).
+    //   (실측 prj60 1.design_rnd p22 — 14.96em 라벨이 389 단위, tabW 300 을 89 초과).
     //   chevron(Issue391)과 같은 auto-fit 부재 계열이나 고칠 자리가 다르다: 탭 제목은
     //   foreignObject 가 아니라 SVG `text` 라 wrap 이 없다 → nodeBox 의 fitFsFor(줄 수 기반)를
     //   그대로 쓸 수 없고 **한 줄 폭**만 본다. 그래서 감사 스크립트(foreignObject 기준)에도
@@ -4457,7 +4475,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     // ── 라벨 박스 높이를 콘텐츠 실측으로 정한다 (Issue395) ────────────────
     //   고정 78px 이던 자리. 제목이 두 줄로 래핑되거나 부제가 길면 내부 flex 가
     //   «중앙정렬» 이라 위·아래로 균등하게 넘치고 foreignObject 가 그것을 잘라 낸다
-    //   — 화면에는 「윗줄이 반쯤 잘린 제목」으로 나타난다(5일차 실측 6/6 넘침).
+    //   — 화면에는 「윗줄이 반쯤 잘린 제목」으로 나타난다(prj60 5일차 실측 6/6 넘침).
     //   박스는 접시 «위에» 놓이므로 높이를 키우면 자연히 위로 자란다.
     //   ⚠️ 여기 계수(1.1·1.3·padV)는 아래 plate() 의 line-height·padding 과 한 쌍이다
     //      — 한쪽만 고치면 통과한 값이 렌더에서 넘친다.
@@ -5228,7 +5246,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
 
     // ── hub 텍스트 실측 높이 — stem 이 글자를 가로지르지 않게 (Issue376) ──
     //   hub 박스는 `cy` 중심이고 `align-items:center` 라 **텍스트 중앙도 정확히 cy** 다.
-    //   그래서 stem 을 `cy` 에 그으면 취소선처럼 제목을 관통한다(2026-09-19 실발생:
+    //   그래서 stem 을 `cy` 에 그으면 취소선처럼 제목을 관통한다(2026-09-19 prj63 실발생:
     //   horizontal "📌 막혔을 때" 가 가로선에 그어짐). 브랜치 라벨은 이미 박스 하단
     //   underline(`lb.y+labelH`)을 받고 있어 **같은 컴포넌트 안에서 처리가 갈려 있었다.**
     //
@@ -5399,7 +5417,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   //
   //   `.m2-htmlart` 는 `flex:1 1 0` 으로 **본문이 쓰고 남은 세로**를 받는다(Issue197/198).
   //   본문이 길면 그 잔여가 얇아지고, svg 는 viewBox 비율을 지키므로 **가로를 통째로 버리며**
-  //   축소된다 → 라벨이 같은 배율로 작아져 판독이 안 된다(실측 1.design_rnd p16:
+  //   축소된다 → 라벨이 같은 배율로 작아져 판독이 안 된다(실측 prj60 1.design_rnd p16:
   //   컨테이너 1017×253 · viewBox 812×710 → 배율 0.356, 가로 1017 중 289 만 사용).
   //
   //   ⚠️ **무조건 좌우 분할하면 안 된다.** 전 프로젝트 실측(2026-09-20) htmlart 331 장 중
@@ -5434,7 +5452,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   //      틀린 판정이 한 번 붙으면 그 슬라이드는 영영 재판정되지 않는다 —
   //      다음 `slidechanged` 때는 이미 다른 슬라이드다.
   //
-  //      실측(2026-09-20 1.design_rnd 446p): 같은 HTML·같은 명령인데 실행마다
+  //      실측(2026-09-20 prj60 1.design_rnd 446p): 같은 HTML·같은 명령인데 실행마다
   //      갈렸다. 배포본 p184 는 2열 전환이 불발돼 본문이 `.contents-body`(40px)를 직접
   //      상속하며 44px 로 커졌고(2열이면 35.2px→38.72px) 마지막 불릿이 잘렸다.
   //      같은 챕터를 재추출하니 정상이 나왔다 — **비결정적**이다.
@@ -5963,220 +5981,232 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/4\">한 팀의 사례 — 웹 대화로 여기까지, 설계에서 막힘</a>",
+                              "content": "<a href=\"#/4\">세 질문 → 세 도구 → 하나의 습관</a>",
+                              "children": []
+                        },
+                        {
+                              "content": "<a href=\"#/5\">한 팀의 사례 — 웹 대화로 여기까지, 설계에서 막힘</a>",
                               "children": []
                         }
                   ]
             },
             {
-                  "content": "<a href=\"#/5\">VS Code</a>",
+                  "content": "<a href=\"#/6\">VS Code</a>",
                   "children": [
                         {
-                              "content": "<a href=\"#/5\">VS Code — 흩어진 파일을 한 화면에</a>",
+                              "content": "<a href=\"#/6\">VS Code — 흩어진 파일을 한 화면에</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/6\">VS Code — 바이브코딩 플랫폼</a>",
+                              "content": "<a href=\"#/7\">VS Code — 바이브코딩 플랫폼</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/7\">VS Code 란?</a>",
+                              "content": "<a href=\"#/8\">VS Code 란?</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/8\">화면은 네 영역</a>",
+                              "content": "<a href=\"#/9\">화면은 네 영역</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/9\">웹 대화 대신 VS Code 를 쓰는 이유</a>",
+                              "content": "<a href=\"#/10\">웹 대화 대신 VS Code 를 쓰는 이유</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/10\">흩어진 파일 수십 개를 한 화면에</a>",
+                              "content": "<a href=\"#/11\">흩어진 파일 수십 개를 한 화면에</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/11\">AI 에게 말로 일을 시키고, 바뀐 것을 바로 확인</a>",
+                              "content": "<a href=\"#/12\">AI 에게 말로 일을 시키고, 바뀐 것을 바로 확인</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/12\">대화 한 개 vs 기능별 세션 분리</a>",
+                              "content": "<a href=\"#/13\">세션을 나누면 맥락이 깨끗함</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/13\">같은 지시를 세 번 하면 Skill, 맥락이 다르면 Agent</a>",
+                              "content": "<a href=\"#/14\">대화 한 개 vs 기능별 세션 분리</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/14\">한 환경에서만 터진 결함</a>",
+                              "content": "<a href=\"#/15\">같은 지시를 세 번 하면 Skill, 맥락이 다르면 Agent</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/15\">VS Code 정리 — 한 장 요약</a>",
+                              "content": "<a href=\"#/16\">한 환경에서만 터진 결함</a>",
+                              "children": []
+                        },
+                        {
+                              "content": "<a href=\"#/17\">VS Code 정리 — 한 장 요약</a>",
                               "children": []
                         }
                   ]
             },
             {
-                  "content": "<a href=\"#/16\">Markdown</a>",
+                  "content": "<a href=\"#/18\">Markdown</a>",
                   "children": [
                         {
-                              "content": "<a href=\"#/16\">Markdown — 사람도 AI 도 같은 문서를 읽음</a>",
+                              "content": "<a href=\"#/18\">Markdown — 사람도 AI 도 같은 문서를 읽음</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/17\">Markdown — AI 의 문서 포맷</a>",
+                              "content": "<a href=\"#/19\">Markdown — AI 의 문서 포맷</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/18\">Markdown 이란?</a>",
+                              "content": "<a href=\"#/20\">Markdown 이란?</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/19\">기호 몇 개로 쓰는 쉬운 문서</a>",
+                              "content": "<a href=\"#/21\">기호 몇 개로 쓰는 쉬운 문서</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/20\">왜 AI 가 잘 알아듣나</a>",
+                              "content": "<a href=\"#/22\">왜 AI 가 잘 알아듣나</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/21\">워드·한글 파일과 무엇이 다른가</a>",
+                              "content": "<a href=\"#/23\">워드·한글 파일과 무엇이 다른가</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/22\">어디에 쓰이나</a>",
+                              "content": "<a href=\"#/24\">어디에 쓰이나</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/23\">지침 파일 — AI 에게 맡기는 «프로젝트 사용 설명서»</a>",
+                              "content": "<a href=\"#/25\">지침 파일 — AI 에게 맡기는 «프로젝트 사용 설명서»</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/24\">기획과 요청을 적어 두면 AI 가 정확히 이해함</a>",
+                              "content": "<a href=\"#/26\">기획과 요청을 적어 두면 AI 가 정확히 이해함</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/25\">코드를 읽고 쓴 설계 문서의 함정</a>",
+                              "content": "<a href=\"#/27\">코드를 읽고 쓴 설계 문서의 함정</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/26\">요구사항 → 설계 → 이슈 → 변경</a>",
+                              "content": "<a href=\"#/28\">기준 문서가 먼저 — 요구사항에서 변경까지 한 사슬</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/27\">작업 하나 = 이슈 하나</a>",
+                              "content": "<a href=\"#/29\">요구사항 → 설계 → 이슈 → 변경</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/28\">Markdown 정리 — 한 장 요약</a>",
+                              "content": "<a href=\"#/30\">작업 하나 = 이슈 하나</a>",
+                              "children": []
+                        },
+                        {
+                              "content": "<a href=\"#/31\">Markdown 정리 — 한 장 요약</a>",
                               "children": []
                         }
                   ]
             },
             {
-                  "content": "<a href=\"#/29\">Git</a>",
+                  "content": "<a href=\"#/32\">Git</a>",
                   "children": [
                         {
-                              "content": "<a href=\"#/29\">Git — 되돌아갈 수 있으니, 마음껏 시도함</a>",
+                              "content": "<a href=\"#/32\">Git — 되돌아갈 수 있으니, 마음껏 시도함</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/30\">Git — 코드 공유</a>",
+                              "content": "<a href=\"#/33\">Git — 코드 공유</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/31\">Git 이란?</a>",
+                              "content": "<a href=\"#/34\">Git 이란?</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/32\">Git 을 왜 쓰나 — 없을 때와 있을 때</a>",
+                              "content": "<a href=\"#/35\">Git 을 왜 쓰나 — 없을 때와 있을 때</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/33\">저장 지점(커밋) — AI 가 고칠 때마다 남김</a>",
+                              "content": "<a href=\"#/36\">저장 지점(커밋) — AI 가 고칠 때마다 남김</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/34\">되돌리기 — 망가지면 잘 되던 시점으로</a>",
+                              "content": "<a href=\"#/37\">되돌리기 — 망가지면 잘 되던 시점으로</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/35\">Git 과 GitHub 는 다름</a>",
+                              "content": "<a href=\"#/38\">Git 과 GitHub 는 다름</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/36\">모두 코딩하고, 모두 문서 만들고, 모두 리뷰함</a>",
+                              "content": "<a href=\"#/39\">모두 코딩하고, 모두 문서 만들고, 모두 리뷰함</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/37\">같은 줄기에 동시에 올리면 덮어쓰기 위험</a>",
+                              "content": "<a href=\"#/40\">같은 줄기에 동시에 올리면 덮어쓰기 위험</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/38\">브랜치 = 멀티버스</a>",
+                              "content": "<a href=\"#/41\">브랜치 = 멀티버스</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/39\">Git 작업 흐름 — 개요</a>",
+                              "content": "<a href=\"#/42\">Git 작업 흐름 — 개요</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/40\">접속 토큰 — 비밀번호 대신 쓰는 열쇠</a>",
+                              "content": "<a href=\"#/43\">접속 토큰 — 비밀번호 대신 쓰는 열쇠</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/41\">Git 정리 — 한 장 요약</a>",
+                              "content": "<a href=\"#/44\">Git 정리 — 한 장 요약</a>",
                               "children": []
                         }
                   ]
             },
             {
-                  "content": "<a href=\"#/42\">돌파구</a>",
+                  "content": "<a href=\"#/45\">돌파구</a>",
                   "children": [
                         {
-                              "content": "<a href=\"#/42\">왜 쓰는가 — 한 장 결론</a>",
+                              "content": "<a href=\"#/45\">왜 쓰는가 — 한 장 결론</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/43\">시연 — 요청 한 줄이 저장 지점이 되기까지</a>",
+                              "content": "<a href=\"#/46\">시연 — 요청 한 줄이 저장 지점이 되기까지</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/44\">시연에서 볼 화면 세 곳</a>",
+                              "content": "<a href=\"#/47\">시연에서 볼 화면 세 곳</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/45\">세 개가 맞물리는 그림</a>",
+                              "content": "<a href=\"#/48\">세 개가 맞물리는 그림</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/46\">돌아가서 할 일 5가지</a>",
+                              "content": "<a href=\"#/49\">돌아가서 할 일 5가지</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/47\">질의응답</a>",
+                              "content": "<a href=\"#/50\">질의응답</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/48\">참고 자료</a>",
+                              "content": "<a href=\"#/51\">참고 자료</a>",
                               "children": []
                         }
                   ]
             },
             {
-                  "content": "<a href=\"#/49\">부록</a>",
+                  "content": "<a href=\"#/52\">부록</a>",
                   "children": [
                         {
-                              "content": "<a href=\"#/49\">부록 — 배포 전 보안 점검 3가지</a>",
+                              "content": "<a href=\"#/52\">부록 — 배포 전 보안 점검 3가지</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/50\">부록 — 데이터 활용 권한은 보유 주체가 정함</a>",
+                              "content": "<a href=\"#/53\">부록 — 데이터 활용 권한은 보유 주체가 정함</a>",
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/51\">부록 — 막히는 확인 사항은 일찍 담당 부서에</a>",
+                              "content": "<a href=\"#/54\">부록 — 막히는 확인 사항은 일찍 담당 부서에</a>",
                               "children": []
                         }
                   ]
