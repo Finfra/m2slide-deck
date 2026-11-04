@@ -88,3 +88,13 @@ release_date: 2026-07-02
   * mkdir <span class="fragment" data-fragment-index="1"> : MaKe DIRectory</span>
   * cp <span class="fragment" data-fragment-index="1"> : CoPy</span>
   * mv <span class="fragment" data-fragment-index="1"> : MoVe</span>
+
+---
+
+#layout-_mg
+
+# 경로 — 절대경로는 /로 시작, 상대경로는 현재 폴더 기준
+
+```mg
+src: mg/02-path
+```
