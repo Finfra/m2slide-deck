@@ -23,6 +23,7 @@
 * `StellarEvolution.md` — 슬라이드 소스 (single mode, `---` 구분)
 * `_config.yml` — theme·layout 등 m2slide 설정
 * `Info.md` — 기획 메타 (청중·분량·빌드 옵션 등)
+* `mg/` — 모션그래픽 4장 (`mg/_src/` 원본 · `node mg/_src/compose.js` 로 `mg/NN-*/scene.js` 생성, 시나리오 `mg/_src/SCENARIO.md`)
 
 ## 라이선스
 
