@@ -22,6 +22,7 @@
 
 * `graphify.md` — 슬라이드 소스 (single mode, `---` 구분)
 * `img/` — 이미지 자산 (`./img/...` 로 참조)
+* `mg/` — 모션그래픽 4장(16:9). `mg/_src/` 가 원본(`SCENARIO.md` · 공통 도구 · 장면), `node mg/_src/compose.js` 로 `mg/NN-*/scene.js` 생성
 * `_config.yml` — theme·layout 등 m2slide 설정
 * `Info.md` — 기획 메타 (청중·분량·빌드 옵션 등)
 
