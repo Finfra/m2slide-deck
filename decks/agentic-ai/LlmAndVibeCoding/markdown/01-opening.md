@@ -13,6 +13,16 @@
 
 ---
 
+#layout-_mg
+
+## LLM 툴 진화와 바이브 코딩 — 8장 구성
+
+```mg
+src: mg/00-flow
+```
+
+---
+
 ## 개발 방식의 변화
 
 <div style="float:right; margin-left:15px; max-width:400px;">
@@ -117,6 +127,16 @@ graph TB
 * 고수준 설계와 비즈니스 로직에 집중
 * 반복 작업 자동화로 생산성 향상
 * 검토와 품질 관리에 집중
+
+---
+
+#layout-_mg
+
+## 패러다임 전환 — Code-First → Intent-First
+
+```mg
+src: mg/01-paradigm
+```
 
 ---
 
