@@ -9,6 +9,16 @@ release_date: 2026-07-07
 
 # 들어가며 — 왜 graphify인가
 
+#layout-_mg
+
+## 15분 입문 — 문제에서 실전 워크플로까지
+
+```mg
+src: mg/00-flow
+```
+
+---
+
 ## 대규모 코드베이스의 문제
 #layout-contents
 
@@ -70,6 +80,16 @@ graph LR
 
 ---
 
+#layout-_mg
+
+## 폴더 하나 → knowledge graph → 3대 산출물
+
+```mg
+src: mg/01-pipeline
+```
+
+---
+
 ## 세 개념 구분 — 혼동 주의
 #layout-contents
 
@@ -112,6 +132,16 @@ graph LR
 
 * EXTRACTED → 신뢰도 높음 (함수 호출, import 등)
 * INFERRED → 문맥 기반 추론 (avg confidence: 0.7)
+
+---
+
+#layout-_mg
+
+## edge 신뢰도 — EXTRACTED · INFERRED · AMBIGUOUS
+
+```mg
+src: mg/02-edge
+```
 
 ---
 
@@ -223,6 +253,16 @@ sed -n '/^## Community Hubs/,/^## /p' \
 ```
 
 * 허용: `GRAPH_REPORT.brief.md` (≤100줄), `wiki/index.md`, `wiki/{community}.md` (1~2개)
+
+---
+
+#layout-_mg
+
+## 전체 Read 대신 — 필요한 노드만
+
+```mg
+src: mg/03-token
+```
 
 ---
 
