@@ -17,6 +17,7 @@ release_date: 2026-11-06
   모든 장에 시각물을 둠: 인포그래픽 PNG(img/ig-*) · mg(챕터 오프닝) · 그 밖의 장은 `::: htmlart`. 예외는 참고 자료(링크 표) 1장.
   이미지: img/ 의 자체 제작물만 사용. 외부 출처 이미지는 쓰지 않음.
   모션그래픽: mg/01-vscode · 02-markdown · 03-git — 각 챕터 앞 `#layout-_mg` 장(10초, 끝 화면에서 멈춤). 밝은 테마(흰 바탕).
+  추가 모션그래픽: mg/04-flow(세 질문 다음) · 05-session(세션 분리 앞) · 06-chain(요구사항 사슬 앞) — 13~14초, 원본은 mg/_src(compose.js 로 scene.js 생성).
 -->
 
 <!-- ═══ 01 문제 — 0 ~ 5분 ═══ -->
@@ -38,6 +39,17 @@ release_date: 2026-11-06
 #id-three-q
 
 ![세 질문과 답하는 도구 — 어디 있나는 VS Code, 무엇을 시켰나는 Markdown, 무엇이 바뀌었나는 Git](./img/ig-01-three-q.png)
+
+---
+
+#layout-_mg
+#id-mg-flow
+
+## 세 질문 → 세 도구 → 하나의 습관
+
+```mg
+src: mg/04-flow
+```
 
 ---
 
@@ -155,6 +167,17 @@ src: mg/01-vscode
 :::
 
 * 마음에 안 들면 받아들이지 않음 — 확장이 변경을 추적해 **이전 상태로 되돌리는 기능**도 제공함
+
+---
+
+#layout-_mg
+#id-mg-session
+
+## 세션을 나누면 맥락이 깨끗함
+
+```mg
+src: mg/05-session
+```
 
 ---
 
@@ -404,6 +427,17 @@ src: mg/02-markdown
 :::
 
 * 기준 문서는 코드보다 **먼저** 있어야 함
+
+---
+
+#layout-_mg
+#id-mg-chain
+
+## 기준 문서가 먼저 — 요구사항에서 변경까지 한 사슬
+
+```mg
+src: mg/06-chain
+```
 
 ---
 
