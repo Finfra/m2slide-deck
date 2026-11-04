@@ -49,6 +49,16 @@ release_date: 2026-07-13
 
 ---
 
+#layout-_mg
+
+## 전체 흐름 — 물 → 스프 → 면 → 시간 → 고명 → 완성
+
+```mg
+src: mg/00-flow
+```
+
+---
+
 ## 1단계 · 물 끓이기
 
 ::: columns
@@ -134,6 +144,16 @@ release_date: 2026-07-13
 ![완성된 라면 한 그릇](./img/ramyeon_pot_zimage.png)
 :::
 :::
+
+---
+
+#layout-_mg
+
+## 3원칙 — 물의 양 · 투입 순서 · 시간 엄수
+
+```mg
+src: mg/01-principles
+```
 
 ---
 
