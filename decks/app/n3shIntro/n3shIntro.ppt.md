@@ -6,6 +6,16 @@ date: 2026.08.31
 type: ppt
 ---
 
+#layout-_mg
+
+# n3sh 한눈에 — 무엇 → 원리 → 학습 → 설치
+
+```mg
+src: mg/00-flow
+```
+
+---
+
 # n3sh 란 무엇인가
 
 ## 자모 2개 → 완성형 한 글자
@@ -37,6 +47,16 @@ type: ppt
 #layout-contents
 
 ![같은 두 키 위의 모디파이어 4갈래](./img/curriculum-5-content.svg)
+
+---
+
+#layout-_mg
+
+## 자모 2개를 동시에 → 완성형 한 글자
+
+```mg
+src: mg/01-chord
+```
 
 ---
 

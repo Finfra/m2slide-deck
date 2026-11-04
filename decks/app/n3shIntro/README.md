@@ -23,6 +23,7 @@
 * `n3shIntro.ppt.md` — 슬라이드 소스 (single mode, `---` 구분)
 * `ppt/` · `.claude/pptx.yml` — 도형 pptx(인포그래픽) 작업 자산
 * `img/` — 이미지 자산 (`./img/...` 로 참조)
+* `mg/` — 모션그래픽 2장 (`#layout-_mg`, 16:9 · 1920×1080). 원본·시나리오·합성은 `mg/_src/` — `node decks/app/n3shIntro/mg/_src/compose.js`
 * `_config.yml` — theme·layout 등 m2slide 설정
 * `Info.md` — 기획 메타
 
