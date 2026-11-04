@@ -4,6 +4,16 @@ type: ppt
 release_date: 2026-07-02
 ---
 
+#layout-_mg
+
+# 부록1 MarkDown → 부록2 리눅스 사용 기초
+
+```mg
+src: mg/00-flow
+```
+
+---
+
 # Markdown이란?
 
 * 텍스트 기반의 마크업언어로 2004년 존그루버에 의해 만들어졌으며 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능
@@ -18,6 +28,16 @@ release_date: 2026-07-02
 ::: source
 출처: 마크다운 작성법 (ihoneymon) — https://gist.github.com/ihoneymon/652be052a0727ad59601
 :::
+
+---
+
+#layout-_mg
+
+# Markdown — 간단한 기호로 쓰고 HTML로 변환
+
+```mg
+src: mg/01-markdown
+```
 
 ---
 
