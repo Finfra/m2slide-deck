@@ -57,6 +57,16 @@
 
 ---
 
+#layout-_mg
+
+## Pandoc — Markdown 1소스 → 5종 출력
+
+```mg
+src: mg/04-pandoc
+```
+
+---
+
 ## 설치 확인 + CLI 기본 문법
 
 ```bash

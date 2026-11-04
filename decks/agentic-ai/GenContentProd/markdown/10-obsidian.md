@@ -107,4 +107,12 @@
   * Q. 모바일도 되나? — A. iOS·Android 앱 무료, Vault 동기화 별도 구성 필요
 * 트러블슈팅: 첫 실행 시 macOS Gatekeeper·Windows SmartScreen 차단 → 우클릭 “열기”로 우회
 
+---
 
+#layout-_mg
+
+## Obsidian — 폴더에서 지식 베이스까지 5단계
+
+```mg
+src: mg/03-obsidian
+```

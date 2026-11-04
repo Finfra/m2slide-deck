@@ -288,4 +288,12 @@ Part 1.
 * 실무 권장: 시작은 Role + Constraint + Format 3종 조합으로 충분
 * 어려운 작업일 때 CoT 추가, 양식 일관성이 중요할 때 Few-shot 추가
 
+---
 
+#layout-_mg
+
+## 프롬프트 엔지니어링 6대 패턴 — 한 줄 정리
+
+```mg
+src: mg/01-patterns
+```
