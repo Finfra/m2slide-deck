@@ -67,12 +67,12 @@ src: mg/05-multi
 
 ::: columns
 :::: {.column width="40%"}
-* `cdf 15 16`처럼 번호를 여러 개 주면 **iTerm2 분할 pane**로 각각 열림
+* `cdf 15 16`처럼 번호를 여러 개 주면 **iTerm2 분할 pane**으로 각각 열림
 * 여러 프로젝트를 나란히 놓고 동시에 작업함 — 창을 하나씩 여는 수고가 없음
-* 로컬 macOS에서는 iTerm2 분할이 자동 적용됨 (원격 Linux는 다음 챕터 graceful degrade 참조)
+* 로컬 macOS에서는 iTerm2 분할이 자동 적용됨 (원격 Linux는 5.2 챕터의 graceful degrade 참조)
 ::::
 :::: {.column width="60%"}
-![cdf 15 16 → iTerm2 상·하 분할 pane가 각각 다른 프로젝트로 이동](./img/screenshots/05-cdf-split.png)
+![cdf 15 16 → iTerm2 상·하 분할 pane이 각각 다른 프로젝트로 이동](./img/screenshots/05-cdf-split.png)
 ::::
 :::
 
@@ -82,7 +82,7 @@ src: mg/05-multi
 
 ::: columns
 :::: {.column width="40%"}
-* `cdfv <번호>`는 해당 프로젝트를 **VSCode로 열기**함 (`cdf`의 에디터 버전)
+* `cdfv <번호>`는 해당 프로젝트를 **VSCode로 엶** (`cdf`의 에디터 버전)
 * `cdfv 16` → 16번(fWarrange)을 VSCode 창으로 엶
 * `cdfv 0 1 2`처럼 여러 번호를 주면 여러 프로젝트를 한 번에 엶
 ::::

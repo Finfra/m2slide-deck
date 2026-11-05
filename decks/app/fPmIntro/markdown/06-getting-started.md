@@ -137,7 +137,7 @@ gh api -H "Accept: application/vnd.github.raw" \
 
 ```wordart
 <h1 class="wordart-gradient" style="font-size:3em;margin:0.1em 0;">fPM</h1>
-<p class="wordart-shadow" style="font-size:1.15em;color:#666;margin:0;">연결은 fPm이 하고, 나는 통찰에 집중</p>
+<p class="wordart-shadow" style="font-size:1.15em;color:#666;margin:0;">연결은 fPM이 하고, 나는 통찰에 집중</p>
 ```
 
 ::: cards
