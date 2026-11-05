@@ -16,9 +16,9 @@ src: mg/00-flow
 
 # Markdown이란?
 
-* 텍스트 기반의 마크업언어로 2004년 존그루버에 의해 만들어졌으며 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능
+* 텍스트 기반의 마크업 언어로 2004년 존 그루버에 의해 만들어졌으며 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능
 * 특수기호와 문자를 이용한 **매우 간단한 구조의 문법** 을 사용하여 웹에서도 보다 빠르게 컨텐츠를 작성하고 보다 **직관적으로 인식**
-* 깃헙의 저장소Repository에 관한 정보를 기록하는 README.md 파일이 Markdown으로 작성됨
+* 깃헙의 저장소(Repository)에 관한 정보를 기록하는 README.md 파일이 Markdown으로 작성됨
   - 설치방법, 소스코드 설명, 이슈 등을 간단하게 기록하고 가독성을 높일 수 있다는 강점이 부각되면서 널리 사용됨
 * HTML : Hyper Text Markup Language  vs Markdown
   - html) `<html><h1>hi</h1></html>`
@@ -45,11 +45,11 @@ src: mg/01-markdown
 
 * 장점
   - 1. 간결하다.
-  - 2. 별도의 도구없이 작성가능하다.
+  - 2. 별도의 도구 없이 작성 가능하다.
   - 3. 다양한 형태로 변환이 가능하다.
-  - 3. 텍스트(Text)로 저장되기 때문에 용량이 적어 보관이 용이하다.
-  - 4. 텍스트파일이기 때문에 버전관리시스템을 이용하여 변경이력을 관리할 수 있다.
-  - 5. 지원하는 프로그램과 플랫폼이 다양하다.
+  - 4. 텍스트(Text)로 저장되기 때문에 용량이 적어 보관이 용이하다.
+  - 5. 텍스트 파일이기 때문에 버전관리시스템을 이용하여 변경이력을 관리할 수 있다.
+  - 6. 지원하는 프로그램과 플랫폼이 다양하다.
 * 단점
   - 1. 표준이 없다.
   - 2. 표준이 없기 때문에 도구에 따라서 변환방식이나 생성물이 다르다.
@@ -93,7 +93,7 @@ src: mg/01-markdown
 
 ![H1 underline 예제](./img/s06_i1.png)
 
-* 큰제목: 문서 제목
+* 작은제목: 문서 부제목
 
 ![H2 underline 예제](./img/s06_i2.png)
 :::
@@ -112,7 +112,7 @@ src: mg/01-markdown
 
 # Markdown 문법 - BlockQuote
 
-* 이메일에서 사용하는 `>` 블럭인용문자를 이용한다.
+* 이메일에서 사용하는 `>` 블록 인용 문자를 이용한다.
 
 ![BlockQuote syntax + 중첩 렌더](./img/BasicKnowledgeForAI_small_2.png)
 
@@ -126,9 +126,9 @@ src: mg/01-markdown
 
 ---
 
-# Markdown 문법 - 순서있는 목록(번호)
+# Markdown 문법 - 순서 있는 목록(번호)
 
-* 순서있는 목록은 <span class="emph-green">숫자와 점(`1.`)</span> 을 사용한다
+* 순서 있는 목록은 <span class="emph-green">숫자와 점(`1.`)</span> 을 사용한다
 * 어떤 번호를 입력해도 렌더 시 <span class="emph-green">자동으로 1부터 차례대로</span> 매겨진다
 
 ::: columns
@@ -156,15 +156,15 @@ src: mg/01-markdown
 
 ---
 
-# Markdown 문법 - 순서없는 목록(글머리 기호)
+# Markdown 문법 - 순서 없는 목록(글머리 기호)
 
-* - + 등을 사용
+* `*` `-` `+` 등을 사용
 
 혼합해서 사용하는 것도 가능
 
 ::right::
 
-![Markdown 문법 - 순서없는 목록(글머리 기호)](./img/BasicKnowledgeForAI_small_4.png)
+![Markdown 문법 - 순서 없는 목록(글머리 기호)](./img/BasicKnowledgeForAI_small_4.png)
 
 ::: source
 출처: 마크다운 작성법 (ihoneymon) — https://gist.github.com/ihoneymon/652be052a0727ad59601
@@ -185,7 +185,7 @@ src: mg/01-markdown
 # Markdown 문법 - 링크
 
 * 인라인 링크
-  - [name](URL) : ex) [Google](http://google.com)
+  - `[name](URL)` : ex) [Google](http://google.com)
 * 자동링크
   - `<http://example.com/>`
   - `<address@example.com>`
@@ -214,7 +214,7 @@ for i in range(10):
     print(i)
 ```
 
-* 코드 블록 ( 언어명은 생략 가능)
+* 코드 블록 (언어명은 생략 가능)
 * HTML 블록
   - Markdown에서 표현 안되는 것 표현할 때 사용
 
@@ -257,7 +257,7 @@ for i in range(10):
 
 # Markdown 문법 - 이미지
 
-* `![이미지명][URL]`
+* `![이미지명](URL)`
 
 * ex)
 
@@ -294,13 +294,13 @@ cf) Atom의 atom-csv-markdown Package사용하면 csv를 간단하게 markdown t
 # MarkDown Editor
 
 * 기존 고급 Editor의 플러그인 사용
-  - Sublime Text, VsCode 등
+  - Sublime Text, VS Code 등
 * Web기반 Editor : https://stackedit.io/
-* Markdown 문법을 지원 하는 웹페이지 사용
+* Markdown 문법을 지원하는 웹페이지 사용
   - Jupyter Notebook의 Text
-  - Github의 .md파일 편집
+  - GitHub의 .md 파일 편집
 * 네이티브 앱
-  - MacOS : Typora (https://www.typora.io)
+  - macOS : Typora (https://www.typora.io)
   - Windows : Inkdrop (https://inkdrop.app)
 
 
