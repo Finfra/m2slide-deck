@@ -199,7 +199,7 @@ pipx upgrade graphifyy          # 최신 (2026-07 기준 0.9.4)
 /graphify <github-url>          # repo clone 후 빌드
 ```
 
-* 도구 = `graphifyy` (pip 패키지), `/graphify` = 이 저장소의 skill wrapper
+* 도구 = `graphifyy` (pip 패키지), `/graphify` = 이 저장소의 skill 래퍼
 
 ---
 
