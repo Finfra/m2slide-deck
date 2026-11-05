@@ -21,9 +21,9 @@ release_date: 2026-07-12
 
 * 보조강사 1명이 환경 오류 1차 응답
 
-* 흐름: 셋팅 → 1단계 MVP → (선택) Superpowers → 2단계 기능 개선 (DB + Docker) → 코드 리뷰
+* 흐름: 세팅 → 1단계 MVP → (선택) Superpowers → 2단계 기능 개선 (DB + Docker) → 코드 리뷰
 
-* 환경: 1단계 — Windows 설치된 Node.js만 사용 / 2단계 — Docker로 MySQL 추가 (설치 불필요)
+* 환경: 1단계 — Windows에 설치된 Node.js만 사용 / 2단계 — Docker로 MySQL 추가 (설치 불필요)
 
 ---
 
@@ -51,7 +51,7 @@ src: mg/05-project
 
 ---
 
-# 하네스 셋팅 절차 개요
+# 하네스 세팅 절차 개요
 
 * 1단계: 작업 디렉토리 + git init
 
@@ -77,7 +77,7 @@ src: mg/05-project
 
 ---
 
-# (시연)Claude Code 시작 → /init → CLAUDE.md 자동 생성
+# (시연) Claude Code 시작 → /init → CLAUDE.md 자동 생성
 
 ```bash
 # VsCode에서 Claude Code 패널 열기
@@ -120,7 +120,7 @@ src: mg/05-project
 
 * 위 단계 완료 여부 확인 (손들기)
 
-* ✅ 통과 조건: 응답에 “Node 18”, “Express”, “한국어” 키워드 포함
+* ✅ 통과 조건: 응답에 “Node 22”, “Express”, “한국어” 키워드 포함
 
 * 오류 시 보조강사에게 손들기
 
@@ -139,7 +139,7 @@ src: mg/05-project
 
 * 3단계: 코드 — Claude Code가 tasks 1번씩 자율 실행
 
-* 평균 1턴 5~30초 — 60분 동안 15~10 task 처리 가능
+* 평균 1턴 5~30초 — 60분 동안 10~15 task 처리 가능
 
 ![MVP 개발 3단계 흐름](./img/AgenticCoding_v10_24.png)
 
@@ -147,7 +147,7 @@ src: mg/05-project
 
 # 의도와 실행의 분리: PRD vs. Tasks
 
-주의) 직접 작성않아도 됩니다. “우리는 검토만 의견 제시로 수정”
+주의) 직접 작성하지 않아도 됩니다. “우리는 검토만 의견 제시로 수정”
 
 ![의도와 실행의 분리: PRD vs. Tasks](./img/AgenticCoding_v10_25.png)
 
@@ -217,9 +217,9 @@ src: mg/05-project
 
 ---
 
-# nPTiR 진행 싸이클
+# nPTiR 진행 사이클
 
-![nPTiR 진행 싸이클](./img/AgenticCoding_v10_27.png)
+![nPTiR 진행 사이클](./img/AgenticCoding_v10_27.png)
 
 ---
 
@@ -394,13 +394,19 @@ src: mg/05-project
 
 * 이 섹션 스킵해도 다음 섹션 진행 가능 (Sec3 전체 스킵 가능)
 
-* 자기 학습 권장: 14개 스킬 docs를 1주일에 1개씩 읽기 🖥️ 시연 # SCAR 체계 구축
+* 자기 학습 권장: 14개 스킬 docs를 1주일에 1개씩 읽기
 
-* SCAR구현(프로젝트 폴더에서)
+* 🖥️ 시연
 
-* 클로드 환경 구성이 되어 있지 않은데, https://finfra.kr/jg/2026/04/20/scar_define/ 기반 scar체계 구현해줘.
+---
 
-* 검토 프로젝트 폴더의 .claude폴더 확인!
+# SCAR 체계 구축
+
+* SCAR 구현(프로젝트 폴더에서)
+
+* 클로드 환경 구성이 되어 있지 않은데, https://finfra.kr/jg/2026/04/20/scar_define/ 기반 SCAR 체계 구현해줘.
+
+* 검토 프로젝트 폴더의 .claude 폴더 확인!
 
 * 글로벌 스킬로 이동. (위 2번 프로젝트 폴더에 구현)
 
@@ -416,7 +422,7 @@ src: mg/05-project
 
 * 클로드 환경 구성이 되어 있지 않은데, https://finfra.kr/jg/2026/04/20/nptir_define/ 기반 nPTiR 체계 구현해줘.
 
-* 검토 프로젝트 폴더의 .claude폴더 확인!
+* 검토 프로젝트 폴더의 .claude 폴더 확인!
 
 * 글로벌 스킬로 이동. (위 2번 프로젝트 폴더에 구현)
 
