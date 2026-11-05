@@ -48,11 +48,11 @@ AI 코딩 도구의 발전 과정과 바이브 코딩(VibeCoding) 개념을 소�
 
 **특징**:
 - Markmap 기반 인터랙티브 네비게이션
-- 계층적 챕터 구조 (메인 7개, 하위 9개)
+- 계층적 챕터 구조 (메인 8개, 하위 7개)
 - Mermaid 다이어그램 (LLM 툴 진화 타임라인 등)
 - 실전 활용 사례와 도입 로드맵 포함
 
-## 컨텐츠 구성
+## 콘텐츠 구성
 
 ### 1. 오프닝 - AI 코딩의 패러다임 전환 (01-opening.md)
 - 2023년 이후 급격한 변화와 도구의 다양화
@@ -118,15 +118,15 @@ LlmAndVibeCoding/
 │   ├── AGENDA.md            # 전체 목차 (계층 구조)
 │   ├── 01-opening.md
 │   ├── 02-llm-tool-evolution.md
-│   ├── 02.1-chat-based.md   # 하위 챕터
-│   ├── 02.2-ide-integration.md
-│   ├── 02.3-cli-based.md
+│   ├── 02.1.chat-based.md   # 하위 챕터
+│   ├── 02.2.ide-integration.md
+│   ├── 02.3.cli-based.md
 │   ├── 03-vibecoding-concept.md
-│   ├── 03.1-chat-limitations.md
-│   ├── 03.2-vibecoding-start.md
+│   ├── 03.1.chat-limitations.md
+│   ├── 03.2.vibecoding-start.md
 │   ├── 04-vibecoding-generations.md
-│   ├── 04.1-ide-generation.md
-│   ├── 04.2-cli-generation.md
+│   ├── 04.1.ide-generation.md
+│   ├── 04.2.cli-generation.md
 │   ├── 05-generation-comparison.md
 │   ├── 06-practical-cases.md
 │   ├── 07-adoption-roadmap.md
@@ -166,7 +166,7 @@ open slide/01-opening.html # 개별 챕터
 
 ```bash
 # 1. markdown 폴더의 파일 수정
-vi markdown/02.1-chat-based.md
+vi markdown/02.1.chat-based.md
 
 # 2. 상위 폴더로 이동
 cd ../../
