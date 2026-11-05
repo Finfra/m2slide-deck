@@ -19,9 +19,9 @@ release_date: 2026-07-02
 ::: columns
 ::: {.column width="50%"}
 * Putty.exe와 같은 ssh지원 어플 사용 접속
-* file은 fileZillaftp사용
+* file은 FileZilla(FTP) 사용
 * upload(일명 sftp)
-  - alftp,SublimeText의
+  - ALFTP, SublimeText의
   - sftp기능도 사용 가능
 
 ![FileZilla 화면](./img/BasicKnowledgeForAI_small_12.png)
@@ -76,14 +76,14 @@ release_date: 2026-07-02
 # 절대경로 이름과 상대경로 이름
 
 * 절대경로 이름 <span class="fragment" data-fragment-index="1"> : /로 시작</span>
-  * ex) /home, /etc,
+  * ex) /home, /etc
 * 상대경로 이름 <span class="fragment" data-fragment-index="1"> : 현재 폴더를 기준</span>
   * "." 현재 폴더 의미(생략시 /와 함께)
     * cd ./xx   == cd xx
   * ".." 상위 폴더를 의미
 * 관련 명령어
   * cd <span class="fragment" data-fragment-index="1"> : Change Directory</span>
-  * pwd <span class="fragment" data-fragment-index="1"> : Parent Working Directory</span>
+  * pwd <span class="fragment" data-fragment-index="1"> : Print Working Directory</span>
   * ls <span class="fragment" data-fragment-index="1"> : LiSt</span>
   * mkdir <span class="fragment" data-fragment-index="1"> : MaKe DIRectory</span>
   * cp <span class="fragment" data-fragment-index="1"> : CoPy</span>
