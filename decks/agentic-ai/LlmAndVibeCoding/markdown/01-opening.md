@@ -6,7 +6,7 @@
 
 ## 본 자료의 구성
 * 작성자 : 남중구 ( [https://finfra.kr/nowage/](https://finfra.kr/nowage/) )
-* 본 발표자료의 컨텐츠와 시각화 도구는 100% VibeCoding 도구로 작성되었습니다.
+* 본 발표자료의 콘텐츠와 시각화 도구는 100% VibeCoding 도구로 작성되었습니다.
 * 발표 자료 : https://finfra.kr/go/vibe2025
 * ePub : https://finfra.kr/go/vibe2025e
 * Source Code : https://finfra.github.io/m2slide
@@ -54,7 +54,7 @@ graph TD;
 
 
 **2024년부터 CLI 기반 코딩 본격화**
-* 터미널에서 실행되는 AI 도구 등장 (2024: Claude Code, 2025: Gemini CLI)
+* 터미널에서 실행되는 AI 도구 등장 (2025: Claude Code, Gemini CLI)
 * AI가 전체 프로젝트를 이해하고 파일을 직접 수정
 * 에이전트처럼 자율적으로 멀티파일 작업 수행
 
