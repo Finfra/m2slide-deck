@@ -1,4 +1,4 @@
-# AI Prompt Engineering으로 시작하는 AI기반 문서작성 실습
+# AI Prompt Engineering으로 시작하는 AI 기반 문서작성 실습
 
 * 저자: 남중구 (핀프라)
 * 카테고리: agentic-ai (Agentic AI)
