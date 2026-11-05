@@ -12,7 +12,7 @@ release_date: 2026-07-06
 * 강사 남중구 (핀프라)
   * 보조강사 : 환경 구성 오류 1차 응답·실습 도우미 역할
 * Q&A는 각 섹션 끝·쉬는 시간에 분산 운영
-* 본 강의 자료는 계속 업데이트되는 다이나믹 자료 입니다
+* 본 강의 자료는 계속 업데이트되는 다이나믹 자료입니다
   * 현재 기준 : Claude Model Sonnet 4.6 or Opus 4.7
 
 ---
@@ -103,13 +103,13 @@ src: mg/00-flow
 
 # Agentic Engineering이란?
 
-* 정의: ’Agentic 코드’의 휘발성을 극복하고 장기 유지보수·확장을 가능하게 하는 패러다임
+* 정의: ‘Agentic 코드’의 휘발성을 극복하고 장기 유지보수·확장을 가능하게 하는 패러다임
 
 * 핵심 원칙: 격리(Git·Docker)·재현성(설정파일)·검증(test·review)·문서화(PRD/tasks)
 
 * 바이브 코딩 vs Agentic Engineering: 1회용 vs 지속 가능
 
-* 이 강의의 방향성 — ‘도구 사용법’이 아니라 ’엔지니어링 사고’
+* 이 강의의 방향성 — ‘도구 사용법’이 아니라 ‘엔지니어링 사고’
 
 ---
 
@@ -178,7 +178,7 @@ src: mg/02-loop
 
 
 * 점검 명령:
-              * node -vcode --version docker --versiongit --version
+              * node -v / code --version / docker --version / git --version
 * 모두 출력되면 통과. 오류 시 보조강사에게 손들기
 * 권한 테스트: docker ps (Desktop 실행 여부 확인)
 * VsCode 확장: Claude Code, GitLens (선택)
@@ -186,7 +186,7 @@ src: mg/02-loop
 
 ---
 
-# VsCode기반 ClaudeCode환경 구축.
+# VsCode 기반 Claude Code 환경 구축
 
 * 확장 설치: Ctrl+Shift+X → “Claude Code” 검색 → Install
 
@@ -198,7 +198,7 @@ src: mg/02-loop
 
 * 터미널 병행: claude CLI와 VsCode 확장은 동일 설정 공유
 
-![VsCode기반 ClaudeCode환경 구축.](./img/AgenticCoding_v10_6.png)
+![VsCode 기반 Claude Code 환경 구축](./img/AgenticCoding_v10_6.png)
 
 ---
 
@@ -218,7 +218,7 @@ src: mg/02-loop
 
 # Markdown이란?
 
-John Gruber가 2005년 개발. 텍스트로 저장되어 용량이 적고 버전관리 용이함.
+John Gruber가 2004년 개발. 텍스트로 저장되어 용량이 적고 버전관리 용이함.
 
 ![Markdown이란?](./img/AgenticCoding_v10_8.png)
 
@@ -242,11 +242,11 @@ John Gruber가 2005년 개발. 텍스트로 저장되어 용량이 적고 버전
 
 ---
 
-# Docker혁명: 무거운 가상머신(VM)을 넘어서다!
+# Docker 혁명: 무거운 가상머신(VM)을 넘어서다!
 
-내 컴퓨터에서 되는 코드는, 전 세계 으느 서버에서도 똑같이 돌아간다.
+내 컴퓨터에서 되는 코드는, 전 세계 어느 서버에서도 똑같이 돌아간다.
 
-![Docker혁명: 무거운 가상머신(VM)을 넘어서다!](./img/AgenticCoding_v10_10.png)
+![Docker 혁명: 무거운 가상머신(VM)을 넘어서다!](./img/AgenticCoding_v10_10.png)
 
 ---
 
@@ -264,11 +264,11 @@ John Gruber가 2005년 개발. 텍스트로 저장되어 용량이 적고 버전
 
 ---
 
-# Docker 핵식 라이프사이클
+# Docker 핵심 라이프사이클
 
-"claudeCode로 실행가능!"
+"Claude Code로 실행 가능!"
 
-![Docker 핵식 라이프사이클](./img/AgenticCoding_v10_12.png)
+![Docker 핵심 라이프사이클](./img/AgenticCoding_v10_12.png)
 
 ---
 
