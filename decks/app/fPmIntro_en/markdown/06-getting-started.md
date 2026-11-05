@@ -137,7 +137,7 @@ gh api -H "Accept: application/vnd.github.raw" \
 
 ```wordart
 <h1 class="wordart-gradient" style="font-size:3em;margin:0.1em 0;">fPM</h1>
-<p class="wordart-shadow" style="font-size:1.15em;color:#666;margin:0;">fPm handles the connections; I focus on the insight</p>
+<p class="wordart-shadow" style="font-size:1.15em;color:#666;margin:0;">fPM handles the connections; I focus on the insight</p>
 ```
 
 ::: cards
