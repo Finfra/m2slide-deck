@@ -108,7 +108,7 @@ src: mg/01-what
 * 3. Live dashboard
 * 4. VSCode integration
 * 5. Multi-project
-* 6. Getting started
+* 6. Adopting fPM
 :::
 
 * Each chapter runs **"the pain without it → fPM's fix → Before/After"**

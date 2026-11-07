@@ -69,7 +69,7 @@ src: mg/05-multi
 :::: {.column width="40%"}
 * Give several numbers like `cdf 15 16` and each opens in a **split iTerm2 pane**
 * Place several projects side by side and work at once — no opening windows one by one
-* On local macOS, iTerm2 splitting applies automatically (remote Linux: see the graceful-degrade in the next chapter)
+* On local macOS, iTerm2 splitting applies automatically (remote Linux: see the graceful degrade in chapter 5.2)
 ::::
 :::: {.column width="60%"}
 ![cdf 15 16 → top/bottom split iTerm2 panes each move to a different project](./img/screenshots/05-cdf-split.png)
