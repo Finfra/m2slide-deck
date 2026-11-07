@@ -31,7 +31,7 @@
 
 ---
 
-## Pandoc는 역으로 변환 가능?
+## Pandoc은 역으로 변환 가능?
 
 * 양방향 지원: `docx → md`도 가능 (legacy 문서 마이그레이션)
 * PDF만 별도 의존성: LaTeX(texlive) 또는 wkhtmltopdf 백엔드 필요

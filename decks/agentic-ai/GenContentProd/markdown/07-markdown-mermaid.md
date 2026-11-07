@@ -4,13 +4,13 @@
 
 
 
-* 텍스트 기반의 마크업언어로 2004년 존그루버에 의해 만들어졌으며 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능
-* 특수기호와 문자를 이용한 매 _우 간단한 구조의 문법_ 을 사용하여 웹에서도 보다 빠르게 컨텐츠를 작성하고 보다  _직관적으로 인식_
-* 깃헙의 저장소Repository에 관한 정보를 기록하는 README. _md _ 파일이 Markdown으로 작성됨
+* 텍스트 기반의 마크업 언어로 2004년 존 그루버에 의해 만들어졌으며 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능
+* 특수기호와 문자를 이용한 _매우 간단한 구조의 문법_ 을 사용하여 웹에서도 보다 빠르게 콘텐츠를 작성하고 보다  _직관적으로 인식_
+* GitHub의 저장소(Repository)에 관한 정보를 기록하는 README.md 파일이 Markdown으로 작성됨
   * 설치방법, 소스코드 설명, 이슈 등을 간단하게 기록하고 가독성을 높일 수 있다는 강점이 부각되면서 널리 사용됨
-* HTML : Hyper Text Markup Language  vs Markdown
-  * html)  _<html><h1>hi</h1></html>   _
-  * Markdown)  _# hi_
+* HTML : HyperText Markup Language  vs Markdown
+  * html)  `<html><h1>hi</h1></html>`
+  * Markdown)  `# hi`
 
 
 * 참고: [마크다운 작성법 (ihoneymon)](https://gist.github.com/ihoneymon/652be052a0727ad59601)
@@ -66,7 +66,7 @@
 
 ---
 
-## Markdown 문법 - 코드,HTML 블록
+## Markdown 문법 - 코드·HTML 블록
 
 ::: columns
 ::: {.column width="52%"}
@@ -79,7 +79,7 @@ for i in range(10):
 :::
 ::: {.column width="48%"}
 * HTML 블록
-  * Markdown에서 표현 안되는 것 표현할 때 사용
+  * Markdown에서 표현 안 되는 것 표현할 때 사용
 
 ![HTML 블록 예시](img/GenContetntsProd_v10_20.png)
 :::
@@ -87,7 +87,7 @@ for i in range(10):
 
 ---
 
-## Markdown 문법 - html삽입
+## Markdown 문법 - HTML 삽입
 
 ::: columns
 ::: {.column width="50%"}

@@ -1,5 +1,5 @@
 ---
-title: GenContentProd_v1.1 (AI Prompt Engineering으로 시작하는 AI기반 문서작성 실습)
+title: GenContentProd_v1.1 (AI Prompt Engineering으로 시작하는 AI 기반 문서작성 실습)
 description: ppt2m2slide md_first 재변환 산출물. 사용자 후속 작성 영역.
 date: 2026-05-27
 ---
@@ -19,7 +19,7 @@ date: 2026-05-27
 * PNG 풀스크린 자동 fallback 금지 — `_proposals/GenContentProd_v1.1-2026-05-27.md` 의 "수동 마크다운 작성 필요" 섹션 참조
 
 # 후속 작업 가이드
-* 시연해보고 중요 스크린 샷 추가.
+* 시연해보고 중요 스크린샷 추가.
 * `markdown/*.md` 의 텍스트·bullet 위계가 PPT 원본과 다르면 수정
 * 이미지 alt 텍스트 (현재 H1 제목으로 자동 채움) 의 구체화
 * `_proposals/` 의 수동 작성 필요 슬라이드 보완

@@ -1,5 +1,5 @@
 ---
-title: AI Prompt Engineering으로 시작하는 AI기반 문서작성 실습
+title: AI Prompt Engineering으로 시작하는 AI 기반 문서작성 실습
 subtitle: Prompt Engineering 기초부터 Prompt-to-Publish 파이프라인까지
 author: 남중구 (핀프라)
 date: 2026-05-27
