@@ -9,17 +9,17 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 ## 📋 상태 요약
 - 신규 등록: nPTiR 스캐폴드 생성 완료
 
-## 🌱 이슈후보
+# 🌱 이슈후보
 
-## 🚧 진행중
+# 🚧 진행중
 
-## 📕 중요
+# 📕 중요
 
-## 📙 일반
+# 📙 일반
 
-## 📗 선택
+# 📗 선택
 
-## ✅ 완료
+# ✅ 완료
 
 ## Issue2: GitHub Pages 갤러리 사이트 신설 — finfra.github.io/m2slide-deck + m2slide 사이트와 상호 링크 (등록: 2026-10-19, 해결: 2026-10-19, commit: e677a35) ✅
 * 목적: m2slide-deck 에 웹 페이지가 없어 DesignRndAI 등 덱을 브라우저로 열 수 없었다. m2slide 본체 사이트(finfra.github.io/m2slide)처럼 갤러리를 두고 두 사이트를 서로 링크로 잇는다
@@ -42,8 +42,8 @@ description: m2slide 프로젝트 갤러리 이슈 추적
     - 커밋 후 ✅ 이동 + hash 기록 (이 Issue.md 는 다른 세션과 공유 — 자기 블록만 스테이징)
 * 결과: `LICENSE.md` 신설(덱 콘텐츠 CC BY-NC-SA 4.0 · 코드 MIT · 덱 README 우선 · 상업 이용 문의처) · README 라이선스 절 · `_template/README.md` 기본값 안내 — commit 126aa13
 
-## ⏸️ 보류
+# ⏸️ 보류
 
-## 🚫 취소
+# 🚫 취소
 
-## 📜 참고
+# 📜 참고
