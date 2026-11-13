@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>mg3d — ArchivesHomepage</title>
+<!--
+  three.js 3D 모션그래픽 로더 — 덱(ArchivesHomepage)이 #layout-_mg 장의 iframe 으로 싣는다.
+    <iframe src="./img/mg3d/mg.htm?scene=overview" style="display:block;width:1920px;height:1280px;border:0;pointer-events:none"></iframe>
+  쿼리: scene=<이름>(필수 · scenes/<이름>.js) · t=<초>(그 시점에 고정 — 검증·stills)
+  classic script 만 쓴다 — ES module 은 file:// 에서 CORS 로 막힌다. three.min.js 는 r159 UMD 로컬 사본.
+-->
+<style>
+  html, body { margin: 0; height: 100%; background: #FFFFFF; overflow: hidden; }
+  #stage { position: absolute; left: 0; top: 0; overflow: hidden; background: #FFFFFF; }
+  #gl { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+  #ov {
+    position: absolute; left: 0; top: 0; width: 1920px; height: 1280px;
+    transform-origin: 0 0; pointer-events: none;
+    font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #mg-title {
+    position: absolute; left: 0; right: 0; top: 40px; text-align: center;
+    font-weight: 800; font-size: 72px; line-height: 1.15; color: #0F172A; letter-spacing: -0.01em;
+    transform-origin: 50% 50%; opacity: 0;
+  }
+  #mg-title .bar { display: block; margin: 14px auto 0; height: 8px; width: 0; background: #D49B00; border-radius: 4px; }
+  #mg-punch {
+    position: absolute; left: 0; right: 0; bottom: 56px; text-align: center;
+    font-weight: 700; font-size: 56px; line-height: 1.2; color: #0F172A; opacity: 0;
+  }
+  #mg-punch span.pill {
+    display: inline-block; padding: 14px 44px; border-radius: 999px;
+    background: rgba(255, 255, 255, .96); box-shadow: 0 10px 30px rgba(15, 23, 42, .10);
+  }
+  #mg-fallback {
+    position: absolute; left: 0; right: 0; top: 47%; text-align: center;
+    font-size: 44px; font-weight: 700; color: #64748B; display: none;
+  }
+  .lbl { position: absolute; left: 0; top: 0; white-space: nowrap; display: none; line-height: 1.2; }
+  .lbl.tag {
+    font-weight: 800; font-size: 36px; color: #0F172A; background: rgba(255, 255, 255, .95);
+    border: 4px solid var(--c, #2563EB); border-radius: 999px; padding: 8px 26px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .10);
+  }
+  .lbl.badge {
+    font-weight: 800; font-size: 36px; color: #FFFFFF; background: var(--c, #2563EB);
+    border-radius: 999px; padding: 10px 28px; box-shadow: 0 6px 18px rgba(15, 23, 42, .16);
+  }
+  .lbl.bubble {
+    font-weight: 700; font-size: 38px; color: #0F172A; background: #FFFFFF;
+    border: 4px solid var(--c, #2563EB); border-radius: 28px; padding: 16px 32px;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, .12);
+  }
+  .lbl.bubble::after {
+    content: ''; position: absolute; left: 64px; bottom: -30px;
+    border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 26px solid var(--c, #2563EB);
+  }
+  .lbl.bubble.tail-r::after { left: auto; right: 64px; }
+  .lbl.bubble.tail-c::after { left: 50%; margin-left: -16px; }
+  .lbl.plain {
+    font-weight: 800; font-size: 36px; color: var(--c, #0F172A);
+    text-shadow: 0 0 4px #FFF, 0 0 10px #FFF, 0 0 18px #FFF;
+  }
+  .lbl.mark {
+    font-weight: 900; font-size: 76px; line-height: 1; color: var(--c, #DC2626);
+    text-shadow: 0 0 6px #FFF, 0 0 14px #FFF;
+  }
+  .lbl.code {
+    font-weight: 800; font-size: 34px; color: #0F172A; background: rgba(255, 255, 255, .95);
+    border: 3px solid var(--c, #2563EB); border-radius: 14px; padding: 4px 16px;
+    font-family: Menlo, Consolas, "Noto Sans KR", monospace;
+  }
+  .lbl.banner {
+    font-weight: 800; font-size: 46px; color: #FFFFFF; background: var(--c, #2563EB);
+    border-radius: 20px; padding: 14px 36px; box-shadow: 0 10px 28px rgba(37, 99, 235, .30);
+    font-family: Menlo, Consolas, "Noto Sans KR", monospace;
+  }
+  /* PDF(decktape · printToPDF)에서는 box-shadow 가 라벨 둘레의 회색 사각형으로 찍힌다(2026.11.08 실측) → 인쇄 때만 끈다 */
+  html.print .lbl, html.print #mg-punch span.pill { box-shadow: none !important; }
+</style>
+<script>if (navigator.webdriver) document.documentElement.classList.add('print');</script>
+</head>
+<body>
+<div id="stage">
+  <canvas id="gl"></canvas>
+  <div id="ov">
+    <div id="mg-title"></div>
+    <div id="mg-punch"></div>
+    <div id="mg-fallback">3D 를 표시할 수 없음</div>
+  </div>
+</div>
+<script src="three.min.js"></script>
+<script src="mg-core.js"></script>
+<script>
+(function () {
+  var m = location.search.match(/[?&]scene=([a-z0-9_-]+)/i);
+  var name = m ? m[1] : 'overview';
+  if (!window.MG3D) {
+    document.getElementById('mg-fallback').style.display = 'block';
+    return;
+  }
+  var s = document.createElement('script');
+  s.src = 'scenes/' + name + '.js';
+  s.onload = function () { window.MG3D.boot(name); };
+  s.onerror = function () { window.MG3D.fail('장면 없음: ' + name); };
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>

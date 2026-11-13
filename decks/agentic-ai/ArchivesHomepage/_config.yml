@@ -1,0 +1,24 @@
+# ArchivesHomepage — 국가기록원 특강(2026.11.13) 빌드 옵션
+#   기준: 202609_Rebuild/2.marketing/_config.yml (강의용 default_lec · 전환 없음)
+#   판형 3:2 — 같은 강의장(국가기록원 2026.05 AgenticCoding 덱)에서 문제없이 쓴 비율
+theme: default_lec
+theme_default_layout: contents
+head_left: d1        # 좌 = 현재 챕터(시작 · 1. 준비 · …)
+head_right: none
+slide_ratio: "3:2"
+cover_enabled: true
+toc_card_mode: false
+cards_placeholder: false
+markmap_depth: 2
+auto_layout_detect: true
+nav_indicator: both
+# 화면 전환 — 즉시 넘김 (2026.09.28 Rebuild 1일차 실측: 3D 전환이 장마다 재생돼 눈이 피곤함)
+animation:
+  default_transition: none
+  default_transition_speed: fast
+  default_background_transition: none
+style:
+  global:
+    # 덱 전용 CSS 주입 — theme/default_lec 무수정. 🚫 slide_css: 로 바꾸지 말 것(레이아웃·theme-img 유실 — 2.marketing 선례)
+    font_import:
+      - Projects_deck/decks/agentic-ai/ArchivesHomepage/css/deck.css
