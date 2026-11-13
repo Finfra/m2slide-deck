@@ -1,0 +1,9 @@
+/* deck.css — ArchivesHomepage 덱 전용 보정 (테마 · base.css 무수정)
+ * 배선: _config.yml style.global.font_import 에 이 파일 절대경로
+ * 목적: 프롬프트 코드 블록을 강의장 뒷자리에서도 읽히게 키운다(테마 기본 0.85em → 1.1em)
+ */
+/* 테마 custom.css 가 이 파일 뒤에 주입되므로 선택자를 한 단계 높여 이긴다 */
+.reveal .slides section[class*="layout-"] .code-wrapper {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
