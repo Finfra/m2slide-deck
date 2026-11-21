@@ -1430,7 +1430,7 @@ html.ratio-fill .agenda-frame {
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
   <link rel="stylesheet" href="css/lec-tokens.css"/>
-  <link rel="stylesheet" href="css/custom.css?v=1793376934950">
+  <link rel="stylesheet" href="css/custom.css?v=1795275570225">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1675,8 +1675,10 @@ html.ratio-fill .agenda-frame {
     
   </div>
   
-</section>
-
+  <aside class="notes">
+<p>⏱ <strong>표지 장이다.</strong> 1일차에서 만든 맥락 카드가 오늘 조사의 입력이라는 한 문장과, 오늘의 한 단어 «조사하기» 만 말하고 넘긴다. 앞 장(모션그래픽)이 아니라 이 장이 먼저 나온다.</p>
+  </aside>
+      </section>
 
       <section data-slide-hash="#/2" id="toc-placeholder" class="layout-_toc title-slide">
   <header class="toc-page-header">
@@ -1690,8 +1692,10 @@ html.ratio-fill .agenda-frame {
 <section data-slide-hash="#/3" class="layout-_mg">
   <h1 class="mg-title">조사하기 — 출처를 단 조사가 브리핑으로</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="16">{&quot;src&quot;:&quot;mg/02-day2&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1440,&quot;H&quot;:1080,&quot;DUR&quot;:16,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 영업·마케팅 AI 강의 모션그래픽 02-day2 (2일차 조사하기) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s02-day2.js · 합성: node mg/_src/compose.js\n(function (root) {\n// common.js — 영업·마케팅 6일 덱 mg 7개 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: DesignRndAI(설계·R&amp;D 덱) mg/_src/common.js — 같은 default_lec 색 체계(lec-tokens.css)라 상수를 그대로 쓴다\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1440, H = 1080;\nvar C = {\n  bg: &#39;#FFFDF6&#39;, ink: &#39;#222222&#39;, sub: &#39;#4A4A44&#39;, muted: &#39;#8A877A&#39;, line: &#39;#E3DFD0&#39;, paper: &#39;#FFFFFF&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#7A6000&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#0365C0&#39;, blueTint: &#39;#EAF2FB&#39;, red: &#39;#C82506&#39;, redTint: &#39;#FDECE8&#39;, green: &#39;#1F7A4D&#39;, greenTint: &#39;#E4F3EA&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);  // 바깥 페이드와 곱함\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// ── 공통 틀: 머리(일차 칩 + 제목) · 아래 한 줄 ───────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  ctx.fillStyle = C.brand;\n  rr(ctx, 70, 62, 178, 62, 31);\n  ctx.fill();\n  txt(ctx, chip, 159, 93, 34, 800, C.ink, &#39;center&#39;);\n  txt(ctx, title, 276, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(70, 148, 1300 * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  txt(ctx, s, 720, 1010 + (1 - p) * 12, 38, 700, color || C.brandInk, &#39;center&#39;);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// ── 영업·마케팅 덱 추가 도구 ────────────────────────────────────────────────\n// 알약 라벨 — 가운데 정렬, 폭은 글자에 맞춰 잰다\nfunction pill(ctx, s, cx, cy, size, fill, color, padX) {\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  var w = ctx.measureText(s).width + (padX == null ? 36 : padX) * 2, h = size * 1.75;\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  txt(ctx, s, cx, cy + 1, size, 800, color, &#39;center&#39;);\n  return w;\n}\n// 말풍선 — 아래 꼬리\nfunction bubble(ctx, x, y, w, h, o) {\n  o = o || {};\n  card(ctx, x, y, w, h, { fill: o.fill || C.paper, stroke: o.stroke || C.line, lw: o.lw || 2, alpha: o.alpha, r: 24 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = o.lw || 2;\n  var tx = o.tail == null ? x + 60 : o.tail;\n  ctx.beginPath(); ctx.moveTo(tx, y + h - 2); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h - 2); ctx.closePath();\n  ctx.fill();\n  ctx.beginPath(); ctx.moveTo(tx, y + h); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h); ctx.stroke();\n  ctx.restore();\n}\n// 브라우저 창 — 주소창 + 본문 영역(콜백)\nfunction browser(ctx, x, y, w, h, url, alpha) {\n  card(ctx, x, y, w, h, { fill: C.paper, alpha: alpha, r: 16 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (alpha == null ? 1 : alpha);\n  ctx.fillStyle = &#39;#F1EEE3&#39;;\n  rr(ctx, x + 2, y + 2, w - 4, 54, 14); ctx.fill();\n  var dots = [&#39;#E5533C&#39;, &#39;#F5C518&#39;, &#39;#3E8E41&#39;];\n  for (var i = 0; i &lt; 3; i++) { ctx.fillStyle = dots[i]; ctx.beginPath(); ctx.arc(x + 30 + i * 26, y + 29, 8, 0, Math.PI * 2); ctx.fill(); }\n  ctx.fillStyle = C.paper; rr(ctx, x + 120, y + 12, w - 150, 34, 17); ctx.fill();\n  if (url) txt(ctx, url, x + 166, y + 30, 22, 600, C.sub, &#39;left&#39;, MONO);\n  ctx.restore();\n}\n\n// 장면 ③ — 2일차 조사하기 (원고 근거: 2-1 «출처 링크가 달려도 틀릴 수 있음 — 열리는가·본문에 있는가·날짜가 최신인가»\n//          · 2-4 «사전 브리핑 5항목 — 개요·제품·동향·접점 가설·질문» · 1일차 맥락 카드를 받아 시작)\nvar NAME = &#39;mg-02-day2&#39;, DUR = 16;\nvar TL = { src0: 0.8, chk: 4.4, bad: 6.4, fly: 8.2, brief: 8.8, foot: 13.6 };\nvar SRC = [\n  [&#39;시장 동향&#39;, &#39;소형 굴착기 시장 흐름&#39;, &#39;[1]&#39;, 1],\n  [&#39;바이어 후보&#39;, &#39;부시·핀 수요가 있는 제조사&#39;, &#39;[2]&#39;, 1],\n  [&#39;경쟁사&#39;, &#39;«점유율 1위» — 링크가 안 열림&#39;, &#39;[3]&#39;, 0],\n];\nvar BR = [&#39;개요 — 사업 영역·규모&#39;, &#39;제품 — 주력 제품·시장&#39;, &#39;동향 — 최근 1년 뉴스&#39;, &#39;접점 가설 — 부시·핀 수요&#39;, &#39;질문 — 첫 상담에서 물을 3가지&#39;];\nvar CHK = [&#39;열리는가&#39;, &#39;본문에 있는가&#39;, &#39;날짜가 최신인가&#39;];\nfunction srcY(i) { return 330 + i * 170; }\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;2일차&#39;, &#39;조사하기 — 출처를 단 조사가 브리핑으로&#39;, 0.2);\n  // 출처 확인 세 점 — 위 띠\n  for (var c = 0; c &lt; 3; c++) {\n    var a = TL.chk + 0.35 * c, p = es(T, a, a + 0.5);\n    if (p &lt;= 0) continue;\n    ctx.save(); ctx.globalAlpha = p;\n    pill(ctx, (c + 1) + &#39;. &#39; + CHK[c], 230 + c * 250, 222, 25, C.blueTint, C.blue, 22);\n    ctx.restore();\n  }\n  var lbl = es(T, TL.chk - 0.3, TL.chk + 0.2);\n  if (lbl &gt; 0) { ctx.save(); ctx.globalAlpha = lbl; txt(ctx, &#39;출처 확인&#39;, 70, 178, 26, 700, C.muted, &#39;left&#39;); ctx.restore(); }\n  // 조사 카드 셋 — 왼쪽\n  for (var i = 0; i &lt; SRC.length; i++) {\n    var s = TL.src0 + 1.0 * i, q = es(T, s, s + 0.6);\n    if (q &lt;= 0) continue;\n    var y = srcY(i), ok = SRC[i][3], fl = es(T, TL.fly + 0.25 * i, TL.fly + 0.25 * i + 0.8);\n    var gone = ok ? 0 : 0.55 * es(T, TL.bad + 0.6, TL.bad + 1.4);\n    ctx.save();\n    ctx.globalAlpha = q * (1 - gone);\n    card(ctx, 70 + (1 - q) * -50, y, 600, 140, { fill: ok &amp;&amp; fl &gt; 0 ? C.tint : C.paper, stroke: ok &amp;&amp; fl &gt; 0 ? C.brand : C.line, lw: ok &amp;&amp; fl &gt; 0 ? 3 : 2 });\n    txt(ctx, SRC[i][0], 104, y + 44, 34, 800, C.ink, &#39;left&#39;);\n    txt(ctx, SRC[i][1], 104, y + 98, 27, 500, C.sub, &#39;left&#39;);\n    pill(ctx, SRC[i][2], 600, y + 44, 22, C.blueTint, C.blue, 14);\n    ctx.restore();\n    var ck = es(T, TL.chk + 1.2 + 0.4 * i, TL.chk + 1.6 + 0.4 * i);\n    if (ok) stamp(ctx, 640, y + 100, 22, ck, C.blue);\n    else if (gone &lt; 1) {\n      crossmark(ctx, 640, y + 100, 22, es(T, TL.bad, TL.bad + 0.5), C.red);\n      var t2 = es(T, TL.bad + 0.3, TL.bad + 0.8);\n      if (t2 &gt; 0) { ctx.save(); ctx.globalAlpha = t2; txt(ctx, &#39;확정으로 쓰지 않음&#39;, 370, y + 166, 26, 800, C.red, &#39;center&#39;); ctx.restore(); }\n    }\n    if (ok) arrow(ctx, 690, y + 70, 780, lerp(y + 70, 560, 0.6), fl, C.brandInk, 5);\n  }\n  // 사전 브리핑 — 오른쪽 문서\n  var b = es(T, TL.brief, TL.brief + 0.7);\n  if (b &gt; 0) {\n    ctx.save(); ctx.globalAlpha = b;\n    card(ctx, 800, 300, 570, 600, { fill: C.paper, stroke: C.brand, lw: 3 });\n    ctx.fillStyle = C.brand; rr(ctx, 820, 320, 530, 70, 14); ctx.fill();\n    txt(ctx, &#39;고객사 사전 브리핑&#39;, 1085, 356, 34, 800, C.ink, &#39;center&#39;);\n    for (var k = 0; k &lt; BR.length; k++) {\n      var r = es(T, TL.brief + 0.5 + 0.55 * k, TL.brief + 1.0 + 0.55 * k), y2 = 440 + k * 94;\n      if (r &lt;= 0) continue;\n      ctx.globalAlpha = b * r;\n      ctx.fillStyle = C.brand; ctx.beginPath(); ctx.arc(856, y2, 22, 0, Math.PI * 2); ctx.fill();\n      txt(ctx, String(k + 1), 856, y2 + 1, 26, 800, C.ink, &#39;center&#39;);\n      txt(ctx, BR[k], 896, y2 + 1, 27, k === 3 ? 800 : 600, k === 3 ? C.brandInk : C.ink, &#39;left&#39;);\n      if (k &lt; BR.length - 1) { ctx.fillStyle = C.line; ctx.fillRect(836, y2 + 46, 500, 2); }\n    }\n    ctx.restore();\n  }\n  footer(ctx, T, &#39;세 점을 통과한 문장만 확정으로 씀&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
-</section>
-
+  <aside class="notes">
+<p>⏱ <strong>모션그래픽 장이다.</strong> 재생이 끝날 때까지 말을 얹지 않고, 끝나면 그날의 한 단어 «조사하기» 만 말하고 다음 장으로 넘긴다.</p>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/4" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -1731,12 +1735,36 @@ html.ratio-fill .agenda-frame {
 </div>
 
 <ul>
-<li class="bullet-dot">1일차 맥락 카드(제품·고객·시장 각 5줄)를 받아 비교표와 브리핑을 만들고, 브리핑 5항목 틀은 3일차에 상담 메모를 채우는 틀로 다시 씀.</li>
+<li class="bullet-dot">비교표는 데이터시트 요약표로, 브리핑은 1일차 맥락 카드의 제품 5줄로 만들고, 브리핑 5항목 틀은 3일차에 상담 메모를 채우는 틀로 다시 씀.</li>
 <li class="bullet-dot">🖥️ 시연은 화면을 보는 시간이고, 🙋 Practice 는 입력 파일부터 결과 파일까지 처음부터 끝까지 직접 치는 시간임.</li>
 <li class="bullet-dot">결과 파일은 모두 <code>Day2/</code> 폴더에 저장함. 끝나면 Progress 시트에 O 를 적음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">2일차의 구조: Practice 6장(설정 2 + P2-1 2 + P2-2 2) + 시연 3장 + 이론 23장 = 32장. 이론은 상한(24) 안, 하루 합계는 상한(32)과 같다. 구판 36장에서 줄인 내역은 검증 장 2건을 Practice 마지막 장에 접음, 2-2 후보 발굴·니즈 가설 2→1장, 2-4 검증 흐름 장을 5항목 장에 흡수, 시연 2-4 는 1장 유지(내용은 3단 연쇄로 확장). 6일 흐름 timeline 은 여는 절 장(<code>day2-opening</code>)에 흡수했다. <strong>VSCode 란 1장과 마크다운 개요 4장은 줄이지 않는다</strong> — 설계·R&D 때부터 확정된 구성(Issue42·44)이고, 한 번 «1장으로 접음» 으로 지웠다가 사용자 지적(2026-10-25)으로 복원했다. 장 수가 모자라면 다른 이론 장을 접는다.</li>
+<li class="bullet-dot">🔴 <strong>Practice 시간은 시간표에서 보장한다.</strong> 늦어지면 줄이는 순서는 ① 2-2 시연 ② 2-1 시연의 선택 따라하기 ③ 2-3 이론이고, Practice 블록(P2-1 35분 · P2-2 35분)은 줄이지 않는다.</li>
+<li class="bullet-dot">결과 파일은 전부 <code>Day2/</code> 폴더에 저장하고 Progress 시트(D열 P2-1 · E열 P2-2)에 O/X 를 적게 한다. 화면 공유를 보지 않아도 같은 절차로 끝나도록, 장표에 입력·프롬프트·기대 결과·막힘 복구를 모두 적었다.</li>
+<li class="bullet-dot">연결: 1일차 맥락 카드(<code>맥락카드.txt</code>)의 시장 5줄(2-1 시연) · 고객 5줄(2-2 시연) · 제품 5줄(P2-2-1) 을 쓴다. 카드를 못 만든 수강생은 드라이브 <code>_doc/Day1/맥락카드.txt</code> 배포본을 쓴다(원본 <code>_material/Day1/맥락카드.txt</code>).</li>
+</ul>
 
+<table>
+<thead>
+<tr><th style="text-align:left">교시</th><th style="text-align:left">시각</th><th style="text-align:left">내용</th><th style="text-align:left">분</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">1</td><td style="text-align:left">13:00~13:50</td><td style="text-align:left">표지·흐름·VSCode 2·마크다운 4(이론 18) + P2-0-1·P2-0-2(23)</td><td style="text-align:left">41 + 여유 9</td></tr>
+<tr><td style="text-align:left">2</td><td style="text-align:left">14:00~14:50</td><td style="text-align:left">2-1 이론 9 + 시연 8 · 2-2 이론 5 + 시연 7 · 2-3 이론 11</td><td style="text-align:left">40 + 여유 10</td></tr>
+<tr><td style="text-align:left">3</td><td style="text-align:left">15:00~15:50</td><td style="text-align:left">P2-1-1(20) + P2-1-2(15) · 2-4 이론 8</td><td style="text-align:left">43 + 여유 7</td></tr>
+<tr><td style="text-align:left">4</td><td style="text-align:left">16:00~16:50</td><td style="text-align:left">2-4 시연 8 · P2-2-1(20) + P2-2-2(15) · 닫는 절 7</td><td style="text-align:left">50 (여유 없음)</td></tr>
+</tbody>
+</table>
+
+<ul>
+<li class="bullet-dot">1교시 여유 9분은 설치·로그인 지연용이다(설계·R&D 2회차 Sign in 대기 8.5분 실측 — 개요 장 복원으로 11분에서 4분 줄었으나 설치 구간을 25분에서 23분(P2-0-1 15 + P2-0-2 8)으로 맞춰 2분 늘었으므로, 로그인이 길어지면 마크다운 문법 ①②는 읽기만 하고 넘긴다). 4교시가 여유 없으므로 3교시 끝에서 4분을 당겨 둔다.</li>
+<li class="bullet-dot">4교시 닫는 절 7분 = 정답 공개 1 + 결론 2 + 예고 2 + Progress 확인 2.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/5" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1782,7 +1810,15 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">쓰는 기능은 확장(Codex)과 터미널 둘임. 디버깅·Git 같은 개발 기능은 이 과정에서 쓰지 않음.</li>
 <li class="bullet-dot">1일차 ChatGPT 는 답이 브라우저 대화창에 남았음. VSCode 에서는 결과가 내 PC 폴더의 파일로 남음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">영업·마케팅 수강생은 VSCode 를 처음 보는 사람이 많다. «개발자 도구» 라는 말에 겁먹지 않게 «코딩은 하지 않는다» 를 먼저 말한다. 화면 4구역은 실제 VSCode 창을 띄워 손으로 가리킨다. 터미널은 3일차부터 Codex 가 쓰는 자리라 «보기만 한다» 고 말한다.</li>
+<li class="bullet-dot">쓰는 이유는 둘이다 — 마크다운 문서를 쓰고 미리 보는 자리, Codex 를 담는 그릇. 1일차 ChatGPT 는 답이 대화창에 남았고, VSCode 에서는 결과가 내 PC 폴더의 파일로 남는다는 대비를 한 번 말한다.</li>
+<li class="bullet-dot">1분 안에 끝낸다. 영역 이름을 외우게 하지 않는다 — 다음 Practice 에서 손으로 찾는다.</li>
+<li class="bullet-dot">마지막 불릿(쓰는 기능은 확장과 터미널 둘)은 «VSCode 에 있는 나머지 기능은 몰라도 된다» 는 안심 한 줄이다. 디버깅·Git·확장 마켓 전체를 설명하지 않는다 — 영업 수강생이 쓰지 않는 기능을 장으로 세우면 배우지 않을 것에 시간을 쓴다(설계·R&D 1-0 «VSCode 주요 기능 5종» 은 의도적으로 한 줄로만 흡수, Issue64 단계2 A05).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/6" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1811,10 +1847,18 @@ html.ratio-fill .agenda-frame {
 </div>
 
 <ul>
-<li class="bullet-dot">2일차에는 Codex 에게 일을 시키지 않음. 실습은 VSCode 편집기와 미리보기까지임.</li>
+<li class="bullet-dot">2일차 실습에서는 Codex 에게 일을 시키지 않음. 실습은 VSCode 편집기와 미리보기까지이고, Codex 는 2-4 강사 시연으로만 봄.</li>
 <li class="bullet-dot">📱 필드 영업은 설치를 건너뜀. ChatGPT 앱 로그인과 «안녕» 응답 확인으로 대신하고, 이후 Practice 도 같은 프롬프트를 앱에 붙여 넣음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">🔴 2일차에는 수강생에게 Codex 로 일을 시키지 않는다. 설치·로그인·«안녕» 응답까지다.</li>
+<li class="bullet-dot">📱 필드 영업 4명은 PC 를 거의 안 쓴다. 설치는 건너뛰고 ChatGPT 앱 로그인과 인사 응답만 확인시킨다. 이후 Practice 의 📱 줄(앱에 본문 붙여넣기)이 이 4명의 경로다. 🖐 선실행 대기 — 앱에서 파일 첨부·본문 붙여넣기가 지급 계정으로 되는지(⑤ 선실행 몫).</li>
+<li class="bullet-dot">설치 파일은 강사 USB 의 VSCode User Installer 다. 기설치(설계 1회차에서 같은 렌털 PC 에 설치)이면 로그인만 확인한다.</li>
+<li class="bullet-dot">설치 파일이 USB 에서 안 열리면 <code>code.visualstudio.com</code> 에서 User Installer 를 받는다(관리자 권한이 필요 없는 설치본). 수강생이 직접 내려받는 일은 드물어 이 주소는 「막히면」 한 줄로만 두었다. 렌털 PC 사전 설치 확인은 <a href="../PREP.md">PREP.md</a> D-1 점검 항목이다(Issue64 단계2 A06).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/7" class="layout-exercise">
   <div class="contents-head-bar">
@@ -1836,8 +1880,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><strong>막히면</strong> 승인 화면이 5분 넘게 멈추면 손을 들고 다음 Practice 로 넘어감. 3일차 전까지 다시 시도함. VSCode 가 없고 설치 파일도 막히면 <code>code.visualstudio.com</code> 의 User Installer 를 받음.</li>
 <li class="bullet-dot">📱 ChatGPT 앱에 같은 문장을 보내 인사 응답이 오는지만 확인함.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">🖐 선실행 대기 — Codex 로그인 완료 화면 캡처와 15분 실측(Windows 렌털 PC 에서만 재현). 막힌 사람은 손을 들게 하고 개별 지원하되 전체 진행은 멈추지 않는다. 5분을 넘기면 다음 Practice 로 넘어가고, P2-1·P2-2 는 ChatGPT 웹이라 영향이 없다.</li>
+<li class="bullet-dot">3일차 시작 시 재시도 시간이 있다. 로그인이 끝내 안 되는 사람은 3일차에 ChatGPT 웹 + 강사 결과 파일 경로로 간다.</li>
+<li class="bullet-dot">Codex 한도: 설계·R&D 4·5회차 오후 4시대에 <code>429 Too Many Requests</code> 가 연속 발생했다. 2일차 오후 Codex 시연(2-4)은 결과 파일 <code>_강사본/회사.md</code> 를 미리 열어 두고 시작한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/8" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1872,7 +1922,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">한계 — 표준이 여럿이라 도구마다 조금씩 다르게 보임. 글상자·두 단 같은 복잡한 배치는 못 함.</li>
 <li class="bullet-dot">2004년 존 그루버가 만듦. 깃허브 <code>README.md</code> 처럼 설명서에 널리 씀.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">정의와 HTML 대비를 먼저 말한다 — HTML 은 태그로 감싸 사람이 읽기 어렵고, 마크다운은 줄 앞에 기호만 붙여 그대로 읽힌다. 존 그루버(2004)와 깃허브 <code>README.md</code> 는 말로 한 줄만 한다.</li>
+<li class="bullet-dot">영업 수강생에게는 «ChatGPT 답을 복사하면 기호가 따라온다» 가 가장 와닿는 이유다. 한계(도구마다 모양이 다름·두 단 배치 불가)도 같이 말해 기대를 맞춘다.</li>
+<li class="bullet-dot">개요 4장(이 장 + 문법 ① ② ③)은 구판 구성(Issue44 «부록1. MarkDown»)의 복원이다. 시간이 모자라면 문법 ① ② 는 표를 읽기만 하고, ③ 은 P2-0-2 코드 블록으로 대신한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/9" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1909,7 +1966,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">기호 뒤에는 한 칸을 띄움 — <code>#제목</code> 처럼 붙이면 제목이 되지 않음.</li>
 <li class="bullet-dot">목록 아래에 표·문단을 이으려면 빈 줄을 하나 둠.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">표 6줄을 위에서부터 읽는다. 오른쪽 «미리보기에서 보이는 모양» 은 강사 화면에서 같은 줄을 실제로 입력하고 <code>Ctrl+Shift+V</code> 로 보여 주면 가장 빠르다.</li>
+<li class="bullet-dot">기호 뒤 한 칸 띄우기를 일부러 한 번 틀려 보인다(<code>#제목</code> → 제목이 되지 않음). 목록 아래 빈 줄을 빼먹으면 표가 깨진다는 것도 여기서 한 번 보여야 P2-0-2 에서 덜 막힌다.</li>
+<li class="bullet-dot">그림 — VSCode 에서 왼쪽에 # · - · ** 기호가 보이는 소스, 오른쪽에 제목·목록·굵게·인용·구분선으로 바뀐 미리보기(vscode.dev 에서 촬영 · 2026.10.25)</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/10" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1934,7 +1998,13 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">이 교안의 프롬프트 상자가 코드 블록임. 상자 안 글은 기호가 있어도 모양으로 바뀌지 않음.</li>
 <li class="bullet-dot">링크·이미지는 대괄호 다음에 소괄호를 붙임 — 이미지는 맨 앞에 느낌표가 하나 더 붙음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">링크·이미지는 대괄호 다음에 소괄호 — 이미지는 느낌표가 하나 더 붙는다는 것만 짚는다. 이 과정에서 이미지 삽입은 직접 하지 않는다.</li>
+<li class="bullet-dot">코드 블록은 «교안의 프롬프트 상자와 같은 것» 이라고 말한다. 상자 안 글이 기호 그대로 보이는 이유가 이것이며, 프롬프트를 복사할 때 상자의 복사 버튼을 쓰게 되는 근거다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/11" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1961,7 +2031,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><code>:--</code> 는 왼쪽 정렬, <code>--:</code> 는 오른쪽 정렬임.</li>
 <li class="bullet-dot">ChatGPT 가 코드 블록에 낸 마크다운 표를 복사 버튼으로 붙이면 이 형식이고, VSCode 미리보기에서 표로 보임. 화면의 표를 끌어 복사하면 이 형식이 되지 않음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">위쪽 주석은 구분선 줄 <code>| :-- | :-- | --: |</code> 만 떼어 세로선·왼쪽 정렬·오른쪽 정렬을 짚는다. 아래 코드 블록의 표 3줄과 같은 줄이다.</li>
+<li class="bullet-dot">이 장이 P2-1-2(비교표.md 저장)의 사전 지식이다. 세로선 한 줄이 한 행이고 둘째 줄이 머리글 구분선이라는 것, <code>:--</code> 와 <code>--:</code> 의 정렬 차이만 말한다.</li>
+<li class="bullet-dot">🔴 «화면의 표를 끌어 복사하면 이 형식이 되지 않는다» 가 실패 원인 1순위다. ChatGPT 의 코드 블록 복사 버튼으로 받아야 한다. 예제 표의 값(GGB·DU·250·140)은 요약표 값과 같은 예시이며 정답이 아니다(정답은 MBI 350 환산).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/12" class="layout-exercise">
   <div class="contents-head-bar">
@@ -1972,7 +2049,7 @@ html.ratio-fill .agenda-frame {
     <h1 class="exercise-title">🙋 Practice P2-0-2 — 마크다운 파일 만들고 미리보기 열기</h1>
   </div>
   <div class="exercise-body"><ul>
-<li class="bullet-dot"><strong>시간</strong> 8분 | <strong>입력</strong> 바탕화면 <code>Day2</code> 폴더 | <strong>결과</strong> <code>연습.md</code> 의 미리보기</li>
+<li class="bullet-dot"><strong>시간</strong> 8분 | <strong>입력</strong> 바탕화면 <code>Day2</code> 폴더(드라이브 <code>_doc/Day2</code> 에서 내려받음) | <strong>결과</strong> <code>연습.md</code> 의 미리보기</li>
 <li class="bullet-dot">단계 — VSCode 파일 → 폴더 열기 → <code>Day2</code> → <code>Ctrl+N</code> → <code>Ctrl+S</code> 로 <code>연습.md</code> 저장 → 아래 6줄 입력(셋째 줄은 빈 줄) → <code>Ctrl+Shift+V</code></li>
 </ul>
 
@@ -1988,8 +2065,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><strong>막히면</strong> 표가 글자로만 보이면 목록 아래 빈 줄과 <code>:--</code> 줄이 있는지 봄.</li>
 <li class="bullet-dot">📱 PC 작업이라 건너뜀. ChatGPT 앱 답에서 표가 보이는지만 확인함.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">🖐 선실행 대기 — VSCode 미리보기 창 캡처(렌털 PC 리허설 몫). 사전 조건: 바탕화면에 <code>Day2</code> 폴더가 내려받아져 있어야 한다(<code>practice/README.md</code> 「파일 저장 방법」).</li>
+<li class="bullet-dot">6줄 입력은 강사 화면에서 한 줄씩 같이 친다. 셋째 줄(빈 줄)을 빼먹으면 표가 깨진다.</li>
+<li class="bullet-dot">📱 이 Practice 는 PC 전용이라 필드 영업은 건너뛴다. 대신 ChatGPT 앱 답에서 표가 보이는지만 본다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/13" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2010,7 +2093,13 @@ html.ratio-fill .agenda-frame {
 <tr><td style="text-align:left">다음에 쓸 곳</td><td style="text-align:left">2-4 브리핑의 «최근 동향» 칸</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">2-1 은 시연만 하는 절이다. 직접 치는 Practice 는 2-3(P2-1)·2-4(P2-2) 다. 시연 1건(8분)으로 «조사 질문 설계» 와 «출처 확인» 을 보인다.</li>
+<li class="bullet-dot">받는 것인 시장 5줄은 맥락 카드 11~15행이다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/14" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2031,11 +2120,18 @@ html.ratio-fill .agenda-frame {
 </table>
 
 <ul>
-<li class="bullet-dot">Perplexity 는 검색 결합형이고 계정 없이 열림. 기본 검색은 무료로 넉넉하고, 고급 검색·심층 조사·첨부는 무료 한도가 적음.</li>
+<li class="bullet-dot">Perplexity 는 검색 결합형이고 계정 없이 열림. 고급 검색의 한도는 화면에서 확인함.</li>
 <li class="bullet-dot">같은 질문도 부류에 따라 답의 근거가 달라짐. 검색 결합형도 링크가 틀릴 수 있어 링크를 열어 확인함.</li>
-<li class="bullet-dot">출처 — Perplexity 이용약관 https://www.perplexity.ai/hub/legal/terms-of-service</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">Perplexity 는 2일차에 새로 쓰는 조사용 도구다(1일차 도구 표의 2일차 행에 있다) — 계정 없이 열린다고 한 번 말한다. 도구 이름보다 «답의 근거가 어디서 오는가» 로 구분하게 한다.</li>
+<li class="bullet-dot">한도는 당일 아침 브라우저로 확인한다 — 무료 등급 한도는 바뀌고 장표에는 횟수를 적지 않았다(검증 필요). 한 번 시연해 한도 문구도 본다. 고급 검색·심층 조사·파일 첨부는 시연에서 쓰지 않는다.</li>
+<li class="bullet-dot">같은 IP 로 다수가 접속하면 속도 제한이 걸릴 수 있다 — 그래서 시장 동향 조사는 시연으로만 돌리고, 따라하기는 선택 1회로 한정한다.</li>
+<li class="bullet-dot">실측(2026.10.09): ChatGPT 는 검색을 자동으로 수행한다(검색 토글 단계 불필요).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/15" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2070,8 +2166,14 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">범위·기간은 1일차 프롬프트 6요소의 맥락이고, 출처 형식은 형식에 해당함. 범위의 재료는 맥락 카드의 시장 5줄임.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">세 칸(범위·기간·출처 형식)이 프롬프트의 «조건» 부분이다. 1일차 6요소와의 대응: 범위·기간은 맥락, 출처 형식은 형식. 6요소에 «제약» 은 없으므로 제약이라고 말하지 않는다.</li>
+<li class="bullet-dot">출처 형식 칸의 표(번호·매체·날짜·링크)가 다음 시연과 P2-2-2 의 출처 표로 이어진다.</li>
+<li class="bullet-dot">그림 — 조사 프롬프트를 범위·기간·출처 형식 세 요소로 짜며, 범위·기간은 6요소의 맥락, 출처 형식은 형식에 해당함을 보인 틀</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/16" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2088,7 +2190,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">링크가 달려 있다는 것은 맞다는 뜻이 아님. 없는 페이지를 그럴듯하게 붙이는 일이 1일차에서 본 할루시네이션과 같은 뿌리임.</li>
 <li class="bullet-dot">세 점 중 하나라도 막히면 그 문장은 확정으로 쓰지 않음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">🔴 이 장이 2일차 핵심이다. 링크가 달려 있어도 열어 봐야 한다는 말을 한 번만 강하게 한다.</li>
+<li class="bullet-dot">이 세 점이 P2-2-2 의 O·X 기준이다. P2-2-2 장표의 O·X 기준 한 줄(경로까지 있는 주소만 O)이 이것의 운영판이다.</li>
+<li class="bullet-dot">그림 — 링크 열림·근거 있음·날짜 최근 세 점을 모두 통과하면 확정으로 쓰고, 하나라도 막히면 확정으로 쓰지 않는 판정 흐름도</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/17" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2126,7 +2235,16 @@ html.ratio-fill .agenda-frame {
 </div>
 
 </div></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">8분 안에 끝낸다. 결과 화면을 미리 캡처해 두고, 응답이 느리면 캡처로 대체한다. 🖐 선실행 대기 — Perplexity 결과 화면 캡처와 소요 시간(8분 확인). 같은 성격의 검색 브리핑을 ChatGPT 로 돌린 기록: <a href="../result/P2-2/run.md">P2-2 run.md</a>(1~2분대).</li>
+<li class="bullet-dot">시연 순서: 프롬프트 붙여넣기(시장 5줄 포함) → 출처 묶음 보이기 → 출처표의 «확인 내용» 칸이 비어 있음을 짚기 → 링크 하나 열어 본문에서 근거 문장 찾기. 이 비어 있는 확인 칸이 P2-2-2 에서 O·X 가 된다.</li>
+<li class="bullet-dot">출처표 형식은 5회차 «출처파일 생성해줘» 시연(설계·R&D 10.20, 검색일·검색처·URL·확인 내용)을 영업 소재로 옮긴 것이다.</li>
+<li class="bullet-dot">📱 필드 영업은 이 시연을 보기만 한다.</li>
+<li class="bullet-dot">그림 — Perplexity 에서 시연 질문을 실행한 화면 — 문장마다 출처 칩이 붙은 5줄 답과 번호·매체·날짜·링크·확인 내용 표(확인 내용 칸 빔). 로그인 없는 화면에서 촬영(2026.10.25 · 계정·최근 기록 없음)</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/18" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2151,7 +2269,14 @@ html.ratio-fill .agenda-frame {
 <tr><td style="text-align:left">다음에 쓸 곳</td><td style="text-align:left">2-4 브리핑의 «접점 가설» 칸</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">후보 발굴은 AI 가 넓게 모으고 확정은 사람이 한다는 분업을 한 번 말한다. 니즈는 «사실» 이 아니라 «가설» 로 적는다는 것이 이 절의 핵심이다.</li>
+<li class="bullet-dot">넘치면 3일차 여는 절로 넘긴다.</li>
+<li class="bullet-dot">시연 1건(바이어 후보 표와 니즈 가설)으로 마무리하는 절이라고 말로 안내한다 — 장표에는 두지 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/19" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2214,8 +2339,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">기준 없이 모으면 이름만 많고 쓸 후보가 없음. 기준은 맥락 카드의 고객 5줄(업종·규모)에서 가져옴.</li>
 <li class="bullet-dot">가설은 「가설」이라고 표시하고, 첫 상담에서 질문으로 바꿔 확인함.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">왼쪽 깔때기는 후보 발굴이고 오른쪽 비교는 니즈 가설이다 — 두 장을 한 장으로 합쳤으므로 왼쪽(후보 거르기)을 먼저 짚고 오른쪽으로 넘어간다. 시간은 5분.</li>
+<li class="bullet-dot">기준은 맥락 카드의 고객 5줄(6~10행)에서 가져온다. 카드 6번이 한솔건기 OEM 이라 붙이면 실제로 이어진다. 기준 없이 «굴착기 회사 알려줘» 로 시작하면 이름만 많고 쓸 후보가 없다는 점을 예로 든다. 상위 5곳만 남기는 이유는 첫 상담 준비 시간이 후보당 30분쯤 들기 때문이다.</li>
+<li class="bullet-dot">오른쪽 «사실» 은 출처 링크가 있어야 쓴다. «가설» 은 내 추정이며 상담에서 질문으로 바꿔 확인한다. 흔한 실패: 가설 문장을 «~함» 단정으로 적어 사실처럼 보이게 만든다 — 가설에는 반드시 «가설» 표시를 붙이게 한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/20" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2234,7 +2365,14 @@ html.ratio-fill .agenda-frame {
 후보 기준은 카드의 고객 업종·규모로 한다.
 열: 회사명 · 구분 · 근거 링크 · 니즈 가설(가설이라고 표시).
 공개 정보로 확인되지 않는 칸은 «확인 안 됨» 으로 적고 추측하지 마.</code></pre></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">7분. 프롬프트 첫 줄에서 <code>맥락카드.txt</code> 의 고객 5줄을 붙이고 시작한다. 8곳 표를 받은 뒤 «5곳만 남기고 이유 한 줄» 을 이어서 보인다. «확인 안 됨» 칸이 나오면 그 자리가 이 시연의 포인트이므로 짚는다.</li>
+<li class="bullet-dot">🖐 선실행 대기 — 후보 표 결과 화면 캡처(선실행 16건 밖이라 리허설에서 한 번 돌려 확보). 맥락 카드 효과의 실측은 <a href="../result/P1-2/run.md">P1-2 run.md</a>.</li>
+<li class="bullet-dot">📱 필드 영업은 보기만 한다. 후보 표는 첫 상담 질문(2-4 5번)으로 이어진다는 점만 짚는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/21" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2259,7 +2397,13 @@ html.ratio-fill .agenda-frame {
 <tr><td style="text-align:left">다음에 쓸 곳</td><td style="text-align:left">3일차 차별점의 경쟁사 근거</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">비교표의 품질은 입력 자료와 열 정의가 정한다는 말을 먼저 한다. 입력은 직접 만든 요약표(MBI·GGB·SKF)이고 제조사 PDF 는 배포하지 않는다(법무 결정 2026.10.09). 수강생이 원문을 보려면 요약표의 출처 링크를 연다.</li>
+<li class="bullet-dot">이 절의 Practice 는 35분이다 — P2-1-1(검색 5 + 비교표 15) · P2-1-2(저장 10 + 검산 5). 이 블록을 줄이지 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/22" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2284,8 +2428,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">가격·포지셔닝은 데이터시트에 없는 경우가 많음. 없으면 「원문에 없음」으로 두고 추정치로 채우지 않음.</li>
 <li class="bullet-dot">빈칸을 추정으로 채우면 표 안에서 사실과 구별되지 않음. 3일차 차별점이 이 표를 근거로 삼아 틀린 칸이 제안까지 이어짐.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">열 4개(제품·수치·단위·근거)가 P2-1-1 프롬프트의 열 정의와 같다. 환산을 일부러 별도 열로 빼는 이유는 다음 장(단위 함정)에서 드러난다.</li>
+<li class="bullet-dot">가격·포지셔닝은 데이터시트에 없는 경우가 많다. «원문에 없음» 으로 두는 것이 정상이며 AI 가 채우려 하면 지우게 한다.</li>
+<li class="bullet-dot"><strong>이유를 한 번 말한다</strong> — 프롬프트에 «확인 안 됨… 추측하지 마» 가 이미 있지만 왜 비워 두는지는 장표에 없었다. 추정치가 한 칸에 들어가면 표 안에서 사실과 구별되지 않고, 3일차 차별점이 이 표를 근거로 쓰므로 틀린 칸이 제안서까지 간다(설계·R&D 2-1 «미기재를 강제하는 이유» 의 영업판, Issue64 단계2 A19).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/23" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2334,8 +2484,13 @@ html.ratio-fill .agenda-frame {
 </div>
 
 </div></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">차트는 MBI 면압 3값만 N/mm² 로 바꾼 것이다(16.7 · 137.3 · 343.2). 원문에는 4값(연속·저속 정하중·표준·내압)이 있으나 «표준» 34.3 이 P2-1-2 검산의 정답이라 차트에서 뺐다(정답 누설 방지, 2026.10.09 총괄 결정). 계산은 <code>_강사본/calc_answer.py</code> 로 재현한다.</li>
+<li class="bullet-dot">10 으로 나누는 근사를 쓰는 수강생이 반드시 나온다. 정확값은 0.0980665 곱셈이다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/24" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2360,8 +2515,17 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><strong>기대 결과</strong> 3사 행과 원문 단위 열이 있는 표 ✅ MBI 의 350 행이 빠질 수 있어 요약표와 대조함.</li>
 <li class="bullet-dot"><strong>막히면</strong> 광고만 나오면 검색어에 <code>site:ggbearings.com</code> 을 더함 · 첨부가 안 되면 본문을 붙임.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot"><strong>filetype:pdf 단계(5분)는 5회차 즉흥(Google «ISO 3547-2 filetype:pdf» → 샘플 PDF 즉시 발견)을 영업 소재로 옮긴 신규 단계다.</strong> 필드 영업이 폰으로 할 수 있는 경로이기도 하다. 🖐 선실행 대기 — 검색어 <code>굴착기 부시 자기윤활 datasheet filetype:pdf</code> 의 상위 결과가 실제로 제조사 PDF 를 내는지, 광고·제조사 홈페이지만 나오는 경우 <code>site:</code> 폴백이 통하는지 확인한다. 결과가 매번 다르므로 이 단계의 합격은 «PDF 한 건을 열었다» 까지다.</li>
+<li class="bullet-dot">비교표 입력은 직접 만든 <code>_material/Day2/데이터시트요약.md</code> 다. 제조사 PDF(<code>_강사본/데이터시트3종.pdf</code>)는 배포하지 않고 강사 화면 시연으로만 쓴다. 원문 링크 3개는 제조사 PDF 직링크다 — 2026.11.01 실브라우저로 셋 다 PDF 로 열림(MBI 5쪽 · GGB 11쪽 · SKF 22쪽). GGB 는 스크립트 요청에 Cloudflare 403 을 주므로 링크 확인은 브라우저로 한다.</li>
+<li class="bullet-dot">✅ 선실행(2026.10.09) — <a href="../result/P2-1/01-compare-table.png">비교표 결과</a>. AI 가 MBI Standard Working 350 행을 빠뜨리고 정하중·동하중만 표시했다. 장표의 «요약표와 행을 대조함» 이 이 사건의 대응이다. SKF 값은 그래프 근사값이라 «약» 이 붙는 것이 정상이다.</li>
+<li class="bullet-dot">📱 필드 영업 경로: 구글 앱 검색 → ChatGPT 앱에 요약표 본문 붙여넣기. 🖐 선실행 대기 — 앱 경로 동작.</li>
+<li class="bullet-dot">시연 안내(4분): 요약표를 ChatGPT 새 대화에 첨부 → 프롬프트 붙여넣기 → 표가 나오면 «원문 단위» 열과 «약» 표시를 짚고, 환산 열이 없는 것이 의도임을 말한다. 이후 수강생이 처음부터 직접 한다.</li>
+<li class="bullet-dot">폴백: 첨부가 안 되면 요약표 본문 붙여넣기. 그래도 안 되면 요약표(<code>데이터시트요약.md</code>)의 MBI 절만 띄워 수강생이 직접 환산한다. 정답이 든 강사본은 폴백으로도 보이지 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/25" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2383,8 +2547,15 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><strong>막히면</strong> 표가 글자로만 보이면 둘째 줄 <code>:--</code> 와 표 밖 설명을 확인함 · 10 으로 나누지 않음.</li>
 <li class="bullet-dot">📱 VSCode 는 건너뜀. ChatGPT 앱의 표를 보며 계산기 앱으로 검산함.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">✅ 선실행 결과: <a href="../result/P2-1/02-markdown-table.png">Markdown 표 화면</a> · 저장본 <a href="../result/P2-1/비교표.md">비교표.md</a>. VSCode 미리보기 창 캡처만 🖐 렌털 PC 리허설 몫이다. 표 밖 설명이 섞이면 깨지므로 프롬프트가 «코드 블록 안에만» 을 요구한다.</li>
+<li class="bullet-dot">정답은 34.3 N/mm² 이다(350 × 0.0980665 = 34.323). 흔한 오답은 3500 → 343.2(Resistance to pressure 를 집음) · 3.43(소수점 착오) · 350 그대로(환산 안 함) · 35(10 으로 나눔)이다. 정답은 닫는 절에서 공개한다.</li>
+<li class="bullet-dot">질문에 <code>Standard Working</code> 을 못 박은 이유: 한 지면에 «허용 면압» 후보가 4개다. 다른 값을 집으면 그 자리가 교육 포인트다.</li>
+<li class="bullet-dot">📱 VSCode 를 건너뛰므로 필드 영업은 <code>비교표.md</code> 를 만들지 않는다. 검산 숫자만 Progress 시트에 적게 한다 — Progress 의 O 를 이 경우 «숫자 제출» 로 본다(🖐 합격선 판단은 사람 몫).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/26" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2410,7 +2581,14 @@ html.ratio-fill .agenda-frame {
 <tr><td style="text-align:left">다음에 쓸 곳</td><td style="text-align:left">3일차 상담 메모를 읽는 틀</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">가상 고객사(건설기계 제조사) 1곳으로 진행한다. 공시가 없는 가상 기업이라 DART 는 «성격만 익히는» 용도이고, 검색은 업계 동향에만 쓴다. 공개 자료만 쓰고 상담·견적 내용은 지어 넣지 않는다는 선을 여기서 말한다.</li>
+<li class="bullet-dot">받는 것에 맥락 카드 «제품» 5줄이 있다 — P2-2-1 의 접점 가설이 이 5줄의 사양만 근거로 쓰도록 했다(1일차 카드 → 2일차 브리핑 사슬).</li>
+<li class="bullet-dot">채우기 전에 «같은 이름의 다른 회사» 를 걸러 내는 법을 시연(회사 조사 스킬)으로 먼저 보인다고 말하고 들어간다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/27" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2427,8 +2605,13 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">공시는 법적 책임이 따라 믿을 만하고 시점이 느림.</li>
 <li class="bullet-dot">뉴스는 빠르지만 기자의 해석이 섞임. 홈페이지는 자기 홍보임.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">공시(법적 책임·시점 느림), 뉴스(빠름·해석 섞임), 홈페이지(자기 홍보)로 신뢰 순서를 말로 정리한다. 세 출처를 교차해야 한다는 결론은 다음 장 검증 흐름으로 잇는다.</li>
+<li class="bullet-dot">그림 — 고객사 브리핑에 쓰는 공시·뉴스·홈페이지가 각각 무엇을 말하고 어떤 성격인지(믿을 만하나 느림·빠르나 해석 섞임·자기 홍보) 비교한 3열 카드. 표는 이 그림으로 대신했다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/28" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2452,7 +2635,15 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">채운 문장은 2-1 의 세 점(링크가 열리는가 · 본문에 그 문장이 있는가 · 날짜가 최근인가)을 모두 통과해야 확정으로 씀.</li>
 <li class="bullet-dot">안 열리거나 본문에 없으면 빼거나 다시 검색함. 날짜가 오래된 정보는 버리지 않고 «오래된 정보» 로 표시함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">5항목은 <code>브리핑틀.md</code> 의 틀과 같다. 4번 접점 가설은 «가설» 표시, 5번 질문은 공개 정보로 알 수 없는 것을 질문으로 바꾼 것이다.</li>
+<li class="bullet-dot">흔한 실패: 3번 동향에 날짜 없는 뉴스를 넣는다. 날짜를 포함해 적게 한다.</li>
+<li class="bullet-dot"><strong>쓰기 전 검증(구 «검증 흐름» 장을 흡수)</strong>: 2-1 <code>source-check-steps</code> 의 세 점(링크 → 본문 → 날짜)과 같은 순서를 한 번 더 말한다. «안 열림»·«없음» 은 빼거나 다시 검색, «오래됨» 은 버리지 않고 오래된 정보로 표시한다는 차이를 짚는다. 1일차 할루시네이션 대응(내 자료를 붙이고 모르면 모른다고 답하게 하기)과는 다른 방법이다.</li>
+<li class="bullet-dot">1일차 환각 방어 한 줄(«적대적·비관적 비판 후 자기 개선» — 설계·R&D 3회차)을 여기서 한 번 더 상기시킬 수 있다. 📱 필드 영업이 폰에서 바로 쓸 수 있는 한 줄이다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/29" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2468,7 +2659,7 @@ html.ratio-fill .agenda-frame {
 <tbody>
 <tr><td style="text-align:left">① 조사</td><td style="text-align:left">동명 업체를 먼저 거름</td><td style="text-align:left">법인명·주소·도메인 중 둘 이상 일치</td></tr>
 <tr><td style="text-align:left">② 출처</td><td style="text-align:left">출처를 표로 남김</td><td style="text-align:left">검색일·검색처·URL·확인 내용 칸</td></tr>
-<tr><td style="text-align:left">③ 판올림</td><td style="text-align:left">원본은 두고 새 판으로 저장함</td><td style="text-align:left"><code>기업_v1.0.1.md</code> 가 생기고 원본은 그대로임</td></tr>
+<tr><td style="text-align:left">③ 판올림</td><td style="text-align:left">원본은 두고 새 판으로 저장함</td><td style="text-align:left"><code>회사_v1.0.1.md</code> 가 생기고 원본은 그대로임</td></tr>
 </tbody>
 </table>
 
@@ -2476,10 +2667,21 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">같은 이름의 다른 회사가 섞이면 브리핑 전체가 틀림. 매번 같은 지시를 하는 대신 <strong>스킬</strong>로 남겨 한 줄로 부름 — Codex 를 직접 쓰는 것은 3일차부터임.</li>
 </ul>
 
-<pre class="code-wrapper"><code class="language-text hljs">1) company-profile 스킬로 시연용 제조기업 1곳(기업명은 강사가 알려 줌)을 조사해 기업.md 로 저장해 줘. 동명 업체를 먼저 걸러 내고, 회사 주장과 확인된 사실을 나눠 적어 줘.
-2) 기업.md 에 쓴 출처를 검색일·검색처·URL·확인 내용 표로 기업_출처.md 에 저장해 줘.
-3) 기업.md 를 최신 공개 자료로 업데이트해 줘. 원본은 두고 기업_v1.0.1.md 로 저장해 줘.</code></pre></div>
-</section>
+<pre class="code-wrapper"><code class="language-text hljs">1) company-profile 스킬로 [조사할 회사]를 조사해 회사.md 로 저장해 줘. 동명 업체를 먼저 걸러 내고, 회사 주장과 확인된 사실을 나눠 적어 줘.
+2) 회사.md 에 쓴 출처를 검색일·검색처·URL·확인 내용 표로 회사_출처.md 에 저장해 줘.
+3) 회사.md 를 최신 공개 자료로 업데이트해 줘. 원본은 두고 회사_v1.0.1.md 로 저장해 줘.</code></pre></div>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">8분. 3단 연쇄다: ① <code>company-profile</code> 스킬 조사 ② 출처 표 저장 ③ <code>_v1.0.1</code> 판올림. 설계·R&D 3회차(10.06) 스킬 · 5회차(10.20) 출처 표·판올림 시연을 영업 소재(자사 공개 자료)로 옮겼다. 결과 예시는 <code>_강사본/회사.md</code>(조사 기준일 2026.10.06).</li>
+<li class="bullet-dot">왜 이 장인가: 설계·R&D 4회차(10.13)에 다른 업체를 조사하다 이름이 같은 다른 회사(DADA-TECH)가 섞였다. 고객사 브리핑(P2-2)에서 같은 사고가 그대로 난다 — Practice 전에 «먼저 같은 회사로 고정» 을 눈으로 보여 준다. 장표에는 그 업체명을 쓰지 않는다.</li>
+<li class="bullet-dot">볼 곳을 결과 파일에서 짚는다 — ① 법인명·주소·도메인 중 둘 이상 일치 근거 ② 회사 주장(홈페이지 문구)과 확인된 사실(공시·등록 정보)의 칸 구분 ③ «공개 자료에서 확인되지 않음» 칸이 비어 있지 않다는 것 ④ 판올림 뒤 원본이 그대로인지.</li>
+<li class="bullet-dot"><strong>판올림은 프롬프트로만 보인다.</strong> 5회차에 <code>/vu</code> 커맨드를 만들었으나 새 세션에서 «명령 정의를 찾지 못함» 이 났다(<code>.claude/commands/</code> 는 Codex 가 읽지 않음). 2일차에는 커맨드를 만들지 않는다 — 커맨드·스킬로 남기는 이야기는 6일차 과제 카드의 수단으로 둔다.</li>
+<li class="bullet-dot">스킬은 미리 넣어 둔다 — 과정 드라이브 <code>202611_mkt/_src/skills/company-profile/</code> · jm4·jma <code>~/.codex/skills/company-profile/</code>. 렌털 PC 에서 시연하면 드라이브 사본을 <code>%USERPROFILE%\.codex\skills\</code> 로 복사한다. 🖐 선실행 대기 — 3단 연쇄 소요 시간(8분 확인)과 <code>회사_출처.md</code> 결과.</li>
+<li class="bullet-dot">폴백: Codex 한도가 소진됐거나 응답이 3분 넘게 없으면 <code>_강사본/회사.md</code> 를 열어 볼 곳만 짚는다(4회차 16:21 «You're out of Codex messages», 5회차 429 실측).</li>
+<li class="bullet-dot">대상은 자사 공개 자료만 쓴다 — <code>[조사할 회사]</code> 자리에 강사가 현장에서 회사명을 넣는다. 장표·노트는 공개 덱에 실리므로 실존 업체명을 적지 않는다(2026.11.01). 실습 고객사(가상 건설기계 제조사)는 공개 자료가 없다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/30" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2491,7 +2693,7 @@ html.ratio-fill .agenda-frame {
   </div>
   <div class="exercise-body"><ul>
 <li class="bullet-dot"><strong>시간</strong> 20분 | <strong>입력</strong> <code>Day2/브리핑틀.md</code> · 1일차 <code>맥락카드.txt</code> | <strong>결과</strong> 5항목이 채워진 <code>브리핑틀.md</code></li>
-<li class="bullet-dot">단계 — ChatGPT 새 대화 → <code>브리핑틀.md</code> 첨부 + 맥락 카드 제품 5줄(1~5행) 붙이기 → 프롬프트 → 답을 <code>브리핑틀.md</code> 5항목에 옮기고 출처 표에 링크 적기</li>
+<li class="bullet-dot">단계 — ChatGPT 새 대화 → <code>브리핑틀.md</code> 첨부 + <code>맥락카드.txt</code> 의 제품 5줄(번호 1~5) 붙이기 → 프롬프트 → 답을 <code>브리핑틀.md</code> 5항목에 옮기고 출처 표에 링크 적기</li>
 </ul>
 
 <pre class="code-wrapper"><code class="language-text hljs">가상의 건설기계 제조사의 영업 사전 브리핑을 작성해 줘. 회사 정보는 첨부한 틀의 프로필만 쓰고, 웹 검색은 소형 굴착기 시장·업계 동향 같은 공개 정보에만 사용해.
@@ -2504,8 +2706,15 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><strong>막히면</strong> 링크가 없으면 «웹 검색으로» 를 앞에 붙여 다시 보냄.</li>
 <li class="bullet-dot">📱 앱에 틀 본문과 제품 5줄을 붙임. 옮기기는 1·3·5번만 함.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">🔴 첨부와 붙이기가 둘 다 필요하다 — <code>브리핑틀.md</code> 는 ChatGPT 에 첨부하고(프롬프트가 «첨부한 틀의 프로필» 을 가리킴), <code>맥락카드.txt</code> 의 제품 5줄(번호 1~5)은 본문에 붙인다. 카드가 없는 수강생은 드라이브 <code>_doc/Day1/맥락카드.txt</code> 를 다시 내려받는다. <code>Day2/</code> 배포 폴더에는 넣지 않는다 — 같은 파일이 두 벌이면 어느 쪽을 고쳤는지 갈린다(2026.10.31 최종 검토).</li>
+<li class="bullet-dot">✅ 선실행(2026.10.09) — <a href="../result/P2-2/01-briefing.png">브리핑 결과</a>. 단 이 선실행은 맥락 카드를 붙이지 않은 판이다. 카드 붙인 판은 🖐 선실행 대기(접점 가설이 카드 사양만 근거로 쓰는지).</li>
+<li class="bullet-dot">고객은 가상의 건설기계 제조사다. 회사 정보는 틀의 프로필만, 검색은 업계 동향 같은 공개 정보에만 쓰고 상담·견적 내용을 지어 넣지 않게 한다. 이 가상 기업은 검색해도 나오지 않는다 — «확인 안 됨» 이 정상 응답이다. 합병·사명 변경 뉴스가 나올 수 있다. 그것도 최근 동향의 정당한 내용이다.</li>
+<li class="bullet-dot">📱 필드 영업은 5항목 중 1·3·5번만 옮긴다(최소 조작). 이 선택이 충분한지는 🖐 사람 판단이다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/31" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2526,10 +2735,17 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot"><strong>O·X 기준</strong> 경로까지 있는 주소에서 본문에 근거 문장이 있으면 O. 사이트 첫 화면만 열리거나 근거가 없으면 X.</li>
 <li class="bullet-dot"><strong>확인</strong> O 의 개수를 Progress 시트에 적음 ✅ 사람마다 달라 정답은 없음.</li>
 <li class="bullet-dot"><strong>막히면</strong> 링크가 잘려 있으면 «링크 원문 그대로 다시 줘» 로 받음 · O 가 하나도 없으면 «웹 검색으로» 를 붙여 앞 장을 다시 함.</li>
-<li class="bullet-dot">📱 링크는 폰 브라우저로 열어도 됨. (선택) 완성한 브리핑을 NotebookLM 에 올려 오디오 개요를 들어 봄.</li>
+<li class="bullet-dot">📱 링크는 폰 브라우저로 열어도 됨. (선택) 완성한 브리핑을 Gemini Notebook(구 NotebookLM)에 올려 오디오 개요를 들어 봄.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">✅ 선실행(2026.10.09) — <a href="../result/P2-2/02-sources.png">출처 표</a>. 외부 URL 5개 중 O 2 · X 3(사이트 루트 3개). 판정 기준을 «경로까지 있는 주소에서 근거 문장이 있을 때만 O» 로 못 박아야 분포가 안정된다 — <a href="../result/P2-2/run.md">P2-2 run.md</a>.</li>
+<li class="bullet-dot">정답이 없는 확인이다. 강사는 분포를 묻고 X 가 나온 링크 하나를 화면에 띄워 이유를 같이 본다. 열리기만 하고 근거가 없으면 세지 않는다. O 가 0개면 열었는지를 한 번 되묻는다.</li>
+<li class="bullet-dot">링크를 줄여 쓰면 열리지 않으므로 프롬프트에서 «원문 그대로» 를 요구한다.</li>
+<li class="bullet-dot">선택 줄(Gemini Notebook(구 NotebookLM) 오디오 개요)은 빨리 끝난 사람용이다 — 설계·R&D 1회차 반응이 좋았던 기능을 브리핑 청취(이동 중)로 옮긴 것이다. 개인 구글 계정 로그인이 필요하고 모바일 동작은 🖐 선실행 대기다. 하지 않아도 Practice 완료조건에 영향이 없다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/32" class="layout-summary">
   <div class="summary-header">
@@ -2546,8 +2762,12 @@ html.ratio-fill .agenda-frame {
 <tr><td style="text-align:left">가설</td><td style="text-align:left">사실과 분리함</td></tr>
 </tbody>
 </table></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">육각 4칸(후보·출처·단위·가설)을 하나씩 짚으며 2일차를 1분에 정리한다. 새 내용은 말하지 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/33" class="layout-summary">
   <div class="summary-header">
@@ -2565,8 +2785,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">P2-1 정답 34.3 N/mm² (350 × 0.0980665). 35 는 ÷10 근사값임.</li>
 <li class="bullet-dot">P2-2 는 정답이 없음. 열린 링크 수의 분포를 봄.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">정답 34.3 N/mm² 를 환산식(350 × 0.0980665 = 34.323)과 함께 공개한다. 장표에 «35 는 10 으로 나눈 근사값임» 이 있으므로, 35 로 적은 수강생에게 틀린 것이 아니라 근사라고 설명한다.</li>
+<li class="bullet-dot">P2-2 는 열린 링크 수의 분포를 Progress 시트에서 읽는다. X 가 하나도 없으면 «사이트 첫 화면을 O 로 센 것이 아닌지» 를 되묻는다.</li>
+<li class="bullet-dot">3일차 연결: 이어지는 것은 브리핑 5항목 «틀» 이다. 가상 제조사 브리핑 내용이 3일차에 재사용되지는 않는다(3일차 고객은 한솔건기(가상)).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/34" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2590,7 +2816,13 @@ html.ratio-fill .agenda-frame {
 <tr><td style="text-align:left">Codex 로그인</td><td style="text-align:left">3일차 첫 Practice</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">3일차에 Codex 가 처음으로 일을 한다 — 상담 메모에서 페인포인트 표. 로그인이 안 된 사람은 3일차 시작 전까지 다시 시도하게 한다. 3일차 첫 Practice 번호는 3일차 원고가 정한다.</li>
+<li class="bullet-dot">2일차에 익힌 브리핑 5항목 «틀» 을 3일차에 상담 메모를 채우는 틀로 다시 쓴다는 점만 한 번 말하고 마친다.</li>
+</ul>
+  </aside>
+      </section>
 
     </div>
   </div>

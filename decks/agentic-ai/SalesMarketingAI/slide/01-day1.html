@@ -1430,7 +1430,7 @@ html.ratio-fill .agenda-frame {
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
   <link rel="stylesheet" href="css/lec-tokens.css"/>
-  <link rel="stylesheet" href="css/custom.css?v=1793376934944">
+  <link rel="stylesheet" href="css/custom.css?v=1795275570213">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1671,8 +1671,10 @@ html.ratio-fill .agenda-frame {
 <section data-slide-hash="#/1" class="layout-_mg">
   <h1 class="mg-title">6일 강의 흐름 — 묻기에서 넓히기까지</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="14">{&quot;src&quot;:&quot;mg/00-flow&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1440,&quot;H&quot;:1080,&quot;DUR&quot;:14,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 영업·마케팅 AI 강의 모션그래픽 00-flow (6일 과정 전체 흐름) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s00-flow.js · 합성: node mg/_src/compose.js\n(function (root) {\n// common.js — 영업·마케팅 6일 덱 mg 7개 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: DesignRndAI(설계·R&amp;D 덱) mg/_src/common.js — 같은 default_lec 색 체계(lec-tokens.css)라 상수를 그대로 쓴다\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1440, H = 1080;\nvar C = {\n  bg: &#39;#FFFDF6&#39;, ink: &#39;#222222&#39;, sub: &#39;#4A4A44&#39;, muted: &#39;#8A877A&#39;, line: &#39;#E3DFD0&#39;, paper: &#39;#FFFFFF&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#7A6000&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#0365C0&#39;, blueTint: &#39;#EAF2FB&#39;, red: &#39;#C82506&#39;, redTint: &#39;#FDECE8&#39;, green: &#39;#1F7A4D&#39;, greenTint: &#39;#E4F3EA&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);  // 바깥 페이드와 곱함\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// ── 공통 틀: 머리(일차 칩 + 제목) · 아래 한 줄 ───────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  ctx.fillStyle = C.brand;\n  rr(ctx, 70, 62, 178, 62, 31);\n  ctx.fill();\n  txt(ctx, chip, 159, 93, 34, 800, C.ink, &#39;center&#39;);\n  txt(ctx, title, 276, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(70, 148, 1300 * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  txt(ctx, s, 720, 1010 + (1 - p) * 12, 38, 700, color || C.brandInk, &#39;center&#39;);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// ── 영업·마케팅 덱 추가 도구 ────────────────────────────────────────────────\n// 알약 라벨 — 가운데 정렬, 폭은 글자에 맞춰 잰다\nfunction pill(ctx, s, cx, cy, size, fill, color, padX) {\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  var w = ctx.measureText(s).width + (padX == null ? 36 : padX) * 2, h = size * 1.75;\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  txt(ctx, s, cx, cy + 1, size, 800, color, &#39;center&#39;);\n  return w;\n}\n// 말풍선 — 아래 꼬리\nfunction bubble(ctx, x, y, w, h, o) {\n  o = o || {};\n  card(ctx, x, y, w, h, { fill: o.fill || C.paper, stroke: o.stroke || C.line, lw: o.lw || 2, alpha: o.alpha, r: 24 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = o.lw || 2;\n  var tx = o.tail == null ? x + 60 : o.tail;\n  ctx.beginPath(); ctx.moveTo(tx, y + h - 2); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h - 2); ctx.closePath();\n  ctx.fill();\n  ctx.beginPath(); ctx.moveTo(tx, y + h); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h); ctx.stroke();\n  ctx.restore();\n}\n// 브라우저 창 — 주소창 + 본문 영역(콜백)\nfunction browser(ctx, x, y, w, h, url, alpha) {\n  card(ctx, x, y, w, h, { fill: C.paper, alpha: alpha, r: 16 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (alpha == null ? 1 : alpha);\n  ctx.fillStyle = &#39;#F1EEE3&#39;;\n  rr(ctx, x + 2, y + 2, w - 4, 54, 14); ctx.fill();\n  var dots = [&#39;#E5533C&#39;, &#39;#F5C518&#39;, &#39;#3E8E41&#39;];\n  for (var i = 0; i &lt; 3; i++) { ctx.fillStyle = dots[i]; ctx.beginPath(); ctx.arc(x + 30 + i * 26, y + 29, 8, 0, Math.PI * 2); ctx.fill(); }\n  ctx.fillStyle = C.paper; rr(ctx, x + 120, y + 12, w - 150, 34, 17); ctx.fill();\n  if (url) txt(ctx, url, x + 166, y + 30, 22, 600, C.sub, &#39;left&#39;, MONO);\n  ctx.restore();\n}\n\n// 장면 ① — 6일 과정 전체 (원고 근거: 1일차 «1-0. 여는 절 — 6일 강의 흐름과 초기 설정» timeline\n//          + Agenda_forHuman «6일 흐름» 의 산출물 계보: 맥락 카드 → 브리핑 → 제안서 → 홈페이지·CSV → 시각물·차트 → 영문·CRM)\nvar NAME = &#39;mg-00-flow&#39;, DUR = 14;\nvar TL = { row0: 0.9, step: 1.3, glow: 9.4, foot: 11.4 };\nvar ROWS = [\n  [&#39;1일차&#39;, &#39;묻기&#39;, &#39;6요소와 맥락 카드로 AI 에게 제대로 물음&#39;, &#39;맥락 카드&#39;],\n  [&#39;2일차&#39;, &#39;조사하기&#39;, &#39;출처를 달아 시장·고객·경쟁사를 조사함&#39;, &#39;사전 브리핑&#39;],\n  [&#39;3일차&#39;, &#39;제안하기&#39;, &#39;상담 메모에서 제안서와 견적 메일을 만듦&#39;, &#39;제안서 · 메일&#39;],\n  [&#39;4일차&#39;, &#39;알리기&#39;, &#39;제품 소개를 홈페이지와 SNS 글로 배포함&#39;, &#39;홈페이지 · CSV&#39;],\n  [&#39;5일차&#39;, &#39;꾸미기&#39;, &#39;슬라이드·사진·차트를 도구별 한계를 보고 고름&#39;, &#39;슬라이드 · 차트&#39;],\n  [&#39;6일차&#39;, &#39;넓히기&#39;, &#39;영문 응대와 CRM 으로 해외영업·리드를 돌림&#39;, &#39;영문 · CRM&#39;],\n];\nvar RY0 = 196, RSTEP = 128, RH = 108, AX = 1046, AW = 300;\nfunction rowY(i) { return RY0 + i * RSTEP; }\nfunction rowT(i) { return TL.row0 + TL.step * i; }\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;6일 과정&#39;, &#39;묻기에서 넓히기까지&#39;, 0.2);\n  for (var r = 0; r &lt; ROWS.length; r++) {\n    var s = rowT(r), p = es(T, s, s + 0.7);\n    if (p &lt;= 0) continue;\n    var y = rowY(r), dx = (1 - p) * -60;\n    ctx.save();\n    ctx.globalAlpha = p;\n    card(ctx, 70 + dx, y, 1300, RH, { fill: C.paper });\n    ctx.fillStyle = C.brand;\n    rr(ctx, 92 + dx, y + 25, 100, 58, 29); ctx.fill();\n    txt(ctx, ROWS[r][0], 142 + dx, y + 55, 29, 800, C.ink, &#39;center&#39;);\n    txt(ctx, ROWS[r][1], 222 + dx, y + 38, 44, 800, C.ink, &#39;left&#39;);\n    txt(ctx, ROWS[r][2], 222 + dx, y + 81, 27, 500, C.sub, &#39;left&#39;);\n    ctx.restore();\n    // 그날 손에 남는 것 — 오른쪽 칩. 마지막에 모두 한 번 빛난다\n    var q = es(T, s + 0.5, s + 1.0);\n    if (q &gt; 0) {\n      var g = es(T, TL.glow + 0.18 * r, TL.glow + 0.18 * r + 0.4) * (1 - es(T, TL.glow + 0.18 * r + 0.6, TL.glow + 0.18 * r + 1.2));\n      ctx.save();\n      ctx.globalAlpha = q;\n      card(ctx, AX, y + 22, AW, 64, { fill: g &gt; 0 ? C.brand : C.tint, stroke: C.brand, lw: 3, r: 32, shadow: 0 });\n      txt(ctx, ROWS[r][3], AX + AW / 2, y + 55, 28, 800, C.brandInk, &#39;center&#39;);\n      ctx.restore();\n    }\n    // 앞 날의 결과물이 다음 날 재료로 — 칩 사이 화살표\n    if (r &gt; 0) arrow(ctx, AX + AW / 2, rowY(r - 1) + 90, AX + AW / 2, y + 18, es(T, s + 0.3, s + 0.8), C.brandInk, 5);\n  }\n  var lb = es(T, TL.row0 + 0.5, TL.row0 + 1.0);\n  if (lb &gt; 0) { ctx.save(); ctx.globalAlpha = lb; txt(ctx, &#39;손에 남는 것&#39;, AX + AW / 2, 176, 24, 700, C.muted, &#39;center&#39;); ctx.restore(); }\n  footer(ctx, T, &#39;앞 날의 결과물이 다음 날의 재료가 됨&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
-</section>
-
+  <aside class="notes">
+<p>⏱ <strong>모션그래픽 장이다. 과정 첫 장이다.</strong> 재생이 끝날 때까지 말을 얹지 않는다. 끝나면 6일 동안 날마다 한 단어씩 쌓는다는 점만 말한다 — 묻기 · 조사하기 · 제안하기 · 알리기 · 꾸미기 · 넓히기. 자세한 흐름은 1-0 여는 절에서 timeline 으로 다시 본다.</p>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/2" data-heading-level="1" class="layout-chapter">
   <div class="chapter-part"><p>Day 1.</p></div>
@@ -1681,8 +1683,10 @@ html.ratio-fill .agenda-frame {
     
   </div>
   
-</section>
-
+  <aside class="notes">
+<p>⏱ <strong>표지 장이다.</strong> 앞 장(과정 흐름 모션그래픽)에 이어 «1일차 — 프롬프트» 만 말하고 넘긴다.</p>
+  </aside>
+      </section>
 
       <section data-slide-hash="#/3" id="toc-placeholder" class="layout-_toc title-slide">
   <header class="toc-page-header">
@@ -1696,8 +1700,52 @@ html.ratio-fill .agenda-frame {
 <section data-slide-hash="#/4" class="layout-_mg">
   <h1 class="mg-title">묻기 — 한 줄 질문이 고유한 답으로</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="16">{&quot;src&quot;:&quot;mg/01-day1&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1440,&quot;H&quot;:1080,&quot;DUR&quot;:16,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 영업·마케팅 AI 강의 모션그래픽 01-day1 (1일차 묻기) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s01-day1.js · 합성: node mg/_src/compose.js\n(function (root) {\n// common.js — 영업·마케팅 6일 덱 mg 7개 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: DesignRndAI(설계·R&amp;D 덱) mg/_src/common.js — 같은 default_lec 색 체계(lec-tokens.css)라 상수를 그대로 쓴다\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1440, H = 1080;\nvar C = {\n  bg: &#39;#FFFDF6&#39;, ink: &#39;#222222&#39;, sub: &#39;#4A4A44&#39;, muted: &#39;#8A877A&#39;, line: &#39;#E3DFD0&#39;, paper: &#39;#FFFFFF&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#7A6000&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#0365C0&#39;, blueTint: &#39;#EAF2FB&#39;, red: &#39;#C82506&#39;, redTint: &#39;#FDECE8&#39;, green: &#39;#1F7A4D&#39;, greenTint: &#39;#E4F3EA&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);  // 바깥 페이드와 곱함\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// ── 공통 틀: 머리(일차 칩 + 제목) · 아래 한 줄 ───────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  ctx.fillStyle = C.brand;\n  rr(ctx, 70, 62, 178, 62, 31);\n  ctx.fill();\n  txt(ctx, chip, 159, 93, 34, 800, C.ink, &#39;center&#39;);\n  txt(ctx, title, 276, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(70, 148, 1300 * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  txt(ctx, s, 720, 1010 + (1 - p) * 12, 38, 700, color || C.brandInk, &#39;center&#39;);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// ── 영업·마케팅 덱 추가 도구 ────────────────────────────────────────────────\n// 알약 라벨 — 가운데 정렬, 폭은 글자에 맞춰 잰다\nfunction pill(ctx, s, cx, cy, size, fill, color, padX) {\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  var w = ctx.measureText(s).width + (padX == null ? 36 : padX) * 2, h = size * 1.75;\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  txt(ctx, s, cx, cy + 1, size, 800, color, &#39;center&#39;);\n  return w;\n}\n// 말풍선 — 아래 꼬리\nfunction bubble(ctx, x, y, w, h, o) {\n  o = o || {};\n  card(ctx, x, y, w, h, { fill: o.fill || C.paper, stroke: o.stroke || C.line, lw: o.lw || 2, alpha: o.alpha, r: 24 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = o.lw || 2;\n  var tx = o.tail == null ? x + 60 : o.tail;\n  ctx.beginPath(); ctx.moveTo(tx, y + h - 2); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h - 2); ctx.closePath();\n  ctx.fill();\n  ctx.beginPath(); ctx.moveTo(tx, y + h); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h); ctx.stroke();\n  ctx.restore();\n}\n// 브라우저 창 — 주소창 + 본문 영역(콜백)\nfunction browser(ctx, x, y, w, h, url, alpha) {\n  card(ctx, x, y, w, h, { fill: C.paper, alpha: alpha, r: 16 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (alpha == null ? 1 : alpha);\n  ctx.fillStyle = &#39;#F1EEE3&#39;;\n  rr(ctx, x + 2, y + 2, w - 4, 54, 14); ctx.fill();\n  var dots = [&#39;#E5533C&#39;, &#39;#F5C518&#39;, &#39;#3E8E41&#39;];\n  for (var i = 0; i &lt; 3; i++) { ctx.fillStyle = dots[i]; ctx.beginPath(); ctx.arc(x + 30 + i * 26, y + 29, 8, 0, Math.PI * 2); ctx.fill(); }\n  ctx.fillStyle = C.paper; rr(ctx, x + 120, y + 12, w - 150, 34, 17); ctx.fill();\n  if (url) txt(ctx, url, x + 166, y + 30, 22, 600, C.sub, &#39;left&#39;, MONO);\n  ctx.restore();\n}\n\n// 장면 ② — 1일차 묻기 (원고 근거: 1-2 «1줄 프롬프트와 6요소 프롬프트» · «프롬프트 6요소 — 페르소나·맥락·예시·형식·톤·과제»\n//          · 1-3 «맥락 카드 — 제품·고객·시장 각 5줄» · P1-2-1 «맥락 카드 없이 묻고 붙여서 다시 묻기»)\nvar NAME = &#39;mg-01-day1&#39;, DUR = 16;\nvar TL = { ask: 0.8, ans1: 1.8, miss: 3.6, six: 5.0, cardIn: 8.0, fly: 10.0, ans2: 11.4, stamp: 13.0, foot: 13.8 };\nvar SIX = [&#39;페르소나&#39;, &#39;맥락&#39;, &#39;예시&#39;, &#39;형식&#39;, &#39;톤&#39;, &#39;과제&#39;];\nvar L = { x: 70, w: 600 }, R = { x: 740, w: 630 };\nfunction chipPos(i) { return { x: R.x + (i % 2) * 320, y: 210 + Math.floor(i / 2) * 100 }; }\nfunction drawAsk(ctx, T) {\n  var p = es(T, TL.ask, TL.ask + 0.6);\n  if (p &lt;= 0) return;\n  var full = es(T, TL.fly + 0.6, TL.fly + 1.2);\n  ctx.save(); ctx.globalAlpha = p;\n  bubble(ctx, L.x, 200, L.w, 120, { fill: full &gt; 0 ? C.tint : C.paper, stroke: full &gt; 0 ? C.brand : C.line, lw: full &gt; 0 ? 4 : 2 });\n  ctx.globalAlpha = p * (1 - full);\n  txt(ctx, &#39;«소개 메일 써 줘»&#39;, L.x + 40, 260, 40, 800, C.ink, &#39;left&#39;);\n  ctx.globalAlpha = p * full;\n  txt(ctx, &#39;6요소 + 맥락 카드&#39;, L.x + 40, 244, 38, 800, C.ink, &#39;left&#39;);\n  txt(ctx, &#39;페르소나 · 맥락 · 예시 · 형식 · 톤 · 과제&#39;, L.x + 40, 290, 25, 600, C.brandInk, &#39;left&#39;);\n  ctx.restore();\n}\nfunction drawAnswer(ctx, T) {\n  var p = es(T, TL.ans1, TL.ans1 + 0.6);\n  if (p &lt;= 0) return;\n  var sw = es(T, TL.ans2, TL.ans2 + 0.8);\n  ctx.save(); ctx.globalAlpha = p;\n  card(ctx, L.x, 380, L.w, 470, {});\n  txt(ctx, &#39;AI 의 답&#39;, L.x + 40, 428, 28, 700, C.muted, &#39;left&#39;);\n  // 1줄 프롬프트의 답 — 누구에게나 보낼 수 있는 문장\n  ctx.globalAlpha = p * (1 - sw);\n  var G = [&#39;안녕하세요, 귀사의 발전을 기원합니다.&#39;, &#39;저희는 우수한 품질의 제품을…&#39;, &#39;많은 관심 부탁드립니다.&#39;];\n  for (var i = 0; i &lt; G.length; i++) txt(ctx, G[i], L.x + 40, 500 + i * 62, 30, 500, C.sub, &#39;left&#39;);\n  var m = es(T, TL.miss, TL.miss + 0.6);\n  if (m &gt; 0) {\n    ctx.globalAlpha = p * (1 - sw) * m;\n    txt(ctx, &#39;누구에게? 무엇을? 왜?&#39;, L.x + L.w / 2, 740, 36, 800, C.red, &#39;center&#39;);\n    crossmark(ctx, L.x + L.w - 70, 428, 26, m, C.red);\n  }\n  // 6요소 + 맥락 카드의 답 — 우리 회사만 쓸 수 있는 문장\n  ctx.globalAlpha = p * sw;\n  var S = [[&#39;건설기계 제조사 구매팀께&#39;, &#39;고객&#39;], [&#39;상담에서 들은 불만부터&#39;, &#39;문제&#39;], [&#39;DG-DB 시리즈 사양 · 급유&#39;, &#39;제품&#39;], [&#39;없는 것은 «카드에 없음»&#39;, &#39;검증&#39;]];\n  for (var k = 0; k &lt; S.length; k++) {\n    var q = es(T, TL.ans2 + 0.3 * k, TL.ans2 + 0.3 * k + 0.5), y = 494 + k * 78;\n    ctx.globalAlpha = p * sw * q;\n    card(ctx, L.x + 30, y - 30, L.w - 60, 62, { fill: C.tint, stroke: &#39;transparent&#39;, shadow: 0, r: 12 });\n    txt(ctx, S[k][0], L.x + 54, y + 1, 30, 700, C.ink, &#39;left&#39;);\n    txt(ctx, S[k][1], L.x + L.w - 54, y + 1, 24, 700, C.brandInk, &#39;right&#39;);\n  }\n  ctx.restore();\n  stamp(ctx, L.x + L.w - 70, 428, 26, es(T, TL.stamp, TL.stamp + 0.5), C.green);\n}\nfunction drawSix(ctx, T) {\n  var lbl = es(T, TL.six - 0.3, TL.six + 0.3);\n  if (lbl &gt; 0) { ctx.save(); ctx.globalAlpha = lbl; txt(ctx, &#39;프롬프트 6요소&#39;, R.x, 178, 28, 700, C.muted, &#39;left&#39;); ctx.restore(); }\n  for (var i = 0; i &lt; 6; i++) {\n    var a = TL.six + 0.35 * i, p = es(T, a, a + 0.5);\n    if (p &lt;= 0) continue;\n    var c = chipPos(i), x = c.x, y = c.y, w = 300, h = 80;\n    ctx.save();\n    ctx.globalAlpha = p;\n    var hot = (i === 1 &amp;&amp; T &gt;= TL.cardIn) || es(T, TL.fly + 0.12 * i, TL.fly + 0.12 * i + 0.3) &gt; 0.5;\n    card(ctx, x, y, w, h, { fill: hot ? C.brand : C.paper, stroke: C.brand, lw: 3, r: 18, shadow: 0 });\n    ctx.fillStyle = hot ? C.paper : C.brand;\n    ctx.beginPath(); ctx.arc(x + 42, y + h / 2, 22, 0, Math.PI * 2); ctx.fill();\n    txt(ctx, String(i + 1), x + 42, y + h / 2 + 1, 26, 800, C.ink, &#39;center&#39;);\n    txt(ctx, SIX[i], x + 80, y + h / 2 + 1, 32, 800, C.ink, &#39;left&#39;);\n    ctx.restore();\n  }\n}\nfunction drawContext(ctx, T) {\n  var p = es(T, TL.cardIn, TL.cardIn + 0.7);\n  if (p &lt;= 0) return;\n  var x = R.x, y = 540, w = R.w, h = 310;\n  ctx.save(); ctx.globalAlpha = p;\n  card(ctx, x, y + (1 - p) * 30, w, h, { fill: C.paper, stroke: C.brand, lw: 3 });\n  txt(ctx, &#39;맥락 카드 — 각 5줄&#39;, x + 32, y + 46, 30, 800, C.brandInk, &#39;left&#39;);\n  var COL = [&#39;제품&#39;, &#39;고객&#39;, &#39;시장&#39;];\n  for (var c = 0; c &lt; 3; c++) {\n    var cx = x + 32 + c * 200;\n    ctx.fillStyle = C.tint; rr(ctx, cx, y + 80, 176, 48, 12); ctx.fill();\n    txt(ctx, COL[c], cx + 88, y + 105, 28, 800, C.ink, &#39;center&#39;);\n    for (var k = 0; k &lt; 5; k++) {\n      var q = es(T, TL.cardIn + 0.4 + 0.1 * (c * 5 + k), TL.cardIn + 0.7 + 0.1 * (c * 5 + k));\n      ctx.fillStyle = C.line;\n      ctx.fillRect(cx + 8, y + 150 + k * 30, (160 - (k % 2) * 40) * q, 10);\n    }\n  }\n  ctx.restore();\n}\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;1일차&#39;, &#39;묻기 — 한 줄 질문이 고유한 답으로&#39;, 0.2);\n  drawAsk(ctx, T);\n  drawAnswer(ctx, T);\n  drawSix(ctx, T);\n  drawContext(ctx, T);\n  arrow(ctx, R.x - 20, 300, L.x + L.w + 18, 270, es(T, TL.fly - 0.3, TL.fly + 0.3), C.brandInk, 5);\n  footer(ctx, T, &#39;맥락을 붙이면 답이 우리 회사 것이 됨&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>모션그래픽 장이다.</strong> 재생이 끝날 때까지 말을 얹지 않고, 끝나면 그날의 한 단어 «묻기» 만 말하고 다음 장으로 넘긴다.</p>
 
+<h2 class="title">시간표 — 240분</h2>
+
+<table>
+<thead>
+<tr><th style="text-align:left">블록</th><th style="text-align:right">분</th><th style="text-align:left">내용</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">여는 절</td><td style="text-align:right">12</td><td style="text-align:left">6일 흐름 timeline 1 + 도구·제출 위치 표 1장</td></tr>
+<tr><td style="text-align:left">초기 설정</td><td style="text-align:right">25</td><td style="text-align:left">P1-0-1 15 + P1-0-2 10 (설치 0 · 터미널 0)</td></tr>
+<tr><td style="text-align:left">이론</td><td style="text-align:right">58</td><td style="text-align:left">1-1 · 1-2 · 1-3 · 1-4 의 이론 장(맡기는 선 포함)</td></tr>
+<tr><td style="text-align:left">🖥️ 시연</td><td style="text-align:right">15</td><td style="text-align:left">할루시네이션 7 + 3분할 비교 8 — 보는 시간, 따라 치지 않음</td></tr>
+<tr><td style="text-align:left">🙋 실습</td><td style="text-align:right">70</td><td style="text-align:left">P1-1 35 + P1-2 35 (건당 시연 5 + 실습 20 + 확인 5 + 여유 5)</td></tr>
+<tr><td style="text-align:left">닫는 절 · QnA</td><td style="text-align:right">20</td><td style="text-align:left">정답 공개 · 결론 · 2일차 연결</td></tr>
+<tr><td style="text-align:left">휴식</td><td style="text-align:right">40</td><td style="text-align:left">50분/10분 × 4교시</td></tr>
+</tbody>
+</table>
+
+<ul>
+<li class="bullet-dot">시연(🖥️)과 실습(🙋)은 장 제목 머리표로 분리한다. 시연은 강사 손으로만, 실습은 수강생이 처음부터 끝까지 친다</li>
+<li class="bullet-dot">실습 시간은 시간표에서 먼저 확보하고 이론이 밀리면 이론을 접는다. 실습 70분은 줄이지 않는다</li>
+<li class="bullet-dot">수강생 구성(필드 영업 4 · 광고 4 · SNS 14)에 맞춰 도구 숙련 가정을 낮춘다. 필드 영업 4명은 📱 줄을 따라 폰으로 끝낸다</li>
+</ul>
+
+<h2 class="title">🖐 사람이 정할 것</h2>
+
+<ul>
+<li class="bullet-dot">🖐 Practice 난이도 합격선 — 실습 4건의 «기대 결과» 가 22명 기준에서 시간 안에 닫히는지는 선실행·리허설 뒤 사람이 판정한다</li>
+<li class="bullet-dot">🖐 필드 영업 📱 경로의 충분성 — 모든 실습에 폰 줄을 달았으나 모바일 동작은 아직 실측하지 않았다</li>
+<li class="bullet-dot">🖐 결과 제출 방식 — 현재 안은 «개인 드라이브 <code>AI실습/</code> 에 파일 저장(2일차부터 바탕화면 <code>Day{n}</code> 폴더에도), Progress 시트에 O/X·숫자 기록» 이다. 정의는 슬라이드 «6일 동안 쓰는 도구와 제출 위치» 한 장과 이 노트 <code>tools-submit</code> 절에만 둔다 — 확정이 바뀌면 그 두 곳만 고친다(mq 20261023-003353-001 대기, 팀장 L 결정)</li>
+<li class="bullet-dot">🖐 Progress 시트의 링크·열 구성(실습 1건 = 1열)이 PREP·PRACTICE 어디에도 확정돼 있지 않다 — 장표는 «강사가 안내하는 진행 확인 시트» 로만 쓴다. 링크 배포 방식(칠판·메시지·QR)을 사람이 정하면 <code>tools-submit</code> 절에 적는다</li>
+</ul>
+
+<h2 class="title">🖐 선실행 대기</h2>
+
+<ul>
+<li class="bullet-dot">🖐 선실행 대기 — P1-0-1 새 프롬프트(영업 담당자 · 세 문장) ChatGPT 출력이 실제로 세 문장인지 1회 실행</li>
+<li class="bullet-dot">🖐 선실행 대기 — 렌털 PC(Windows + Edge) 에서 <code>제품소개.txt</code> 붙여넣기 시 줄바꿈·한글 깨짐</li>
+<li class="bullet-dot">🖐 선실행 대기 — 할루시네이션 시연 4단계(적대적 비판 문구) 결과가 «지어낸 수치를 걷어냄» 으로 나오는지. 안 나오면 4단계를 생략하고 3단계에서 끝낸다</li>
+<li class="bullet-dot">🖐 선실행 대기 — 모바일(ChatGPT 앱) 에서 P1-0-1·P1-1·P1-2 흐름이 끝까지 되는지 — 드라이브 앱에서 <code>.txt</code> 복사 → 앱 붙여넣기</li>
+<li class="bullet-dot">P1-2 세는 기준은 하나다 — 카드 15줄 중 답에 키워드가 나온 줄 수(고객명 6번 포함). 슬라이드의 «8개 안팎» 은 2026.10.09 선실행 실측(1·2·3·4·5·6·9·10번)이다. <code>_material/Day1/_강사본/정답.md</code> 의 7 은 같은 기준을 고정 견본 문장(고객명·온도 줄이 없음)에 적용한 값이라 기준이 갈린 것이 아니다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/5" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -1740,8 +1788,17 @@ html.ratio-fill .agenda-frame {
 </li>
 </ul>
 </div></div>
-</section>
+  <aside class="notes">
+<p>6일 흐름 timeline 은 <strong>1분 안에 넘긴다.</strong> 한 단어씩만 짚는다 — 묻기·조사하기·제안하기·알리기·꾸미기·넓히기.</p>
 
+<ul>
+<li class="bullet-dot">앞날의 결과가 다음 날의 재료가 된다는 한 줄이 핵심이다. 맥락 카드 → 브리핑 → 제안서 → 홈페이지 → 시각물 → 영문·CRM·과제 카드</li>
+<li class="bullet-dot">1일차는 브라우저만 쓰고 설치는 2일차부터 하루에 하나씩 늘어난다고 못 박는다</li>
+<li class="bullet-dot">실습 번호 <code>P일차-순번</code> 은 실습이 있는 절의 순번이라 절 번호와 1씩 어긋난다(ex) 1-2 절 안의 P1-1-1). 첫 실습 전에 한 번 말해 준다</li>
+<li class="bullet-dot">지급 안내문(계정 정보)은 슬라이드에 없다. 종이나 메시지로 이미 나눠 준 상태여야 한다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/6" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1756,20 +1813,30 @@ html.ratio-fill .agenda-frame {
 </thead>
 <tbody>
 <tr><td style="text-align:left">1일차</td><td style="text-align:left">브라우저 · ChatGPT · Google</td><td style="text-align:left">없음 — 로그인만</td></tr>
-<tr><td style="text-align:left">2일차</td><td style="text-align:left">VSCode · Markdown</td><td style="text-align:left">VSCode · Codex 확장 설치·로그인</td></tr>
+<tr><td style="text-align:left">2일차</td><td style="text-align:left">VSCode · Markdown · Perplexity</td><td style="text-align:left">VSCode · Codex 확장 설치·로그인</td></tr>
 <tr><td style="text-align:left">3일차</td><td style="text-align:left">Codex · pandoc</td><td style="text-align:left">pandoc zip 풀기(강사 USB)</td></tr>
 <tr><td style="text-align:left">4일차</td><td style="text-align:left">Netlify</td><td style="text-align:left">이메일 가입</td></tr>
-<tr><td style="text-align:left">5일차</td><td style="text-align:left">Gamma · Gemini Notebook · Python</td><td style="text-align:left">로그인 재확인 · Codex 가 셋팅</td></tr>
+<tr><td style="text-align:left">5일차</td><td style="text-align:left">Gamma · Gemini Notebook · Python</td><td style="text-align:left">로그인 재확인 · Codex 가 세팅</td></tr>
 <tr><td style="text-align:left">6일차</td><td style="text-align:left">n8n</td><td style="text-align:left">체험 가입(카드 불필요)</td></tr>
 </tbody>
 </table>
 
 <ul>
-<li class="bullet-dot"><strong>결과 파일</strong> — <code>Day{n}</code> 폴더에 저장하고, 개인 드라이브 <code>AI실습/</code> 에도 둠. 렌탈 PC 바탕화면에만 두면 다음 시간에 찾기 어려움.</li>
+<li class="bullet-dot"><strong>결과 파일</strong> — 개인 드라이브 <code>AI실습/</code> 에 저장함(2일차부터는 바탕화면 <code>Day{n}</code> 폴더에도 둠). 렌털 PC 바탕화면에만 두면 다음 시간에 찾기 어려움.</li>
 <li class="bullet-dot"><strong>Progress 시트</strong> — 강사가 안내하는 진행 확인 시트임. 하루가 끝나면 실습 칸에 O/X 와 확인 질문의 숫자를 적음.</li>
 <li class="bullet-dot">실습 자료는 드라이브 <code>_doc/Day{n}</code> 에서 받음 · «제출» 줄은 위 두 곳을 가리킴.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p><strong>1분 안에 넘긴다.</strong> 표는 읽어 주지 않고 «하루에 도구가 하나씩 늘어난다» 와 제출 두 곳만 말한다.</p>
+
+<ul>
+<li class="bullet-dot">이 표가 설치 계단의 수강생용 사본이다 — 일차 여는 절의 도구 장은 그대로 두고, 당일 아침에 한 번 더 확인하는 자리로 쓴다. 근거 표는 <a href="../practice/README.md">practice/README.md</a> 「하루에 도구가 하나씩 늘어납니다」</li>
+<li class="bullet-dot">제출은 둘이다 — 파일은 개인 드라이브 <code>AI실습/</code>(2일차부터 바탕화면 <code>Day{n}</code> 폴더에도), 진행은 Progress 시트. 이 두 곳의 정의는 이 장·이 절에만 있다. 다른 장의 «제출» 줄은 이 장을 가리킨다</li>
+<li class="bullet-dot">Progress 시트를 여기서 한 번 열어 보여 준다. 첫 Practice(P1-0-1)가 O 표시를 시키는데 시트를 본 적이 없으면 로그인 직후 5분이 시트 찾는 데 든다</li>
+<li class="bullet-dot">3일차 <code>Codex · pandoc</code>, 5일차 <code>Python</code>, 6일차 <code>n8n</code> 은 당일 여는 절에서 다시 설치·가입을 안내한다. 지금 준비시키지 않는다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/7" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -1800,8 +1867,21 @@ html.ratio-fill .agenda-frame {
 
 <pre class="code-wrapper"><code class="language-text hljs">너는 건설기계 부품 제조사의 B2B 영업 담당자다.
 신규 거래처 구매팀에 첫 메일을 보낼 때 가장 먼저 밝혀야 할 것을 세 문장으로 정리하라.</code></pre></div>
-</section>
+  <aside class="notes">
+<p>🙋 <strong>운영 확인을 겸한 실습이다.</strong> 준비 상태를 눈으로 센다. 15분 = 설정 5 + 로그인 10.</p>
 
+<ul>
+<li class="bullet-dot">프롬프트는 구판의 «자기소개» 에서 영업 담당자 역할로 바꿨다. 로그인 확인만 아니라 6요소의 «페르소나» 를 처음 맛보게 하는 자리다</li>
+<li class="bullet-dot">1일차는 브라우저만 쓴다. 주소창에 <code>chatgpt.com</code> 을 직접 쳐서 열게 하고, 즐겨찾기는 6일 내내 같은 자리에서 연다.</li>
+<li class="bullet-dot">제출은 Progress 시트 1일차 칸의 O 표시다. 시트는 앞 장 «6일 동안 쓰는 도구와 제출 위치» 에서 안내했다.</li>
+<li class="bullet-dot">로그인이 5분 넘게 막히면 옆 사람 화면을 같이 보게 하고 진행한다</li>
+<li class="bullet-dot">지급 계정을 못 받은 사람은 여기서 처리한다. 실습에 들어가서 발견하면 한 절을 통째로 놓친다</li>
+<li class="bullet-dot">필드 영업은 PC 로그인 대신 폰 ChatGPT 앱으로 같은 프롬프트를 친다. 앱이 없으면 설치부터라 5분이 더 든다</li>
+<li class="bullet-dot">🖐 로그인 직후 화면 캡처(렌털 PC Windows + Edge)를 선실행으로 받아 둔다</li>
+<li class="bullet-dot">그림 — 로그인 전 ChatGPT 첫 화면에서 우상단 Log in 버튼을 표시한 캡처(촬영 2026.09.19 · 개인정보 없음). «Log in» 을 누를 자리를 짚는다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/8" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -1831,8 +1911,16 @@ html.ratio-fill .agenda-frame {
 </div>
 
 </div></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">소요 10분. 🖐 2단계 인증 화면 캡처 1장을 선실행으로 받아 둔다</li>
+<li class="bullet-dot">2단계 인증은 <strong>휴대폰이 없는 사람만</strong> 손을 들게 한다. 강사가 개별 지원한다</li>
+<li class="bullet-dot">개인 구글 계정이 없는 사람은 그 자리에서 만들면 5분이 든다. 5일차 Gemini 에 필요하다</li>
+<li class="bullet-dot">📱 이미 로그인된 폰이면 PC 화면의 승인 알림만 누르면 된다. 새 탭에서 연다는 말은 입으로 한다</li>
+<li class="bullet-dot">그림 — 로그인 전 Google 첫 화면에서 우상단 «로그인» 버튼을 표시한 캡처(촬영 2026.10.25 · 계정 없음)</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/9" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1854,7 +1942,10 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">맡기는 선 — 사람이 정할 것</li>
 </ul>
 </div></div>
-</section>
+  <aside class="notes">
+<p>LLM 개념은 짧게 간다. 목적은 «왜 틀리는가» 와 «왜 내 자료를 붙이는가» 를 납득시키는 것이다.</p>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/10" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1887,7 +1978,13 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">학습한 글에 없는 내용도 그럴듯하게 이어 씀. 우리 제품과 고객 정보는 학습에 없음.</li>
 <li class="bullet-dot">그래서 이 과정은 내 자료를 붙여 주는 방식으로 진행함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">확률로 낱말을 고른다는 한 줄이면 충분하다. 수식과 용어(토큰)는 꺼내지 않는다</li>
+<li class="bullet-dot">마지막 두 불릿이 6일 전체의 논리다 — 우리 제품은 학습에 없으니 붙여 준다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/11" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1904,7 +2001,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">다섯 영역 모두 AI 가 초안을 만들고 사람이 확인하는 구조임.</li>
 <li class="bullet-dot">영역별 실습은 2일차 조사부터 6일차 응대·분석까지 이어짐.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">다섯 영역은 각 일차에 대응한다. 조사 2일차 · 제안 3일차 · 콘텐츠 4~5일차 · 응대·분석 6일차</li>
+<li class="bullet-dot">수강생 업무에 가까운 영역을 손들어 묻되 1분을 넘기지 않는다</li>
+<li class="bullet-dot">그림 — 조사·콘텐츠·제안·응대·분석 다섯 영역 카드가 모두 «AI 가 초안을 만든다 → 사람이 확인한다» 띠로 모이는 그림</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/12" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1926,7 +2030,14 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">영업 문서에서는 틀린 단가·납기·규격이 곧 사고임.</li>
 <li class="bullet-dot">대응은 둘임 — 내 자료를 붙여 주고, 모르면 모른다고 답하게 함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">영업 문서에서 틀린 단가·납기·규격이 사고라는 문장에서 한 번 멈춘다</li>
+<li class="bullet-dot">다음 장 시연으로 곧바로 넘어가므로 설명을 길게 하지 않는다</li>
+<li class="bullet-dot">그림 — 지어냄·낡음·오독 세 오류가 영업 문서에서 사고가 되며, 자료를 붙여 주고 모르면 모른다고 답하게 하는 두 가지 대응으로 막는다는 그림</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/13" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1956,7 +2067,20 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">📱 4단계 문구는 앱에서도 그대로 붙여 쓸 수 있음. 이후 모든 질문 끝에 붙이는 습관으로 이어짐.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>🖥️ <strong>시연 7분. 보는 시간이다.</strong> 강사 손으로만 실행하고 수강생은 따라 치지 않는다.</p>
+
+<ul>
+<li class="bullet-dot">시연 프롬프트(<code>국내 부시 제조사의 DG-DB 시리즈 부시…</code>)에는 일부러 (가상) 을 붙이지 않는다 — AI 가 모르는 제품을 지어내는지 보는 시연이다.</li>
+<li class="bullet-dot"><code>DG-DB 시리즈(가상)</code> 는 실재하지 않는 제품이다. 2026.10.25 사전 실측에서 로그아웃 ChatGPT 기본 모델에 5회 물었으나 모두 «확인 불가» 로 답하고 수치를 지어내지 않았다 — 지어내는지는 모델·계정·검색 상태에 따라 갈린다</li>
+<li class="bullet-dot">1단계(검색 끔)에서 지어내면 그 수치를 칠판처럼 읽어 준다. 지어내지 않으면 «검색이 없었다면 위험했던 질문» 이라고 말로 잇고 2·3단계로 간다. 어느 쪽이든 결론은 «검색이 붙으면 덜 지어내지만 출처 링크는 열어서 확인한다» 이다</li>
+<li class="bullet-dot">4단계는 3회차 실강의에서 환각 방어로 가장 반응이 좋았던 한 줄이다(시연 전수표 D18). 지어낸 수치를 스스로 걷어내는지 본다</li>
+<li class="bullet-dot">🖐 당일 강사 계정에서 한 번 돌려 본다. 1단계가 지어내는지·2단계에 출처 링크가 붙는지 확인하고, 결과가 다르면 위 두 갈래 중 맞는 쪽으로 말한다</li>
+<li class="bullet-dot">시간이 모자라면 3단계(링크 열기)를 2단계 화면에서 한 곳만 열어 보이는 것으로 줄인다</li>
+<li class="bullet-dot">폰 사용자에게는 4단계 문구를 메모 앱에 저장해 두고 이후 질문 끝에 붙이게 한다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/14" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1992,7 +2116,16 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">이 과정의 실습 자료는 전부 공개 자료와 가상 데이터임. 이름 뒤의 <code>(가상)</code> 이 그 표시임.</li>
 <li class="bullet-dot">사내 자료를 업무에 쓸 때는 회사 정책을 먼저 확인함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>🔴 <strong>실습 데이터가 전부 가상이라는 말을 여기서 한다.</strong></p>
+
+<ul>
+<li class="bullet-dot">나중에 «왜 우리 고객 리스트로 안 하나» 질문이 반드시 나온다. 답은 보안이고, 실습 계정이 개인 계정이기 때문이다</li>
+<li class="bullet-dot">사내 자료는 회사 정책 확인이 먼저다. 강사가 허용 여부를 대신 판정하지 않는다</li>
+<li class="bullet-dot">그림 — 사람 정보 1종·돈 정보 2종·회사 정보 2종, 다섯 중 하나라도 해당하면 개인 계정 AI 에 올리지 않는다는 그림</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/15" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2029,7 +2162,17 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">초안이 틀려도 고객은 보낸 사람의 문서로 받음. 책임은 AI 가 아니라 보낸 사람에게 남음.</li>
 <li class="bullet-dot">4일차 결론의 «공개는 사람» 이 이 선의 마지막 칸임.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p><strong>2분.</strong> 1-1 의 마지막 장이다. 보안 장이 «올리면 안 되는 것» 이라면 이 장은 «AI 가 낸 것을 어디까지 쓰는가» 이다.</p>
+
+<ul>
+<li class="bullet-dot">세 칸을 소리 내어 읽고, 가운데 «초안만» 에 시간을 쓴다. 비교표 수치·견적 문장은 AI 가 초안을 내되 원문과 대조하는 쪽은 사람이다</li>
+<li class="bullet-dot">«사람이 정함» 에 공개 여부가 들어 있는 이유 — 4일차 결론 «공개는 사람» 과 같은 문구다. 4일차에 이 장을 다시 짚는다</li>
+<li class="bullet-dot">견적 금액·납기 약속을 AI 에게 «정해 줘» 라고 묻는 수강생이 반드시 나온다. 초안 문장은 받되 숫자는 사람이 넣는다고 답한다</li>
+<li class="bullet-dot">시간이 밀리면 세 번째 불릿(책임은 보낸 사람에게 남음)만 읽고 넘어간다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/16" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2059,7 +2202,10 @@ html.ratio-fill .agenda-frame {
 </li>
 </ul>
 </div></div>
-</section>
+  <aside class="notes">
+<p>도구 비교(시연) → 6요소 → 톤 → 실습 순서다. 실습 P1-1 이 이 절의 핵심이다.</p>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/17" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2095,7 +2241,15 @@ html.ratio-fill .agenda-frame {
 </div>
 
 <div class="media-container"><img src="img/d1-logos-three-tools.png" alt="ChatGPT·Claude·Gemini 세 도구의 로고 — 식별용"></div></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">이 과정에서 실제로 쓰는 것은 ChatGPT 뿐이다. Claude 는 시연으로만, Gemini 는 5일차에 쓴다</li>
+<li class="bullet-dot">Claude 는 강사 계정으로 시연만 한다(수강생 계정 없음)</li>
+<li class="bullet-dot">도구 우열을 말하지 않는다. 우열 논쟁은 시간만 쓴다</li>
+<li class="bullet-dot">그림 — 세 도구 로고 띠(식별용 · 위키미디어 커먼즈 · 상표는 각 회사 소유 · 공개 덱 게시 금지). 출처는 img/SOURCES.md «외부»</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/18" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2120,7 +2274,15 @@ html.ratio-fill .agenda-frame {
 </table>
 
 <pre class="code-wrapper"><code class="language-text hljs">제조 B2B 영업 담당자로서 굴착기 제조사 구매팀에 보낼 부시 신제품 소개 메일을 5줄로 써 줘.</code></pre></div>
-</section>
+  <aside class="notes">
+<p>🖥️ <strong>시연 8분. 보는 시간이다.</strong> 한 화면을 셋으로 나눈다.</p>
+
+<ul>
+<li class="bullet-dot">Claude 가 안 열리면 사전 캡처로 대체한다. 🖐 3분할 결과 캡처를 선실행으로 받아 둔다</li>
+<li class="bullet-dot">비교 기준 셋(사실 오류·문체·길이)만 읽는다. 읽는 법 자체가 목적이다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/19" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2143,7 +2305,12 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">실습은 지급 계정이 있는 ChatGPT 로 진행함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">한 장으로 끝낸다. 실습은 ChatGPT 로 한다는 문장이 핵심이다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/20" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2172,7 +2339,13 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">1줄 프롬프트의 결과는 실행할 때마다 달라짐. 빠진 요소를 AI 가 임의로 채우기 때문임.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">두 칸 용어는 바로 다음 장 <code>six-elements</code> 와 같다(페르소나·맥락·예시·형식·톤·과제)</li>
+<li class="bullet-dot">같은 질문을 두 번 실행해 결과가 달라지는 것을 보여 주면 설득이 빠르다. 시간이 없으면 말로 한다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/21" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2195,7 +2368,14 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">과제만 있으면 1줄 프롬프트임. 나머지 다섯이 결과를 고정함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">여섯 개를 외우게 하지 않는다. <code>6요소카드.txt</code> 를 복사해 쓰므로 틀은 파일에 있다</li>
+<li class="bullet-dot">「과제만 있으면 1줄 프롬프트」 문장을 반드시 말한다. 실습 P1-1-1 의 셈이 이 문장에 걸린다</li>
+<li class="bullet-dot">그림 — 프롬프트 6요소 3×2 격자에서 «과제» 가 강조되고, 과제만 있으면 1줄 프롬프트이며 나머지 다섯이 결과를 고정한다는 그림</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/22" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2227,7 +2407,13 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">톤은 형용사만 쓰지 않고 상대와 상황으로 지정하면 안정됨.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">톤은 상대와 상황으로 지정한다는 점만 강조한다</li>
+<li class="bullet-dot">시간이 남으면 «고객 말 ↔ 사내 말» 용어 20개를 고정하는 용어집을 입으로만 소개한다(시연 전수표 D07 — 실습으로 올리지 않음, 1일차 시간 예산에 자리가 없다)</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/23" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2239,15 +2425,27 @@ html.ratio-fill .agenda-frame {
   </div>
   <div class="exercise-body"><ul>
 <li class="bullet-dot"><strong>시간</strong> 8분 | <strong>입력</strong> 바탕화면 <code>Day1</code> 폴더(드라이브 <code>_doc/Day1</code> 에서 내려받음)의 <code>제품소개.txt</code> · <code>6요소카드.txt</code></li>
-<li class="bullet-dot"><strong>단계</strong> <code>제품소개.txt</code> 열어 전체 복사(Ctrl+A → Ctrl+C) → ChatGPT <strong>새 대화</strong> 에 붙임 → 아래 한 줄을 <strong>내 말로 고쳐</strong> 실행 → <code>6요소카드.txt</code> 표와 대조해 내 프롬프트에 들어 있던 요소에 ✓ → 빠진 개수를 <code>P1-1.txt</code> 첫 줄에 적음</li>
+<li class="bullet-dot"><strong>단계</strong> <code>제품소개.txt</code> 열어 전체 복사(Ctrl+A → Ctrl+C) → ChatGPT <strong>새 대화</strong> 에 붙임 → 아래 한 줄을 <strong>내 말로 고쳐</strong> 실행 → <code>6요소카드.txt</code> 표와 대조해 내 프롬프트에 빠진 요소에 표시 → 빠진 개수를 셈 → <code>P1-1.txt</code> 첫 줄에 적음</li>
 <li class="bullet-dot"><strong>기대 결과</strong> 소개 메일 초안 1통 — 길이·제목·말투가 사람마다 다름</li>
 <li class="bullet-dot"><strong>막히면</strong> 붙이기가 안 되면 📎 로 파일을 첨부 | 영어로 답하면 «한국어로 써 줘» 추가 | 📱 폰은 드라이브 앱에서 <code>제품소개.txt</code> 를 열어 복사해 앱에 붙임</li>
 <li class="bullet-dot"><strong>제출</strong> <code>P1-1.txt</code> 를 개인 드라이브 <code>AI실습/</code> 에 저장 · 빠진 개수는 Progress 시트에도 적음</li>
 </ul>
 
 <pre class="code-wrapper"><code class="language-text hljs">(제품소개.txt 를 붙인 뒤) 이 제품 소개 메일 써 줘.</code></pre></div>
-</section>
+  <aside class="notes">
+<p>P1-1 은 건당 35분 = 시연 5(이 장 앞에서 첫 단계만 강사 손으로) + 수강생 20(P1-1-1 8분 + P1-1-2 12분) + 확인 5(✅ 장) + 여유 5. 장표의 8분·12분은 수강생 배분이다.</p>
 
+<ul>
+<li class="bullet-dot">폴더 배포 규약: 구글 드라이브 <code>_doc/Day1</code> 폴더에서 내려받아 바탕화면에 둔다(압축하지 않음). 드라이브 <code>_doc/Day1</code> 에는 <code>_material/Day1/</code> 의 배포분만 올린다(<code>_강사본/</code> 제외). 루트 <code>Day{n}</code> 은 강사 화면 스크린샷 폴더라 자료를 두지 않는다</li>
+<li class="bullet-dot"><strong>새 대화</strong> 를 연다. P1-0-1 대화에 이어 치면 영업 담당자 역할이 남아 «1줄 프롬프트» 셈이 어그러진다</li>
+<li class="bullet-dot">수강생이 6요소를 어느 정도 채웠는지는 <strong>본인이 센다.</strong> 강사가 정답 개수를 알려 주지 않는다</li>
+<li class="bullet-dot">1줄 프롬프트가 실제로 1줄이어야 셈이 의미 있다. 길게 쓴 사람은 짧게 되돌린다</li>
+<li class="bullet-dot">붙여넣기가 깨지는 사람은 ChatGPT 의 📎 로 파일을 첨부하게 한다</li>
+<li class="bullet-dot">필드 영업: 폰 드라이브 앱에서 <code>.txt</code> 를 열어 복사 → 앱에 붙임. 🖐 이 경로는 선실행 전이다</li>
+<li class="bullet-dot">🖐 결과 화면 캡처를 선실행으로 받아 둔다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/24" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2273,8 +2471,15 @@ html.ratio-fill .agenda-frame {
 
 <pre class="code-wrapper"><code class="language-text hljs">위 메일을 같은 내용으로 격식형·친근형·간결형 세 가지 톤으로 다시 써 줘.
 각 톤 앞에 어떤 상대에게 맞는지 한 줄로 적어 줘.</code></pre></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot"><code>6요소카드.txt</code> 의 틀은 이미 채워진 견본이다. 수강생은 <code>[맥락]</code>·<code>[톤]</code> 두 줄만 자기 상황으로 고친다</li>
+<li class="bullet-dot">P1-1-1 과 <strong>같은 대화</strong> 여야 <code>제품소개.txt</code> 를 다시 붙이지 않는다. 끊긴 사람은 제품소개를 다시 붙이면 된다</li>
+<li class="bullet-dot">톤 3종이 나오면 맞는 하나를 고르고 이유를 한 줄 적게 한다</li>
+<li class="bullet-dot">결과 파일 <code>P1-1.txt</code> 는 P1-1-1 에서 시작한 같은 파일에 이어 적는다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/25" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -2305,8 +2510,15 @@ html.ratio-fill .agenda-frame {
 </div>
 
 </div></div>
-</section>
+  <aside class="notes">
+<p>확인 질문은 숫자다. <strong>본인 결과를 세어 적는다</strong>(정답이 하나가 아님).</p>
 
+<ul>
+<li class="bullet-dot">Progress 시트에 숫자를 적게 한다</li>
+<li class="bullet-dot">🖐 강사 예시 답: 1줄 프롬프트 「이 제품 소개 메일 써 줘.」 는 5개(페르소나·맥락·예시·형식·톤)가 빠진다. <code>_강사본/정답.md</code> 참고</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/26" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2328,7 +2540,12 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">맥락을 더할수록 답이 좁혀지고 고유해짐.</li>
 <li class="bullet-dot">AI 는 우리 제품과 고객을 모르므로 맥락 카드로 붙여 줌.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">깔때기는 «맥락을 더할수록 좁혀진다» 한 문장으로 끝낸다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/27" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2351,9 +2568,16 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">카드는 15줄을 넘기지 않음. 짧을수록 붙이기 쉽고 답을 검증하기 쉬움.</li>
 <li class="bullet-dot">카드에 쓴 사실만 답에 나오게 하고, 없는 것은 「카드에 없음」으로 답하게 함.</li>
-<li class="bullet-dot">1-1 시연에서 AI 가 지어낸 <code>DG-DB 시리즈(가상)</code> 가 이 카드의 제품임. 카드를 붙이면 지어낸 답이 카드의 사실로 바뀜.</li>
+<li class="bullet-dot">1-1 시연에서 물어본 <code>DG-DB 시리즈(가상)</code> 가 이 카드의 제품임. 카드를 붙이면 지어낸 답이 카드의 사실로 바뀜.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">카드는 15줄 이내다. <code>맥락카드.txt</code> 는 가상 회사(한솔건기(가상)) 기준으로 이미 만들어 두었다</li>
+<li class="bullet-dot">홈페이지 공개 문구로 교체하는 것은 plan 확인 7번 회신 뒤 작업이다</li>
+<li class="bullet-dot">1-1 시연에서 물어본 <code>DG-DB 시리즈(가상)</code> 가 <code>맥락카드.txt</code> 1번 제품이다. «아까 시연에서 물어본 그 제품이 이 카드의 제품» 이라고 한 줄로 잇는다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/28" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2375,7 +2599,12 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">가치 제안은 고객이 우리를 고를 이유를 한 문장으로 말한 것임.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">가치 제안은 «고객이 우리를 고를 이유 한 문장» 이라는 정의만 말한다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/29" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2385,7 +2614,13 @@ html.ratio-fill .agenda-frame {
   <h3 class="title">가치 제안 한 문장 틀 — 고객·문제·해결·증거</h3>
   <div class="contents-body">
 <div class="media-container"><img src="img/d1-vp-sentence.png" alt="고객·문제·해결·증거 네 칸이 각각 맥락 카드의 자리에서 채워져 «고객의 문제를 제품이 해결로 풀고 증거로 보여 줌» 한 문장이 되는 그림"></div></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">표의 마지막 열이 맥락 카드와 이어진다. 실습에서 카드 번호를 붙이게 하는 이유다</li>
+<li class="bullet-dot">그림 — 고객·문제·해결·증거 네 칸이 각각 맥락 카드의 자리에서 채워져 «[고객]의 [문제]를 [제품]이 [해결]로 풀고 [증거]로 보여 줌» 한 문장이 되는 그림. 표는 이 그림으로 대신했다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/30" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2406,8 +2641,15 @@ html.ratio-fill .agenda-frame {
 <pre class="code-wrapper"><code class="language-text hljs">[질문 1] 우리 회사 제품을 굴착기 제조사 구매팀에 제안할 때 강조할 점을 3줄로 정리해 줘.
 
 [질문 2] (맥락카드.txt 를 붙인 뒤) 같은 질문에 답하되, 카드에 있는 사실만 쓰고 카드에 없는 것은 «카드에 없음» 이라고 적어 줘.</code></pre></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">질문 1 은 <strong>새 대화</strong> 에서 친다. 제품소개가 남은 P1-1 대화에서 치면 질문 1 에도 제품 사실이 나와 비교가 흐려진다</li>
+<li class="bullet-dot">질문 2 는 카드를 붙인 같은 대화에서 이어 친다</li>
+<li class="bullet-dot">카드 줄이 답에 나온 개수를 센다. 키워드로 센다 — 제품명·수치·고객명이 나오면 1(장표 «세는 기준»). 고객명 줄(6번)을 센다</li>
+<li class="bullet-dot">🖐 질문 2 결과 캡처를 선실행으로 받아 둔다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/31" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2429,8 +2671,13 @@ html.ratio-fill .agenda-frame {
 틀은 «[고객]의 [문제]를 [제품]이 [해결]로 풀고 [증거]로 보여 준다» 로 한다.
 근거 3개를 붙이고 각 근거 끝에 카드 줄 번호를 적어 줘.
 카드에 없는 내용은 쓰지 말고 «카드에 없음» 이라고 적어 줘.</code></pre></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">근거마다 카드 줄 번호가 붙었는지 확인한다. 붙지 않으면 «번호를 붙여서 다시» 라고만 안내한다</li>
+<li class="bullet-dot">카드에 없는 수치가 나오면 1-1 시연의 지어냄과 같은 현상임을 짚는다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/32" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -2461,8 +2708,14 @@ html.ratio-fill .agenda-frame {
 </div>
 
 </div></div>
-</section>
+  <aside class="notes">
+<p>확인 질문은 숫자다. <strong>본인 결과를 세어 적는다.</strong></p>
 
+<ul>
+<li class="bullet-dot">🖐 강사 예시 답: 카드 없는 답 0개, 카드 붙인 답 8개 안팎(고객명 줄 포함 기준). 실제 출력 기준으로 다시 센다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/33" class="layout-summary">
   <div class="summary-header">
@@ -2476,8 +2729,12 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">가치 제안으로 모음</li>
 </ul>
 </div></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">4단계 흐름을 한 번 훑고 정답 공개로 넘어간다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/34" class="layout-summary">
   <div class="summary-header">
@@ -2496,8 +2753,13 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">참고 예시 — 빠진 요소 5개 · 늘어난 사실 8개 안팎. 비교 기준일 뿐 정답이 아님</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">정답이 사람마다 다르다는 점을 먼저 말한다. 강사 예시는 비교 기준일 뿐이다</li>
+<li class="bullet-dot">장표의 참고 예시(빠진 요소 5개 · 늘어난 사실 8개 안팎)는 선실행 값이다. 🖐 현장 수강생 결과로 다시 읽는다</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/35" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2526,9 +2788,17 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">6요소와 맥락 카드를 채우면 같은 도구에서도 답이 고유해지고 틀린 곳이 보임.</li>
 <li class="bullet-dot">2일차 조사 프롬프트의 범위·기간은 맥락, 출처 형식은 형식에 해당함.</li>
-<li class="bullet-dot">2일차 여는 절에 VSCode·Codex 설치와 로그인이 25분 들어감. 휴대폰을 지참함.</li>
+<li class="bullet-dot">2일차 여는 절에 VSCode·Codex 설치와 로그인이 23분 들어감. 휴대폰을 지참함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dot">이 한 줄을 읽고 멈춘다. 두 카드는 «틀» 이다 — 2일차 조사 프롬프트의 범위·기간은 맥락, 출처 형식은 형식에 해당한다고만 짚는다</li>
+<li class="bullet-dot">오른쪽 compare 로 2일차를 예고한다. 2일차는 VSCode·Codex 설치와 로그인이 23분 든다. 설치 파일은 USB·공유 폴더로 사전 배포한다</li>
+<li class="bullet-dot">2일차 이후 휴대폰 지참을 말한다 — 구글 2단계 인증, 4일차 배포 주소 확인, 5일차 사진 확인에 쓴다</li>
+<li class="bullet-dot">QnA 는 이 장 뒤 5분이다</li>
+</ul>
+  </aside>
+      </section>
 
     </div>
   </div>

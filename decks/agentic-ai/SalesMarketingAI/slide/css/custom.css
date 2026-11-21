@@ -430,7 +430,7 @@
 }
 
 /* ── License attribution badge (Issue292) ─────────────────────────────────
-   theme/LICENSE.md(테마 라이선스) 조건 — 첫 장·마지막 장에 항상 표기.
+   첫 장·마지막 장 "Powered by finfra.kr" 뱃지 — 기본 on (MIT 전환 후 의무 아닌 부탁, license_attribution: false 로 끔).
    설계 SSOT: _doc_arch/license-attribution.md
    - 위치: 하단 중앙, 상하단 노랑 가로선(section[class*="layout-"]::after, bottom:12px
      height:10px, z-index:100 — 본 파일 §2) "바깥"(아래)에 배치. 2026-07-15 사용자 시각
@@ -491,6 +491,18 @@
 }
 .m2-license-badge--standalone {
   position: fixed; /* .agenda-frame 미탐지 시 fallback — 위치 앵커(position:relative)가 없을 수 있어 fixed */
+}
+/* Issue469: 그림 배경 장(#background-image-* → section[data-background-image]) — 테마 기본 배경 기준의
+   --m2-license-fg 는 그림 위에서 대비가 무너진다(실측 1.44:1·4.16:1). 대표색을 뽑지 않고 반투명 어두운
+   받침(pill) + 흰 글자로 그림과 무관하게 대비를 보장한다 — 받침을 흰 그림 위에 합성한 최악값 5.7:1.
+   색 리터럴을 쓴다(테마·원고의 --m2-license-fg override 를 타지 않게). 위치·표시·변형은 건드리지 않는다.
+   검증: ./m2slide.sh --lint-license «그림 배경» 행 · 설계 _doc_arch/license-attribution.md §4 */
+.reveal .slides section[data-background-image] .m2-license-badge {
+  color: #ffffff;
+  text-shadow: none;
+  background: rgba(15, 23, 42, 0.66);
+  padding: 0.04em 0.7em;
+  border-radius: 999px;
 }
 
 /* Issue449: _mg layout — ```mg 모션그래픽 전면 장 (theme 무관 구조 규칙).

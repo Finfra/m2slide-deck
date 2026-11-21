@@ -1430,7 +1430,7 @@ html.ratio-fill .agenda-frame {
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
   <link rel="stylesheet" href="css/lec-tokens.css"/>
-  <link rel="stylesheet" href="css/custom.css?v=1793376934969">
+  <link rel="stylesheet" href="css/custom.css?v=1795275570281">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1675,8 +1675,10 @@ html.ratio-fill .agenda-frame {
     
   </div>
   
-</section>
-
+  <aside class="notes">
+<p>⏱ <strong>표지 장이다. 마지막 날이다.</strong> 오늘의 한 단어 «넓히기» 와, 마지막에 «우리 부서 과제 카드 1건» 을 받는다는 한 문장만 말하고 넘긴다.</p>
+  </aside>
+      </section>
 
       <section data-slide-hash="#/2" id="toc-placeholder" class="layout-_toc title-slide">
   <header class="toc-page-header">
@@ -1690,8 +1692,32 @@ html.ratio-fill .agenda-frame {
 <section data-slide-hash="#/3" class="layout-_mg">
   <h1 class="mg-title">넓히기 — 번역 · 표 · 워크플로로</h1>
   <div class="mg-body"><div class="component-container mg-container" data-component="mg" data-mg-dur="17">{&quot;src&quot;:&quot;mg/06-day6&quot;,&quot;fit&quot;:&quot;contain&quot;,&quot;loop&quot;:false,&quot;start&quot;:0,&quot;theme&quot;:&quot;light&quot;,&quot;W&quot;:1440,&quot;H&quot;:1080,&quot;DUR&quot;:17,&quot;assets&quot;:{},&quot;code&quot;:&quot;// scene.js — 영업·마케팅 AI 강의 모션그래픽 06-day6 (6일차 넓히기) — 생성 파일, 직접 고치지 않는다\n// 원본: mg/_src/common.js + mg/_src/s06-day6.js · 합성: node mg/_src/compose.js\n(function (root) {\n// common.js — 영업·마케팅 6일 덱 mg 7개 장면이 공유하는 그리기 도구 (compose.js 가 각 scene.js 에 전문을 싣는다)\n// 출발점: DesignRndAI(설계·R&amp;D 덱) mg/_src/common.js — 같은 default_lec 색 체계(lec-tokens.css)라 상수를 그대로 쓴다\n// 결정론: Math.random·Date·performance.now 금지 — 모든 값은 시간 T 의 함수다. 글꼴은 시스템 글꼴만.\n\nvar W = 1440, H = 1080;\nvar C = {\n  bg: &#39;#FFFDF6&#39;, ink: &#39;#222222&#39;, sub: &#39;#4A4A44&#39;, muted: &#39;#8A877A&#39;, line: &#39;#E3DFD0&#39;, paper: &#39;#FFFFFF&#39;,\n  brand: &#39;#F5C518&#39;, brandInk: &#39;#7A6000&#39;, tint: &#39;#FFF6D5&#39;,\n  blue: &#39;#0365C0&#39;, blueTint: &#39;#EAF2FB&#39;, red: &#39;#C82506&#39;, redTint: &#39;#FDECE8&#39;, green: &#39;#1F7A4D&#39;, greenTint: &#39;#E4F3EA&#39;,\n};\nvar KR = &#39;\&quot;Apple SD Gothic Neo\&quot;, \&quot;Noto Sans KR\&quot;, sans-serif&#39;;\nvar MONO = &#39;Menlo, \&quot;SF Mono\&quot;, monospace&#39;;\n\n// ── 수학 ──────────────────────────────────────────────────────────────────\nfunction clamp(x, a, b) { return x &lt; a ? a : x &gt; b ? b : x; }\nfunction seg(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }\nfunction ease(p) { return p &lt; 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }\nfunction es(T, a, b) { return ease(seg(T, a, b)); }\nfunction lerp(a, b, p) { return a + (b - a) * p; }\nfunction hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }\nfunction rgba(c, a) { var x = hex(c); return &#39;rgba(&#39; + x[0] + &#39;,&#39; + x[1] + &#39;,&#39; + x[2] + &#39;,&#39; + a + &#39;)&#39;; }\n\n// ── 도형 ──────────────────────────────────────────────────────────────────\nfunction rr(ctx, x, y, w, h, r) {\n  r = Math.min(r, w / 2, h / 2);\n  ctx.beginPath();\n  ctx.moveTo(x + r, y);\n  ctx.arcTo(x + w, y, x + w, y + h, r);\n  ctx.arcTo(x + w, y + h, x, y + h, r);\n  ctx.arcTo(x, y + h, x, y, r);\n  ctx.arcTo(x, y, x + w, y, r);\n  ctx.closePath();\n}\n// 카드 — o: {fill, stroke, lw, r, alpha, shadow}\nfunction card(ctx, x, y, w, h, o) {\n  o = o || {};\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);  // 바깥 페이드와 곱함\n  if (o.shadow !== 0) {\n    ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;;\n    ctx.shadowBlur = 26;\n    ctx.shadowOffsetY = 8;\n  }\n  ctx.fillStyle = o.fill || C.paper;\n  rr(ctx, x, y, w, h, o.r == null ? 20 : o.r);\n  ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.shadowBlur = 0;\n  ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line;\n  ctx.lineWidth = o.lw || 2;\n  ctx.stroke();\n  ctx.restore();\n}\n// 글자 — size px, weight, color, align(left|center|right), 기준선 middle\nfunction txt(ctx, s, x, y, size, weight, color, align, font) {\n  ctx.font = weight + &#39; &#39; + size + &#39;px &#39; + (font || KR);\n  ctx.fillStyle = color;\n  ctx.textAlign = align || &#39;left&#39;;\n  ctx.textBaseline = &#39;middle&#39;;\n  ctx.fillText(s, x, y);\n}\nfunction lines(ctx, arr, x, y, step, size, weight, color, align) {\n  for (var i = 0; i &lt; arr.length; i++) txt(ctx, arr[i], x, y + i * step, size, weight, color, align);\n}\n// 화살표 — 시작점에서 p(0~1) 만큼 그려진다\nfunction arrow(ctx, x1, y1, x2, y2, p, color, lw) {\n  if (p &lt;= 0) return;\n  var x = lerp(x1, x2, p), y = lerp(y1, y2, p), a = Math.atan2(y2 - y1, x2 - x1);\n  ctx.save();\n  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw || 5; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();\n  if (p &gt; 0.85) {\n    ctx.beginPath();\n    ctx.moveTo(x2, y2);\n    ctx.lineTo(x2 - 22 * Math.cos(a - 0.45), y2 - 22 * Math.sin(a - 0.45));\n    ctx.lineTo(x2 - 22 * Math.cos(a + 0.45), y2 - 22 * Math.sin(a + 0.45));\n    ctx.closePath(); ctx.fill();\n  }\n  ctx.restore();\n}\n// 검증 도장 — ✓ (색 원 + 체크)\nfunction stamp(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  var s = lerp(1.5, 1, p);\n  ctx.translate(cx, cy); ctx.scale(s, s);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;; ctx.lineJoin = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(-r * 0.42, 0); ctx.lineTo(-r * 0.1, r * 0.34); ctx.lineTo(r * 0.45, -r * 0.34); ctx.stroke();\n  ctx.restore();\n}\nfunction crossmark(ctx, cx, cy, r, p, color) {\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = Math.min(1, p * 1.6);\n  ctx.fillStyle = color;\n  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();\n  ctx.strokeStyle = &#39;#FFFFFF&#39;; ctx.lineWidth = r * 0.22; ctx.lineCap = &#39;round&#39;;\n  ctx.beginPath(); ctx.moveTo(cx - r * 0.36, cy - r * 0.36); ctx.lineTo(cx + r * 0.36, cy + r * 0.36);\n  ctx.moveTo(cx + r * 0.36, cy - r * 0.36); ctx.lineTo(cx - r * 0.36, cy + r * 0.36); ctx.stroke();\n  ctx.restore();\n}\n// 문서 아이콘 — 접힌 모서리 + 본문 줄\nfunction doc(ctx, x, y, w, h, o) {\n  o = o || {};\n  var f = Math.min(w, h) * 0.22;\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.shadowColor = &#39;rgba(60,50,10,0.13)&#39;; ctx.shadowBlur = 20; ctx.shadowOffsetY = 6;\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.beginPath();\n  ctx.moveTo(x + 10, y); ctx.lineTo(x + w - f, y); ctx.lineTo(x + w, y + f); ctx.lineTo(x + w, y + h - 10);\n  ctx.arcTo(x + w, y + h, x + w - 10, y + h, 10); ctx.lineTo(x + 10, y + h); ctx.arcTo(x, y + h, x, y + h - 10, 10);\n  ctx.lineTo(x, y + 10); ctx.arcTo(x, y, x + 10, y, 10); ctx.closePath(); ctx.fill();\n  ctx.shadowColor = &#39;transparent&#39;; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = 2; ctx.stroke();\n  ctx.fillStyle = C.line;\n  ctx.beginPath(); ctx.moveTo(x + w - f, y); ctx.lineTo(x + w - f, y + f); ctx.lineTo(x + w, y + f); ctx.closePath(); ctx.fill();\n  var n = o.rows == null ? 4 : o.rows;\n  for (var i = 0; i &lt; n; i++) ctx.fillRect(x + 18, y + f + 18 + i * 20, (w - 36) * (i === n - 1 ? 0.55 : 1), 7);\n  ctx.restore();\n}\n\n// ── 공통 틀: 머리(일차 칩 + 제목) · 아래 한 줄 ───────────────────────────────\nfunction header(ctx, T, chip, title, a) {\n  var p = es(T, a, a + 0.6);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  ctx.fillStyle = C.brand;\n  rr(ctx, 70, 62, 178, 62, 31);\n  ctx.fill();\n  txt(ctx, chip, 159, 93, 34, 800, C.ink, &#39;center&#39;);\n  txt(ctx, title, 276, 94 + (1 - p) * 10, 52, 800, C.ink, &#39;left&#39;);\n  ctx.fillStyle = C.brand;\n  ctx.fillRect(70, 148, 1300 * p, 6);\n  ctx.restore();\n}\nfunction footer(ctx, T, s, a, color) {\n  var p = es(T, a, a + 0.8);\n  if (p &lt;= 0) return;\n  ctx.save();\n  ctx.globalAlpha = p;\n  txt(ctx, s, 720, 1010 + (1 - p) * 12, 38, 700, color || C.brandInk, &#39;center&#39;);\n  ctx.restore();\n}\nfunction backdrop(ctx) {\n  ctx.setTransform(1, 0, 0, 1, 0, 0);\n  ctx.globalAlpha = 1;\n  ctx.shadowColor = &#39;transparent&#39;;\n  ctx.fillStyle = C.bg;\n  ctx.fillRect(0, 0, W, H);\n}\n\n// ── 영업·마케팅 덱 추가 도구 ────────────────────────────────────────────────\n// 알약 라벨 — 가운데 정렬, 폭은 글자에 맞춰 잰다\nfunction pill(ctx, s, cx, cy, size, fill, color, padX) {\n  ctx.font = &#39;800 &#39; + size + &#39;px &#39; + KR;\n  var w = ctx.measureText(s).width + (padX == null ? 36 : padX) * 2, h = size * 1.75;\n  ctx.fillStyle = fill;\n  rr(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);\n  ctx.fill();\n  txt(ctx, s, cx, cy + 1, size, 800, color, &#39;center&#39;);\n  return w;\n}\n// 말풍선 — 아래 꼬리\nfunction bubble(ctx, x, y, w, h, o) {\n  o = o || {};\n  card(ctx, x, y, w, h, { fill: o.fill || C.paper, stroke: o.stroke || C.line, lw: o.lw || 2, alpha: o.alpha, r: 24 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (o.alpha == null ? 1 : o.alpha);\n  ctx.fillStyle = o.fill || C.paper;\n  ctx.strokeStyle = o.stroke || C.line; ctx.lineWidth = o.lw || 2;\n  var tx = o.tail == null ? x + 60 : o.tail;\n  ctx.beginPath(); ctx.moveTo(tx, y + h - 2); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h - 2); ctx.closePath();\n  ctx.fill();\n  ctx.beginPath(); ctx.moveTo(tx, y + h); ctx.lineTo(tx + 10, y + h + 28); ctx.lineTo(tx + 36, y + h); ctx.stroke();\n  ctx.restore();\n}\n// 브라우저 창 — 주소창 + 본문 영역(콜백)\nfunction browser(ctx, x, y, w, h, url, alpha) {\n  card(ctx, x, y, w, h, { fill: C.paper, alpha: alpha, r: 16 });\n  ctx.save();\n  ctx.globalAlpha = ctx.globalAlpha * (alpha == null ? 1 : alpha);\n  ctx.fillStyle = &#39;#F1EEE3&#39;;\n  rr(ctx, x + 2, y + 2, w - 4, 54, 14); ctx.fill();\n  var dots = [&#39;#E5533C&#39;, &#39;#F5C518&#39;, &#39;#3E8E41&#39;];\n  for (var i = 0; i &lt; 3; i++) { ctx.fillStyle = dots[i]; ctx.beginPath(); ctx.arc(x + 30 + i * 26, y + 29, 8, 0, Math.PI * 2); ctx.fill(); }\n  ctx.fillStyle = C.paper; rr(ctx, x + 120, y + 12, w - 150, 34, 17); ctx.fill();\n  if (url) txt(ctx, url, x + 166, y + 30, 22, 600, C.sub, &#39;left&#39;, MONO);\n  ctx.restore();\n}\n\n// 장면 ⑦ — 6일차 넓히기 (원고 근거: 6-0 process «번역·표 정리·근거 제안·규칙 자동화·과제 카드»\n//          · 받는 파일 → 만드는 파일: 번역/ → 카탈로그_영문.md · CRM.xlsx → CRM_정리.xlsx · 후보분석.xlsx → 원페이지제안.md\n//          · 리드워크플로.json → 결과 표 5행(A·B·C 등급, AI 노드 없음) · 6-6 과제 카드)\n// ⚠️ 확인 질문(A 등급 수 · 999/1000 경계)의 답은 그리지 않는다 — 등급 이름만 보인다\nvar NAME = &#39;mg-06-day6&#39;, DUR = 17;\nvar TR = [0.8, 3.4, 6.0, 8.6];  // 네 줄 시작 시각\nvar TL = { r1: TR[0], r2: TR[1], r3: TR[2], r4: TR[3], card: 11.4, foot: 14.2 };\nvar ROWS = [\n  [&#39;번역&#39;, &#39;카탈로그 · 메일&#39;, &#39;번역&#39;, &#39;영문 카탈로그&#39;],\n  [&#39;표 정리&#39;, &#39;CRM.xlsx&#39;, &#39;정리&#39;, &#39;전환율 표&#39;],\n  [&#39;근거 제안&#39;, &#39;후보분석.xlsx&#39;, &#39;근거&#39;, &#39;원페이지 제안&#39;],\n  [&#39;규칙 자동화&#39;, &#39;테스트 리드 5건&#39;, &#39;n8n 규칙&#39;, &#39;A · B · C&#39;],\n];\nvar RY0 = 210, RSTEP = 182, NH = 112;\nvar X = [70, 412, 690], NW = [280, 220, 300];\nfunction node(ctx, x, y, w, h, title, sub, o) {\n  card(ctx, x, y, w, h, o);\n  ctx.save(); ctx.globalAlpha = (o &amp;&amp; o.alpha != null) ? o.alpha : 1;\n  if (sub) { txt(ctx, title, x + w / 2, y + 40, 26, 700, C.muted, &#39;center&#39;); txt(ctx, sub, x + w / 2, y + 78, 30, 800, C.ink, &#39;center&#39;); }\n  else txt(ctx, title, x + w / 2, y + h / 2 + 1, 30, 800, C.ink, &#39;center&#39;);\n  ctx.restore();\n}\nfunction grades(ctx, x, y, w, p) {\n  var G = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], F = [C.green, C.blue, C.muted];\n  for (var i = 0; i &lt; 3; i++) {\n    var q = clamp(p * 3 - i, 0, 1);\n    if (q &lt;= 0) continue;\n    ctx.save(); ctx.globalAlpha = q;\n    ctx.fillStyle = F[i]; ctx.beginPath(); ctx.arc(x + w / 2 - 80 + i * 80, y + NH / 2, 30, 0, Math.PI * 2); ctx.fill();\n    txt(ctx, G[i], x + w / 2 - 80 + i * 80, y + NH / 2 + 2, 32, 800, &#39;#FFFFFF&#39;, &#39;center&#39;);\n    ctx.restore();\n  }\n}\nfunction draw(ctx, T) {\n  backdrop(ctx);\n  header(ctx, T, &#39;6일차&#39;, &#39;넓히기 — 번역 · 표 · 워크플로로&#39;, 0.2);\n  for (var r = 0; r &lt; ROWS.length; r++) {\n    var s = TR[r], y = RY0 + r * RSTEP;\n    var a = es(T, s, s + 0.5), b = es(T, s + 0.7, s + 1.2), c = es(T, s + 1.4, s + 1.9);\n    if (a &lt;= 0) continue;\n    ctx.save(); ctx.globalAlpha = a;\n    pill(ctx, (r + 1) + &#39;. &#39; + ROWS[r][0], X[0] + 100, y - 8, 22, C.brand, C.ink, 16);\n    ctx.restore();\n    node(ctx, X[0], y + 14, NW[0], NH, &#39;받는 것&#39;, ROWS[r][1], { alpha: a, fill: C.paper });\n    arrow(ctx, X[0] + NW[0] + 8, y + 14 + NH / 2, X[1] - 10, y + 14 + NH / 2, b, C.brandInk, 5);\n    if (b &gt; 0) node(ctx, X[1], y + 14, NW[1], NH, ROWS[r][2], null, { alpha: b, fill: C.tint, stroke: C.brand, lw: 3, r: 56, shadow: 0 });\n    arrow(ctx, X[1] + NW[1] + 8, y + 14 + NH / 2, X[2] - 10, y + 14 + NH / 2, c, C.brandInk, 5);\n    if (c &gt; 0) {\n      if (r === 3) {\n        card(ctx, X[2], y + 14, NW[2], NH, { alpha: c, fill: C.paper });\n        grades(ctx, X[2], y + 14, NW[2], es(T, s + 1.6, s + 2.4));\n      } else node(ctx, X[2], y + 14, NW[2], NH, &#39;만드는 것&#39;, ROWS[r][3], { alpha: c, fill: C.paper, stroke: C.brand, lw: 3 });\n    }\n    // 모든 결과물이 과제 카드로 모인다\n    arrow(ctx, X[2] + NW[2] + 8, y + 14 + NH / 2, 1086, 560 + (r - 1.5) * 40, es(T, TL.card - 0.6 + 0.15 * r, TL.card + 0.1 + 0.15 * r), C.brand, 4);\n  }\n  var k = es(T, TL.card, TL.card + 0.7);\n  if (k &gt; 0) {\n    ctx.save(); ctx.globalAlpha = k;\n    var cy = 400 + (1 - k) * 30;\n    card(ctx, 1100, cy, 270, 320, { fill: C.paper, stroke: C.brand, lw: 4 });\n    ctx.fillStyle = C.brand; rr(ctx, 1116, cy + 16, 238, 64, 14); ctx.fill();\n    txt(ctx, &#39;과제 카드&#39;, 1235, cy + 48, 32, 800, C.ink, &#39;center&#39;);\n    var K = [&#39;업무 · 입력&#39;, &#39;프롬프트 · 규칙&#39;, &#39;검증 기준 · 수단&#39;];\n    for (var i = 0; i &lt; 3; i++) {\n      var q = es(T, TL.card + 0.6 + 0.35 * i, TL.card + 1.0 + 0.35 * i);\n      ctx.globalAlpha = k * q;\n      ctx.fillStyle = C.line; ctx.fillRect(1130, cy + 118 + i * 66, 210, 2);\n      txt(ctx, K[i], 1140, cy + 146 + i * 66, 26, 700, C.sub, &#39;left&#39;);\n    }\n    ctx.restore();\n  }\n  footer(ctx, T, &#39;6일의 결과물을 내 업무 한 장으로 가져감&#39;, TL.foot);\n}\n\nroot.MG = {\n  NAME: NAME,\n  W: W, H: H, FPS: 30, DUR: DUR,\n  T: TL,\n  renderFrame: function (ctx, t) { draw(ctx, clamp(t, 0, DUR)); },\n  sfxEvents: function () { return []; },\n};\n})(typeof window !== &#39;undefined&#39; ? window : globalThis);\n&quot;}</div></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>모션그래픽 장이다.</strong> 재생이 끝날 때까지 말을 얹지 않고, 끝나면 그날의 한 단어 «넓히기» 만 말하고 다음 장으로 넘긴다.</p>
 
+<h2 class="title">6일차 시간 시계 (240분)</h2>
+
+<table>
+<thead>
+<tr><th style="text-align:left">구간</th><th style="text-align:right">분</th><th style="text-align:left">슬라이드</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">휴식 (50/10 × 4)</td><td style="text-align:right">40</td><td style="text-align:left">—</td></tr>
+<tr><td style="text-align:left">6-0 여는 절</td><td style="text-align:right">10</td><td style="text-align:left">day6-open</td></tr>
+<tr><td style="text-align:left">이론</td><td style="text-align:right">34</td><td style="text-align:left">6-1 이론 2 · 카탈로그 1 · CRM 이론 2 · 6-4 헤드 · 6-5 이론 3</td></tr>
+<tr><td style="text-align:left">🙋 Practice</td><td style="text-align:right">110</td><td style="text-align:left">P6-1 30 · P6-2 30 · P6-4 20 · P6-3 30 (확인 5분 포함)</td></tr>
+<tr><td style="text-align:left">🖥️ 시연 2건</td><td style="text-align:right">10</td><td style="text-align:left">demo-buyer-followup 5 · demo-n8n-ai 5</td></tr>
+<tr><td style="text-align:left">6-6 닫는 절</td><td style="text-align:right">36</td><td style="text-align:left">정답 공개 3 · 수단 고르기 3 · 과제 15 · 회고 10 · 로그아웃 5</td></tr>
+</tbody>
+</table>
+
+<ul>
+<li class="bullet-dot">닫는 절의 정답 공개(약 3분)와 수단 고르기 이론 장(약 3분)은 예산표에 열거되지 않아 과제 15 + 회고 10 + 로그아웃 5 = 30 이 실제로는 36분이었다. 2026.10.25(Issue64 단계2 S06)에 표에 올리고 같은 6분을 이론 40분에서 뺐다(합 240 불변) — 6-5 의 GPTs 종료 장을 3분으로 줄이면 맞는다. 6-6 도입(timeline) 장은 정답 공개 앞 1분 안에 읽는다.</li>
+<li class="bullet-dot">확인 5분 블록은 Agenda_forHuman 시간표와 같다. 각 절의 <code>verify-*</code> 장이 그 5분이며 숫자는 Progress 시트로 받는다.</li>
+<li class="bullet-dot">순서는 P6-1 → P6-2 → P6-4 → P6-3 이다. n8n(6-5) 이 맨 끝이라 가입이 막혀도 앞 세 건은 끝난 상태가 된다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/4" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -1733,13 +1759,22 @@ html.ratio-fill .agenda-frame {
 <ul>
 <li class="bullet-dot">시연은 두 번(합계 10분)이고 화면을 보기만 함. Practice 는 다섯 번이며 장표의 입력 파일·프롬프트·기대 결과를 따라 처음부터 끝까지 직접 침.</li>
 <li class="bullet-dot">진행 순서는 P6-1 → P6-2 → P6-4 → P6-3 임. 6-5 가 n8n 이라 번호는 그대로 두고 순서만 이렇게 돎.</li>
-<li class="bullet-dot">제출은 모든 Practice 가 같음 — 결과 파일을 <code>Day6</code> 폴더에 저장하고, 확인 질문의 숫자를 Progress 시트에 적음.</li>
+<li class="bullet-dot">제출은 모든 Practice 가 같음 — 결과 파일을 <code>Day6</code> 폴더에 저장하고 개인 드라이브 <code>AI실습/</code> 에도 두며, 확인 질문의 숫자를 Progress 시트에 적음.</li>
 <li class="bullet-dot">필드 영업은 장마다 📱 줄의 경로로 같은 확인 질문에 닿음. 막힌 단계 번호는 시트 비고에 적음.</li>
 <li class="bullet-dot">🔗 <strong>받는 파일 → 만드는 파일</strong>: <code>번역/</code> → <code>카탈로그_영문.md</code> · <code>CRM.xlsx</code> → <code>CRM_정리.xlsx</code> · <code>후보분석.xlsx</code> → <code>원페이지제안.md</code> · <code>리드워크플로.json</code> → 결과 표 5행.</li>
-<li class="bullet-dot">5일차 셋팅이 안 된 경우 <code>Day5/셋팅프롬프트.md</code> 의 마지막 1줄을 Codex 에 다시 넣음. 입력은 전부 가상 데이터이며 자사 고객·견적 데이터는 올리지 않음.</li>
+<li class="bullet-dot">5일차 세팅이 안 된 경우 <code>Day6/셋팅프롬프트.md</code> 의 마지막 1줄을 Codex 에 다시 넣음. 입력은 전부 가상 데이터이며 자사 고객·견적 데이터는 올리지 않음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>10분.</strong> 5일차 세팅이 남아 있는지 손으로 센다. P6-2 는 5일차 P5-2-1 에서 한 번에 깐 Python·openpyxl·matplotlib 을 그대로 쓰므로, 안 된 사람은 <code>Day6/셋팅프롬프트.md</code> 의 마지막 코드펜스 1줄을 지금 넣게 한다(5일차 배포본의 사본이며 <code>_material/Day6/</code> 에 동봉).</p>
 
+<ul>
+<li class="bullet-dash">로그인이 풀린 사람은 이 시간에 ChatGPT·VSCode 를 다시 로그인한다. n8n 은 P6-3 안에서 가입한다.</li>
+<li class="bullet-dash">입력은 전부 가상 데이터다. 자사 고객·견적을 올리려는 사람은 말린다.</li>
+<li class="bullet-dash">제출 방식을 한 번만 말한다 — 결과 파일은 <code>Day6</code> 폴더에, 확인 질문의 숫자는 Progress 시트에 적는다. 화면 공유에 기대지 않는 방식이라 원격 수강생이 있어도 같다.</li>
+<li class="bullet-dash">필드 영업 4명은 장마다 📱 줄만 따라가도 같은 확인 질문에 닿는다. Codex·룰·명령 화면은 보기 전용이다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/5" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1762,7 +1797,13 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">입력은 Pinecrest Equipment Parts(가상)가 보낸 영문 문의 3통이며 P6-1 에서 직접 응대 초안을 씀. 영문 제안서도 같은 네 칸에 길이만 늘림.</li>
 <li class="bullet-dot">AI 가 쓴 영문은 수량·납기·단가를 원문 숫자와 대조한 뒤에 보냄.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">영문 메일은 «네 칸 순서»(문의 확인 → 직접 답변 → 수치 근거 → 기한 있는 다음 행동) 한 가지만 외우게 한다. 제안서 이야기는 길이만 늘린다고 한 줄로 끝낸다.</li>
+<li class="bullet-dash">숫자 대조가 이 절의 핵심이다. 수량·납기·단가를 원문과 맞춘 뒤에만 보낸다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/6" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1786,7 +1827,12 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">어조는 프롬프트에 한 줄로 지정함. 3일차 견적 회신의 어조 2종과 같은 방식임.</li>
 <li class="bullet-dot">첫 문의 응대는 «정중» 이 기본이고, 계약·클레임 문서만 «격식» 으로 올림.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">세 문장은 읽어 주고 넘어간다. 실습에서 어조를 고르게 하지는 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/7" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1811,7 +1857,13 @@ flowchart LR
 <li class="bullet-dot">1일차의 할루시네이션 방어 한 줄(«비판한 뒤 고쳐 다시 써라»)을 영문 회신에도 한 번 더 걸 수 있음.</li>
 <li class="bullet-dot">실습 메일은 가상이라 올려도 되지만, 실제 고객 메일은 붙여 넣지 않음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">deepl.com 은 로그인 없이 쓴다. 역번역은 뜻만 잡는다는 말을 반드시 한다 — 숫자는 못 거른다.</li>
+<li class="bullet-dash">가상 메일만 올린다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/8" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1835,7 +1887,13 @@ flowchart LR
 <li class="bullet-dot">전시회 후속 메일은 만난 직후 보내야 값이 큼 — 명함 메모 3줄이면 초안이 나옴.</li>
 <li class="bullet-dot">다국어 카탈로그는 파일 하나씩이 아니라 <strong>폴더째</strong>, 용어집을 붙여 번역함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">시연 1건 + 카탈로그 설명 + P6-1 실습 2건(폴더 번역·문의 응대)이 이 절이다. 시연 5분. 시연이 길어지면 카탈로그 설명을 줄인다.</li>
+<li class="bullet-dash">시연은 보기만 하고 따라 치지 않는다고 말한다. 직접 치는 것은 Practice P6-1 두 건이다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/9" class="layout-_contents">
   <div class="contents-head-bar">
@@ -1863,7 +1921,17 @@ flowchart LR
 <tr><td style="text-align:left">후속 영문 메일</td><td style="text-align:left">정중한 어조 · James 호명 · «3일 안 회신»</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>시연 5분.</strong> 수강생은 보기만 한다.</p>
+
+<ul>
+<li class="bullet-dash">첫 프롬프트는 공개 웹 검색이 되는 계정에서만 의미가 있다. 검색이 안 되면 기준 5가지만 말로 받는다.</li>
+<li class="bullet-dash">🔴 특정 기업의 연락처를 모으는 시연으로 흐르지 않게 한다. 유형·기준까지만 한다.</li>
+<li class="bullet-dash">둘째 프롬프트는 결과가 매번 다르다. 어조와 «3일 안 회신» 이 들어갔는지만 본다.</li>
+<li class="bullet-dash">🖐 사전 실행 대기 — 이 시연은 선실행 대상 밖이고 결과가 매번 달라, 개강 전에 두 프롬프트를 한 번씩 돌려 두고 실패 시 보여 줄 캡처를 남긴다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/10" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -1912,8 +1980,14 @@ flowchart LR
 </div>
 
 </div></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">순서는 «glossary 먼저 읽히기 → 번역 → 점검표» 이다. glossary 를 읽히지 않고 번역시키면 P6-1-1 의 확인 질문이 무너진다.</li>
+<li class="bullet-dash">«쓰지 않는 표기» 열이 핵심이다. 예: 부시를 <code>bushing</code> 으로 고정하고 <code>bush</code> 는 금지 표기.</li>
+<li class="bullet-dash">1열 용어 20행이라 점검표도 20행이 나온다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/11" class="layout-exercise">
   <div class="contents-head-bar">
@@ -1951,8 +2025,17 @@ glossary 의 English 열 표기만 쓰고 "쓰지 않는 표기" 열의 단어�
 <ul>
 <li class="bullet-dot"><strong>기대 결과</strong>: <code>카탈로그_영문.md</code> · <code>용어점검표.md</code> 생성, 원본 불변 ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>12분.</strong> 입력은 <code>번역/카탈로그_국문.md</code> 와 <code>glossary.md</code>(가상).</p>
 
+<ul>
+<li class="bullet-dash">수량 120·150 대조는 눈으로 한다. 표의 숫자가 바뀌었는지가 첫 번째 위험이다.</li>
+<li class="bullet-dash">사전 실행 결과: 어긋난 용어 0개 (<code>result/P6-1/run.md</code>). 슬라이드 프롬프트와 사전 실행 프롬프트가 같다.</li>
+<li class="bullet-dash">오후라 Codex 한도(429)가 재발한 5회차 사례가 있다. 막히면 chatgpt.com 에 파일을 첨부하고 프롬프트의 «번역 폴더의» 를 «첨부한» 으로 바꾼다(verify-p6-1 에 같은 복구가 있다).</li>
+<li class="bullet-dash">📱 필드 영업은 ChatGPT 앱에 카탈로그 본문을 붙여 번역하고 용어 대조만 눈으로 한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/12" class="layout-exercise">
   <div class="contents-head-bar">
@@ -1989,10 +2072,19 @@ glossary 의 English 열 표기만 쓰고 "쓰지 않는 표기" 열의 단어�
 </div>
 
 <ul>
-<li class="bullet-dot"><strong>기대 결과</strong>: <code>문의요약.md</code> 3행 · <code>회신2.txt</code> 납기 8주 · 단가 «별도 견적» ✅</li>
+<li class="bullet-dot"><strong>기대 결과</strong>: <code>문의요약.md</code> 3행 · <code>회신2.txt</code> 납기 8주 · 단가 «별도 견적» · 습·분진은 «확인 필요» ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>13분.</strong> 입력은 <code>번역/</code> 폴더의 <code>문의1_견적요청.txt</code>·<code>문의2_납기사양.txt</code>·<code>문의3_샘플.txt</code>(Pinecrest 영문 3통, 가상).</p>
 
+<ul>
+<li class="bullet-dash">🖐 사전 실행 대기 — 프롬프트 ①(요약표·회신 초안)은 사전 실행으로 확인됐으나 <strong>프롬프트 ②(네 칸 순서 재정렬)는 사전 실행을 거치지 않았다.</strong> 개강 전에 한 번 돌려 본다.</li>
+<li class="bullet-dash">문의2 의 두 질문은 «6주 출하» 와 «표면처리» 다. 카탈로그에 답이 있는지가 대조 기준이며, 없으면 «확인 불가» 로 답하게 하는 것이 정답이다. 의도된 설계다 — 표면처리 방식(DG-DB 80 은 질화)은 카탈로그에 있지만 «습하고 먼지 많은 현장에 적합한가» 와 6주 출하·분할 출하는 자료에 없어 «확인 불가» 가 맞다.</li>
+<li class="bullet-dash">단가는 카탈로그에 없으므로 «별도 견적» 으로 적히는지 본다. 단가를 지어내면 verify-p6-1 의 복구 줄을 쓴다.</li>
+<li class="bullet-dash">역번역은 deepl.com 에서 한다. 납기 8주가 한글 역번역에서도 8주로 나오는지만 본다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/13" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -2009,7 +2101,7 @@ glossary 의 English 열 표기만 쓰고 "쓰지 않는 표기" 열의 단어�
 <ul>
 <li class="bullet-dot">용어점검표에서 어긋난 칸을 셈</li>
 <li class="bullet-dot">의심 용어 둘을 Ctrl+F 로 확인</li>
-<li class="bullet-dot">문의 3통 수량 합을 요약표와 대조</li>
+<li class="bullet-dot">문의 3통의 새 요청 수량이 요약표에 있는지 확인</li>
 </ul>
 </div>
 </div>
@@ -2033,8 +2125,15 @@ glossary 의 English 열 표기만 쓰고 "쓰지 않는 표기" 열의 단어�
 <ul>
 <li class="bullet-dot"><strong>5분</strong> · <strong>확인 질문</strong>: glossary 와 다르게 번역된 용어는 몇 개인가 — 숫자를 Progress 시트에 O/X 와 함께 적음. 대소문자 차이는 세지 않음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>5분.</strong> 정답: <strong>어긋난 용어 0개.</strong> 단 AI 출력에 따라 달라질 수 있어, 0 이 아니면 어떤 용어인지 같이 보고 내 숫자와 비교한다.</p>
 
+<ul>
+<li class="bullet-dash">대소문자 차이는 세지 않는다고 못 박는다. 이것이 합격선 흔들림의 가장 큰 원인이다.</li>
+<li class="bullet-dash">🖐 사람 판단 — 합격선(몇 개까지 허용할지)은 강사가 현장에서 정한다. 이 노트는 결정하지 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/14" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2056,7 +2155,12 @@ glossary 의 English 열 표기만 쓰고 "쓰지 않는 표기" 열의 단어�
 <li class="bullet-dot">분모를 무엇으로 두느냐에 따라 값이 달라지므로 정의를 프롬프트에 먼저 씀. 이 과정의 정의는 (견적 + 수주) ÷ 전체이고, 실주는 분모에만 넣음.</li>
 <li class="bullet-dot">위 숫자는 모양을 보이는 예시임. 내 데이터의 값은 P6-2 에서 직접 계산해 구함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">6-3 은 시연 없이 Practice 두 건으로 간다. 시간이 모자라면 P6-2-2 의 «수량 구간별 전환율» 선택 요청을 뺀다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/15" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2076,7 +2180,14 @@ glossary 의 English 열 표기만 쓰고 "쓰지 않는 표기" 열의 단어�
 </ul>
 </div>
 </div></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">세 함정은 중복 행·표기 불일치·분모 정의다. 마지막이 가장 중요하다 — 실주를 분모에 넣느냐에 따라 같은 CRM 에서 전환율이 달라진다.</li>
+<li class="bullet-dash">정의는 한 번 정해 두고 바꾸지 않는다고 말한다.</li>
+<li class="bullet-dot">그림 — CRM 정리의 함정 세 카드(중복·표기 흔들림·과잉 병합)로, 과잉 병합은 지우면 리드가 사라진다고 빨간 테두리로 강조한 그림</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/16" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2131,8 +2242,13 @@ Malgun Gothic 으로 지정해
 <li class="bullet-dot">5일차 엑셀 차트와 길이 다름 — 엑셀 차트는 글자가 텍스트라 안 깨지고, <code>.png</code> 는 그림에 글자를 그려 넣어 폰트를 지정해야 함.</li>
 <li class="bullet-dot">이 CRM 에는 금액 열이 없어 접수 <strong>건수</strong>까지만 봄. 금액 열이 있으면 같은 요청에서 건수를 월별 합계로 바꿔 매출 트렌드를 봄.</li>
 </ul></div>
-</section>
-
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">차트는 <strong>모양을 보이는 예시값</strong>이다(24·22·21·26·20·18·23·22·10). P6-2-2 에서 나오는 실제 월별 값(25·23·21·26·21·18·24·22·10)과 다르다. 수강생이 숫자를 대조하려 하면 예시값이라고 알린다.</li>
+<li class="bullet-dash">🖐 사전 실행 대기 — 렌털 Windows PC 에서 차트의 한글이 네모로 깨지는지 확인한다. 깨지면 프롬프트의 Malgun Gothic 줄이 복구다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/17" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2169,8 +2285,16 @@ Malgun Gothic 으로 지정해
 <ul>
 <li class="bullet-dot"><strong>기대 결과</strong>: <code>CRM_정리.xlsx</code> 생성 · 단계 열에 리드·상담·견적·수주·실주 다섯 가지뿐 ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>12분.</strong> 입력은 <code>CRM.xlsx</code>(가상 200행).</p>
 
+<ul>
+<li class="bullet-dash">승인 전에 «바꾼 표기 목록» 을 읽게 한다. 이상한 변환(예: 견적 → 수주)이 이 줄에서만 잡힌다.</li>
+<li class="bullet-dash">사전 실행 결과: 200행 → 중복 제거 후 <strong>190행</strong>.</li>
+<li class="bullet-dash">📱 필드 영업은 ChatGPT 앱에 xlsx 를 첨부해 같은 프롬프트로 하고 필터 확인은 건너뛴다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/18" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2208,8 +2332,16 @@ Malgun Gothic 으로 지정해
 <ul>
 <li class="bullet-dot"><strong>기대 결과</strong>: 분자·분모·전환율(%) 숫자 + <code>월별접수.png</code> 막대 9개와 한글 제목·축 ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>13분.</strong> 같은 대화에서 이어서 한다 — 새 대화를 열면 정리된 파일을 잃는다.</p>
 
+<ul>
+<li class="bullet-dash">정답: 분자 57 ÷ 분모 190 = <strong>30.0%</strong> (견적 또는 수주 57건).</li>
+<li class="bullet-dash">사전 실행에서 한글 폰트가 문제 된 적이 없어도 렌털 PC 는 다를 수 있다. 막대 9개가 보이는지로 판단한다.</li>
+<li class="bullet-dash">선택 요청(수량 구간별)은 정답이 없다. 확인 질문과 무관함을 알린다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/19" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -2237,7 +2369,7 @@ Malgun Gothic 으로 지정해
 <tr><th style="text-align:left">막히면</th><th style="text-align:left">복구</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">openpyxl·차트 오류</td><td style="text-align:left"><code>Day5/셋팅프롬프트.md</code> 의 마지막 1줄을 Codex 에 다시 넣음</td></tr>
+<tr><td style="text-align:left">openpyxl·차트 오류</td><td style="text-align:left"><code>Day6/셋팅프롬프트.md</code> 의 마지막 1줄을 Codex 에 다시 넣음</td></tr>
 <tr><td style="text-align:left">Codex 한도 초과(429)</td><td style="text-align:left">chatgpt.com 에 <code>CRM.xlsx</code> 를 첨부, 결과 파일을 <code>Day6</code> 에 저장</td></tr>
 <tr><td style="text-align:left">전환율이 정의와 다름</td><td style="text-align:left">«분모는 전체 행, 실주 포함» 으로 재요청</td></tr>
 <tr><td style="text-align:left">글자가 네모</td><td style="text-align:left">«Malgun Gothic 폰트로 다시 그려라» 한 번 더</td></tr>
@@ -2251,8 +2383,15 @@ Malgun Gothic 으로 지정해
 <ul>
 <li class="bullet-dot"><strong>5분</strong> · <strong>확인 질문</strong>: 중복 제거 후 남은 행은 몇 개이고 리드→견적 전환율은 몇 %인가 — 두 숫자를 Progress 시트에 적음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>5분.</strong> 정답: <strong>190행 · 30.0%.</strong></p>
 
+<ul>
+<li class="bullet-dash">두 숫자를 Progress 시트에 적게 하고 틀린 사람은 분모 정의(실주 포함)부터 본다.</li>
+<li class="bullet-dash">Codex 한도(429)가 나면 chatgpt.com 에 <code>CRM.xlsx</code> 를 첨부하고 결과 파일을 <code>Day6</code> 에 저장하게 한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/20" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2276,7 +2415,13 @@ Malgun Gothic 으로 지정해
 <li class="bullet-dot">3일차 원페이지와 같은 틀에서 «기대효과» 가 «근거 숫자 3개» 로 바뀜. 독자·요청·담당·기한이 있어야 읽는 사람이 움직임.</li>
 <li class="bullet-dot"><strong>받는 것</strong> <code>후보분석.xlsx</code>(5일차) → <strong>만드는 것</strong> <code>원페이지제안.md</code> — 1차 타깃 표 · 근거 숫자 3개(P6-4) → <strong>다음에 쓸 곳</strong> 6-6 과제 카드의 «검증 기준» 예시</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">6-4 는 5일차 후보 분석을 근거로 한 장짜리 제안을 쓰는 절이다. 피라미드는 «결론 → 근거 → 출처» 순서 설명이다. 길게 끌지 않는다.</li>
+<li class="bullet-dash">5일차에 만든 <code>후보분석.xlsx</code> 가 없는 사람은 <code>_material/Day6/</code> 의 같은 이름 파일을 쓴다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/21" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2287,7 +2432,7 @@ Malgun Gothic 으로 지정해
     <h1 class="exercise-title">🙋 Practice P6-4-1 — 1차 타깃을 고르고 원페이지 제안 쓰기</h1>
   </div>
   <div class="exercise-body"><ul>
-<li class="bullet-dot"><strong>15분</strong> · 입력 <code>Day6/후보분석.xlsx</code> (시트 3개 — 5일차에 만든 파일이 있으면 그것을 씀)</li>
+<li class="bullet-dot"><strong>15분</strong> · 입력 <code>Day6/후보분석.xlsx</code> (시트 3개 — 5일차 <code>후보분석.xlsx</code> 는 <code>Day6</code> 폴더로 복사)</li>
 </ul>
 
 <div class="m2-cols columns">
@@ -2314,8 +2459,18 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 <ul>
 <li class="bullet-dot"><strong>기대 결과</strong>: 4덩어리와 숫자 3개(식 병기). 담당·기한이 «확인 필요» 인 것은 정상 ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>15분.</strong> 입력은 <code>후보분석.xlsx</code>(시트 3개).</p>
 
+<ul>
+<li class="bullet-dash">숫자 3개를 xlsx 값·식과 하나씩 대조하는 것이 핵심이다. «확인 필요» 로 남은 담당·기한 칸은 정상이며 지어내지 않았다는 증거다.</li>
+<li class="bullet-dash">사전 실행 결과: 1차 타깃 <strong>6곳</strong>, ① 74,400억원 ② 약 91% ③ 해외지사 28곳, 재현 안 되는 숫자 <strong>0개</strong>.</li>
+<li class="bullet-dash">이 슬라이드의 프롬프트가 5개 줄 중 가장 길다. 코드블록을 통째로 복사하게 한다.</li>
+<li class="bullet-dash">📱 필드 영업은 ChatGPT 앱에 xlsx 를 첨부해 같은 프롬프트로 하고, 대조는 화면에서 한다.</li>
+<li class="bullet-dash">🖐 사람 판단 — 송부용 PDF 에 이 절의 결과를 어느 수준까지 넣을지는 결정하지 않는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/22" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -2344,7 +2499,7 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 </thead>
 <tbody>
 <tr><td style="text-align:left">숫자가 xlsx 와 다름</td><td style="text-align:left">«그 숫자의 식과 출처 셀을 알려 줘» 로 재요청</td></tr>
-<tr><td style="text-align:left">3분 넘게 막힘</td><td style="text-align:left">손을 들어 완성본 파일을 받아 확인 질문만 진행</td></tr>
+<tr><td style="text-align:left">3분 넘게 막힘</td><td style="text-align:left">손을 들고, 풀이를 들은 뒤 완성본과 대조함</td></tr>
 <tr><td style="text-align:left">Codex 한도 초과(429)</td><td style="text-align:left">chatgpt.com 에 <code>후보분석.xlsx</code> 를 첨부</td></tr>
 <tr><td style="text-align:left">📱 필드 영업</td><td style="text-align:left">ChatGPT 앱에 xlsx 를 첨부해 같은 프롬프트 · 화면에서 대조</td></tr>
 </tbody>
@@ -2356,8 +2511,14 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 <ul>
 <li class="bullet-dot"><strong>5분</strong> · <strong>확인 질문</strong>: 1차 타깃은 몇 곳이고, xlsx 값이나 식으로 재현되지 않는 근거 숫자는 몇 개인가.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>5분.</strong> 정답: <strong>6곳 · 재현되지 않는 숫자 0개.</strong></p>
 
+<ul>
+<li class="bullet-dash">3분 넘게 막힌 사람은 손을 들게 한다. 완성본(<code>_강사본/원페이지제안.md</code>)은 정답(6곳)이 들어 있어 건네지 않고, 확인 질문을 풀이한 뒤에만 강사 화면으로 보여 준다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/23" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2371,18 +2532,27 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 <div class="m2-col column" style="flex: 0 0 58.78%; max-width: 58.78%">
 <ul>
 <li class="bullet-dot">GPTs 는 종료 단계라 5분 안에 보고, 리드 자동 분류는 n8n Practice(P6-3)에서 직접 함.</li>
-<li class="bullet-dot">개인 계정(Free·Go·Plus·Pro)은 신규 생성이 이미 막혔다는 보도가 있음. 지급 계정의 실제 상태는 ChatGPT 화면에서 확인함.</li>
+<li class="bullet-dot">개인 계정(Free·Go·Plus·Pro)은 새 GPT 를 못 만들고, 기존 GPT 는 2026.12.11 종료(OpenAI 도움말). 지급 계정은 화면에서 봄.</li>
 <li class="bullet-dot"><strong>받는 것</strong> <code>리드워크플로.json</code> · <code>리드규칙.md</code> · 테스트 리드 5건 → <strong>만드는 것</strong> 결과 표 5행 — A·B·C 등급(P6-3) → <strong>다음에 쓸 곳</strong> 6-6 과제 카드의 수단 «n8n»</li>
-<li class="bullet-dot">종료 뒤 대체는 플러그인임. Actions(외부 API 연동)는 그대로 옮겨지지 않아 앱이나 MCP 서버로 다시 만들어야 하고, 옮긴 결과는 응답이 달라질 수 있어 재시험함.</li>
+<li class="bullet-dot">종료 뒤 대체는 플러그인임. Actions(외부 API 연동)는 그대로 옮겨지지 않아 앱이나 MCP(AI 와 외부 도구를 잇는 표준) 서버로 다시 만들고, 응답이 달라질 수 있어 재시험함.</li>
 </ul>
 </div>
 
 <div class="m2-col column" style="flex: 0 0 37.22%; max-width: 37.22%">
-<div class="media-container"><img src="img/d6-day6-s4-gpts-timeline.png" alt="GPTs 일정 타임라인으로 2026.10.26 신규 생성 차단, 2026.12.11 종료, 2027.02.11 유예 승인 고객 종료를 보여 줌(날짜는 보도·공지 기준이며 계정마다 다를 수 있음)"></div>
+<div class="media-container"><img src="img/d6-day6-s4-gpts-timeline.png" alt="GPTs 종료 일정 타임라인 — 2026.10.26 Enterprise 신규 생성 종료 · 2026.12.11 GPTs 종료 · 2027.02.11 유예 승인 워크스페이스 종료(OpenAI 도움말 기준)"></div>
 </div>
 
 </div></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>5분 이내.</strong> GPTs 종료는 사실 전달만 하고 토론하지 않는다.</p>
+
+<ul>
+<li class="bullet-dash">✅ 날짜는 OpenAI 도움말 원문으로 확인했다(2026.11.01 브라우저) — «Custom GPT retirement and migration FAQ»·«Creating and editing GPTs». 표준 종료 2026.12.11 · Enterprise 신규 생성 종료 2026.10.26 · FedRAMP·유예 승인 워크스페이스 종료 2027.02.11. 개인 계정(Free·Go·Plus·Pro)은 새 GPT 를 만들거나 게시할 수 없다(08.16 시작일은 보도 기준). 6일차(11.18)는 종료 전이라 기존 GPT 는 아직 쓰인다. 공지가 자주 갱신되니 11.17 에 한 번 더 연다.</li>
+<li class="bullet-dash">종료 뒤에도 지난 대화 기록은 남고 GPT 페이지만 닫힌다. 이전(migration)하면 지시문은 플러그인의 skill, 지식 파일은 참고 파일로 옮겨지고 원본 GPT 는 읽기 전용이 된다. custom action 은 옮겨지지 않는다.</li>
+<li class="bullet-dot">그림 — GPTs 종료 일정 타임라인(2026.11.01 도움말 기준으로 다시 그림). 가운데 12.11 만 읽고, 양옆은 «회사 워크스페이스는 날짜가 다르다» 로 묶는다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/24" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2418,7 +2588,13 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 <li class="bullet-dot">공통 기준은 <strong>지시문과 참고 파일을 한 번 저장해 두고 매번 꺼내 쓴다</strong>는 것임. 이 기준을 채우면 이름이 바뀌어도 같은 방식으로 옮겨 감.</li>
 <li class="bullet-dot">1일차 도구 비교에서 본 «프로젝트» 가 첫째 대안임. 이 과정의 지급 계정에서는 ChatGPT 프로젝트가 가장 가까움.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">세 가지 모두 «지시문과 참고 파일을 한 번 저장해 두고 꺼내 쓴다» 는 같은 기준이다. 지급 계정에서 열리는 것은 프로젝트가 확실하고 플러그인은 화면에서 확인한다.</li>
+<li class="bullet-dash">Gemini Gems 는 개인 구글 계정으로 만든다. 자사 자료를 넣지 않는다고 덧붙인다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/25" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2454,11 +2630,17 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 
 <ul>
 <li class="bullet-dot">n8n 은 규칙으로 도는 일을 노드로 이어 붙이는 자동화 도구임. 코드를 쓰지 않음.</li>
-<li class="bullet-dot">체험은 Cloud 14일 무료이고 카드 입력이 없음. 6일차에 가입하면 12.02 까지 씀.</li>
+<li class="bullet-dot">체험은 Cloud 14일 무료이고 카드 없이 시작하는 것으로 안내됨. 6일차에 가입하면 12.02 까지 씀.</li>
 <li class="bullet-dot">체험 뒤에는 유료 Cloud(회사 결정) 또는 무료 Community Edition(사내 서버, IT 부서와 함께)임.</li>
 <li class="bullet-dot">Practice P6-3 은 준비된 워크플로를 붙여넣고 규칙 3줄로 등급을 나눠 표로 봄. AI 노드는 쓰지 않음.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<ul>
+<li class="bullet-dash">n8n 의 핵심은 «같은 입력이면 항상 같은 결과» 다. 다음 시연(AI 분류)과 이 대비를 만들기 위한 장이다.</li>
+<li class="bullet-dash">n8n 화면·가격은 바뀔 수 있다. 🖐 6일차 전날(11.17) Cloud 무료 체험 가입 화면과 가격을 다시 확인한다. 체험 14일은 공식 문서로 확인했고 «카드 없이 시작» 안내는 가입 화면에서 확인한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/26" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2476,7 +2658,7 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 
 <div class="m2-col column" style="flex: 0 0 50.94%; max-width: 50.94%">
 <ol>
-<li>n8n.io → Cloud 무료 체험 — 이메일 · 비밀번호 · 인스턴스 이름 (카드 없음)</li>
+<li>n8n.io → Cloud 무료 체험 — 이메일 · 비밀번호 · 인스턴스 이름 (카드 없이 시작하도록 안내됨)</li>
 <li>인증 코드를 입력하고 설문은 Skip, 1분쯤 대기</li>
 <li>새 워크플로(빈 캔버스)를 만들고 <code>리드워크플로.json</code> 을 열어 전체 복사</li>
 <li>캔버스를 한 번 클릭하고 Ctrl+V — <strong>한 번만</strong></li>
@@ -2492,8 +2674,17 @@ xlsx 값이거나 계산한 수만 쓰고 식을 병기. 재현 못 하면 '확�
 <ul>
 <li class="bullet-dot"><strong>기대 결과</strong>: 캔버스에 노드 7개가 선으로 이어져 보임 ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>12분.</strong> n8n Cloud 무료 체험 가입이 이 12분의 대부분이다(카드 없이 시작하도록 안내됨).</p>
 
+<ul>
+<li class="bullet-dash">인증 메일이 늦거나 스팸함으로 가면 가입이 막힌 것처럼 보인다. 그동안 옆 화면(P6-3-2 의 규칙 3줄)을 읽게 한다.</li>
+<li class="bullet-dash">JSON 붙여넣기는 <strong>한 번만</strong> 한다. 두 번 붙이면 노드가 두 벌이 되어 화면이 어지러워지고 실행 결과를 읽기 어렵다.</li>
+<li class="bullet-dash">슬라이드의 캔버스 이미지(<code>img/p6-3-n8n-workflow.png</code>)는 등급 규칙 → 등급 A·B·C → 결과 표 구간만 확대한 것(실행 뒤 모습, 정답 개수 라벨은 가림)이다. 붙여넣은 직후 캔버스 전체는 노드 7개(테스트 리드 5건 · 등급 규칙 · 등급 A·B·C · 결과 표)로 대조한다.</li>
+<li class="bullet-dash">개인 이메일 1개가 필요하다. 지급 계정이 아니라 각자의 개인 메일이라 필드 영업도 폰에서 인증은 가능하다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/27" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2531,8 +2722,16 @@ C: 그 밖의 전부
 <ul>
 <li class="bullet-dot"><strong>기대 결과</strong>: 노드마다 초록 체크 · <code>결과 표</code> 에 5행과 등급 열(A·B·C) ✅</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>13분.</strong> 입력은 가져온 워크플로와 <code>리드규칙.md</code>(테스트 리드 5건).</p>
 
+<ul>
+<li class="bullet-dash">규칙: A 는 수량 1000 이상 그리고 유입경로 = 전시회, B 는 A 가 아니고 수량 300 이상, C 는 그 밖의 전부.</li>
+<li class="bullet-dash">선택 실습(1000 → 900)은 시간이 남는 사람만 한다. 바꾸면 999 도 A 가 되어 A 가 3건으로 나온다 — 확인 질문의 정답은 바꾸기 전 기준 <strong>2건</strong>이다.</li>
+<li class="bullet-dash">📱 필드 영업은 실행 대신 테스트 리드 5건에 규칙 3줄을 손으로 대입한다(Codex·n8n 은 보기 전용).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/28" class="layout-exercise-small">
   <div class="contents-head-bar">
@@ -2574,8 +2773,15 @@ C: 그 밖의 전부
 <ul>
 <li class="bullet-dot"><strong>5분</strong> · <strong>확인 질문</strong>: 테스트 리드 5건 중 A 등급은 몇 건인가 — 숫자를 Progress 시트에 O/X 와 함께 적음. 선택 실습을 했어도 바꾸기 전 1000 기준 숫자임.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>5분.</strong> 정답: <strong>A 등급 2건</strong> (999 는 B, 1000 은 A).</p>
 
+<ul>
+<li class="bullet-dash">999 와 1000 의 경계가 규칙 읽기의 핵심이다. 이 비교를 못 하면 규칙 3줄을 처음부터 다시 읽게 한다.</li>
+<li class="bullet-dash">가입이 끝내 막힌 사람은 시트 비고에 적게 하고 시연 화면으로 결과 판정만 한다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/29" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2607,7 +2813,15 @@ C: 그 밖의 전부
 <tr><td style="text-align:left">같은 문의 재실행</td><td style="text-align:left">결과가 바뀔 수 있음을 눈으로 확인함</td></tr>
 </tbody>
 </table></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>시연 5분.</strong> 보기만 한다. P6-3 과 구분하기 위해 «AI 노드» 시연이라고 말하고 시작한다.</p>
+
+<ul>
+<li class="bullet-dash">같은 문의를 두 번 돌려 결과가 바뀔 수 있음을 눈으로 보이는 것이 목적이다. 바뀌지 않아도 «바뀔 수 있다» 고 말한다.</li>
+<li class="bullet-dash">🖐 사전 실행 대기 — 이 시연은 선실행 대상 밖이다. AI 노드에 쓸 모델 연결(자격증명)이 필요하므로 강사 계정으로 개강 전에 한 번 돌려 둔다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/30" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2655,8 +2869,15 @@ C: 그 밖의 전부
 <li class="bullet-dot">앞날의 결과가 다음 날의 재료였음 — 맥락 카드 → 브리핑 → 제안서 → 홈페이지·CSV → 시각물·차트 → 영문·CRM. 이제 이 사슬을 <strong>우리 부서 일 1건</strong>에 거는 것이 과제 카드임.</li>
 <li class="bullet-dot">남은 시간은 정답 공개 → 수단 고르기 → 🙋 과제 카드 15분 → 🙋 회고·로그아웃 15분 순서임.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>닫는 절 36분의 시작.</strong> 타임라인은 읽어 주고 넘어간다.</p>
 
+<ul>
+<li class="bullet-dash">한 줄 요지: 앞날의 결과가 다음 날의 재료였다. 이 사슬을 우리 부서 일 1건에 거는 것이 과제 카드다.</li>
+<li class="bullet-dash">남은 시간 배분: 정답 공개 3 → 수단 고르기 3 → 과제 카드 15 → 회고·로그아웃 15(회고 10 + 로그아웃 5). 앞 둘이 길어지면 과제 카드를 줄이지 말고 정답 공개를 읽고 넘어간다.</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/31" class="layout-contents-full">
   <div class="contents-head-bar">
@@ -2680,8 +2901,26 @@ C: 그 밖의 전부
 <ul>
 <li class="bullet-dot">시트에 정답과 내 숫자를 나란히 적고 Progress 를 O/X 로 정리함. P6-1 은 AI 출력에 따라 달라질 수 있어 내 숫자와 비교함.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>3분.</strong> 표를 띄워 놓고 시트에 정답과 내 숫자를 나란히 적게 한다.</p>
 
+<table>
+<thead>
+<tr><th style="text-align:left">검증</th><th style="text-align:left">정답</th><th style="text-align:left">근거</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">P6-1</td><td style="text-align:left">0개</td><td style="text-align:left"><code>_강사본/정답.md</code>, <code>result/P6-1/run.md</code></td></tr>
+<tr><td style="text-align:left">P6-2</td><td style="text-align:left">190행 · 30.0%</td><td style="text-align:left">57 ÷ 190</td></tr>
+<tr><td style="text-align:left">P6-3</td><td style="text-align:left">A 등급 2건</td><td style="text-align:left">999 는 B, 1000 은 A</td></tr>
+<tr><td style="text-align:left">P6-4</td><td style="text-align:left">6곳 · 0개 (74,400억원 · 약 91% · 해외지사 28곳)</td><td style="text-align:left"><code>result/P6-4/run.md</code></td></tr>
+</tbody>
+</table>
+
+<ul>
+<li class="bullet-dash">이 장은 닫는 절에서만 연다. 앞 절의 확인 5분에는 정답을 띄우지 않는다(정답 숫자가 먼저 노출되면 확인 질문이 무의미해진다).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/32" class="layout-_contents">
   <div class="contents-head-bar">
@@ -2703,7 +2942,16 @@ C: 그 밖의 전부
 </ul>
 </div>
 </div></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>3분.</strong> 과제 카드의 «수단» 칸을 채우기 위한 장이다.</p>
+
+<ul>
+<li class="bullet-dash">사다리는 바로 묻기 → 규칙·명령으로 고정 → 스킬로 맡기기 순이다. 같은 일을 두 번째 치는 순간이 한 칸 올릴 때라고 말한다.</li>
+<li class="bullet-dash">Codex + CDP 는 공개된 페이지·약관이 허용하는 범위만 대상으로 한다고 반드시 덧붙인다.</li>
+<li class="bullet-dot">그림 — 일의 모양 네 가지(대화 반복·규칙 분류·웹 표 수집·파일별 반복 지시)가 각각 ChatGPT 프로젝트·n8n·Codex + CDP·Codex 스킬로 이어지고 n8n 이 강조된 표</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/33" class="layout-exercise">
   <div class="contents-head-bar">
@@ -2743,8 +2991,19 @@ C: 그 밖의 전부
 <li class="bullet-dot"><strong>기대 결과</strong>: 다섯 칸이 모두 차고 검증 기준이 숫자·대조 방법으로 적힘 ✅</li>
 <li class="bullet-dot"><strong>막히면</strong>: 작성 예의 업무로 먼저 쓰고 · 📱 폰 메모 앱에 5줄을 써서 시트에 붙임</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>15분.</strong> 입력은 슬라이드의 5칸 양식이다. 결과 파일은 <code>과제카드.md</code>.</p>
 
+<ul>
+<li class="bullet-dash">🖐 사람 판단 — 과제 카드의 합격선(검증 기준이 얼마나 구체적이어야 하는지)은 강사가 현장에서 판정한다. 이 노트는 정하지 않는다.</li>
+<li class="bullet-dash">가장 흔한 실패: 업무를 «영업 자동화» 처럼 크게 적는다. 이번 달에 두 번 한 일 1건으로 줄이게 한다.</li>
+<li class="bullet-dash">검증 기준이 «잘 되는지 본다» 로 끝나면 숫자·대조 방법으로 다시 쓰게 한다.</li>
+<li class="bullet-dash">자사 고객·견적 데이터는 쓰지 않고 파일 이름만 적는다. 📱 필드 영업은 폰 메모 앱에 같은 5줄을 써서 시트에 붙인다.</li>
+<li class="bullet-dash">업무가 안 떠오르는 사람은 슬라이드의 작성 예로 먼저 쓰게 한다.</li>
+<li class="bullet-dash">검증 기준 칸의 마지막 불릿은 <strong>6일의 표준 검증 문구</strong>다 — 1일차 할루시네이션 시연 2~4단계(출처 요구 · 모르면 모른다 · 비판 뒤 고침)와 일차마다 붙은 ✅ 숫자 대조를 한 줄로 모은 것이다. 새 개념이 아니라 이미 써 온 것을 과제 카드에 옮기는 안내다. 장을 더하지 않고 흡수한 이유는 6일차 닫는 절 시간이 찼기 때문이다(Issue64 단계2 A30, 보고서 S08).</li>
+</ul>
+  </aside>
+      </section>
 
 <section data-slide-hash="#/34" class="layout-exercise-small"><div class="m2-license-badge" data-m2-license="true">Powered by finfra.kr, Made by m2slide</div>
   <div class="contents-head-bar">
@@ -2759,11 +3018,22 @@ C: 그 밖의 전부
 <li class="bullet-dot">바뀌는 것은 도구·크레딧·화면임 — 6-5 에서 본 GPTs 종료가 그 실례임. 바뀌지 않는 것은 확인·출처·사람의 서명임.</li>
 <li class="bullet-dot">회고: 시트를 열어 세 줄 입력 — 쓸모 있던 것 · 현업에서 먼저 할 것 · 막혔던 것(내가 만난 AI 의 틀림 포함) ✅ 세 줄이 시트에 입력됨</li>
 <li class="bullet-dot">로그아웃: ChatGPT → Google → Gamma → VSCode 의 ChatGPT(Codex) → Netlify → n8n 순서로 로그아웃하고 브라우저에 저장된 비밀번호도 지움 ✅ 여섯 곳 모두 로그인 화면으로 돌아감</li>
-<li class="bullet-dot">렌탈 PC 를 다음 사용자에게 넘기기 전에 하는 일임. 폰은 해당 없음 📱 — 회고만 폰으로 입력해도 됨.</li>
+<li class="bullet-dot">렌털 PC 를 다음 사용자에게 넘기기 전에 하는 일임. 폰은 해당 없음 📱 — 회고만 폰으로 입력해도 됨.</li>
 <li class="bullet-dot">질문은 강의노트 QnA 시트로 남김. 과정이 끝난 뒤에도 그 시트로 답함. 더 보기: 공개 덱 저장소 <a href="https://github.com/Finfra/m2slide-deck">m2slide-deck</a> 의 <code>decks/agentic-ai/</code>.</li>
 </ul></div>
-</section>
+  <aside class="notes">
+<p>⏱ <strong>15분</strong> (회고 10 + 로그아웃 5).</p>
 
+<ul>
+<li class="bullet-dash">회고는 세 줄(쓸모 있던 것 · 현업에서 먼저 할 것 · 막혔던 것)이다. 이 회고가 강사의 마감 단계 자평 재료가 되므로 시트 입력을 확인한다.</li>
+<li class="bullet-dash">도입 두 줄(바뀌는 것 · 바뀌지 않는 것)을 먼저 읽는다. 바뀌는 것의 실례는 6-5 에서 본 GPTs 종료다 — 이름이 바뀌어도 «지시문과 참고 파일을 한 번 저장해 꺼내 쓴다» 는 기준은 그대로라는 점을 한 번 잇는다. 바뀌지 않는 것은 확인·출처·사람의 서명이다(설계·R&D 6-5 «바뀌는 것과 바뀌지 않는 것» 의 영업판, Issue64 단계2 A31).</li>
+<li class="bullet-dash">세 번째 줄(막혔던 것)에 «내가 만난 AI 의 틀림» 을 포함해 적게 한다. 시트 칸 수는 그대로 3이라 집계 방식은 바뀌지 않는다. 틀림 사례가 모이면 마감 단계 자평의 재료가 된다(Issue64 단계2 A30).</li>
+<li class="bullet-dash">로그아웃 6곳 순서: ChatGPT → Google → Gamma → VSCode 의 ChatGPT(Codex) → Netlify → n8n. 렌털 PC 를 다음 사용자에게 넘기기 전에 한다. 브라우저에 저장된 비밀번호도 지운다.</li>
+<li class="bullet-dash">폰은 로그아웃 대상이 아니다 📱 — 회고만 폰으로 입력해도 된다.</li>
+<li class="bullet-dash">질문은 강의노트 QnA 시트로 남기게 한다. 과정이 끝난 뒤에도 그 시트로 답한다.</li>
+</ul>
+  </aside>
+      </section>
 
     </div>
   </div>
