@@ -17,7 +17,11 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 
 # 📙 일반
 
-## Issue3: CLAUDE.md L1 아이덴티티 frontmatter 신설 — prj·identity·not·outcome·handles (/route 판정 불가 해소) (등록: 2026-11-22, 출처: fbot-architect-req14 · prj40#Req14 · fbotreq-1795274946-77855126)
+# 📗 선택
+
+# ✅ 완료
+
+## Issue3: CLAUDE.md L1 아이덴티티 frontmatter 신설 — prj·identity·not·outcome·handles (/route 판정 불가 해소) (등록: 2026-11-22, 해결: 2026-11-22, commit: 907888f, 출처: fbot-architect-req14 · prj40#Req14 · fbotreq-1795274946-77855126) ✅
 * 목적: `CLAUDE.md` 에 L1 아이덴티티 frontmatter 가 없어 `___pm/Identity.md` 42a 행이 전부 «⚠️ 미기재»이고, `/route` 가 이 prj 를 이름(E4)으로만 잡는다. prj40#Req14 구조 영향 분석(prj40 `_doc_work/report/req14-structure-impact_2026.11.22.md` «prj42a»)에서 심각도 중으로 판정됐다
 * 상세:
     - 스키마 정본: prj6 `~/_git/___oracle/_doc_arch/project-identity-scheme.md` · 선례: prj41 `~/_git/__all/videoMaker/CLAUDE.md` 1~15행(`prj`·`identity`·`not`·`outcome`·`handles` + 스키마 주석)
@@ -27,10 +31,8 @@ description: m2slide 프로젝트 갤러리 이슈 추적
     - `CLAUDE.md` 맨 앞에 frontmatter(`---` … `---`) 추가, 기존 본문 2줄 유지
     - 검증: `___pm` Identity 생성기(있으면) 또는 `/route` 로 42a 가 identity·handles 로 잡히는지 확인 · YAML 파싱 OK(`python3 -c "import yaml…"`)
     - TDD 해당 없음: 문서(frontmatter) 변경 — 테스트 러너 없음, 위 검증 명령이 green 기준
-
-# 📗 선택
-
-# ✅ 완료
+    - TDD(종결): 해당 없음(문서 변경) · local — 대체 검증 green: YAML 파싱 OK(`prj`=`'42a'`·`handles` 리스트 8건) · `___pm/sh/fpm-identity-collect --json` 이 42a 의 identity·not·outcome·handles 를 읽음 · `/route ask --no-log "공개 덱 갤러리에 새 덱 추가해줘"` → `prj 42a · E2 · single`(근거 `덱 갤러리 ← prj42a handles:`)
+* 결과: `CLAUDE.md` 맨 앞에 L1 frontmatter(`prj`·`identity`·`not`·`outcome`·`handles`) 추가, 기존 본문 2줄 유지. 명세 밖 필드(`goal_parent`·`lifetime`·`status`·`now`)는 근거 부족 또는 명세 밖이라 비움 — `___pm/Identity.md` 재생성은 prj1 수집기 몫(이 세션은 쓰지 않음) — commit 907888f
 
 ## Issue2: GitHub Pages 갤러리 사이트 신설 — finfra.github.io/m2slide-deck + m2slide 사이트와 상호 링크 (등록: 2026-10-19, 해결: 2026-10-19, commit: e677a35) ✅
 * 목적: m2slide-deck 에 웹 페이지가 없어 DesignRndAI 등 덱을 브라우저로 열 수 없었다. m2slide 본체 사이트(finfra.github.io/m2slide)처럼 갤러리를 두고 두 사이트를 서로 링크로 잇는다
