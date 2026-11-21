@@ -26,6 +26,7 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 * 구현 명세:
     - `CLAUDE.md` 맨 앞에 frontmatter(`---` … `---`) 추가, 기존 본문 2줄 유지
     - 검증: `___pm` Identity 생성기(있으면) 또는 `/route` 로 42a 가 identity·handles 로 잡히는지 확인 · YAML 파싱 OK(`python3 -c "import yaml…"`)
+    - TDD 해당 없음: 문서(frontmatter) 변경 — 테스트 러너 없음, 위 검증 명령이 green 기준
 
 # 📗 선택
 
