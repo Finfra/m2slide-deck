@@ -5,7 +5,7 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 
 # Issue Management
 
-* Issue HWM: 2
+* Issue HWM: 3
 ## 📋 상태 요약
 - 신규 등록: nPTiR 스캐폴드 생성 완료
 
@@ -16,6 +16,16 @@ description: m2slide 프로젝트 갤러리 이슈 추적
 # 📕 중요
 
 # 📙 일반
+
+## Issue3: CLAUDE.md L1 아이덴티티 frontmatter 신설 — prj·identity·not·outcome·handles (/route 판정 불가 해소) (등록: 2026-11-22, 출처: fbot-architect-req14 · prj40#Req14 · fbotreq-1795274946-77855126)
+* 목적: `CLAUDE.md` 에 L1 아이덴티티 frontmatter 가 없어 `___pm/Identity.md` 42a 행이 전부 «⚠️ 미기재»이고, `/route` 가 이 prj 를 이름(E4)으로만 잡는다. prj40#Req14 구조 영향 분석(prj40 `_doc_work/report/req14-structure-impact_2026.11.22.md` «prj42a»)에서 심각도 중으로 판정됐다
+* 상세:
+    - 스키마 정본: prj6 `~/_git/___oracle/_doc_arch/project-identity-scheme.md` · 선례: prj41 `~/_git/__all/videoMaker/CLAUDE.md` 1~15행(`prj`·`identity`·`not`·`outcome`·`handles` + 스키마 주석)
+    - 값은 이 repo 의 사실(README·LICENSE·`decks/` 구성·Request 이력 — 공개 덱 갤러리 `Finfra/m2slide-deck`, m2slide(prj42) 가 만든 덱의 고객 정보 제거판을 모아 GitHub Pages 로 공개)에서만 쓴다. 근거가 없는 필드는 추측으로 채우지 않고 비운다(«틀린 값은 빈 값보다 나쁘다»)
+    - prj42(도구)·prj42a(덱 보관·공개) 경계가 `not:` 에 드러나야 한다 — 변환기·테마 결함은 prj42
+* 구현 명세:
+    - `CLAUDE.md` 맨 앞에 frontmatter(`---` … `---`) 추가, 기존 본문 2줄 유지
+    - 검증: `___pm` Identity 생성기(있으면) 또는 `/route` 로 42a 가 identity·handles 로 잡히는지 확인 · YAML 파싱 OK(`python3 -c "import yaml…"`)
 
 # 📗 선택
 
