@@ -597,7 +597,7 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
  *   - .reveal .slides section 의 display·height·position 은 건드리지 않는다(CLAUDE.md «CSS 수정 시 주의사항»)
  *   - base.css 는 수정하지 않는다 — 본 파일은 테마 레이어(default·default_lec @import)
  *
- * 목차: §1 공통 · §2 points · §3 chips · §4 flow · §5 versus · §6 summary · §7 띠 4종(+credit·plain) · §8 span 색 · §9 표지(변수 --m2-vc-title-size·--m2-vc-left)
+ * 목차: §1 공통 · §2 points(+§2b 그림+요점 열 세로 가운데) · §3 chips · §4 flow · §5 versus · §6 summary · §7 띠 4종(+credit·plain) · §8 span 색 · §9 표지(변수 --m2-vc-title-size·--m2-vc-left)
  */
 
 /* §1 공통 ------------------------------------------------------------- */
@@ -658,6 +658,12 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
 }
 .m2-points .vb-pt .vb-n { margin-right: 0.6em; vertical-align: 0.1em; }
 .m2-points .vb-sub { font-size: 0.75em; font-weight: 400; margin-top: 0.3em; color: var(--m2-vb-muted); }
+
+/* §2b 그림+요점 장 — 요점 열 세로 가운데 (Issue473_17 · Req7 갭 G)
+ * `:has(.media-container)` stretch(components.css)가 텍스트 열을 행(=그림) 높이로 늘려, 열 안 요점이 위쪽에 붙고 아래가 비었다.
+ * 영상판은 그림·요점을 한 행 안에서 세로 가운데로 둔다 — 요점이 든 열만 flex column 가운데 정렬(그림 열·폭·그림 크기는 불변). */
+.reveal .m2-col:has(.m2-points),
+.reveal .column:has(.m2-points) { justify-content: center; }
 
 /* §3 chips ------------------------------------------------------------ */
 .m2-chips { --m2-vb-color: var(--m2-accent-2); display: flex; flex-wrap: wrap; gap: 0.6em; justify-content: center; }

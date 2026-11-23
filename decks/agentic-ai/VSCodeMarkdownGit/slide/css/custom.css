@@ -578,6 +578,14 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
   border: 0; border-radius: 24px; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.14);
 }
 
+/* Issue473_12 보강: 그림 wrapper(`::: {.img-noframe}`·`::: {.img-round}`) — 한 그림 장에서 그림 하나만 감싼다.
+   wrapper div 가 `.contents-body > .media-container` 의 flex 크기 계약(테마)을 끊지 않도록 레이아웃에서 투명하게 둔다.
+   컬럼 컨테이너(`.columns.img-noframe`)는 자체 레이아웃이 있으므로 제외한다. */
+.reveal .slides section div.img-noframe:not(.columns):not(.m2-cols),
+.reveal .slides section div.img-round:not(.columns):not(.m2-cols) {
+  display: contents;
+}
+
 /* <<< @import ../_shared/components.css */
 /* >>> @import ../_shared/video-blocks.css (Issue191 인라인 전개) */
 /* video-blocks.css — 영상 레이아웃 블록 + 영상 표지 (Issue473_8 G8 · Issue473_7 G7)
@@ -589,7 +597,7 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
  *   - .reveal .slides section 의 display·height·position 은 건드리지 않는다(CLAUDE.md «CSS 수정 시 주의사항»)
  *   - base.css 는 수정하지 않는다 — 본 파일은 테마 레이어(default·default_lec @import)
  *
- * 목차: §1 공통 · §2 points · §3 chips · §4 flow · §5 versus · §6 summary · §7 띠 4종(+credit·plain) · §8 span 색 · §9 표지(변수 --m2-vc-title-size·--m2-vc-left)
+ * 목차: §1 공통 · §2 points(+§2b 그림+요점 열 세로 가운데) · §3 chips · §4 flow · §5 versus · §6 summary · §7 띠 4종(+credit·plain) · §8 span 색 · §9 표지(변수 --m2-vc-title-size·--m2-vc-left)
  */
 
 /* §1 공통 ------------------------------------------------------------- */
@@ -650,6 +658,12 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
 }
 .m2-points .vb-pt .vb-n { margin-right: 0.6em; vertical-align: 0.1em; }
 .m2-points .vb-sub { font-size: 0.75em; font-weight: 400; margin-top: 0.3em; color: var(--m2-vb-muted); }
+
+/* §2b 그림+요점 장 — 요점 열 세로 가운데 (Issue473_17 · Req7 갭 G)
+ * `:has(.media-container)` stretch(components.css)가 텍스트 열을 행(=그림) 높이로 늘려, 열 안 요점이 위쪽에 붙고 아래가 비었다.
+ * 영상판은 그림·요점을 한 행 안에서 세로 가운데로 둔다 — 요점이 든 열만 flex column 가운데 정렬(그림 열·폭·그림 크기는 불변). */
+.reveal .m2-col:has(.m2-points),
+.reveal .column:has(.m2-points) { justify-content: center; }
 
 /* §3 chips ------------------------------------------------------------ */
 .m2-chips { --m2-vb-color: var(--m2-accent-2); display: flex; flex-wrap: wrap; gap: 0.6em; justify-content: center; }
