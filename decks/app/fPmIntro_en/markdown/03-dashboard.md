@@ -1,7 +1,7 @@
 ---
 title: "3. Live Dashboard"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # Live Dashboard — ..board & SSE Monitoring
@@ -10,15 +10,15 @@ release_date: 2026-07-06
 * `..board` pushes task progress to a **live dashboard**
 * Browser cards refresh themselves without you watching the terminal
 
-::: htmlart process
+::: flow
 * Run ..board
-  - Start a runner in a tmux window
+    - Start a runner in a tmux window
 * SSE push
-  - Server streams progress in real time
+    - Server streams progress in real time
 * Card refresh
-  - The browser updates itself
+    - The browser updates itself
 * Completion alert
-  - Auto elapsed time, result, artifacts
+    - Auto elapsed time, result, artifacts
 :::
 
 ---

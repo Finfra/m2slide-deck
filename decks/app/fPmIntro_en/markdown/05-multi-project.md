@@ -1,7 +1,7 @@
 ---
 title: "5. Multi-Project Management"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # Multi-Project Management — the cdf Family
@@ -9,15 +9,15 @@ release_date: 2026-07-06
 * **The pain without it**: memorize dozens of project paths, `cd` around on every switch, and handle cross-project dependencies by hand
 * fPM removes this cost with a **number → path registry** and the `cdf` family
 
-::: htmlart process
+::: flow
 * Register a number
-  - projects/{number} = path SSOT
+    - projects/{number} = path SSOT
 * cdf number
-  - Instant jump (deterministic)
+    - Instant jump (deterministic)
 * Multi / split
-  - iTerm2 panes · VSCode
+    - iTerm2 panes · VSCode
 * Name / frecency
-  - Search even if you forget the number
+    - Search even if you forget the number
 :::
 
 ---

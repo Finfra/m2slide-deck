@@ -1,22 +1,22 @@
 ---
 title: "6. Adopting fPM"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # Adopting fPM & Next Steps
 
 * Here's the **first step to layer** the hub, dashboard, VSCode integration, cdf, pm-do, and sshf you've seen onto your own setup
 
-::: htmlart process
+::: flow
 * Install
-  - One-line bootstrap
+    - One-line bootstrap
 * Maintain
-  - fpm update / upgrade
+    - fpm update / upgrade
 * Tune
-  - hub Settings
+    - hub Settings
 * Practice
-  - What to try today
+    - What to try today
 :::
 
 ---
@@ -116,17 +116,17 @@ gh api -H "Accept: application/vnd.github.raw" \
 
 # First Hands-On — Try It Now
 
-::: htmlart step
+::: flow
 * Install
-  - Run the one-line bootstrap
+    - Run the one-line bootstrap
 * First hub render
-  - ..show in a project folder
+    - ..show in a project folder
 * Jump projects
-  - Check cdf list → jump by number
+    - Check cdf list → jump by number
 * Long task
-  - Watch progress with ..board
+    - Watch progress with ..board
 * Remote reach
-  - Connect to a server with sshf
+    - Connect to a server with sshf
 :::
 
 > Picking just one thing you saw today and applying it right away is the fastest way to learn

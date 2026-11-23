@@ -1,7 +1,7 @@
 ---
 title: "1. Why fPM"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # Why fPM — the Limits of Plain Claude Code
@@ -103,7 +103,7 @@ src: mg/01-what
 
 # What You'll See in This Deck
 
-::: htmlart chevron
+::: flow {.nonum}
 * 2. Hub render / Q&A
 * 3. Live dashboard
 * 4. VSCode integration

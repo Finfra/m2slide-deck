@@ -1,7 +1,7 @@
 ---
 title: "4. VSCode Integration"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # VSCode ↔ Dashboard Integration

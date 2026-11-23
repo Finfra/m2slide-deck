@@ -1,7 +1,7 @@
 ---
 title: "2. Hub Mode"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # Hub Mode — HTML Render & Q&A Form
@@ -82,15 +82,17 @@ src: mg/03-hub
 
 # View from Mobile and Remote Too
 
-::: htmlart process
+::: flow
 * Generate QR
-  - The hub `/qr` page provides a responsive QR
+    - The hub `/qr` page provides a responsive QR
 * Scan
-  - Scan with a phone on the same Wi-Fi
+    - Scan with a phone on the same Wi-Fi
 * View
-  - See the same result doc on the spot
+    - See the same result doc on the spot
 * Share
-  - One link/QR during a talk or review
+    - One link/QR during a talk or review
 :::
 
-* Works with **no external service dependency** via LAN IP bind + offline vendored QR
+::: answer
+Works with **no external service dependency** via LAN IP bind + offline vendored QR
+:::
