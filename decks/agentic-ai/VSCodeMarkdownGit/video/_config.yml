@@ -1,8 +1,0 @@
-# 영상판(16:9) 설정 — videoStudio 영상 007(VS Code · Markdown · Git) 화면 원본
-slide_ratio: '16:9'
-cover_enabled: false
-palette: default
-background: '#FFFFFF'
-style:
-  theContents:
-    font_family: Apple SD Gothic Neo
