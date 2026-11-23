@@ -2,7 +2,7 @@
 title: "Agentic Coding — Part2"
 subtitle: "핸즈온 미니 프로젝트"
 type: ppt
-release_date: 2026-07-12
+release_date: 2026-11-24
 ---
 
 #layout-_chapter
@@ -133,15 +133,19 @@ src: mg/05-project
 
 # MVP 개발 3단계 흐름
 
-* 1단계: PRD.md — 무엇을·왜 (요구사항)
-
-* 2단계: tasks.md — 어떻게·언제 (실행 체크리스트)
-
-* 3단계: 코드 — Claude Code가 tasks 1번씩 자율 실행
-
-* 평균 1턴 5~30초 — 60분 동안 10~15 task 처리 가능
-
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![MVP 개발 3단계 흐름](./img/AgenticCoding_v10_24.png)
+:::
+::: {.column width="44%"}
+::: points
+* 1단계: PRD.md — 무엇을·왜 (요구사항)
+* 2단계: tasks.md — 어떻게·언제 (실행 체크리스트)
+* 3단계: 코드 — Claude Code가 tasks 1번씩 자율 실행
+* 평균 1턴 5~30초 — 60분 동안 10~15 task 처리 가능
+:::
+:::
+:::
 
 ---
 

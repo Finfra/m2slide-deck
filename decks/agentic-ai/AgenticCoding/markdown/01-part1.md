@@ -2,7 +2,7 @@
 title: "Agentic Coding — Part1"
 subtitle: "도입·환경·하네스·SCAR·nPTiR"
 type: ppt
-release_date: 2026-07-06
+release_date: 2026-11-24
 ---
 
 # 강의 시작 — 인사·강사 소개
@@ -19,15 +19,19 @@ release_date: 2026-07-06
 
 # 강의 목표·4시간 흐름 미리보기
 
-* 목표1: 바이브 코딩 vs Agentic Coding 차이 이해
-
-* 목표2: Claude Code 하네스 직접 셋업
-
-* 목표3: 미니 프로젝트로 웹서비스 MVP 완성
-
-* 흐름: Part1 이론·실습 1.5h → 휴식 → Part2 미니 프로젝트 2.5h
-
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![강의 목표·4시간 흐름 미리보기](./img/AgenticCoding_v10_0.png)
+:::
+::: {.column width="44%"}
+::: points
+* 목표1: 바이브 코딩 vs Agentic Coding 차이 이해
+* 목표2: Claude Code 하네스 직접 셋업
+* 목표3: 미니 프로젝트로 웹서비스 MVP 완성
+* 흐름: Part1 이론·실습 1.5h → 휴식 → Part2 미니 프로젝트 2.5h
+:::
+:::
+:::
 
 ---
 
@@ -61,15 +65,19 @@ src: mg/00-flow
 
 # 바이브 코딩(Vibe Coding)이란?
 
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![바이브 코딩(Vibe Coding)이란?](./img/AgenticCoding_v10_1.png)
-
+:::
+::: {.column width="44%"}
+::: points
 * 정의: 자연어 대화 기반 즉흥 개발 — 즉각 결과·낮은 진입장벽
-
 * 한계: 휘발성·재현 불가·맥락 단기 기억 — 1회용 코드에 적합
-
 * Andrej Karpathy의 “Vibe Coding” 개념 (2025) 인용
-
 * 비유: “스케치하듯 즉흥적으로 그리는 코딩”
+:::
+:::
+:::
 
 ---
 
@@ -204,15 +212,19 @@ src: mg/02-loop
 
 # Node·VsCode·Git·Docker 한눈에 보기
 
-* Node.js: Claude Code CLI 실행 런타임 (≥ 18.x)
-
-* VsCode: 편집기 + Claude Code 확장 진입점
-
-* Git: 변경 격리·롤백·기록 (Agentic 안전망)
-
-* Docker: 실행 격리·재현 환경 (Agentic 샌드박스)
-
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![Node·VsCode·Git·Docker 한눈에 보기](./img/AgenticCoding_v10_7.png)
+:::
+::: {.column width="44%"}
+::: points
+* Node.js: Claude Code CLI 실행 런타임 (≥ 18.x)
+* VsCode: 편집기 + Claude Code 확장 진입점
+* Git: 변경 격리·롤백·기록 (Agentic 안전망)
+* Docker: 실행 격리·재현 환경 (Agentic 샌드박스)
+:::
+:::
+:::
 
 ---
 
@@ -252,15 +264,19 @@ John Gruber가 2004년 개발. 텍스트로 저장되어 용량이 적고 버전
 
 # Docker가 Agentic에 각광받는 이유
 
-* 샌드박스: 컨테이너 안에서만 명령 실행 → 호스트 PC 안전
-
-* 재현: Dockerfile 로 동일 환경 재구성 — 다른 PC에서도 작동
-
-* 일회성: docker run --rm 으로 실행 후 삭제 — 흔적 없음
-
-* 비유: “내 PC를 더럽히지 않는 임시 작업실”
-
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![Docker가 Agentic에 각광받는 이유](./img/AgenticCoding_v10_11.png)
+:::
+::: {.column width="44%"}
+::: points
+* 샌드박스: 컨테이너 안에서만 명령 실행 → 호스트 PC 안전
+* 재현: Dockerfile 로 동일 환경 재구성 — 다른 PC에서도 작동
+* 일회성: docker run --rm 으로 실행 후 삭제 — 흔적 없음
+* 비유: “내 PC를 더럽히지 않는 임시 작업실”
+:::
+:::
+:::
 
 ---
 
@@ -290,15 +306,19 @@ John Gruber가 2004년 개발. 텍스트로 저장되어 용량이 적고 버전
 
 # Git이 Agentic에 각광받는 이유
 
-* 격리: git worktree 로 에이전트 작업을 별도 디렉토리에 분리
-
-* 롤백: 자동 변경이 망가지면 git reset --hard 1초 복구
-
-* 기록: 누가·언제·왜 바꿨는지 추적 (commit 메시지 + 해시)
-
-* 협업: Pull Request 단위 코드 리뷰 — Agentic 산출물도 동일 흐름
-
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![Git이 Agentic에 각광받는 이유](./img/AgenticCoding_v10_14.png)
+:::
+::: {.column width="44%"}
+::: points
+* 격리: git worktree 로 에이전트 작업을 별도 디렉토리에 분리
+* 롤백: 자동 변경이 망가지면 git reset --hard 1초 복구
+* 기록: 누가·언제·왜 바꿨는지 추적 (commit 메시지 + 해시)
+* 협업: Pull Request 단위 코드 리뷰 — Agentic 산출물도 동일 흐름
+:::
+:::
+:::
 
 ---
 
@@ -386,15 +406,19 @@ John Gruber가 2004년 개발. 텍스트로 저장되어 용량이 적고 버전
 
 # Claude CLI 모델 정책 (Opus / Sonnet / Haiku)
 
-* Opus 4.7: 설계·복잡 추론 (느림·비쌈) — Plan·아키텍처 단계
-
-* Sonnet 4.6: 구현·반복 (빠름·중간) — 일반 작업
-
-* Haiku 4.5: subagent·간단 작업 (매우 빠름·쌈) — 보조 호출
-
-* Blueprint(Opus)+Execute(Sonnet) 패턴 권장
-
+::: {.columns .img-nocap}
+::: {.column width="56%"}
 ![Claude CLI 모델 정책 (Opus / Sonnet / Haiku)](./img/AgenticCoding_v10_16.png)
+:::
+::: {.column width="44%"}
+::: points
+* Opus 4.7: 설계·복잡 추론 (느림·비쌈) — Plan·아키텍처 단계
+* Sonnet 4.6: 구현·반복 (빠름·중간) — 일반 작업
+* Haiku 4.5: subagent·간단 작업 (매우 빠름·쌈) — 보조 호출
+* Blueprint(Opus)+Execute(Sonnet) 패턴 권장
+:::
+:::
+:::
 
 ---
 
