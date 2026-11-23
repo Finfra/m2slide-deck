@@ -2,10 +2,17 @@
 
 ## VSCode란?
 
+::: {.columns .img-nocap}
+::: {.column width="56%"}
+![VSCode란?](img/GenContetntsProd_v10_10.png)
+:::
+::: {.column width="44%"}
+::: points
 * Microsoft에서 개발한 무료 개발자 도구
 * 경량 코드 편집기로서 Windows·macOS·Linux 크로스 플랫폼 지원
-
-![VSCode란?](img/GenContetntsProd_v10_10.png)
+:::
+:::
+:::
 
 ---
 

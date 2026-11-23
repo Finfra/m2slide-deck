@@ -59,12 +59,18 @@ Part 1.
 
 ## 페르소나(Persona)?
 
+::: {.columns .img-nocap}
+::: {.column width="56%"}
+![페르소나(Persona)?](img/GenContetntsProd_v10_0.png)
+:::
+::: {.column width="44%"}
+::: points
 * **어원**: 그리스의 고대극에서 배우들이 쓰던 가면
 * **뜻**: 심리학에서 타인에게 비치는 외적 성격을 나타내는 용어
-
-![페르소나(Persona)?](img/GenContetntsProd_v10_0.png)
-
 * AI가 취할 인격이나 역할을 정의함.
+:::
+:::
+:::
 
 
 ---
