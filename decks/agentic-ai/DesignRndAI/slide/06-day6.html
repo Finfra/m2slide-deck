@@ -1430,7 +1430,7 @@ html.ratio-fill .agenda-frame {
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
   <link rel="stylesheet" href="css/lec-tokens.css"/>
-  <link rel="stylesheet" href="css/custom.css?v=1792243519911">
+  <link rel="stylesheet" href="css/custom.css?v=1795459109374">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1735,9 +1735,7 @@ html.ratio-fill .agenda-frame {
 </ul>
 </div>
 
-<ul>
-<li class="bullet-dot">1일차 첫 장의 그 그림임. 그때는 예고였고 지금은 산출물 목록임 — 여섯 칸 전부에 각자가 만든 파일이 있음.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">1일차 첫 장의 그 그림임. 그때는 예고였고 지금은 산출물 목록임 — 여섯 칸 전부에 각자가 만든 파일이 있음.</div></div>
 </section>
 
 
@@ -1927,26 +1925,7 @@ html.ratio-fill .agenda-frame {
   </div>
   <h3 class="title">학습시키는 길과 찾아서 주는 길</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>학습시킴</strong> / 모델을 다시 만듦
-<ul>
-<li class="bullet-dash">문서를 모델 안에 넣음</li>
-<li class="bullet-dash">비용과 시간이 큼</li>
-<li class="bullet-dash">문서가 바뀌면 다시 해야 함</li>
-<li class="bullet-dash">어디서 나온 답인지 모름</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>찾아서 줌</strong> / 모델은 그대로
-<ul>
-<li class="bullet-dash">물어볼 때마다 문서를 붙임</li>
-<li class="bullet-dash">문서만 갈아 끼우면 됨</li>
-<li class="bullet-dash">바로 반영됨</li>
-<li class="bullet-dash">어느 문서에서 나왔는지 남음</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">모델을 다시 만듦</div><div class="vb-head">학습시킴</div><div class="vb-it">문서를 모델 안에 넣음</div><div class="vb-it">비용과 시간이 큼</div><div class="vb-it">문서가 바뀌면 다시 해야 함</div><div class="vb-it">어디서 나온 답인지 모름</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">모델은 그대로</div><div class="vb-head">찾아서 줌</div><div class="vb-it">물어볼 때마다 문서를 붙임</div><div class="vb-it">문서만 갈아 끼우면 됨</div><div class="vb-it">바로 반영됨</div><div class="vb-it">어느 문서에서 나왔는지 남음</div></div></div>
 
 <ul>
 <li class="bullet-dot">실무에서 쓰는 것은 거의 전부 <strong>찾아서 주는 길</strong>임. 그 길의 이름이 RAG 임.</li>
@@ -2162,7 +2141,7 @@ sequenceDiagram
 
 <ul>
 <li class="bullet-dot">🔴 <strong>숫자와 관계가 약점</strong>임. 둘 다 설계·R&D 문서의 본체라 <strong>RAG 만으로 끝나지 않음</strong> — 답은 시작점이고 확인은 원문에서 함.</li>
-<li class="bullet-dot">둘째 줄(숫자)에는 <strong>알려진 해법이 있음</strong> — 뜻으로 찾는 방식에 <strong>글자 그대로 찾는 방식</strong>을 겹쳐 쓰는 것임(하이브리드 검색). <code>0.05</code> 라는 문자열을 그대로 맞춰 보므로 치수·품번처럼 <strong>한 글자도 틀리면 안 되는 값</strong>에 강함. 도구를 고를 때 <strong>「키워드 검색을 함께 쓰는가」</strong>를 물어보면 됨.</li>
+<li class="bullet-dot">둘째 줄(숫자)에는 <strong>알려진 해법이 있음</strong> — 뜻으로 찾는 방식에 <strong>글자 그대로 찾는 방식</strong>을 겹쳐 쓰는 것임(하이브리드 검색). <code>0.05</code> 라는 문자열을 그대로 맞춰 보므로 치수·품번처럼 <strong>한 글자도 틀리면 안 되는 값</strong>에 강함. 도구를 고를 때 <strong>「키워드 검색을 함께 쓰는가」</strong> 를 물어보면 됨.</li>
 <li class="bullet-dot">넷째 줄(관계)이 시연 장 「그래프형」의 이유임.</li>
 </ul></div>
 </section>
@@ -2179,7 +2158,7 @@ sequenceDiagram
 <ul>
 <li class="bullet-dot"><strong>설계 문의 대응</strong>
 <ul>
-<li class="bullet-dash">「이 부시 허용 하중이 얼마인가」에 사양서 근거와 함께 답함. 신입 교육 부담이 줄어듦</li>
+<li class="bullet-dash">「이 부시 허용하중이 얼마인가」에 사양서 근거와 함께 답함. 신입 교육 부담이 줄어듦</li>
 </ul>
 </li>
 <li class="bullet-dot"><strong>품질 이력 조회</strong>
@@ -2258,7 +2237,7 @@ sequenceDiagram
 <ul>
 <li class="bullet-dot">네 가지 모두 기술이 아니라 <strong>운영</strong>의 문제임. 도구를 고르는 것보다 앞섬. 특히 세 번째가 실패 지점임. 갱신하는 사람이 없으면 6개월 뒤 낡은 답을 내놓음 — 5일차 표준 모니터링의 「분기 확인」 담당이 같은 사람임.</li>
 <li class="bullet-dot">넷째는 검증 결과가 <strong>돌아오는 길</strong>임. 6-4 에서 만드는 표준 검증 프롬프트가 「틀린 답을 잡는 법」이라면, 이 항목은 잡은 것을 어디에 쌓는가임.</li>
-<li class="bullet-dot">직접 만들 필요는 없음 — 주요 클라우드가 <strong>문서를 넣으면 검색·인용까지 붙여 주는 관리형 서비스</strong>를 내놓았음. 사내 도입 검토는 대개 「만들까」가 아니라 <strong>「어느 것을 쓸까」</strong>가 됨.</li>
+<li class="bullet-dot">직접 만들 필요는 없음 — 주요 클라우드가 <strong>문서를 넣으면 검색·인용까지 붙여 주는 관리형 서비스</strong>를 내놓았음. 사내 도입 검토는 대개 「만들까」가 아니라 <strong>「어느 것을 쓸까」</strong> 가 됨.</li>
 <li class="bullet-dot">네 항목을 사내 규정으로 굳힐 때는 1일차에서 본 <strong>ISO/IEC 42001</strong> 이 그대로 뼈대가 됨. 새 규정을 발명하지 않아도 됨.</li>
 </ul></div>
 </section>
@@ -2341,17 +2320,9 @@ sequenceDiagram
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P6-1 — 그 시나리오가 정말 RAG 로 풀리는가</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">적혀 있는 것을 찾는 질문인가</li>
-<li class="bullet-dot">근거 문서를 댈 수 있는가</li>
-<li class="bullet-dot">갱신할 사람이 정해졌는가</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>적혀 있는 것을 찾는 질문인가</div><div class="vb-pt"><span class="vb-n">2</span>근거 문서를 댈 수 있는가</div><div class="vb-pt"><span class="vb-n">3</span>갱신할 사람이 정해졌는가</div></div>
 
-<ul>
-<li class="bullet-dot">첫째에서 걸리면 시나리오를 바꿈 — 「판단」이 들어간 질문은 RAG 의 일이 아님.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">첫째에서 걸리면 시나리오를 바꿈 — 「판단」이 들어간 질문은 RAG 의 일이 아님.</div></div>
 </section>
 
 
@@ -2520,8 +2491,8 @@ sequenceDiagram
 <tr><th style="text-align:left">결</th><th style="text-align:left">질문 예</th><th style="text-align:left">주의</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">찾기</td><td style="text-align:left">이 부시의 허용 하중이 얼마인가</td><td style="text-align:left">단위와 조건을 함께 물음</td></tr>
-<tr><td style="text-align:left">모으기</td><td style="text-align:left">3사 허용 하중을 한 표로</td><td style="text-align:left">분류 체계가 달라 그대로 못 겹침</td></tr>
+<tr><td style="text-align:left">찾기</td><td style="text-align:left">이 부시의 허용하중이 얼마인가</td><td style="text-align:left">단위와 조건을 함께 물음</td></tr>
+<tr><td style="text-align:left">모으기</td><td style="text-align:left">3사 허용하중을 한 표로</td><td style="text-align:left">분류 체계가 달라 그대로 못 겹침</td></tr>
 <tr><td style="text-align:left">견주기</td><td style="text-align:left">구판과 신판이 무엇이 다른가</td><td style="text-align:left">근거 위치를 함께 요구함</td></tr>
 </tbody>
 </table>
@@ -2597,24 +2568,7 @@ sequenceDiagram
   </div>
   <h3 class="title">소스를 바꿔 가며 답의 변화를 봄</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>전부 켜고 물음</strong> / 소스 6건
-<ul>
-<li class="bullet-dash">넓게 답함</li>
-<li class="bullet-dash">여러 문서가 섞임</li>
-<li class="bullet-dash">어느 것이 근거인지 흐려짐</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>하나만 켜고 물음</strong> / 소스 1건
-<ul>
-<li class="bullet-dash">그 문서 안에서만 답함</li>
-<li class="bullet-dash">없으면 없다고 함</li>
-<li class="bullet-dash">retrieval 이 눈에 보임</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">소스 6건</div><div class="vb-head">전부 켜고 물음</div><div class="vb-it">넓게 답함</div><div class="vb-it">여러 문서가 섞임</div><div class="vb-it">어느 것이 근거인지 흐려짐</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">소스 1건</div><div class="vb-head">하나만 켜고 물음</div><div class="vb-it">그 문서 안에서만 답함</div><div class="vb-it">없으면 없다고 함</div><div class="vb-it">retrieval 이 눈에 보임</div></div></div>
 
 <ul>
 <li class="bullet-dot">이 조작이 <strong>RAG 의 동작을 직접 보는 방법</strong>임. 창고를 바꾸면 답이 바뀜. 답이 이상할 때 범인을 찾는 방법이기도 함 — 하나씩 꺼 가며 어느 문서가 섞였는지 봄.</li>
@@ -2732,17 +2686,9 @@ sequenceDiagram
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P6-2 — 인용 원문 3건을 직접 확인</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">인용 위치가 그 내용이 맞는가</li>
-<li class="bullet-dot">단위·조건이 함께 옮겨졌는가</li>
-<li class="bullet-dot">인용 없는 문장이 섞였는가</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>인용 위치가 그 내용이 맞는가</div><div class="vb-pt"><span class="vb-n">2</span>단위·조건이 함께 옮겨졌는가</div><div class="vb-pt"><span class="vb-n">3</span>인용 없는 문장이 섞였는가</div></div>
 
-<ul>
-<li class="bullet-dot">셋째가 6-4 의 재료임 — 인용 없는 문장이 몇 개였는지 <strong>숫자로</strong> 적어 둠.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">셋째가 6-4 의 재료임 — 인용 없는 문장이 몇 개였는지 <span class="vb-q">숫자로</span> 적어 둠.</div></div>
 </section>
 
 
@@ -2867,28 +2813,9 @@ sequenceDiagram
   </div>
   <h3 class="title">그래서 우리는 Gemini Gems 로 만듦</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>GPTs · Claude Project</strong> / 이 과정에서 못 씀
-<ul>
-<li class="bullet-dash">개인 계정 생성 차단</li>
-<li class="bullet-dash">Claude 는 계정 미지급</li>
-<li class="bullet-dash">시연으로만 봄</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>Gemini Gems</strong> / 이 과정의 실습 도구
-<ul>
-<li class="bullet-dash">개인 구글 계정으로 됨</li>
-<li class="bullet-dash">추가 과금 없음</li>
-<li class="bullet-dash">지시·자료 구조가 같음</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">이 과정에서 못 씀</div><div class="vb-head">GPTs · Claude Project</div><div class="vb-it">개인 계정 생성 차단</div><div class="vb-it">Claude 는 계정 미지급</div><div class="vb-it">시연으로만 봄</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">이 과정의 실습 도구</div><div class="vb-head">Gemini Gems</div><div class="vb-it">개인 구글 계정으로 됨</div><div class="vb-it">추가 과금 없음</div><div class="vb-it">지시·자료 구조가 같음</div></div></div>
 
-<ul>
-<li class="bullet-dot">도구가 바뀌어도 <strong>배우는 것은 같음</strong> — 지시문을 어떻게 쓰고 자료를 어떻게 붙이는가. 회사에서 어느 도구를 쓰게 되든 6일차에 만든 지시문 6줄이 그대로 옮겨감.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">도구가 바뀌어도 <span class="vb-q">배우는 것은 같음</span> — 지시문을 어떻게 쓰고 자료를 어떻게 붙이는가. 회사에서 어느 도구를 쓰게 되든 6일차에 만든 지시문 6줄이 그대로 옮겨감.</div></div>
 </section>
 
 <section data-slide-hash="#/45" class="layout-contents-full">
@@ -3083,17 +3010,9 @@ sequenceDiagram
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P6-3 — 지시를 어기는 질문을 던져 봄</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">없는 것에 없다고 하는가</li>
-<li class="bullet-dot">단위를 임의로 환산하지 않는가</li>
-<li class="bullet-dot">근거와 쪽 번호가 붙는가</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>없는 것에 없다고 하는가</div><div class="vb-pt"><span class="vb-n">2</span>단위를 임의로 환산하지 않는가</div><div class="vb-pt"><span class="vb-n">3</span>근거와 쪽 번호가 붙는가</div></div>
 
-<ul>
-<li class="bullet-dot">일부러 자료에 없는 것을 물음 — 「이 부시의 가격은」 처럼. 「자료에 없음」이 나오면 지시가 먹은 것임.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">일부러 자료에 없는 것을 물음 — 「이 부시의 가격은」 처럼. 「자료에 없음」이 나오면 지시가 먹은 것임.</div></div>
 </section>
 
 
@@ -3106,30 +3025,7 @@ sequenceDiagram
   <div class="contents-body">
 <p>6일 동안 프롬프트마다 붙였던 조항들을 <strong>한 벌로 모음</strong>. 이것이 회사로 가져가는 실물임.</p>
 
-<div class="m2-htmlart htmlart-chevron" data-htmlart="chevron" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">자료 붙임
-<ul>
-<li class="bullet-dash">1-3 · 2-2 · 6-2</li>
-</ul>
-</li>
-<li class="bullet-dot">인용 강제
-<ul>
-<li class="bullet-dash">1-2 · 3-1 · 5-2</li>
-</ul>
-</li>
-<li class="bullet-dot">모름 허용
-<ul>
-<li class="bullet-dash">원문에 없음 · 미기재 · 불명</li>
-</ul>
-</li>
-<li class="bullet-dot">자기 검토
-<ul>
-<li class="bullet-dash">4-3 역번역 · 6-3 위반 질문</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-t">자료 붙임</div><div class="vb-d">1-3 · 2-2 · 6-2</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-t">인용 강제</div><div class="vb-d">1-2 · 3-1 · 5-2</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-t">모름 허용</div><div class="vb-d">원문에 없음 · 미기재 · 불명</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-t">자기 검토</div><div class="vb-d">4-3 역번역 · 6-3 위반 질문</div></div></div>
 
 <ul>
 <li class="bullet-dot">네 장치는 새것이 아님. 1일차 「근거 강제」 프롬프트부터 5일차 「기한 미정」까지 매일 다른 이름으로 붙였던 것임. 여기서 그것을 <strong>하나의 표준본</strong>으로 모음.</li>
@@ -3217,24 +3113,7 @@ sequenceDiagram
   </div>
   <h3 class="title">저감 장치 ① 자료를 붙임</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>붙이지 않음</strong> / 배운 것에서 답함
-<ul>
-<li class="bullet-dash">남의 사양서 값이 나옴</li>
-<li class="bullet-dash">틀려도 문장은 자연스러움</li>
-<li class="bullet-dash">확인할 원문이 없음</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>붙임</strong> / 자료 안에서 답함
-<ul>
-<li class="bullet-dash">우리 값이 나옴</li>
-<li class="bullet-dash">없으면 없다고 할 수 있음</li>
-<li class="bullet-dash">원문이 옆에 있어 대조가 됨</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">배운 것에서 답함</div><div class="vb-head">붙이지 않음</div><div class="vb-it">남의 사양서 값이 나옴</div><div class="vb-it">틀려도 문장은 자연스러움</div><div class="vb-it">확인할 원문이 없음</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">자료 안에서 답함</div><div class="vb-head">붙임</div><div class="vb-it">우리 값이 나옴</div><div class="vb-it">없으면 없다고 할 수 있음</div><div class="vb-it">원문이 옆에 있어 대조가 됨</div></div></div>
 
 <ul>
 <li class="bullet-dot">가장 싼 장치이자 가장 큰 장치임. 1-3 파일 첨부, 2-2 이미지, 3-3·6-2 노트북, 6-3 Gem 의 자료 칸 — 이름은 달라도 전부 <strong>「배운 것」 대신 「우리 것」을 보게 하는 일</strong>임.</li>
@@ -3491,7 +3370,7 @@ sequenceDiagram
 
 <div class="m2-col column" style="flex: 0 0 44%; max-width: 44%">
 <ul>
-<li class="bullet-dot">빨간 선이 <strong>15분쯤에서 평평해짐</strong> — 그 뒤는 시간을 더 써도 오류가 거의 안 줌. 그 무릎이 균형점임.</li>
+<li class="bullet-dot">빨간 선이 <strong>15분쯤에서 평평해짐</strong> — 그 뒤는 시간을 더 써도 오류가 거의 안 줆. 그 무릎이 균형점임.</li>
 <li class="bullet-dot">처음 10분이 가장 큼 — 표준 검증 프롬프트가 그 10분을 대신함.</li>
 <li class="bullet-dot">마지막 1건이 비싼 문서(성적서)는 무릎 너머 전수까지, 사내 초안은 무릎에서 멈춤.</li>
 </ul>
@@ -3554,17 +3433,9 @@ sequenceDiagram
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P6-4 — 저감 전후 오류 건수 비교</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">같은 자료·같은 질문을 전후로 돌림</li>
-<li class="bullet-dot">오류 건수를 숫자로 적어 비교</li>
-<li class="bullet-dot">인용이 실제로 붙는가</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>같은 자료·같은 질문을 전후로 돌림</div><div class="vb-pt"><span class="vb-n">2</span>오류 건수를 숫자로 적어 비교</div><div class="vb-pt"><span class="vb-n">3</span>인용이 실제로 붙는가</div></div>
 
-<ul>
-<li class="bullet-dot">2일차에 적어 둔 오독 건수가 「전」의 기준임. 표준본은 <strong>파일로 저장</strong> — 6일 과정에서 현업으로 가져가는 실물임.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">2일차에 적어 둔 오독 건수가 「전」의 기준임. 표준본은 <span class="vb-q">파일로 저장</span> — 6일 과정에서 현업으로 가져가는 실물임.</div></div>
 </section>
 
 
@@ -3648,25 +3519,7 @@ sequenceDiagram
   <div class="summary-header">
     <h1 class="summary-title">현업에서 먼저 할 세 가지</h1>
   </div>
-  <div class="summary-body"><div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">표준 검증본을 붙임
-<ul>
-<li class="bullet-dash">다음 주 첫 요청부터</li>
-</ul>
-</li>
-<li class="bullet-dot">문서 하나에 메타 5줄
-<ul>
-<li class="bullet-dash">이번 주 만드는 것부터</li>
-</ul>
-</li>
-<li class="bullet-dot">검증 항목을 적어 둠
-<ul>
-<li class="bullet-dash">문서 종류마다 어디서 멈추는가</li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="summary-body"><div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">표준 검증본을 붙임</div><div class="vb-d">다음 주 첫 요청부터</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">문서 하나에 메타 5줄</div><div class="vb-d">이번 주 만드는 것부터</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">검증 항목을 적어 둠</div><div class="vb-d">문서 종류마다 어디서 멈추는가</div></div></div>
 
 <ul>
 <li class="bullet-dot">셋 다 도구 도입이 아니라 <strong>습관</strong>임. 도구는 회사 정책과 계정이 정해진 뒤에 고르면 되고, 습관은 지급 계정 하나로 지금부터 됨.</li>
@@ -3679,28 +3532,9 @@ sequenceDiagram
   <div class="summary-header">
     <h1 class="summary-title">바뀌는 것과 바뀌지 않는 것</h1>
   </div>
-  <div class="summary-body"><div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>바뀌는 것</strong> / 도구와 화면
-<ul>
-<li class="bullet-dash">도메인 주소 · 계정 정책 · 크레딧</li>
-<li class="bullet-dash">모델 이름 · 한도 · 버튼 위치</li>
-<li class="bullet-dash">6개월이면 낡음</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>바뀌지 않는 것</strong> / 순서와 경계
-<ul>
-<li class="bullet-dash">먼저 추리고 확인함</li>
-<li class="bullet-dash">없으면 없다고 하게 함</li>
-<li class="bullet-dash">책임은 옮겨지지 않음</li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="summary-body"><div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">도구와 화면</div><div class="vb-head">바뀌는 것</div><div class="vb-it">도메인 주소 · 계정 정책 · 크레딧</div><div class="vb-it">모델 이름 · 한도 · 버튼 위치</div><div class="vb-it">6개월이면 낡음</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">순서와 경계</div><div class="vb-head">바뀌지 않는 것</div><div class="vb-it">먼저 추리고 확인함</div><div class="vb-it">없으면 없다고 하게 함</div><div class="vb-it">책임은 옮겨지지 않음</div></div></div>
 
-<ul>
-<li class="bullet-dot">이 과정에서 배운 것 중 왼쪽은 곧 낡음 — 노트북도 7월에 이름·주소가 바뀜. 오른쪽은 도구가 바뀌어도 그대로임. 1일차 두 원칙이 오른쪽 열의 첫 두 줄임.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">이 과정에서 배운 것 중 왼쪽은 곧 낡음 — 노트북도 7월에 이름·주소가 바뀜. 오른쪽은 도구가 바뀌어도 그대로임. 1일차 두 원칙이 오른쪽 열의 첫 두 줄임.</div></div>
 </section>
 
 
@@ -5459,6 +5293,20 @@ sequenceDiagram
     if(!target){ target=items[0].title.trim(); }
     if(!annots.length){ errBox(el,'htmlArt annotate: over/under 주석 필요'); return; }
 
+    // ── target 줄바꿈 — `<br>` 에서 줄을 나눈다 ──────────────────────────────
+    //   nodeText 는 textContent 라 `<br>` 이 흔적 없이 사라진다. 그래서 «# 제목<br>- 목록»
+    //   처럼 줄마다 기호가 오는 Markdown 문서 모양을 보여 줄 수 없었다. target li 만 다시
+    //   읽어 `<br>` 을 `\n` 으로 남긴다(다른 항목·다른 타입의 nodeText 는 그대로).
+    ul.querySelectorAll(':scope > li').forEach(function(li){
+      var c=li.cloneNode(true);
+      c.querySelectorAll('ul,ol').forEach(function(n){n.remove();});
+      if(!c.querySelector('br'))return;
+      c.querySelectorAll('br').forEach(function(b){ b.replaceWith('\n'); });
+      var mt=(c.textContent||'').trim().match(/^target\s*:\s*([\s\S]+)$/i);
+      if(mt) target=mt[1].split('\n').map(function(s){ return s.trim(); }).join('\n');
+    });
+    var targetRows=target.split('\n');
+
     var W=1400, H=620, cx=W/2, cy=H/2;
     var labelGap=24, labelFs=24, labelPad=12;
     var colorMap={red:'#e74c3c',blue:'#3498db',green:'#27ae60',yellow:'#f1c40f',
@@ -5505,13 +5353,19 @@ sequenceDiagram
     //   넣으면 안 된다(Issue370 구현 명세). Issue364 와 같은 총량 축으로 함께 푼다:
     //   줄 수 × 줄높이가 상한에 들어갈 때까지 폰트를 낮추고, fo 높이를 실제 줄 수로 준다.
     //   `letter-spacing:0.02em` 은 폭 모델에 없으므로 fs 에 1.02 를 곱해 근사한다.
-    var targetFs=56, targetLines=1;
-    for(; targetFs>24; targetFs--){
-      targetLines=wrapLines(target, targetFs*1.02, targetW);
-      if(targetLines*targetFs*1.2<=360)break;
+    //   `<br>` 로 나눈 줄 사이에는 0.5em 간격을 둔다 — 강조선(글자 위·아래 10px)이 이웃
+    //   줄 글자에 걸치지 않게 하는 자리다. 줄 수는 나눈 줄마다 따로 wrap 해 더한다.
+    var rowGap=0.5;
+    function targetHeight(fs){
+      var n=0;
+      targetRows.forEach(function(r){ n+=Math.max(1, wrapLines(r, fs*1.02, targetW)); });
+      return n*fs*1.2+(targetRows.length-1)*fs*rowGap;
     }
-    targetLines=wrapLines(target, targetFs*1.02, targetW);
-    var targetH=Math.max(120, Math.ceil(targetLines*targetFs*1.2)+8);
+    var targetFs=56;
+    for(; targetFs>24; targetFs--){
+      if(targetHeight(targetFs)<=360)break;
+    }
+    var targetH=Math.max(120, Math.ceil(targetHeight(targetFs))+8);
 
     var svg=mkSvg(el,W,H,'ha-annotate-svg');
 
@@ -5529,6 +5383,14 @@ sequenceDiagram
     });
     var html=markedTarget.replace(/(\d+)([^]+)/g,
       function(m,i,s){ return '<span data-annot-idx="'+i+'" style="display:inline-block;">'+s+'</span>'; });
+    // 여러 줄이면 줄마다 블록으로 — 줄 사이 간격(rowGap)이 강조선 자리이고, 왼쪽 정렬로
+    //   줄머리 기호(#·-·>)가 세로로 맞아 문서 모양이 된다. 한 줄이면 종전 그대로(가운데).
+    var multiRow=targetRows.length>1;
+    if(multiRow){
+      html=html.split('\n').map(function(r,i,a){
+        return '<div data-annot-line style="margin:0 0 '+(i<a.length-1?rowGap:0)+'em;">'+r+'</div>';
+      }).join('');
+    }
 
     var foY=cy-targetH/2;
     var fo=svg.append('foreignObject')
@@ -5542,8 +5404,8 @@ sequenceDiagram
         +'font-weight:800;font-size:'+targetFs+'px;line-height:1.2;text-align:center;'
         +'word-break:keep-all;letter-spacing:0.02em;')
       .node();
-    d3.select(targetBox).append('xhtml:span')
-      .attr('style','display:inline;')
+    d3.select(targetBox).append(multiRow?'xhtml:div':'xhtml:span')
+      .attr('style',multiRow?'text-align:left;':'display:inline;')
       .html(html);
 
     // ── span 계측은 화면 좌표가 아니라 레이아웃 좌표로 한다 (Issue418) ─────────

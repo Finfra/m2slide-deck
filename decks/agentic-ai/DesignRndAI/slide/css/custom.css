@@ -430,7 +430,7 @@
 }
 
 /* ── License attribution badge (Issue292) ─────────────────────────────────
-   theme/LICENSE.md(테마 라이선스) 조건 — 첫 장·마지막 장에 항상 표기.
+   첫 장·마지막 장 "Powered by finfra.kr" 뱃지 — 기본 on (MIT 전환 후 의무 아닌 부탁, license_attribution: false 로 끔).
    설계 SSOT: _doc_arch/license-attribution.md
    - 위치: 하단 중앙, 상하단 노랑 가로선(section[class*="layout-"]::after, bottom:12px
      height:10px, z-index:100 — 본 파일 §2) "바깥"(아래)에 배치. 2026-07-15 사용자 시각
@@ -492,6 +492,18 @@
 .m2-license-badge--standalone {
   position: fixed; /* .agenda-frame 미탐지 시 fallback — 위치 앵커(position:relative)가 없을 수 있어 fixed */
 }
+/* Issue469: 그림 배경 장(#background-image-* → section[data-background-image]) — 테마 기본 배경 기준의
+   --m2-license-fg 는 그림 위에서 대비가 무너진다(실측 1.44:1·4.16:1). 대표색을 뽑지 않고 반투명 어두운
+   받침(pill) + 흰 글자로 그림과 무관하게 대비를 보장한다 — 받침을 흰 그림 위에 합성한 최악값 5.7:1.
+   색 리터럴을 쓴다(테마·원고의 --m2-license-fg override 를 타지 않게). 위치·표시·변형은 건드리지 않는다.
+   검증: ./m2slide.sh --lint-license «그림 배경» 행 · 설계 _doc_arch/license-attribution.md §4 */
+.reveal .slides section[data-background-image] .m2-license-badge {
+  color: #ffffff;
+  text-shadow: none;
+  background: rgba(15, 23, 42, 0.66);
+  padding: 0.04em 0.7em;
+  border-radius: 999px;
+}
 
 /* Issue449: _mg layout — ```mg 모션그래픽 전면 장 (theme 무관 구조 규칙).
    장식 가로선·제목·페이지 번호는 화면에서만 숨긴다 — 제목은 DOM 에 남아 목차·nav·pptx 가 읽는다.
@@ -531,7 +543,294 @@ html[data-mg-backdrop] .reveal:has(.slides > section.present.layout-_mg) {
   background-color: var(--mg-backdrop) !important;
 }
 
+
+/* =========================================================================
+   Issue473_6 (G6): 열 안 그림 높이 상한 opt-out — `.img-nocap`
+   base.css `.m2-cols img { max-height: min(60vh, 500px) }` 는 Reveal 논리 높이(720px) 초과 방지 가드지만
+   16:9 영상판처럼 그림이 장의 주역인 덱에서는 그림을 줄인다. base.css(전 프로젝트 공유·수정 가드)는 건드리지 않고
+   여기서 같은 선택자 + class 로 더 구체화해 푼다 — 열 컨테이너(`::: columns` 에 `.img-nocap`) 또는 그림 자체(raw `<img class="img-nocap">`).
+   폭 한도(max-width:100%)·비율(height:auto)·contain 은 base 규칙이 그대로 유지한다. class 가 없으면 base 상한 불변.
+   ========================================================================= */
+.reveal .m2-cols.img-nocap img,
+.reveal .columns.img-nocap img,
+.reveal .m2-rows.img-nocap img,
+.reveal .rows.img-nocap img,
+.reveal .m2-cols img.img-nocap,
+.reveal .columns img.img-nocap,
+.reveal .m2-rows img.img-nocap,
+.reveal .rows img.img-nocap {
+  max-height: none;
+}
+
+
+/* =========================================================================
+   Issue473_12 (G6 · Req7 갭 A): 그림 프레임 opt-out — `.img-noframe`·`.img-round`
+   테마 `.reveal .media-container img { border: 2px solid var(--m2-media-border) }` 는 비텍스트 대비 3:1(접근성) 근거의 기본 프레임이다 — 기본은 불변.
+   영상판처럼 그림이 장의 주역이고 프레임이 없는 덱에 한해, 열 컨테이너(`::: columns {.img-noframe}`) 또는 그림 자체(raw `<img class="img-noframe">`)에서 푼다.
+   `.img-round` 는 프레임 대신 둥근 모서리+그림자(영상판 `.vmg-fig round`). 둘 다 `.reveal .slides section` 접두로 테마 규칙(0,2,1)을 이긴다.
+   ========================================================================= */
+.reveal .slides section .img-noframe img,
+.reveal .slides section img.img-noframe {
+  border: 0; border-radius: 0;
+}
+.reveal .slides section .img-round img,
+.reveal .slides section img.img-round {
+  border: 0; border-radius: 24px; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.14);
+}
+
+/* Issue473_12 보강: 그림 wrapper(`::: {.img-noframe}`·`::: {.img-round}`) — 한 그림 장에서 그림 하나만 감싼다.
+   wrapper div 가 `.contents-body > .media-container` 의 flex 크기 계약(테마)을 끊지 않도록 레이아웃에서 투명하게 둔다.
+   컬럼 컨테이너(`.columns.img-noframe`)는 자체 레이아웃이 있으므로 제외한다. */
+.reveal .slides section div.img-noframe:not(.columns):not(.m2-cols),
+.reveal .slides section div.img-round:not(.columns):not(.m2-cols) {
+  display: contents;
+}
+
 /* <<< @import ../_shared/components.css */
+/* >>> @import ../_shared/video-blocks.css (Issue191 인라인 전개) */
+/* video-blocks.css — 영상 레이아웃 블록 + 영상 표지 (Issue473_8 G8 · Issue473_7 G7)
+ * 계약 정본: _doc_arch/video-layout.md §3·§4·§5
+ *
+ * 원칙
+ *   - JS 0. 모든 크기는 em (px 는 테두리 두께만). 블록 루트가 font-size 를 calc(1em * --m2-vb-scale) 로 잡는다
+ *   - 색은 변수 --m2-vb-color 하나만 바꾸고, 옅은 배경은 color-mix() 로 그 색에서 만든다
+ *   - .reveal .slides section 의 display·height·position 은 건드리지 않는다(CLAUDE.md «CSS 수정 시 주의사항»)
+ *   - base.css 는 수정하지 않는다 — 본 파일은 테마 레이어(default·default_lec @import)
+ *
+ * 목차: §1 공통 · §2 points · §3 chips · §4 flow · §5 versus · §6 summary · §7 띠 4종(+credit·plain) · §8 span 색 · §9 표지(변수 --m2-vc-title-size·--m2-vc-left)
+ */
+
+/* §1 공통 ------------------------------------------------------------- */
+:root {
+  --m2-vb-surface: #ffffff;   /* 블록 바탕 — default_dark 가 override */
+  --m2-vb-muted: #6b7280;
+  /* Issue473_14 (갭 C): 영상판 칸 색 — 노랑·슬레이트·어두운 선. 팔레트가 이미 정의했으면(뒤에 오는 theme·deck.css) 그쪽이 이긴다 */
+  --m2-accent-4: #F5C518;
+  --m2-accent-5: #94A3B8;
+  --m2-accent-6: #0F172A;
+}
+
+/* 기본 색은 특이도 (0,1,0) 으로 둔다 — 아래 .m2-vb.accent-N (0,2,0)·블록별 기본(.m2-flow 등, 뒤에 선언)이 이긴다.
+ * 예전엔 .reveal .slides section .m2-vb (0,3,1) 안에 있어 블록 루트 {.accent-N} 이 전혀 먹지 않았다(Req7 2회차 실측) */
+.m2-vb { --m2-vb-color: var(--kn-accent, var(--m2-accent-1)); }
+.reveal .slides section .m2-vb {
+  box-sizing: border-box;
+  font-size: calc(1em * var(--m2-vb-scale, 1));
+  line-height: 1.35;
+  text-align: left;
+  color: var(--m2-text, #111);
+  margin: 0.5em auto;
+  max-width: 100%;
+}
+/* 블록 색 지정 class — 블록 루트에 붙은 .accent-N (span 의 글자색과 겹치지 않게 .m2-vb 한정) */
+.m2-vb.accent-1 { --m2-vb-color: var(--m2-accent-1); }
+.m2-vb.accent-2 { --m2-vb-color: var(--m2-accent-2); }
+.m2-vb.accent-3 { --m2-vb-color: var(--m2-accent-3); }
+.m2-vb.accent-4 { --m2-vb-color: var(--m2-accent-4); }
+.m2-vb.accent-5 { --m2-vb-color: var(--m2-accent-5); }
+.m2-vb.accent-6 { --m2-vb-color: var(--m2-accent-6); }
+.m2-vb .accent-1 { --m2-vb-color: var(--m2-accent-1); }
+.m2-vb .accent-2 { --m2-vb-color: var(--m2-accent-2); }
+.m2-vb .accent-3 { --m2-vb-color: var(--m2-accent-3); }
+.m2-vb .accent-4 { --m2-vb-color: var(--m2-accent-4); }
+.m2-vb .accent-5 { --m2-vb-color: var(--m2-accent-5); }
+.m2-vb .accent-6 { --m2-vb-color: var(--m2-accent-6); }
+.m2-vb .muted { --m2-vb-color: var(--m2-vb-muted); color: var(--m2-vb-muted); }
+.m2-vb img { max-width: 100%; height: auto; }
+.m2-vb-error { padding: 0.5em 0.8em; }
+
+/* 번호 배지 공통 */
+.m2-vb .vb-n {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.6em; height: 1.6em; border-radius: 50%;
+  background: var(--m2-vb-color); color: #fff;
+  font-weight: 700; font-size: 0.8em; line-height: 1;
+}
+
+/* §2 points ----------------------------------------------------------- */
+.m2-points { display: flex; flex-direction: column; gap: 0.6em; }
+.m2-points .vb-pt {
+  border-left: 0.3em solid var(--m2-vb-color);
+  background: color-mix(in srgb, var(--m2-vb-color) 12%, var(--m2-vb-surface));
+  border-radius: 0 0.4em 0.4em 0;
+  padding: 0.55em 0.9em;
+  font-size: 1.1em; font-weight: 600;
+}
+.m2-points .vb-pt .vb-n { margin-right: 0.6em; vertical-align: 0.1em; }
+.m2-points .vb-sub { font-size: 0.75em; font-weight: 400; margin-top: 0.3em; color: var(--m2-vb-muted); }
+
+/* §3 chips ------------------------------------------------------------ */
+.m2-chips { --m2-vb-color: var(--m2-accent-2); display: flex; flex-wrap: wrap; gap: 0.6em; justify-content: center; }
+.m2-chips .vb-chip {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  border: 2px solid var(--m2-vb-color);
+  background: color-mix(in srgb, var(--m2-vb-color) 10%, var(--m2-vb-surface));
+  border-radius: 999px; padding: 0.3em 0.9em; font-weight: 600;
+}
+.m2-chips .vb-tag {
+  background: var(--m2-vb-color); color: #fff; border-radius: 0.4em;
+  padding: 0 0.45em; font-size: 0.9em; font-family: inherit;
+}
+
+/* §4 flow ------------------------------------------------------------- */
+/* 블록 폭은 본문 폭을 채우고, 본문(flex column) 세로 가운데에 둔다 — section 의 display·justify 는 건드리지 않고 자동 마진만 쓴다 */
+.reveal .slides section .m2-flow, .reveal .slides section .m2-versus, .reveal .slides section .m2-summary {
+  width: 100%; margin-top: auto; margin-bottom: auto; padding-left: 0.5em; padding-right: 0.5em;
+}
+.m2-flow { --m2-vb-color: var(--kn-text, var(--m2-text, #111)); display: flex; align-items: stretch; justify-content: center; gap: 0; padding-top: 1.2em; }
+.m2-flow .vb-step {
+  flex: 1 1 0; min-width: 0; max-width: 10.25em; position: relative; text-align: center;
+  border: 3px solid color-mix(in srgb, var(--m2-vb-color) 25%, #fff);
+  background: var(--m2-vb-surface);
+  border-radius: 0.7em; padding: 1.8em 0.6em 1.15em;
+  box-shadow: 0 0.25em 0.75em rgba(15, 23, 42, 0.08);
+  display: flex; flex-direction: column; align-items: center; gap: 0.35em;
+}
+.m2-flow .vb-n {
+  position: absolute; top: -1.18em; left: 50%; transform: translateX(-50%);
+  width: 2.15em; height: 2.15em; font-size: 0.72em; font-weight: 900; margin: 0;
+}
+.m2-flow .vb-t { font-weight: 900; font-size: 1.12em; }
+.m2-flow .vb-d { font-size: 0.76em; font-weight: 600; color: #475569; }
+.m2-flow .vb-fig img { max-height: 9em; max-width: 100%; width: auto; }
+.m2-flow .vb-arw { flex: 0 0 1em; align-self: center; text-align: center; font-size: 1.6em; font-weight: 700; color: #94A3B8; line-height: 1; }
+
+/* §5 versus ----------------------------------------------------------- */
+.m2-versus { display: flex; align-items: stretch; justify-content: center; gap: 0; }
+.m2-versus .vb-col {
+  --m2-vb-color: var(--m2-accent-1);
+  flex: 1 1 0; min-width: 0;
+  border: 0; border-top: 0.3em solid var(--m2-vb-color);
+  background: color-mix(in srgb, var(--m2-vb-color) 9%, var(--m2-vb-surface));
+  border-radius: 0.7em; padding: 1.6em 1.75em 2em;
+  display: flex; flex-direction: column; gap: 0.3em;
+}
+.m2-versus .vb-col.accent-1 { --m2-vb-color: var(--m2-accent-1); }
+.m2-versus .vb-col.accent-2 { --m2-vb-color: var(--m2-accent-2); }
+.m2-versus .vb-col.accent-3 { --m2-vb-color: var(--m2-accent-3); }
+.m2-versus .vb-col.accent-4 { --m2-vb-color: var(--m2-accent-4); }
+.m2-versus .vb-col.accent-5 { --m2-vb-color: var(--m2-accent-5); }
+.m2-versus .vb-col.accent-6 { --m2-vb-color: var(--m2-accent-6); }
+.m2-versus .vb-sub { font-size: 0.86em; font-weight: 700; color: #64748B; }
+.m2-versus .vb-col.accent-4 { --m2-vb-head: #8A6400; }   /* 노랑은 어둡게 섞어도 글자로 약해 영상판 값을 고정 */
+.m2-versus .vb-col.accent-5 { --m2-vb-head: #475569; }
+.m2-versus .vb-col.accent-6 { --m2-vb-head: #0F172A; }
+.m2-versus .vb-head { font-size: 2.3em; font-weight: 900; line-height: 1.15; color: var(--m2-vb-head, color-mix(in srgb, var(--m2-vb-color) 80%, #000)); }
+.m2-versus .vb-it { font-size: 1.28em; font-weight: 600; margin-top: 0.62em; padding-left: 1em; position: relative; }
+.m2-versus .vb-it::before { content: ""; position: absolute; left: 0.1em; top: 0.5em; width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--m2-vb-color); }
+.m2-versus .vb-vs { flex: 0 0 2.4em; align-self: center; text-align: center; font-weight: 900; font-size: 1.05em; color: #94A3B8; }
+
+/* §6 summary ---------------------------------------------------------- */
+.m2-summary { --m2-vb-color: var(--m2-accent-1); display: flex; align-items: stretch; justify-content: center; gap: 1.4em; padding-top: 1.3em; }
+.m2-summary .vb-card {
+  flex: 1 1 0; min-width: 0; position: relative;
+  border: 0; border-top: 0.3em solid var(--m2-vb-color);
+  background: var(--m2-vb-surface);
+  box-shadow: 0 0.25em 0.85em rgba(15, 23, 42, 0.11);
+  border-radius: 0.7em; padding: 2.8em 1em 2.15em;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.35em;
+}
+.m2-summary .vb-card .vb-n {
+  position: absolute; top: -1.22em; left: 50%; transform: translateX(-50%);
+  width: 2.2em; height: 2.2em; font-size: 0.9em; font-weight: 900;
+}
+.m2-summary .vb-t { font-weight: 900; font-size: 1.78em; line-height: 1.2; }
+.m2-summary .vb-d { font-size: 1.1em; font-weight: 600; margin-top: 0.6em; color: #475569; }
+.m2-summary .vb-fig img { max-height: 9em; max-width: 100%; width: auto; }
+
+/* §7 띠 3종 ----------------------------------------------------------- */
+.m2-answer, .m2-define { border-radius: 999px; padding: 0.5em 1.4em; text-align: center; font-weight: 700; width: fit-content; }
+.reveal .slides section .m2-answer {
+  background: #0F172A; color: #fff; font-size: 1.12em;
+}
+.m2-answer .vb-q { color: #F5C518; }
+.m2-define {
+  --m2-vb-color: var(--m2-accent-1);
+  background: color-mix(in srgb, var(--m2-vb-color) 18%, var(--m2-vb-surface));
+  border: 2px solid var(--m2-vb-color);
+}
+.m2-next { text-align: center; font-size: 0.7em; color: var(--m2-vb-muted); }
+.reveal .slides section .m2-answer + .m2-next { margin-top: 0.1em; margin-bottom: 0.1em; }
+.reveal .slides section .m2-summary + .m2-answer { margin-top: 1.2em; margin-bottom: 0.3em; }
+
+/* 크레딧 띠 — 영상판 바닥 글(0.5em·슬레이트·가운데). .m2-vb 의 font-size(0,3,1)를 이기려고 같은 접두를 쓴다 (Issue473_15) */
+.reveal .slides section .m2-credit { font-size: 0.5em; color: #64748B; text-align: center; font-weight: 500; margin-top: 0.9em; }
+
+/* §7b .plain — flow·summary 카드 크롬 제거(테두리·그림자·배경·화살표), 번호는 제목 앞 인라인 (Issue473_16) */
+.m2-flow.plain .vb-step { border: 0; box-shadow: none; background: transparent; padding: 0.4em 0.4em 0.6em; }
+.m2-flow.plain { gap: 1.2em; padding-top: 0.4em; }
+.m2-summary.plain .vb-card { border: 0; box-shadow: none; background: transparent; padding: 0.4em 0.4em 0.6em; }
+.m2-summary.plain { padding-top: 0.4em; }
+.m2-flow.plain .vb-n, .m2-summary.plain .vb-card .vb-n {
+  position: static; transform: none; display: inline; width: auto; height: auto; margin: 0 0.3em 0 0;
+  background: transparent; border-radius: 0; color: var(--m2-vb-color); font-size: 1em; font-weight: 900;
+}
+.m2-flow.plain .vb-n::after, .m2-summary.plain .vb-card .vb-n::after { content: "."; }
+.m2-flow.plain .vb-t { font-size: 1.12em; }
+.m2-summary.plain .vb-t { font-size: 1.3em; }
+
+/* §8 인라인 색 강조 span — span 에만 건다([x]{.accent-N}) */
+span.accent-1 { color: var(--m2-accent-1); }
+span.accent-2 { color: var(--m2-accent-2); }
+span.accent-3 { color: var(--m2-accent-3); }
+span.accent-4 { color: var(--m2-accent-4); }
+span.accent-5 { color: var(--m2-accent-5); }
+span.accent-6 { color: var(--m2-accent-6); }
+
+/* §9 영상 표지 layout-video-cover · layout-video-cover-on-dark --------
+ * section 은 theme 가 display:flex(column) 로 잡는다 — display·justify 는 건드리지 않고, 첫 자식 margin-top:auto·마지막 자식
+ * margin-bottom:auto 로 글 묶음을 세로 가운데에 둔다. 테마 h1 의 auto 마진을 이기려고 .reveal .slides section 접두로 특이도를 맞춘다 */
+.reveal .slides section.layout-video-cover,
+.reveal .slides section.layout-video-cover-on-dark {
+  text-align: left; box-sizing: border-box;
+}
+/* 글꼴은 덱의 contents 글꼴(--content-font-family = _config.yml style.theContents.font_family)을 따른다 — 테마 h1 의 제목 글꼴(더 넓다)을 쓰지 않는다 */
+.reveal .slides section.layout-video-cover .vc-chip, .reveal .slides section.layout-video-cover .vc-title, .reveal .slides section.layout-video-cover .vc-sub, .reveal .slides section.layout-video-cover .vc-note, .reveal .slides section.layout-video-cover .vc-by,
+.reveal .slides section.layout-video-cover-on-dark .vc-chip, .reveal .slides section.layout-video-cover-on-dark .vc-title, .reveal .slides section.layout-video-cover-on-dark .vc-sub, .reveal .slides section.layout-video-cover-on-dark .vc-note, .reveal .slides section.layout-video-cover-on-dark .vc-by {
+  font-family: var(--content-font-family, inherit);
+}
+.reveal .slides section.layout-video-cover .vc-chip,
+.reveal .slides section.layout-video-cover-on-dark .vc-chip {
+  align-self: flex-start; display: inline-block; width: auto; font-weight: 800; font-size: 0.62em;
+  background: #F5C518; color: #0F172A; border: 0; border-radius: 999px;
+  padding: 0.2em 0.9em; margin: auto 0 0.6em var(--m2-vc-left, 6%);
+}
+.reveal .slides section.layout-video-cover .vc-title,
+.reveal .slides section.layout-video-cover-on-dark .vc-title {
+  align-self: flex-start; font-size: var(--m2-vc-title-size, 2.5em); line-height: 1.12; font-weight: 900; letter-spacing: -0.02em; text-align: left;
+  margin: 0 0 0.25em var(--m2-vc-left, 6%); max-width: 46%;
+}
+.reveal .slides section.layout-video-cover .vc-title::after,
+.reveal .slides section.layout-video-cover-on-dark .vc-title::after {
+  content: ""; display: block; width: 1.36em; height: 0.056em; margin-top: 0.3em;
+  background: #F5C518; border-radius: 0.1em;
+}
+.reveal .slides section.layout-video-cover .vc-sub,
+.reveal .slides section.layout-video-cover-on-dark .vc-sub { align-self: flex-start; font-size: 1.12em; font-weight: 700; max-width: 46%; margin: 0.5em 0 0 var(--m2-vc-left, 6%); }
+.reveal .slides section.layout-video-cover .vc-note,
+.reveal .slides section.layout-video-cover-on-dark .vc-note { align-self: flex-start; font-size: 0.82em; font-weight: 600; max-width: 46%; margin: 0.4em 0 0 var(--m2-vc-left, 6%); }
+.reveal .slides section.layout-video-cover .vc-by,
+.reveal .slides section.layout-video-cover-on-dark .vc-by { align-self: flex-start; font-size: 0.7em; font-weight: 700; max-width: 46%; margin: 1.6em 0 0 var(--m2-vc-left, 6%); opacity: 0.85; }
+
+.reveal .slides section.layout-video-cover .vc-title:last-child, .reveal .slides section.layout-video-cover .vc-sub:last-child, .reveal .slides section.layout-video-cover .vc-note:last-child, .reveal .slides section.layout-video-cover .vc-by:last-child,
+.reveal .slides section.layout-video-cover-on-dark .vc-title:last-child, .reveal .slides section.layout-video-cover-on-dark .vc-sub:last-child, .reveal .slides section.layout-video-cover-on-dark .vc-note:last-child, .reveal .slides section.layout-video-cover-on-dark .vc-by:last-child { margin-bottom: auto; }
+
+.reveal .slides section.layout-video-cover { color: #0F172A; }
+.reveal .slides section.layout-video-cover .vc-title,
+.reveal .slides section.layout-video-cover .vc-sub,
+.reveal .slides section.layout-video-cover .vc-note,
+.reveal .slides section.layout-video-cover .vc-by { color: #0F172A; text-shadow: none; }
+.reveal .slides section.layout-video-cover .vc-chip { color: #0F172A; text-shadow: none; }
+
+.reveal .slides section.layout-video-cover-on-dark { color: #fff; }
+.reveal .slides section.layout-video-cover-on-dark .vc-title,
+.reveal .slides section.layout-video-cover-on-dark .vc-sub,
+.reveal .slides section.layout-video-cover-on-dark .vc-note,
+.reveal .slides section.layout-video-cover-on-dark .vc-by { color: #fff; text-shadow: 0 0.06em 0.25em rgba(0, 0, 0, 0.75); }
+.reveal .slides section.layout-video-cover-on-dark .vc-chip { color: #0F172A; text-shadow: none; }
+
+/* <<< @import ../_shared/video-blocks.css */
 
 /* =========================================================================
    1. Keynote Nowage 색상 변수 (테마 브랜딩)
@@ -1864,6 +2163,19 @@ body.agenda-page .agenda-frame {
 .reveal.ratio-4-3 section[class*="layout-"] > .contents-head-bar {
   font-size: 0.56em;
   color: rgba(0, 0, 0, 0.8);
+}
+
+/* 머리말 좌/우 폭을 내용에 맞춘다 (__lec 2026.10.25 요구 — 2.marketing 1-1 절 이름이 두 줄로 꺾임).
+   위 네 블록(contents/_contents · contents-full · exercise)은 좌/우를 `flex: 1 1 50%` 로 반씩 나눠,
+   우측이 짧아도(「1일차 — …」) 좌측 절 이름이 화면 절반에서 꺾였다. 우측은 내용 폭만 쓰고
+   남는 폭을 좌측이 가져간다. 둘 다 길어 넘칠 때만 기존처럼 줄바꿈(keep-all)으로 떨어진다.
+   선택자를 layout 나열 대신 `[class*="layout-"]` 한 줄로 둔 이유는 위 4:3 블록과 같다(나열 누락 재발 방지). */
+.reveal section[class*="layout-"] > .contents-head-bar > .contents-head-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.reveal section[class*="layout-"] > .contents-head-bar > .contents-head-right {
+  flex: 0 1 auto;
 }
 
 /* 실습·정리 장표의 본문 글자 크기를 이론 장표와 맞춘다 (__lec 2026.09.19 요구).

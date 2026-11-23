@@ -1430,7 +1430,7 @@ html.ratio-fill .agenda-frame {
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
   <link rel="stylesheet" href="css/lec-tokens.css"/>
-  <link rel="stylesheet" href="css/custom.css?v=1792243519884">
+  <link rel="stylesheet" href="css/custom.css?v=1795459109350">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1900,24 +1900,7 @@ html.ratio-fill .agenda-frame {
   <div class="contents-body">
 <div class="media-container"><img src="img/patents-01-home.png" alt="Google Patents 첫 화면 — 자연어 검색에 관대하고 해외 공보를 기계 번역으로 보여 줌"></div>
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>KIPRIS</strong> / 국내 중심
-<ul>
-<li class="bullet-dash">한글 원문을 그대로 봄</li>
-<li class="bullet-dash">상세 검색 연산자가 강함</li>
-<li class="bullet-dash">국내 선행기술 검토에 씀</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>Google Patents</strong> / 전 세계
-<ul>
-<li class="bullet-dash">해외 공보와 기계 번역</li>
-<li class="bullet-dash">자연어 검색에 관대함</li>
-<li class="bullet-dash">기술 동향 파악에 씀</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">국내 중심</div><div class="vb-head">KIPRIS</div><div class="vb-it">한글 원문을 그대로 봄</div><div class="vb-it">상세 검색 연산자가 강함</div><div class="vb-it">국내 선행기술 검토에 씀</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">전 세계</div><div class="vb-head">Google Patents</div><div class="vb-it">해외 공보와 기계 번역</div><div class="vb-it">자연어 검색에 관대함</div><div class="vb-it">기술 동향 파악에 씀</div></div></div>
 
 <ul>
 <li class="bullet-dot"><strong>국내 출원 검토는 KIPRIS, 해외 동향은 Google Patents</strong> 로 나눠 씀.</li>
@@ -2087,26 +2070,7 @@ flowchart LR
   </div>
   <h3 class="title">구성요소 대비표와 회피 설계 아이디어를 얻는 질문</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>AI 에 맡기는 것</strong> / 범위를 좁힘
-<ul>
-<li class="bullet-dash">구성요소 분해</li>
-<li class="bullet-dash">대체 가능한 방식 나열</li>
-<li class="bullet-dash">관련 선행기술 검색어 제안</li>
-<li class="bullet-dash">✓ 검토 대상을 추려 줌</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>맡기지 않는 것</strong> / 책임이 걸림
-<ul>
-<li class="bullet-dash">침해 여부 판단</li>
-<li class="bullet-dash">회피 성립 여부 결론</li>
-<li class="bullet-dash">출원 전략 결정</li>
-<li class="bullet-dash">✕ 변리사·법무 검토가 필수</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">범위를 좁힘</div><div class="vb-head">AI 에 맡기는 것</div><div class="vb-it">구성요소 분해</div><div class="vb-it">대체 가능한 방식 나열</div><div class="vb-it">관련 선행기술 검색어 제안</div><div class="vb-it">✓ 검토 대상을 추려 줌</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">책임이 걸림</div><div class="vb-head">맡기지 않는 것</div><div class="vb-it">침해 여부 판단</div><div class="vb-it">회피 성립 여부 결론</div><div class="vb-it">출원 전략 결정</div><div class="vb-it">✕ 변리사·법무 검토가 필수</div></div></div>
 
 <ul>
 <li class="bullet-dot">대비표는 <strong>우리 제품의 구성요소</strong>와 <strong>청구항의 구성요소</strong>를 나란히 놓은 표임. 겹치지 않는 칸이 검토 시작점임 — 필수 요소 하나가 우리 제품에 없으면 그 자리가 회피의 후보임.</li>
@@ -2198,35 +2162,7 @@ flowchart LR
   </div>
   <h3 class="title">크롤링의 기법 — 요청·파싱·페이지네이션·대기·에러 처리</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:5">
-<ul>
-<li class="bullet-dot">요청
-<ul>
-<li class="bullet-dash">페이지를 받아 옴</li>
-</ul>
-</li>
-<li class="bullet-dot">파싱
-<ul>
-<li class="bullet-dash">필요한 부분만 골라냄</li>
-</ul>
-</li>
-<li class="bullet-dot">페이지네이션
-<ul>
-<li class="bullet-dash">다음 쪽으로 넘어감</li>
-</ul>
-</li>
-<li class="bullet-dot">대기
-<ul>
-<li class="bullet-dash">서버에 부담을 주지 않게 쉼</li>
-</ul>
-</li>
-<li class="bullet-dot">에러 처리
-<ul>
-<li class="bullet-dash">실패한 건을 기록하고 재시도</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">요청</div><div class="vb-d">페이지를 받아 옴</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">파싱</div><div class="vb-d">필요한 부분만 골라냄</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">페이지네이션</div><div class="vb-d">다음 쪽으로 넘어감</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">대기</div><div class="vb-d">서버에 부담을 주지 않게 쉼</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">5</div><div class="vb-t">에러 처리</div><div class="vb-d">실패한 건을 기록하고 재시도</div></div></div>
 
 <ul>
 <li class="bullet-dot">기법 자체는 어렵지 않음. <strong>대기</strong>를 빼먹으면 상대 서버에 부담을 주고 차단당함 — 교육장 24명이 <strong>단일 IP</strong> 를 쓰므로 한 사람의 연속 요청이 전원의 검색을 막을 수 있음.</li>
@@ -2398,17 +2334,9 @@ flowchart LR
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P3-1 — 원문 청구항 대조와 `robots.txt` 판정</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">분해 결과를 청구항 원문과 한 줄씩 대조</li>
-<li class="bullet-dot">종속항 한정이 독립항으로 올라갔는지 확인</li>
-<li class="bullet-dot"><code>robots.txt</code> 를 열어 판정</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>분해 결과를 청구항 원문과 한 줄씩 대조</div><div class="vb-pt"><span class="vb-n">2</span>종속항 한정이 독립항으로 올라갔는지 확인</div><div class="vb-pt"><span class="vb-n">3</span><code>robots.txt</code> 를 열어 판정</div></div>
 
-<ul>
-<li class="bullet-dot">🔴 <strong>AI 의 침해 판단을 결론으로 쓰지 않음.</strong> 3일차 산출물은 변리사에게 넘길 <strong>검토 대상 목록</strong>임.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">🔴 <span class="vb-q">AI 의 침해 판단을 결론으로 쓰지 않음.</span> 3일차 산출물은 변리사에게 넘길 <span class="vb-q">검토 대상 목록</span>임.</div></div>
 </section>
 
 
@@ -2443,30 +2371,7 @@ flowchart LR
   </div>
   <h3 class="title">논문을 찾는 곳과 읽는 순서</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">검색
-<ul>
-<li class="bullet-dash">Scholar 에서 키워드로</li>
-</ul>
-</li>
-<li class="bullet-dot">거르기
-<ul>
-<li class="bullet-dash">인용수·연도로 축소</li>
-</ul>
-</li>
-<li class="bullet-dot">초록
-<ul>
-<li class="bullet-dash">조건이 맞는지만 봄</li>
-</ul>
-</li>
-<li class="bullet-dot">본문 표
-<ul>
-<li class="bullet-dash">조건·결과를 추출함</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">검색</div><div class="vb-d">Scholar 에서 키워드로</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">거르기</div><div class="vb-d">인용수·연도로 축소</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">초록</div><div class="vb-d">조건이 맞는지만 봄</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">본문 표</div><div class="vb-d">조건·결과를 추출함</div></div></div>
 
 <ul>
 <li class="bullet-dot">본문을 통독하지 않음. <strong>표와 실험 절</strong>만 보면 대개 필요한 것이 나옴 — 논문의 결과 표는 사양서의 사양 표와 같은 자리임.</li>
@@ -2683,25 +2588,7 @@ flowchart LR
 <div class="m2-cols columns">
 
 <div class="m2-col column" style="flex: 0 0 36%; max-width: 36%">
-<div class="m2-htmlart htmlart-block" data-htmlart="block" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">제목이 그럴듯함
-<ul>
-<li class="bullet-dash">실제로는 없음</li>
-</ul>
-</li>
-<li class="bullet-dot">저자·연도가 붙음
-<ul>
-<li class="bullet-dash">실재 이름이 섞임</li>
-</ul>
-</li>
-<li class="bullet-dot">DOI 까지 만듦
-<ul>
-<li class="bullet-dash">열면 다른 논문</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">제목이 그럴듯함</div><div class="vb-d">실제로는 없음</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">저자·연도가 붙음</div><div class="vb-d">실재 이름이 섞임</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">DOI 까지 만듦</div><div class="vb-d">열면 다른 논문</div></div></div>
 </div>
 
 <div class="m2-col column" style="flex: 0 0 60%; max-width: 60%">
@@ -2767,17 +2654,9 @@ flowchart LR
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P3-2 — 인용 정보가 실재하는가</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">제목을 Scholar 에 붙여 넣어 실재 확인</li>
-<li class="bullet-dot">그래프 추정값이 아닌지 확인</li>
-<li class="bullet-dot">단위와 오차범위가 원문 그대로인지 확인</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>제목을 Scholar 에 붙여 넣어 실재 확인</div><div class="vb-pt"><span class="vb-n">2</span>그래프 추정값이 아닌지 확인</div><div class="vb-pt"><span class="vb-n">3</span>단위와 오차범위가 원문 그대로인지 확인</div></div>
 
-<ul>
-<li class="bullet-dot"><strong>인용 3건을 직접 검색</strong>함. 하나라도 안 나오면 나머지도 의심함.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer"><span class="vb-q">인용 3건을 직접 검색</span>함. 하나라도 안 나오면 나머지도 의심함.</div></div>
 </section>
 
 
@@ -2941,25 +2820,7 @@ flowchart LR
 <div class="m2-cols columns">
 
 <div class="m2-col column" style="flex: 0 0 36%; max-width: 36%">
-<div class="m2-htmlart htmlart-step" data-htmlart="step" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">질의응답
-<ul>
-<li class="bullet-dash">가볍게 깎임</li>
-</ul>
-</li>
-<li class="bullet-dot">요약·브리핑
-<ul>
-<li class="bullet-dash">무겁게 깎임</li>
-</ul>
-</li>
-<li class="bullet-dot">오디오 개요
-<ul>
-<li class="bullet-dash">가장 무거움</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">질의응답</div><div class="vb-d">가볍게 깎임</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">요약·브리핑</div><div class="vb-d">무겁게 깎임</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">오디오 개요</div><div class="vb-d">가장 무거움</div></div></div>
 </div>
 
 <div class="m2-col column" style="flex: 0 0 60%; max-width: 60%">
@@ -2968,7 +2829,7 @@ flowchart LR
 <li class="bullet-dot">그래서 실습은 <strong>질의응답 위주</strong>로 함. 생성 기능은 한 번만 눌러 보고 넘어감 — 한 번의 오디오 개요가 질문 수십 개 값임.</li>
 <li class="bullet-dot"><strong>주 단위 한도</strong>이고, 거기 닿기 전까지는 <strong>5시간마다</strong> 조금씩 되채워짐. 오전에 소진해도 오후에 일부 돌아옴.</li>
 <li class="bullet-dot">남은 양은 <strong>설정 > 사용량</strong>에서 보고, 무거운 기능은 누르기 전에 <strong>예상 소모량이 막대로 미리 뜸.</strong> 누르기 전에 그 막대를 보는 습관을 들임.</li>
-<li class="bullet-dot">그래도 막히면 <strong>「나중에 생성」</strong>으로 걸어 둘 수 있음. 몇 시간 뒤 알림이 옴 — 실습이 통째로 멈추지는 않음.</li>
+<li class="bullet-dot">그래도 막히면 <strong>「나중에 생성」</strong> 으로 걸어 둘 수 있음. 몇 시간 뒤 알림이 옴 — 실습이 통째로 멈추지는 않음.</li>
 </ul>
 </div>
 
@@ -3027,13 +2888,7 @@ flowchart LR
   </div>
   <h3 class="title">출처 검증의 3단 확인</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">인용을 눌러 원문 구절로 이동함</li>
-<li class="bullet-dot">구절에 그 내용이 있는지 봄</li>
-<li class="bullet-dot">숫자·단위가 원문과 같은지 대조함</li>
-</ul>
-</div>
+<div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>인용을 눌러 원문 구절로 이동함</div><div class="vb-pt"><span class="vb-n">2</span>구절에 그 내용이 있는지 봄</div><div class="vb-pt"><span class="vb-n">3</span>숫자·단위가 원문과 같은지 대조함</div></div>
 
 <ul>
 <li class="bullet-dot"><strong>3건만</strong> 확인함. 전수는 하지 않되 숫자가 든 문장을 우선함.</li>
@@ -3048,24 +2903,7 @@ flowchart LR
   </div>
   <h3 class="title">소스를 빼면 답이 달라짐</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>소스 3개일 때</strong> / 종합된 답
-<ul>
-<li class="bullet-dash">여러 자료를 가로질러 답함</li>
-<li class="bullet-dash">상충이 드러남</li>
-<li class="bullet-dash">출처가 여럿 붙음</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>소스 1개만 남겼을 때</strong> / 좁아진 답
-<ul>
-<li class="bullet-dash">그 자료 안에서만 답함</li>
-<li class="bullet-dash">앞의 답과 달라지면 정상임</li>
-<li class="bullet-dash">달라지지 않으면 의심함</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">종합된 답</div><div class="vb-head">소스 3개일 때</div><div class="vb-it">여러 자료를 가로질러 답함</div><div class="vb-it">상충이 드러남</div><div class="vb-it">출처가 여럿 붙음</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">좁아진 답</div><div class="vb-head">소스 1개만 남겼을 때</div><div class="vb-it">그 자료 안에서만 답함</div><div class="vb-it">앞의 답과 달라지면 정상임</div><div class="vb-it">달라지지 않으면 의심함</div></div></div>
 
 <ul>
 <li class="bullet-dot"><strong>소스를 빼도 답이 그대로면</strong> 자료가 아니라 모델이 아는 것으로 답한 것임. 검증 P3-3 이 이 시험임.</li>
@@ -3162,17 +3000,9 @@ flowchart LR
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P3-3 — 소스 1개만 남기고 재질의</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">소스를 1개만 남기고 같은 질문을 던짐</li>
-<li class="bullet-dot">답이 달라지면 자료를 보고 답한 것임</li>
-<li class="bullet-dot">그대로면 모델이 답한 것임</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>소스를 1개만 남기고 같은 질문을 던짐</div><div class="vb-pt"><span class="vb-n">2</span>답이 달라지면 자료를 보고 답한 것임</div><div class="vb-pt"><span class="vb-n">3</span>그대로면 모델이 답한 것임</div></div>
 
-<ul>
-<li class="bullet-dot">끝나면 끈 소스를 다시 켬 — <strong>6일차까지</strong> 씀.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">끝나면 끈 소스를 다시 켬 — <span class="vb-q">6일차까지</span> 씀.</div></div>
 </section>
 
 
@@ -3209,25 +3039,7 @@ flowchart LR
   </div>
   <h3 class="title">🔗 이 절의 산출물은 4일차 보고서의 입력임</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-step" data-htmlart="step" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">3일차 3교시까지
-<ul>
-<li class="bullet-dash">자료를 찾아 모음</li>
-</ul>
-</li>
-<li class="bullet-dot">3일차 4교시
-<ul>
-<li class="bullet-dash">시험 데이터를 정리해 표와 그래프를 만듦</li>
-</ul>
-</li>
-<li class="bullet-dot">4일차 1교시
-<ul>
-<li class="bullet-dash">그 표와 그래프로 보고서 초안을 씀</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">3일차 3교시까지</div><div class="vb-d">자료를 찾아 모음</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">3일차 4교시</div><div class="vb-d">시험 데이터를 정리해 표와 그래프를 만듦</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">4일차 1교시</div><div class="vb-d">그 표와 그래프로 보고서 초안을 씀</div></div></div>
 
 <ul>
 <li class="bullet-dot">3일차에 만든 것을 <strong>저장해 두어야</strong> 4일차로 이어짐. 마지막 장에서 보관 위치를 다시 짚음.</li>
@@ -3514,24 +3326,7 @@ flowchart LR
   </div>
   <h3 class="title">Gemini 차트와 수정 버튼 — 두 번째 경로</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>ChatGPT 데이터 분석</strong> / 코드가 돎
-<ul>
-<li class="bullet-dash">파일을 넣고 파일을 받음</li>
-<li class="bullet-dash">세밀한 지시가 먹음</li>
-<li class="bullet-dash">규격선·건수 표기가 됨</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>Gemini 차트</strong> / 버튼으로 고침
-<ul>
-<li class="bullet-dash">만든 차트를 눌러 수정함</li>
-<li class="bullet-dash">손이 덜 감</li>
-<li class="bullet-dash">세밀한 지시는 덜 먹음</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">코드가 돎</div><div class="vb-head">ChatGPT 데이터 분석</div><div class="vb-it">파일을 넣고 파일을 받음</div><div class="vb-it">세밀한 지시가 먹음</div><div class="vb-it">규격선·건수 표기가 됨</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">버튼으로 고침</div><div class="vb-head">Gemini 차트</div><div class="vb-it">만든 차트를 눌러 수정함</div><div class="vb-it">손이 덜 감</div><div class="vb-it">세밀한 지시는 덜 먹음</div></div></div>
 
 <ul>
 <li class="bullet-dot">둘 다 열어 두고 <strong>손에 맞는 쪽</strong>을 씀. 3일차 실습은 앞의 것으로 함 — 규격선과 건수 표기가 보고서 조건이기 때문임.</li>
@@ -3596,17 +3391,9 @@ flowchart LR
   <div class="exercise-header">
     <h1 class="exercise-title">✅ 검증 P3-4 — 합계와 건수를 원본과 대조</h1>
   </div>
-  <div class="exercise-body"><div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">정제 후 건수가 맞는가</li>
-<li class="bullet-dot">그래프 축 단위가 원본과 같은가</li>
-<li class="bullet-dot">규격선 값이 실제 규격과 일치하는가</li>
-</ul>
-</div>
+  <div class="exercise-body"><div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>정제 후 건수가 맞는가</div><div class="vb-pt"><span class="vb-n">2</span>그래프 축 단위가 원본과 같은가</div><div class="vb-pt"><span class="vb-n">3</span>규격선 값이 실제 규격과 일치하는가</div></div>
 
-<ul>
-<li class="bullet-dot"><strong>조용히 사라진 행</strong>이 가장 위험함. 건수를 맞춰 보는 것으로 대부분 잡힘.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer"><span class="vb-q">조용히 사라진 행</span>이 가장 위험함. 건수를 맞춰 보는 것으로 대부분 잡힘.</div></div>
 </section>
 
 
@@ -3623,7 +3410,7 @@ flowchart LR
 </thead>
 <tbody>
 <tr><td style="text-align:left"><code>3-4_시험데이터.xlsx</code></td><td style="text-align:left">P3-4-1</td><td style="text-align:left">4-1 보고서 「결과」 절</td></tr>
-<tr><td style="text-align:left">그래프 이미지 2종</td><td style="text-align:left">P3-4-2</td><td style="text-align:left">4-1 보고서 · 4-4 발표덱</td></tr>
+<tr><td style="text-align:left">그래프 이미지 2종</td><td style="text-align:left">P3-4-2</td><td style="text-align:left">4-1 보고서 · 4-4 발표 덱</td></tr>
 <tr><td style="text-align:left"><code>3-1_대비표.md</code></td><td style="text-align:left">P3-1-2</td><td style="text-align:left">5-1 명세서 골격</td></tr>
 <tr><td style="text-align:left">논문 조건·결과 표</td><td style="text-align:left">P3-2-2</td><td style="text-align:left">4-1 보고서 「고찰」 절</td></tr>
 </tbody>
@@ -3641,24 +3428,7 @@ flowchart LR
   </div>
   <div class="summary-body"><p>3일차는 찾고 읽고 모으고 정리했음. 4일차부터는 <strong>쓰는 시간</strong>임.</p>
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>1~3일차 — 읽는 일</strong> / 밖에 있는 것을 안으로
-<ul>
-<li class="bullet-dash">사양서·도면·특허·논문</li>
-<li class="bullet-dash">찾고 뽑고 모았음</li>
-<li class="bullet-dash">산출물은 표와 요약임</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>4~6일차 — 쓰는 일</strong> / 안에 있는 것을 밖으로
-<ul>
-<li class="bullet-dash">보고서·성적서·명세서</li>
-<li class="bullet-dash">쓰고 판정하고 묶음</li>
-<li class="bullet-dash">입력은 앞 3일의 산출물임</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">읽는 일** — 밖에 있는 것을 안으로</div><div class="vb-head">**1~3일차</div><div class="vb-it">사양서·도면·특허·논문</div><div class="vb-it">찾고 뽑고 모았음</div><div class="vb-it">산출물은 표와 요약임</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">쓰는 일** — 안에 있는 것을 밖으로</div><div class="vb-head">**4~6일차</div><div class="vb-it">보고서·성적서·명세서</div><div class="vb-it">쓰고 판정하고 묶음</div><div class="vb-it">입력은 앞 3일의 산출물임</div></div></div></div>
 </section>
 
 
@@ -3666,30 +3436,7 @@ flowchart LR
   <div class="summary-header">
     <h1 class="summary-title">3일차 정리 — 찾기·읽기·모으기·정리하기</h1>
   </div>
-  <div class="summary-body"><div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">찾기
-<ul>
-<li class="bullet-dash">특허는 1차 선별에 씀</li>
-</ul>
-</li>
-<li class="bullet-dot">읽기
-<ul>
-<li class="bullet-dash">논문은 요약이 아니라 추출</li>
-</ul>
-</li>
-<li class="bullet-dot">모으기
-<ul>
-<li class="bullet-dash">노트북은 출처가 붙음</li>
-</ul>
-</li>
-<li class="bullet-dot">정리하기
-<ul>
-<li class="bullet-dash">진단 → 규칙 → 정제</li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="summary-body"><div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">찾기</div><div class="vb-d">특허는 1차 선별에 씀</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">읽기</div><div class="vb-d">논문은 요약이 아니라 추출</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">모으기</div><div class="vb-d">노트북은 출처가 붙음</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">정리하기</div><div class="vb-d">진단 → 규칙 → 정제</div></div></div>
 
 <ul>
 <li class="bullet-dot">3일차에도 반복된 것이 하나 있음 — <strong>「없으면 없다고 적게 하는 것」</strong> 임. 미기재·명시 없음·불명, 표현은 달라도 같은 장치임.</li>
@@ -3702,34 +3449,9 @@ flowchart LR
   <div class="summary-header">
     <h1 class="summary-title">3일차에 확인한 무료 도구의 경계</h1>
   </div>
-  <div class="summary-body"><div class="m2-htmlart htmlart-hexagon" data-htmlart="hexagon" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">무로그인 검색
-<ul>
-<li class="bullet-dash">조회는 되나 저장·알림은 안 됨</li>
-</ul>
-</li>
-<li class="bullet-dot">논문 유료 장벽
-<ul>
-<li class="bullet-dash">공개본이 없으면 초록으로 끝냄</li>
-</ul>
-</li>
-<li class="bullet-dot">노트북 생성 한도
-<ul>
-<li class="bullet-dash">요약·오디오는 아껴 씀</li>
-</ul>
-</li>
-<li class="bullet-dot">국내 학술 DB
-<ul>
-<li class="bullet-dash">기관 구독이 필요함</li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="summary-body"><div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">무로그인 검색</div><div class="vb-d">조회는 되나 저장·알림은 안 됨</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">논문 유료 장벽</div><div class="vb-d">공개본이 없으면 초록으로 끝냄</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">노트북 생성 한도</div><div class="vb-d">요약·오디오는 아껴 씀</div></div><div class="vb-card"><div class="vb-n">4</div><div class="vb-t">국내 학술 DB</div><div class="vb-d">기관 구독이 필요함</div></div></div>
 
-<ul>
-<li class="bullet-dot">경계를 알면 <strong>막혔을 때 당황하지 않음.</strong> 우회할 곳이 정해져 있음 — 저장·알림은 API, 유료 논문은 초록, 국내 DB 는 회사 구독.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">경계를 알면 <span class="vb-q">막혔을 때 당황하지 않음.</span> 우회할 곳이 정해져 있음 — 저장·알림은 API, 유료 논문은 초록, 국내 DB 는 회사 구독.</div></div>
 </section>
 
 
@@ -3757,9 +3479,7 @@ flowchart LR
 </ul>
 </div>
 
-<ul>
-<li class="bullet-dot">노트북은 6일차에 다시 열림 — 그때는 5일차 볼트가 소스가 되고, 3일차의 노트북은 「왜 그렇게 동작했는가」를 되짚는 사례가 됨.</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">노트북은 6일차에 다시 열림 — 그때는 5일차 볼트가 소스가 되고, 3일차의 노트북은 「왜 그렇게 동작했는가」를 되짚는 사례가 됨.</div></div>
 </section>
 
 
@@ -3786,22 +3506,7 @@ flowchart LR
   </div>
   <h3 class="title">🎬 다음 시간 예고 — 이제 쓰기</h3>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>3일차까지 — 읽는 시간</strong> / 찾고 정리함
-<ul>
-<li class="bullet-dash">사양서·도면·특허·논문</li>
-<li class="bullet-dash">표와 그래프로 정리함</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>4일차부터 — 쓰는 시간</strong> / 문서를 냄
-<ul>
-<li class="bullet-dash">기술 보고서·시험 성적서</li>
-<li class="bullet-dash">영문 초록·발표 덱</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">읽는 시간** — 찾고 정리함</div><div class="vb-head">**3일차까지</div><div class="vb-it">사양서·도면·특허·논문</div><div class="vb-it">표와 그래프로 정리함</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">쓰는 시간** — 문서를 냄</div><div class="vb-head">**4일차부터</div><div class="vb-it">기술 보고서·시험 성적서</div><div class="vb-it">영문 초록·발표 덱</div></div></div>
 
 <ul>
 <li class="bullet-dot">3일차에 만든 표와 그래프가 그대로 4일차 문서의 재료가 됨. 초안까지 하루 안에 만들어 봄.</li>
@@ -5538,6 +5243,20 @@ flowchart LR
     if(!target){ target=items[0].title.trim(); }
     if(!annots.length){ errBox(el,'htmlArt annotate: over/under 주석 필요'); return; }
 
+    // ── target 줄바꿈 — `<br>` 에서 줄을 나눈다 ──────────────────────────────
+    //   nodeText 는 textContent 라 `<br>` 이 흔적 없이 사라진다. 그래서 «# 제목<br>- 목록»
+    //   처럼 줄마다 기호가 오는 Markdown 문서 모양을 보여 줄 수 없었다. target li 만 다시
+    //   읽어 `<br>` 을 `\n` 으로 남긴다(다른 항목·다른 타입의 nodeText 는 그대로).
+    ul.querySelectorAll(':scope > li').forEach(function(li){
+      var c=li.cloneNode(true);
+      c.querySelectorAll('ul,ol').forEach(function(n){n.remove();});
+      if(!c.querySelector('br'))return;
+      c.querySelectorAll('br').forEach(function(b){ b.replaceWith('\n'); });
+      var mt=(c.textContent||'').trim().match(/^target\s*:\s*([\s\S]+)$/i);
+      if(mt) target=mt[1].split('\n').map(function(s){ return s.trim(); }).join('\n');
+    });
+    var targetRows=target.split('\n');
+
     var W=1400, H=620, cx=W/2, cy=H/2;
     var labelGap=24, labelFs=24, labelPad=12;
     var colorMap={red:'#e74c3c',blue:'#3498db',green:'#27ae60',yellow:'#f1c40f',
@@ -5584,13 +5303,19 @@ flowchart LR
     //   넣으면 안 된다(Issue370 구현 명세). Issue364 와 같은 총량 축으로 함께 푼다:
     //   줄 수 × 줄높이가 상한에 들어갈 때까지 폰트를 낮추고, fo 높이를 실제 줄 수로 준다.
     //   `letter-spacing:0.02em` 은 폭 모델에 없으므로 fs 에 1.02 를 곱해 근사한다.
-    var targetFs=56, targetLines=1;
-    for(; targetFs>24; targetFs--){
-      targetLines=wrapLines(target, targetFs*1.02, targetW);
-      if(targetLines*targetFs*1.2<=360)break;
+    //   `<br>` 로 나눈 줄 사이에는 0.5em 간격을 둔다 — 강조선(글자 위·아래 10px)이 이웃
+    //   줄 글자에 걸치지 않게 하는 자리다. 줄 수는 나눈 줄마다 따로 wrap 해 더한다.
+    var rowGap=0.5;
+    function targetHeight(fs){
+      var n=0;
+      targetRows.forEach(function(r){ n+=Math.max(1, wrapLines(r, fs*1.02, targetW)); });
+      return n*fs*1.2+(targetRows.length-1)*fs*rowGap;
     }
-    targetLines=wrapLines(target, targetFs*1.02, targetW);
-    var targetH=Math.max(120, Math.ceil(targetLines*targetFs*1.2)+8);
+    var targetFs=56;
+    for(; targetFs>24; targetFs--){
+      if(targetHeight(targetFs)<=360)break;
+    }
+    var targetH=Math.max(120, Math.ceil(targetHeight(targetFs))+8);
 
     var svg=mkSvg(el,W,H,'ha-annotate-svg');
 
@@ -5608,6 +5333,14 @@ flowchart LR
     });
     var html=markedTarget.replace(/(\d+)([^]+)/g,
       function(m,i,s){ return '<span data-annot-idx="'+i+'" style="display:inline-block;">'+s+'</span>'; });
+    // 여러 줄이면 줄마다 블록으로 — 줄 사이 간격(rowGap)이 강조선 자리이고, 왼쪽 정렬로
+    //   줄머리 기호(#·-·>)가 세로로 맞아 문서 모양이 된다. 한 줄이면 종전 그대로(가운데).
+    var multiRow=targetRows.length>1;
+    if(multiRow){
+      html=html.split('\n').map(function(r,i,a){
+        return '<div data-annot-line style="margin:0 0 '+(i<a.length-1?rowGap:0)+'em;">'+r+'</div>';
+      }).join('');
+    }
 
     var foY=cy-targetH/2;
     var fo=svg.append('foreignObject')
@@ -5621,8 +5354,8 @@ flowchart LR
         +'font-weight:800;font-size:'+targetFs+'px;line-height:1.2;text-align:center;'
         +'word-break:keep-all;letter-spacing:0.02em;')
       .node();
-    d3.select(targetBox).append('xhtml:span')
-      .attr('style','display:inline;')
+    d3.select(targetBox).append(multiRow?'xhtml:div':'xhtml:span')
+      .attr('style',multiRow?'text-align:left;':'display:inline;')
       .html(html);
 
     // ── span 계측은 화면 좌표가 아니라 레이아웃 좌표로 한다 (Issue418) ─────────
