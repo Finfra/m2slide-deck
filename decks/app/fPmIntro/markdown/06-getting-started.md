@@ -1,22 +1,24 @@
 ---
 title: "6. fPM 도입하기"
 type: ppt
-release_date: 2026-07-02
+release_date: 2026-11-24
 ---
 
 # fPM 도입하기 & 다음 단계
 
-* 앞서 본 hub·대시보드·VSCode 연동·cdf·pm-do·sshf를 **내 환경에 얹는 첫 단계**를 정리함
+::: define
+앞서 본 hub·대시보드·VSCode 연동·cdf·pm-do·sshf를 **내 환경에 얹는 첫 단계**를 정리함
+:::
 
-::: htmlart process
+::: flow
 * 설치
-  - 원라인 부트스트랩
+    - 원라인 부트스트랩
 * 유지
-  - fpm update / upgrade
+    - fpm update / upgrade
 * 조정
-  - hub Settings
+    - hub Settings
 * 실습
-  - 오늘 바로 해볼 것
+    - 오늘 바로 해볼 것
 :::
 
 ---
@@ -116,17 +118,17 @@ gh api -H "Accept: application/vnd.github.raw" \
 
 # 첫 실습 — 지금 해보기
 
-::: htmlart step
+::: flow
 * 설치
-  - 원라인 부트스트랩 실행
+    - 원라인 부트스트랩 실행
 * 첫 hub 렌더
-  - 프로젝트 폴더에서 ..show
+    - 프로젝트 폴더에서 ..show
 * 프로젝트 이동
-  - cdf 목록 확인 → 번호 이동
+    - cdf 목록 확인 → 번호 이동
 * 장시간 작업
-  - ..board로 진행 지켜보기
+    - ..board로 진행 지켜보기
 * 원격 확장
-  - sshf로 서버 접속
+    - sshf로 서버 접속
 :::
 
 > 오늘 본 것 중 하나만 골라 바로 적용해보는 것이 가장 빠른 학습임

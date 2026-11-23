@@ -1,7 +1,7 @@
 ---
 title: "5. 다중 프로젝트 관리"
 type: ppt
-release_date: 2026-07-02
+release_date: 2026-11-24
 ---
 
 # 다중 프로젝트 관리 — cdf 패밀리
@@ -9,15 +9,15 @@ release_date: 2026-07-02
 * **이게 없으면 겪는 불편**: 프로젝트 수십 개의 경로를 외우고, 전환마다 `cd`로 오가며, 프로젝트 간 의존 작업을 수동으로 챙김
 * fPM은 **번호 → 경로 레지스트리**와 `cdf` 패밀리로 이 비용을 없앰
 
-::: htmlart process
+::: flow
 * 번호 등록
-  - projects/{번호} = 경로 SSOT
+    - projects/{번호} = 경로 SSOT
 * cdf 번호
-  - 즉시 이동 (결정론적)
+    - 즉시 이동 (결정론적)
 * 다중·분할
-  - iTerm2 pane · VSCode
+    - iTerm2 pane · VSCode
 * 이름·frecency
-  - 번호 잊어도 검색
+    - 번호 잊어도 검색
 :::
 
 ---

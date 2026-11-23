@@ -1,7 +1,7 @@
 ---
 title: "2. hub 모드"
 type: ppt
-release_date: 2026-07-02
+release_date: 2026-11-24
 ---
 
 # hub 모드 — HTML 렌더 & Q&A 폼
@@ -82,15 +82,17 @@ src: mg/03-hub
 
 # 모바일·원격에서도 열람
 
-::: htmlart process
+::: flow
 * QR 생성
-  - hub `/qr` 페이지가 반응형 QR 제공
+    - hub `/qr` 페이지가 반응형 QR 제공
 * 스캔
-  - 같은 Wi-Fi 휴대폰으로 스캔
+    - 같은 Wi-Fi 휴대폰으로 스캔
 * 열람
-  - 동일 결과 문서를 그 자리에서 확인
+    - 동일 결과 문서를 그 자리에서 확인
 * 공유
-  - 발표·리뷰 중 링크·QR 하나로 즉시
+    - 발표·리뷰 중 링크·QR 하나로 즉시
 :::
 
-* LAN IP bind + 오프라인 vendored QR로 **외부 서비스 의존 없이** 동작함
+::: answer
+LAN IP bind + 오프라인 vendored QR로 **외부 서비스 의존 없이** 동작함
+:::

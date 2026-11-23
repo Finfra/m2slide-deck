@@ -1,7 +1,7 @@
 ---
 title: "4. VSCode 연동"
 type: ppt
-release_date: 2026-07-02
+release_date: 2026-11-24
 ---
 
 # VSCode ↔ 대시보드 연동

@@ -1,7 +1,7 @@
 ---
 title: "1. 왜 fPM인가"
 type: ppt
-release_date: 2026-07-02
+release_date: 2026-11-24
 ---
 
 # 왜 fPM인가 — 일반 Claude Code의 한계
@@ -103,7 +103,7 @@ src: mg/01-what
 
 # 이 데크에서 볼 것
 
-::: htmlart chevron
+::: flow {.nonum}
 * 2. hub 렌더 / Q&A
 * 3. 실시간 대시보드
 * 4. VSCode 연동
