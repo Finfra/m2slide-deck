@@ -4,7 +4,7 @@ subtitle: Claude Code 유저를 위한 15분 입문
 author: ""
 date: 2026-05-19
 type: ppt
-release_date: 2026-07-07
+release_date: 2026-11-24
 ---
 
 # 들어가며 — 왜 graphify인가
@@ -37,11 +37,18 @@ graph LR
 
 ## graphify가 해결하는 문제 <!-- nosplit -->
 
+::: {.columns .img-nocap}
+::: {.column width="56%"}
+![Before / After — graphify가 해결하는 문제](./img/before-after-problem.svg)
+:::
+::: {.column width="44%"}
+::: points
 * 코드·문서 전체를 **사전 분석** → knowledge graph 캐시
 * 질의 시 필요한 노드만 가져옴 → **토큰 최소화**
 * EXTRACTED + INFERRED edge로 숨겨진 연결 발견
-
-![Before / After — graphify가 해결하는 문제](./img/before-after-problem.svg)
+:::
+:::
+:::
 
 ---
 
