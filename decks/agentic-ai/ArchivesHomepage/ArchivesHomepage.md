@@ -4,7 +4,7 @@ cover_title: "Claude 로 만드는\n첫 홈페이지\nSupabase · Cloudflare"
 subtitle: 국가기록원 기록관리교육 특강 (2시간) — 말로 만들고, 저장하고, 인터넷에 공개하기
 instructor_name: 남중구 (핀프라)
 type: ppt
-release_date: 2026-11-13
+release_date: 2026-11-24
 ---
 
 # 시작
@@ -45,15 +45,15 @@ release_date: 2026-11-13
 ## 2시간 뒤 손에 남는 것
 #id-goal
 
-::: htmlart compare
-* **내 PC 안에서만** / 지금까지
-  - 파일을 더블클릭해야 열림
-  - 만든 사람만 볼 수 있음
-  - 글을 남겨도 새로고침하면 사라짐
-* **인터넷 주소로** / 이번 2시간
-  - 주소만 알면 휴대폰으로도 열림
-  - 누구나 방명록을 남길 수 있음
-  - 남긴 글이 인터넷 장부에 저장됨
+::: versus
+* **내 PC 안에서만** — 지금까지
+    - 파일을 더블클릭해야 열림
+    - 만든 사람만 볼 수 있음
+    - 글을 남겨도 새로고침하면 사라짐
+* **인터넷 주소로** — 이번 2시간
+    - 주소만 알면 휴대폰으로도 열림
+    - 누구나 방명록을 남길 수 있음
+    - 남긴 글이 인터넷 장부에 저장됨
 :::
 
 ---
@@ -82,15 +82,15 @@ release_date: 2026-11-13
 ## 왜 이 조합인가
 #id-why
 
-::: htmlart compare
-* **서버를 직접 빌리면** / 예전 방식
-  - 서버 임대 · 설치 · 보안 패치를 직접 함
-  - 매달 비용이 나감
-  - 고장 나면 직접 고침
-* **Supabase + Cloudflare** / 이번 방식
-  - 가입만 하면 바로 씀 (무료 범위)
-  - 저장은 Supabase, 공개는 Cloudflare 가 맡음
-  - 남은 일은 화면 만들기 — Claude 가 함
+::: versus
+* **서버를 직접 빌리면** — 예전 방식
+    - 서버 임대 · 설치 · 보안 패치를 직접 함
+    - 매달 비용이 나감
+    - 고장 나면 직접 고침
+* **Supabase + Cloudflare** — 이번 방식
+    - 가입만 하면 바로 씀 (무료 범위)
+    - 저장은 Supabase, 공개는 Cloudflare 가 맡음
+    - 남은 일은 화면 만들기 — Claude 가 함
 :::
 
 ---
@@ -105,22 +105,24 @@ release_date: 2026-11-13
 * 10:50 정리 · 질의응답
 :::
 
-* 먼저 끝난 사람은 **부록 A · B · C** 로 먼저 진행
+::: answer
+먼저 끝난 사람은 **부록 A · B · C** 로 먼저 진행
+:::
 
 ---
 
 ## 실습 약속
 #id-rules
 
-::: htmlart numbered
-* 실제 기록물 · 개인정보는 넣지 않음
-  - 가상의 «한빛기록관» 으로 실습
-* 비밀 키는 어디에도 붙여 넣지 않음
-  - secret 키 · DB 비밀번호 · Client Secret
-* 실제 기관 서비스는 별도 검토가 먼저
-  - 보안 · 개인정보 · 기록관리 규정
-* 실습이 끝나면 정리함
-  - 방명록 비우기 · 프로젝트 일시정지
+::: points
+1. 실제 기록물 · 개인정보는 넣지 않음
+    - 가상의 «한빛기록관» 으로 실습
+1. 비밀 키는 어디에도 붙여 넣지 않음
+    - secret 키 · DB 비밀번호 · Client Secret
+1. 실제 기관 서비스는 별도 검토가 먼저
+    - 보안 · 개인정보 · 기록관리 규정
+1. 실습이 끝나면 정리함
+    - 방명록 비우기 · 프로젝트 일시정지
 :::
 
 ---
@@ -143,14 +145,16 @@ release_date: 2026-11-13
 ## 지금 바로 — 폴더 하나, 말 한 줄
 #id-gu-start
 
-::: htmlart numbered
-* 바탕화면에 gugudan 폴더 만들기
-* VS Code 에서 File → Open Folder
-* 오른쪽 위 아이콘으로 Claude 패널 열기
-* 프롬프트 ⓪ 을 붙여 넣고 Enter
+::: points
+1. 바탕화면에 gugudan 폴더 만들기
+1. VS Code 에서 File → Open Folder
+1. 오른쪽 위 아이콘으로 Claude 패널 열기
+1. 프롬프트 ⓪ 을 붙여 넣고 Enter
 :::
 
-* 폴더를 열어야 Claude 가 그 안에서만 일함 — 폴더 없이 시작하지 않음
+::: answer
+폴더를 열어야 Claude 가 그 안에서만 일함 — 폴더 없이 시작하지 않음
+:::
 
 ---
 
@@ -172,14 +176,14 @@ release_date: 2026-11-13
 ## Claude 가 허락을 물을 때
 #id-approve
 
-::: htmlart compare
-* **허락해도 되는 것** / 이 폴더 안
-  - 파일 만들기 · 고치기
-  - 만든 결과 보여 주기
-* **멈추고 읽을 것** / 폴더 밖 · 되돌리기 어려운 일
-  - 다른 폴더의 파일 지우기
-  - 프로그램 설치 · 비밀번호 입력
-  - 모르면 «이게 무슨 작업이야?» 하고 물음
+::: versus
+* **허락해도 되는 것** — 이 폴더 안
+    - 파일 만들기 · 고치기
+    - 만든 결과 보여 주기
+* **멈추고 읽을 것** — 폴더 밖 · 되돌리기 어려운 일
+    - 다른 폴더의 파일 지우기
+    - 프로그램 설치 · 비밀번호 입력
+    - 모르면 «이게 무슨 작업이야?» 하고 물음
 :::
 
 ---
@@ -187,45 +191,49 @@ release_date: 2026-11-13
 ## 결과 보기 — 더블클릭
 #id-gu-open
 
-::: htmlart numbered
-* 탐색기에서 gugudan 폴더 열기
-* index.html 더블클릭 — 기본 브라우저로 열림
-* 2단 ~ 9단 버튼과 퀴즈를 눌러 보기
-* 주소창 확인 — file:///C:/… 로 시작함
+::: points
+1. 탐색기에서 gugudan 폴더 열기
+1. index.html 더블클릭 — 기본 브라우저로 열림
+1. 2단 ~ 9단 버튼과 퀴즈를 눌러 보기
+1. 주소창 확인 — file:///C:/… 로 시작함
 :::
 
-* `file:///` = 인터넷 주소가 아니라 **내 PC 안의 파일**을 보는 중
+::: answer
+`file:///` = 인터넷 주소가 아니라 **내 PC 안의 파일**을 보는 중
+:::
 
 ---
 
 ## 말로 고치기 — 한 번에 하나씩
 #id-gu-refine
 
-::: htmlart numbered
-* 색 바꾸기
-  - «7단은 빨간색으로 바꿔 줘»
-* 퀴즈 늘리기
-  - «퀴즈를 20문제로 늘려 줘»
-* 재미 더하기
-  - «맞히면 축하 문구를 크게 보여 줘»
-* 되돌리기
-  - «방금 바꾼 것 되돌려 줘»
+::: points
+1. 색 바꾸기
+    - «7단은 빨간색으로 바꿔 줘»
+1. 퀴즈 늘리기
+    - «퀴즈를 20문제로 늘려 줘»
+1. 재미 더하기
+    - «맞히면 축하 문구를 크게 보여 줘»
+1. 되돌리기
+    - «방금 바꾼 것 되돌려 줘»
 :::
 
-* 고칠 곳 하나 · 원하는 모양 하나 — 한 번에 하나씩 말하고 F5 로 확인
+::: answer
+고칠 곳 하나 · 원하는 모양 하나 — 한 번에 하나씩 말하고 F5 로 확인
+:::
 
 ---
 
 ## 해 보면 생기는 질문 세 가지
 #id-gu-questions
 
-::: htmlart numbered
-* 옆 사람 휴대폰으로 열 수 있나?
-  - ✕ 주소가 file:/// — 내 PC 안의 파일임
-* 새로고침하면 퀴즈 점수는?
-  - ✕ 사라짐 — 기억해 두는 곳이 없음
-* 다른 사람 점수와 견줄 수 있나?
-  - ✕ 모두가 같이 쓰는 장부가 없음
+::: points
+1. 옆 사람 휴대폰으로 열 수 있나?
+    - ✕ 주소가 file:/// — 내 PC 안의 파일임
+1. 새로고침하면 퀴즈 점수는?
+    - ✕ 사라짐 — 기억해 두는 곳이 없음
+1. 다른 사람 점수와 견줄 수 있나?
+    - ✕ 모두가 같이 쓰는 장부가 없음
 :::
 
 ---
@@ -264,7 +272,9 @@ release_date: 2026-11-13
   - 읽고 승인
 :::
 
-* 메뉴가 많고 자주 바뀌는 설정 화면 — 사람은 **문을 열고**, 클릭은 Claude 에게 맡김
+::: answer
+메뉴가 많고 자주 바뀌는 설정 화면 — 사람은 **문을 열고**, 클릭은 Claude 에게 맡김
+:::
 
 ---
 
@@ -286,15 +296,15 @@ release_date: 2026-11-13
 ## 담당자가 해 둔 것 · 지금 할 것
 #id-prep-split
 
-::: htmlart compare
-* **담당자가 해 둔 것** / 사전 설정
-  - VS Code 설치
-  - Claude Code 확장 연결 · 로그인
-  - VS Code 오른쪽에 Claude 패널이 열림
-* **지금 할 것** / 18분
-  - ego (lite) 설치
-  - GitHub · Supabase · Cloudflare 가입
-  - Supabase 프로젝트 하나 만들기
+::: versus
+* **담당자가 해 둔 것** — 사전 설정
+    - VS Code 설치
+    - Claude Code 확장 연결 · 로그인
+    - VS Code 오른쪽에 Claude 패널이 열림
+* **지금 할 것** — 18분
+    - ego (lite) 설치
+    - GitHub · Supabase · Cloudflare 가입
+    - Supabase 프로젝트 하나 만들기
 :::
 
 ---
@@ -347,29 +357,33 @@ release_date: 2026-11-13
 ## 설치 뒤 — VS Code 를 한 번 껐다 켬
 #id-ego-restart
 
-::: htmlart numbered
-* VS Code 창을 닫고 다시 열기
-  - 그래야 Claude 가 새로 깔린 ego 를 찾음
-* File → Open Recent 로 gugudan 폴더
-* Claude 에게 ego 연결 확인을 부탁
-  - 실습 자료의 «ego 연결 확인» 프롬프트
-* «ego-browser ready» 가 나오면 준비 끝
+::: points
+1. VS Code 창을 닫고 다시 열기
+    - 그래야 Claude 가 새로 깔린 ego 를 찾음
+1. File → Open Recent 로 gugudan 폴더
+1. Claude 에게 ego 연결 확인을 부탁
+    - 실습 자료의 «ego 연결 확인» 프롬프트
+1. «ego-browser ready» 가 나오면 준비 끝
 :::
 
-* 안 나오면 그대로 진행해도 됨 — ego 에 맡기는 길만 빼고 **모든 실습은 사람이 직접** 할 수 있음
+::: answer
+안 나오면 그대로 진행해도 됨 — ego 에 맡기는 길만 빼고 **모든 실습은 사람이 직접** 할 수 있음
+:::
 
 ---
 
 ## 가입 순서 — ego 창에서 하나씩
 #id-signup
 
-::: htmlart numbered
-* GitHub — 이메일 · 인증 코드
-* Supabase — Continue with GitHub
-* Cloudflare — 이메일 · 인증 메일
+::: points
+1. GitHub — 이메일 · 인증 코드
+1. Supabase — Continue with GitHub
+1. Cloudflare — 이메일 · 인증 메일
 :::
 
-* 세 곳 모두 **ego 창에서** 가입 — 로그인 상태가 ego 에 남아 Claude 가 이어서 쓸 수 있음
+::: answer
+세 곳 모두 **ego 창에서** 가입 — 로그인 상태가 ego 에 남아 Claude 가 이어서 쓸 수 있음
+:::
 
 ---
 
@@ -388,14 +402,14 @@ release_date: 2026-11-13
 ## Supabase 프로젝트 미리 만들기
 #id-sb-new
 
-::: htmlart numbered
-* New project
-* 이름 — archives-homepage
-* Region — Northeast Asia (Seoul)
-* Database Password — Generate
-  - 화면 밖 안전한 곳에 따로 보관
-* Create new project
-  - 1~2분 걸림 — 만드는 동안 다음 실습
+::: points
+1. New project
+1. 이름 — archives-homepage
+1. Region — Northeast Asia (Seoul)
+1. Database Password — Generate
+    - 화면 밖 안전한 곳에 따로 보관
+1. Create new project
+    - 1~2분 걸림 — 만드는 동안 다음 실습
 :::
 
 ---
@@ -487,15 +501,15 @@ src: mg/md
 ## 왜 AI 가 잘 알아듣나
 #id-md-why-ai
 
-::: htmlart hexagon
+::: summary
 * 구조가 뚜렷함
-  - 기호로 제목·목록·표를 구분
+    - 기호로 제목·목록·표를 구분
 * 텍스트만
-  - 서식 없이 내용에 집중
+    - 서식 없이 내용에 집중
 * 그대로 주고받음
-  - AI 의 답변도 같은 기호
+    - AI 의 답변도 같은 기호
 * 제목을 달아 요청
-  - 목표 · 조건 · 완료 기준
+    - 목표 · 조건 · 완료 기준
 :::
 
 ---
@@ -503,35 +517,37 @@ src: mg/md
 ## 워드·한글 파일과 무엇이 다른가
 #id-md-vs-doc
 
-::: htmlart compare
-* **워드·한글** / .docx · .hwp
-  - 서식이 섞인 파일
-  - 변경 비교는 전용 기능으로
-  - AI 와는 복사·변환이 필요
-  - 해당 프로그램이 있어야 열림
-* **Markdown** / .md
-  - 일반 텍스트
-  - Git 으로 줄 단위 비교
-  - AI 가 그대로 읽고 씀
-  - 어떤 편집기든 열림
+::: versus
+* **워드·한글** — .docx · .hwp
+    - 서식이 섞인 파일
+    - 변경 비교는 전용 기능으로
+    - AI 와는 복사·변환이 필요
+    - 해당 프로그램이 있어야 열림
+* **Markdown** — .md
+    - 일반 텍스트
+    - Git 으로 줄 단위 비교
+    - AI 가 그대로 읽고 씀
+    - 어떤 편집기든 열림
 :::
 
-* 일반 텍스트라 **오래 지나도 어떤 프로그램으로든 열림** — 기록 보존 관점에서도 유리한 형식
+::: answer
+일반 텍스트라 **오래 지나도 어떤 프로그램으로든 열림** — 기록 보존 관점에서도 유리한 형식
+:::
 
 ---
 
 ## 어디에 쓰이나
 #id-md-where
 
-::: htmlart matrix
+::: summary {.nonum}
 * README
-  - 프로젝트를 소개하는 첫 장
+    - 프로젝트를 소개하는 첫 장
 * 기획 · 요구사항
-  - AI 에게 주는 요청서
+    - AI 에게 주는 요청서
 * AI 지침 파일
-  - ex) CLAUDE.md — 매 대화 시작 때 읽음
+    - ex) CLAUDE.md — 매 대화 시작 때 읽음
 * 이슈 · 보고
-  - 작업의 기록
+    - 작업의 기록
 :::
 
 ---
@@ -539,31 +555,33 @@ src: mg/md
 ## 지침 파일 — AI 에게 맡기는 «프로젝트 사용 설명서»
 #id-md-guide
 
-::: htmlart process
+::: flow
 * CLAUDE.md 작성
-  - 프로젝트의 규칙과 배경
+    - 프로젝트의 규칙과 배경
 * AI 가 읽음
-  - 매 대화 시작 때
+    - 매 대화 시작 때
 * 설명 반복 없음
-  - 대화마다 다시 말하지 않음
+    - 대화마다 다시 말하지 않음
 * 저장소로 공유
-  - 팀이 같은 지침을 씀
+    - 팀이 같은 지침을 씀
 :::
 
-* ex) «방명록 글은 200자 이내 · 실제 기관명 금지» 를 적어 두면 매번 말하지 않아도 지킴
+::: answer
+ex) «방명록 글은 200자 이내 · 실제 기관명 금지» 를 적어 두면 매번 말하지 않아도 지킴
+:::
 
 ---
 
 ## 기획과 요청을 적어 두면 AI 가 정확히 이해함
 #id-md-write-down
 
-::: htmlart compare
-* **말로만 한 요청** / 흩어짐
-  - 대화가 끝나면 사라짐
-  - 무엇을 시켰는지 다시 찾기 어려움
-* **적어 둔 요청** / 남음
-  - AI 가 정확히 이해함
-  - 나중에 다시 읽기 쉬움
+::: versus
+* **말로만 한 요청** — 흩어짐
+    - 대화가 끝나면 사라짐
+    - 무엇을 시켰는지 다시 찾기 어려움
+* **적어 둔 요청** — 남음
+    - AI 가 정확히 이해함
+    - 나중에 다시 읽기 쉬움
 :::
 
 ---
@@ -602,18 +620,20 @@ src: mg/md
 ## 코드를 읽고 쓴 설계 문서의 함정
 #id-md-trap
 
-::: htmlart compare
-* **코드 → 문서** / 거꾸로
-  - 만들어진 코드를 보고 씀
-  - 코드가 기준이 됨
-  - 설계가 코드를 이끌지 못함
-* **문서 → 코드** / 바로
-  - 기준 문서를 먼저 씀
-  - 문서가 기준이 됨
-  - 설계가 코드를 이끎
+::: versus
+* **코드 → 문서** — 거꾸로
+    - 만들어진 코드를 보고 씀
+    - 코드가 기준이 됨
+    - 설계가 코드를 이끌지 못함
+* **문서 → 코드** — 바로
+    - 기준 문서를 먼저 씀
+    - 문서가 기준이 됨
+    - 설계가 코드를 이끎
 :::
 
-* 기준 문서는 코드보다 **먼저** 있어야 함
+::: answer
+기준 문서는 코드보다 **먼저** 있어야 함
+:::
 
 ---
 
@@ -629,13 +649,13 @@ src: mg/md
 ## Markdown 정리 — 한 장 요약
 #id-md-summary
 
-::: htmlart hexagon
+::: summary
 * 메모 양식
-  - 사람과 AI 가 함께 읽음
+    - 사람과 AI 가 함께 읽음
 * 적어 둔 요청
-  - 남고 다시 읽힘
+    - 남고 다시 읽힘
 * 요구사항에서 시작
-  - 사슬이 변경까지 이어짐
+    - 사슬이 변경까지 이어짐
 :::
 
 ---
@@ -649,7 +669,9 @@ src: mg/md
 * 10:00 — «4. 만들기» 로 이어짐
 :::
 
-* 세 가지 중 끝나지 않은 것이 있으면 손을 들면 같이 맞춤
+::: answer
+세 가지 중 끝나지 않은 것이 있으면 손을 들면 같이 맞춤
+:::
 
 ---
 
@@ -662,14 +684,16 @@ src: mg/md
 ## 작업 폴더 열기 — 구구단과 같은 방법
 #id-open-folder
 
-::: htmlart numbered
-* 바탕화면에 archives-homepage 폴더 만들기
-* File → Open Folder 로 그 폴더 열기
-* 오른쪽 위 아이콘으로 Claude 패널 열기
-* 프롬프트를 붙여 넣고 Enter
+::: points
+1. 바탕화면에 archives-homepage 폴더 만들기
+1. File → Open Folder 로 그 폴더 열기
+1. 오른쪽 위 아이콘으로 Claude 패널 열기
+1. 프롬프트를 붙여 넣고 Enter
 :::
 
-* 구구단과 섞이지 않게 **새 폴더** — 폴더 하나에 홈페이지 하나
+::: answer
+구구단과 섞이지 않게 **새 폴더** — 폴더 하나에 홈페이지 하나
+:::
 
 ---
 
@@ -701,27 +725,31 @@ site 폴더에 index.html 한 파일로 가상의 «한빛기록관» 소개 홈
 ## 결과 보기
 #id-preview
 
-::: htmlart numbered
-* 탐색기에서 site 폴더 열기
-* index.html 을 ego 창에 끌어 놓기
-* F12 → 기기 아이콘 — 휴대폰 크기로 보기
+::: points
+1. 탐색기에서 site 폴더 열기
+1. index.html 을 ego 창에 끌어 놓기
+1. F12 → 기기 아이콘 — 휴대폰 크기로 보기
 :::
 
-* ego 창 위쪽 주소가 `file:///…/index.html` 이면 내 PC 의 파일을 보는 중
+::: answer
+ego 창 위쪽 주소가 `file:///…/index.html` 이면 내 PC 의 파일을 보는 중
+:::
 
 ---
 
 ## 말로 다듬기
 #id-refine
 
-::: htmlart numbered
-* 제목을 더 크게, 카드에 아이콘을 넣어 줘
-* 글씨가 작아 — 어르신도 읽기 쉽게 키워 줘
-* 오시는 길 카드에 운영 시간을 추가해 줘
-* 방금 바꾼 것 되돌려 줘
+::: points
+1. 제목을 더 크게, 카드에 아이콘을 넣어 줘
+1. 글씨가 작아 — 어르신도 읽기 쉽게 키워 줘
+1. 오시는 길 카드에 운영 시간을 추가해 줘
+1. 방금 바꾼 것 되돌려 줘
 :::
 
-* 고칠 곳 하나 · 원하는 모양 하나 — 한 번에 하나씩 말할수록 정확함
+::: answer
+고칠 곳 하나 · 원하는 모양 하나 — 한 번에 하나씩 말할수록 정확함
+:::
 
 ---
 
@@ -755,16 +783,18 @@ site 폴더에 index.html 한 파일로 가상의 «한빛기록관» 소개 홈
 ## 지금 방명록의 한계
 #id-limit
 
-::: htmlart compare
-* **지금** / 화면 안에만 있음
-  - 새로고침하면 글이 사라짐
-  - 내 PC 에서만 보임
-* **Supabase 연결 뒤** / 인터넷 장부에 적힘
-  - 새로고침해도 남음
-  - 누가 접속해도 같은 글이 보임
+::: versus
+* **지금** — 화면 안에만 있음
+    - 새로고침하면 글이 사라짐
+    - 내 PC 에서만 보임
+* **Supabase 연결 뒤** — 인터넷 장부에 적힘
+    - 새로고침해도 남음
+    - 누가 접속해도 같은 글이 보임
 :::
 
-* 구구단 퀴즈 점수가 사라진 것과 같은 이유 — **기억해 두는 곳**이 없었음
+::: answer
+구구단 퀴즈 점수가 사라진 것과 같은 이유 — **기억해 두는 곳**이 없었음
+:::
 
 ---
 
@@ -778,7 +808,9 @@ site 폴더에 index.html 한 파일로 가상의 «한빛기록관» 소개 홈
 * RLS = 표에 거는 자물쇠
 :::
 
-* 무료로 프로젝트 2개까지 — 이번 실습은 1개
+::: answer
+무료로 프로젝트 2개까지 — 이번 실습은 1개
+:::
 
 ---
 
@@ -822,14 +854,16 @@ site 폴더에 index.html 한 파일로 가상의 «한빛기록관» 소개 홈
 ## SQL 실행
 #id-sql-run
 
-::: htmlart numbered
-* supabase.sql 전체 복사
-* SQL Editor → New query
-* 붙여 넣고 Run → «Success» 확인
-* Table Editor 에서 guestbook 표 확인
+::: points
+1. supabase.sql 전체 복사
+1. SQL Editor → New query
+1. 붙여 넣고 Run → «Success» 확인
+1. Table Editor 에서 guestbook 표 확인
 :::
 
-* 경고 창이 뜨면 바로 누르지 말고 — 경고 문장을 Claude 에게 붙여 넣어 무슨 뜻인지 물음
+::: answer
+경고 창이 뜨면 바로 누르지 말고 — 경고 문장을 Claude 에게 붙여 넣어 무슨 뜻인지 물음
+:::
 
 ---
 
@@ -849,13 +883,13 @@ ego-browser skill 을 먼저 실행해 사용법을 읽고, ego 로 Supabase 의
 ## RLS — 표에 거는 자물쇠
 #id-rls
 
-::: htmlart compare
-* **RLS 꺼짐** / 열쇠만 있으면 전부
-  - 공개 키로 읽기 · 쓰기 · 고치기 · 지우기
-  - 누구나 남의 글을 지울 수 있음
-* **RLS 켜짐 + 정책** / 허락한 것만
-  - 읽기 · 쓰기만 허락
-  - 고치기 · 지우기는 막힘
+::: versus
+* **RLS 꺼짐** — 열쇠만 있으면 전부
+    - 공개 키로 읽기 · 쓰기 · 고치기 · 지우기
+    - 누구나 남의 글을 지울 수 있음
+* **RLS 켜짐 + 정책** — 허락한 것만
+    - 읽기 · 쓰기만 허락
+    - 고치기 · 지우기는 막힘
 :::
 
 ---
@@ -885,14 +919,16 @@ site/index.html 의 방명록을 Supabase 의 guestbook 표와 연결해 줘.
 ## config.js 에 두 값 넣기
 #id-config
 
-::: htmlart numbered
-* Project URL 복사
-* Publishable key 복사
-* site/config.js 빈자리에 붙여 넣기
-* Ctrl + S 로 저장
+::: points
+1. Project URL 복사
+1. Publishable key 복사
+1. site/config.js 빈자리에 붙여 넣기
+1. Ctrl + S 로 저장
 :::
 
-* 어려우면 Claude 에게 «이 주소와 키를 config.js 에 넣어 줘» 하고 두 값을 붙여 넣어도 됨 — **publishable 키만**
+::: answer
+어려우면 Claude 에게 «이 주소와 키를 config.js 에 넣어 줘» 하고 두 값을 붙여 넣어도 됨 — **publishable 키만**
+:::
 
 ---
 
@@ -912,11 +948,11 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 확인 — 새로고침해도 남는가
 #id-check-db
 
-::: htmlart numbered
-* ego 창에서 index.html 새로고침
-* 방명록에 이름 · 한 줄 남기기
-* 다시 새로고침 — 글이 남아 있으면 성공
-* Table Editor 에도 같은 글이 보임
+::: points
+1. ego 창에서 index.html 새로고침
+1. 방명록에 이름 · 한 줄 남기기
+1. 다시 새로고침 — 글이 남아 있으면 성공
+1. Table Editor 에도 같은 글이 보임
 :::
 
 ---
@@ -972,27 +1008,29 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 올리는 순서
 #id-upload
 
-::: htmlart numbered
-* 왼쪽 메뉴 Workers & Pages → Create
-* Pages → Upload assets (직접 올리기)
-* 프로젝트 이름 정하기 — 주소가 됨
-* site 폴더를 끌어 놓고 Deploy
+::: points
+1. 왼쪽 메뉴 Workers & Pages → Create
+1. Pages → Upload assets (직접 올리기)
+1. 프로젝트 이름 정하기 — 주소가 됨
+1. site 폴더를 끌어 놓고 Deploy
 :::
 
-* 메뉴 이름은 Cloudflare 업데이트로 바뀔 수 있음 — «Pages» · «Upload» 가 들어간 버튼을 찾음
+::: answer
+메뉴 이름은 Cloudflare 업데이트로 바뀔 수 있음 — «Pages» · «Upload» 가 들어간 버튼을 찾음
+:::
 
 ---
 
 ## 올릴 것 · 올리지 않을 것
 #id-what-upload
 
-::: htmlart compare
-* **올리는 것** / site 폴더
-  - index.html
-  - config.js (공개 키만 들어 있음)
-* **올리지 않는 것** / 내 PC 에만
-  - supabase.sql
-  - 비밀번호 · secret 키를 적은 메모
+::: versus
+* **올리는 것** — site 폴더
+    - index.html
+    - config.js (공개 키만 들어 있음)
+* **올리지 않는 것** — 내 PC 에만
+    - supabase.sql
+    - 비밀번호 · secret 키를 적은 메모
 :::
 
 ---
@@ -1000,11 +1038,11 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 확인 — 휴대폰으로 접속
 #id-phone
 
-::: htmlart numbered
-* 받은 주소(…pages.dev)를 휴대폰으로 열기
-* 옆 사람 주소에 방명록 남기기
-* 내 주소에 옆 사람 글이 보이면 완성
-* 주소가 안 열리면 1~2분 뒤 다시
+::: points
+1. 받은 주소(…pages.dev)를 휴대폰으로 열기
+1. 옆 사람 주소에 방명록 남기기
+1. 내 주소에 옆 사람 글이 보이면 완성
+1. 주소가 안 열리면 1~2분 뒤 다시
 :::
 
 ---
@@ -1012,14 +1050,16 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 고친 뒤 다시 올리기
 #id-redeploy
 
-::: htmlart numbered
-* Claude 에게 수정 요청
-* ego 로 확인
-* 다시 올리기 — Create new deployment
-* site 폴더를 끌어 놓고 휴대폰으로 확인
+::: points
+1. Claude 에게 수정 요청
+1. ego 로 확인
+1. 다시 올리기 — Create new deployment
+1. site 폴더를 끌어 놓고 휴대폰으로 확인
 :::
 
-* 고칠 때마다 1 → 4 반복 — 이 반복을 자동으로 하는 방법이 부록 A
+::: answer
+고칠 때마다 1 → 4 반복 — 이 반복을 자동으로 하는 방법이 부록 A
+:::
 
 ---
 
@@ -1032,12 +1072,12 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 2시간 동안 한 일
 #id-recap
 
-::: htmlart numbered
-* 구구단 — 내 PC 안에서 1분 만에
-* 계정 — ego 와 가입 세 곳
-* 화면 — 요청서대로 만든 홈페이지
-* 저장 — Supabase 방명록
-* 공개 — pages.dev 주소
+::: points
+1. 구구단 — 내 PC 안에서 1분 만에
+1. 계정 — ego 와 가입 세 곳
+1. 화면 — 요청서대로 만든 홈페이지
+1. 저장 — Supabase 방명록
+1. 공개 — pages.dev 주소
 :::
 
 ---
@@ -1063,21 +1103,23 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
   - 만들기부터 공개까지 자동으로
 :::
 
-* 수업 중에는 다루지 않음 — 이미 익숙한 사람은 부록을 보며 스스로 진행
+::: answer
+수업 중에는 다루지 않음 — 이미 익숙한 사람은 부록을 보며 스스로 진행
+:::
 
 ---
 
 ## 실습 뒤 정리
 #id-cleanup
 
-::: htmlart numbered
-* 방명록 글 지우기
-  - Table Editor 에서 행 삭제
-* 쓰지 않으면 Supabase 프로젝트 일시정지
-  - 무료 프로젝트는 오래 안 쓰면 자동 정지
-* Cloudflare 프로젝트는 무료로 남음
-  - 필요 없으면 Delete
-* 비밀번호 메모는 안전한 곳으로
+::: points
+1. 방명록 글 지우기
+    - Table Editor 에서 행 삭제
+1. 쓰지 않으면 Supabase 프로젝트 일시정지
+    - 무료 프로젝트는 오래 안 쓰면 자동 정지
+1. Cloudflare 프로젝트는 무료로 남음
+    - 필요 없으면 Delete
+1. 비밀번호 메모는 안전한 곳으로
 :::
 
 ---
@@ -1102,13 +1144,13 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 왜 GitHub 를 붙이나
 #id-a-why
 
-::: htmlart compare
-* **직접 올리기** / 지금 방식
-  - 고칠 때마다 폴더를 다시 끌어 놓음
-  - 무엇이 바뀌었는지 기록이 없음
-* **GitHub 연동** / 부록 A
-  - Claude 가 올리면(push) 자동으로 배포
-  - 바뀐 기록이 모두 남고 되돌릴 수 있음
+::: versus
+* **직접 올리기** — 지금 방식
+    - 고칠 때마다 폴더를 다시 끌어 놓음
+    - 무엇이 바뀌었는지 기록이 없음
+* **GitHub 연동** — 부록 A
+    - Claude 가 올리면(push) 자동으로 배포
+    - 바뀐 기록이 모두 남고 되돌릴 수 있음
 :::
 
 ---
@@ -1128,12 +1170,12 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## A-1 저장소 만들기
 #id-a-repo
 
-::: htmlart numbered
-* ego 에서 GitHub → New repository
-* 이름 — archives-homepage
-* Private 선택
-  - 공개 저장소에는 비밀값이 영원히 남음
-* Create repository → 주소 복사
+::: points
+1. ego 에서 GitHub → New repository
+1. 이름 — archives-homepage
+1. Private 선택
+    - 공개 저장소에는 비밀값이 영원히 남음
+1. Create repository → 주소 복사
 :::
 
 ---
@@ -1155,12 +1197,12 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## A-3 Cloudflare 와 연결
 #id-a-connect
 
-::: htmlart numbered
-* Create → Pages → Connect to Git
-* GitHub 승인 → 저장소 선택
-* 빌드 설정
-  - Framework preset None · Build command 비움 · Build output directory site
-* Save and Deploy
+::: points
+1. Create → Pages → Connect to Git
+1. GitHub 승인 → 저장소 선택
+1. 빌드 설정
+    - Framework preset None · Build command 비움 · Build output directory site
+1. Save and Deploy
 :::
 
 ---
@@ -1168,14 +1210,16 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## A-4 이후 — 말하면 배포까지
 #id-a-loop
 
-::: htmlart numbered
-* Claude 에게 수정 요청
-* «커밋 · 푸시해 줘»
-* Cloudflare 가 자동으로 배포 (1~2분)
-* 주소에서 확인
+::: points
+1. Claude 에게 수정 요청
+1. «커밋 · 푸시해 줘»
+1. Cloudflare 가 자동으로 배포 (1~2분)
+1. 주소에서 확인
 :::
 
-* ex) «제목 색을 바꾸고 커밋 · 푸시해 줘» — 한 문장으로 수정부터 배포까지
+::: answer
+ex) «제목 색을 바꾸고 커밋 · 푸시해 줘» — 한 문장으로 수정부터 배포까지
+:::
 
 ---
 
@@ -1188,13 +1232,13 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 무엇이 달라지나
 #id-b-what
 
-::: htmlart compare
-* **지금** / 누구나 글쓰기
-  - 이름을 아무렇게나 적을 수 있음
-  - 장난 글을 막기 어려움
-* **Google 로그인 뒤** / 로그인한 사람만
-  - Google 계정 이름이 자동으로 들어감
-  - 읽기는 누구나, 쓰기는 로그인한 사람만
+::: versus
+* **지금** — 누구나 글쓰기
+    - 이름을 아무렇게나 적을 수 있음
+    - 장난 글을 막기 어려움
+* **Google 로그인 뒤** — 로그인한 사람만
+    - Google 계정 이름이 자동으로 들어감
+    - 읽기는 누구나, 쓰기는 로그인한 사람만
 :::
 
 ---
@@ -1202,33 +1246,35 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 세 곳을 잇는 흐름
 #id-b-flow
 
-::: htmlart process
+::: flow
 * 홈페이지
-  - 로그인 버튼
+    - 로그인 버튼
 * Google
-  - 계정 확인
+    - 계정 확인
 * Supabase
-  - 로그인 처리
+    - 로그인 처리
 * 홈페이지
-  - 글쓰기 허용
+    - 글쓰기 허용
 :::
 
-* 준비 순서 — Google 쪽 클라이언트 → Supabase 설정 → Claude 프롬프트
+::: answer
+준비 순서 — Google 쪽 클라이언트 → Supabase 설정 → Claude 프롬프트
+:::
 
 ---
 
 ## B-1 Google 클라이언트 만들기
 #id-b-google
 
-::: htmlart numbered
-* 새 프로젝트 만들기
-  - console.cloud.google.com
-* Google Auth Platform → 시작하기
-  - 대상 «외부» · 테스트 사용자에 내 메일
-* Clients → Create client
-  - 유형 «웹 애플리케이션»
-* 주소 두 개 등록 (다음 장)
-* Client ID · Client Secret 복사
+::: points
+1. 새 프로젝트 만들기
+    - console.cloud.google.com
+1. Google Auth Platform → 시작하기
+    - 대상 «외부» · 테스트 사용자에 내 메일
+1. Clients → Create client
+    - 유형 «웹 애플리케이션»
+1. 주소 두 개 등록 (다음 장)
+1. Client ID · Client Secret 복사
 :::
 
 ---
@@ -1249,15 +1295,15 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## B-3 Supabase 쪽 설정
 #id-b-supabase
 
-::: htmlart numbered
-* Google 켜기
-  - Authentication → Sign In / Providers
-* Client ID · Secret 붙여 넣기 → Save
-* 돌아올 주소 등록
-  - Authentication → URL Configuration
-  - Site URL · Redirect URLs 에 pages.dev 주소
-* Client Secret 은 Supabase 에만
-  - 홈페이지 · GitHub · 채팅 금지
+::: points
+1. Google 켜기
+    - Authentication → Sign In / Providers
+1. Client ID · Secret 붙여 넣기 → Save
+1. 돌아올 주소 등록
+    - Authentication → URL Configuration
+    - Site URL · Redirect URLs 에 pages.dev 주소
+1. Client Secret 은 Supabase 에만
+    - 홈페이지 · GitHub · 채팅 금지
 :::
 
 ---
@@ -1286,15 +1332,15 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 ## 사람의 일 · Claude 의 일
 #id-c-split
 
-::: htmlart compare
-* **사람만 할 수 있는 것** / 먼저 끝내 둠
-  - 가입 · 로그인 · 인증 메일
-  - 결제 · 비밀번호 입력
-  - 결과 확인과 승인
-* **Claude 에게 맡길 것** / 프롬프트 한 장
-  - 화면 · SQL · 설정 파일 만들기
-  - SQL 실행 · 배포 명령
-  - 브라우저로 결과 확인
+::: versus
+* **사람만 할 수 있는 것** — 먼저 끝내 둠
+    - 가입 · 로그인 · 인증 메일
+    - 결제 · 비밀번호 입력
+    - 결과 확인과 승인
+* **Claude 에게 맡길 것** — 프롬프트 한 장
+    - 화면 · SQL · 설정 파일 만들기
+    - SQL 실행 · 배포 명령
+    - 브라우저로 결과 확인
 :::
 
 ---
@@ -1319,7 +1365,9 @@ ego 로 Supabase 의 archives-homepage 프로젝트 Project Settings → API Key
 * 끝난 기준 — 주소에서 글이 저장되면 완료
 :::
 
-* 전문은 실습 자료 «실습_프롬프트.md» 부록 C — 복사해 폴더에 PROMPT.md 로 저장
+::: answer
+전문은 실습 자료 «실습_프롬프트.md» 부록 C — 복사해 폴더에 PROMPT.md 로 저장
+:::
 
 ---
 
