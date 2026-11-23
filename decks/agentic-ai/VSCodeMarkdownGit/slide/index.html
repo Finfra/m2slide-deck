@@ -1429,7 +1429,7 @@ html.ratio-fill .agenda-frame {
 
   </style>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"/>
-  <link rel="stylesheet" href="css/custom.css?v=1793755807062">
+  <link rel="stylesheet" href="css/custom.css?v=1795453647810">
   <script>
     // Suppress specific SVG errors from Markmap/D3 to avoid noise in PDF generation
     (function() {
@@ -1693,7 +1693,10 @@ html.ratio-fill .agenda-frame {
       
     </div>
 
-    
+    <div class="cover-meta">
+      
+      <span class="cover-version">1.1</span>
+    </div>
   </div>
 
   
@@ -1740,29 +1743,9 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">한 팀의 사례 — 웹 대화로 여기까지, 설계에서 막힘</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">웹 대화로 시작
-<ul>
-<li class="bullet-dash">화면 · 데이터베이스 연동까지</li>
-</ul>
-</li>
-<li class="bullet-dot">관리자 화면
-<ul>
-<li class="bullet-dash">설계가 필요해지며 멈춤</li>
-</ul>
-</li>
-<li class="bullet-dot">세 질문이 한꺼번에
-<ul>
-<li class="bullet-dash">위치 · 지시 · 바뀐 것</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">웹 대화로 시작</div><div class="vb-d">화면 · 데이터베이스 연동까지</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">관리자 화면</div><div class="vb-d">설계가 필요해지며 멈춤</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">세 질문이 한꺼번에</div><div class="vb-d">위치 · 지시 · 바뀐 것</div></div></div>
 
-<ul>
-<li class="bullet-dot">코드가 어디 있는지 · 무엇을 시켰는지 · 무엇이 바뀌었는지 — <strong>세 질문이 한꺼번에</strong> 나타남</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">코드가 어디 있는지 · 무엇을 시켰는지 · 무엇이 바뀌었는지 — <span class="vb-q">세 질문이 한꺼번에</span> 나타남</div></div>
 </section>
 
 <section data-slide-hash="#/6" class="layout-_mg">
@@ -1809,27 +1792,9 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">VS Code 란?</h2>
   <div class="contents-body">
 
-<ul>
-<li class="bullet-dot">Microsoft 가 만든 <strong>무료 코드 편집기</strong> — Windows · macOS · Linux 에서 같게 동작함</li>
-</ul>
+<div class="m2-vb m2-define" data-vb="define">Microsoft 가 만든 <strong>무료 코드 편집기</strong> — Windows · macOS · Linux 에서 같게 동작함</div>
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>메모장</strong> / 파일 하나
-<ul>
-<li class="bullet-dash">글자 하나의 파일을 다룸</li>
-<li class="bullet-dash">기능을 덧붙이기 어려움</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>VS Code</strong> / 폴더 전체
-<ul>
-<li class="bullet-dash">폴더 전체와 파일 수십 개를 다룸</li>
-<li class="bullet-dash">확장(extension)으로 기능을 덧붙임</li>
-<li class="bullet-dash">ex) AI 도우미(Claude Code 확장)</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">파일 하나</div><div class="vb-head">메모장</div><div class="vb-it">글자 하나의 파일을 다룸</div><div class="vb-it">기능을 덧붙이기 어려움</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">폴더 전체</div><div class="vb-head">VS Code</div><div class="vb-it">폴더 전체와 파일 수십 개를 다룸</div><div class="vb-it">확장(extension)으로 기능을 덧붙임</div><div class="vb-it">ex) AI 도우미(Claude Code 확장)</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/9" class="layout-_contents">
@@ -1903,9 +1868,7 @@ html.ratio-fill .agenda-frame {
 </ul>
 </div>
 
-<ul>
-<li class="bullet-dot">폴더 전체를 열면 <strong>파일 구조가 한눈에</strong> 보임 — 웹 대화에서는 볼 수 없던 <strong>«전체 모습»</strong> 임</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">폴더 전체를 열면 <span class="vb-q">파일 구조가 한눈에</span> 보임 — 웹 대화에서는 볼 수 없던 <span class="vb-q">«전체 모습»</span> 임</div></div>
 </section>
 
 <section data-slide-hash="#/12" class="layout-_contents">
@@ -1915,34 +1878,9 @@ html.ratio-fill .agenda-frame {
   </div>
   <h2 class="title">AI 에게 말로 일을 시키고, 바뀐 것을 바로 확인</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">말로 지시
-<ul>
-<li class="bullet-dash">무엇을 바꿀지</li>
-</ul>
-</li>
-<li class="bullet-dot">AI 가 파일을 고침
-<ul>
-<li class="bullet-dash">폴더 안에서 직접</li>
-</ul>
-</li>
-<li class="bullet-dot">고친 줄을 확인
-<ul>
-<li class="bullet-dash">같은 화면에서 줄 단위로</li>
-</ul>
-</li>
-<li class="bullet-dot">저장 지점 남김
-<ul>
-<li class="bullet-dash">Git 과 이어짐</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">말로 지시</div><div class="vb-d">무엇을 바꿀지</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">AI 가 파일을 고침</div><div class="vb-d">폴더 안에서 직접</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">고친 줄을 확인</div><div class="vb-d">같은 화면에서 줄 단위로</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">저장 지점 남김</div><div class="vb-d">Git 과 이어짐</div></div></div>
 
-<ul>
-<li class="bullet-dot">마음에 안 들면 받아들이지 않음 — 확장이 변경을 추적해 <strong>이전 상태로 되돌리는 기능</strong>도 제공함</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">마음에 안 들면 받아들이지 않음 — 확장이 변경을 추적해 <span class="vb-q">이전 상태로 되돌리는 기능</span>도 제공함</div></div>
 </section>
 
 <section data-slide-hash="#/13" class="layout-_mg">
@@ -1958,24 +1896,7 @@ html.ratio-fill .agenda-frame {
   </div>
   <h2 class="title">대화 한 개 vs 기능별 세션 분리</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>대화 한 개</strong> / 한 줄기
-<ul>
-<li class="bullet-dash">모든 기능을 한곳에서 지시</li>
-<li class="bullet-dash">맥락이 뒤엉킴</li>
-<li class="bullet-dash">앞의 지시를 AI 가 놓침</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>기능별 세션</strong> / 나눠서
-<ul>
-<li class="bullet-dash">기능마다 세션을 따로 엶</li>
-<li class="bullet-dash">각자 맥락이 깨끗함</li>
-<li class="bullet-dash">무엇을 시켰는지 추적됨</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">한 줄기</div><div class="vb-head">대화 한 개</div><div class="vb-it">모든 기능을 한곳에서 지시</div><div class="vb-it">맥락이 뒤엉킴</div><div class="vb-it">앞의 지시를 AI 가 놓침</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">나눠서</div><div class="vb-head">기능별 세션</div><div class="vb-it">기능마다 세션을 따로 엶</div><div class="vb-it">각자 맥락이 깨끗함</div><div class="vb-it">무엇을 시켰는지 추적됨</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/15" class="layout-_contents">
@@ -1986,28 +1907,11 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">같은 지시를 세 번 하면 Skill, 맥락이 다르면 Agent</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>Skill</strong> / 같은 지시를 세 번
-<ul>
-<li class="bullet-dash">반복하는 지시를 저장함</li>
-<li class="bullet-dash">다음부터는 이름으로 부름</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>Agent</strong> / 맥락이 다를 때
-<ul>
-<li class="bullet-dash">맥락을 분리해 따로 맡김</li>
-<li class="bullet-dash">서로의 지시가 섞이지 않음</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">같은 지시를 세 번</div><div class="vb-head">Skill</div><div class="vb-it">반복하는 지시를 저장함</div><div class="vb-it">다음부터는 이름으로 부름</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">맥락이 다를 때</div><div class="vb-head">Agent</div><div class="vb-it">맥락을 분리해 따로 맡김</div><div class="vb-it">서로의 지시가 섞이지 않음</div></div></div>
 
-<ul>
-<li class="bullet-dot">팀이 같이 쓸 것은 <strong>저장소</strong>에 두어 모두가 공유함</li>
-</ul>
+<div class="m2-vb m2-answer" data-vb="answer">팀이 같이 쓸 것은 <span class="vb-q">저장소</span>에 두어 모두가 공유함</div>
 
-<p><!-- [줄임] 시간이 모자라면 이 장부터 접음 --></p></div>
+<!-- [줄임] 시간이 모자라면 이 장부터 접음 --></div>
 </section>
 
 <section data-slide-hash="#/16" class="layout-_contents">
@@ -2019,22 +1923,16 @@ html.ratio-fill .agenda-frame {
   <div class="contents-body">
 
 <ul>
-<li class="bullet-dot">시행착오 사례: <strong>윈도우에서만</strong> 테스트가 실패함 — 설정 한 줄이 다른 운영체제의 문법이었음</li>
+<li class="bullet-dot">시행착오 사례: <strong>Windows 에서만</strong> 테스트가 실패함 — 설정 한 줄이 다른 운영체제의 문법이었음</li>
 </ul>
 
-<div class="m2-htmlart htmlart-chevron" data-htmlart="chevron" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">원인 진단</li>
-<li class="bullet-dot">이슈 등록</li>
-<li class="bullet-dot">수정</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-t">원인 진단</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-t">이슈 등록</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-t">수정</div></div></div>
 
 <ul>
 <li class="bullet-dot">코드가 아니라 <strong>환경의 차이</strong>인 경우가 많음</li>
 </ul>
 
-<p><!-- [줄임] 시간이 모자라면 이 장을 접음 --></p></div>
+<!-- [줄임] 시간이 모자라면 이 장을 접음 --></div>
 </section>
 
 <section data-slide-hash="#/17" class="layout-_contents">
@@ -2138,7 +2036,7 @@ html.ratio-fill .agenda-frame {
   </div>
   <h2 class="title">기호 몇 개로 쓰는 쉬운 문서</h2>
   <div class="contents-body">
-<p><!-- 기호 범례(2026.10.25) — 줄머리 기호라 br 로 줄을 나눠 실제 Markdown 문서 모양으로 둠. 실제 문서 예시는 아래 --></p>
+<!-- 기호 범례(2026.10.25) — 줄머리 기호라 br 로 줄을 나눠 실제 Markdown 문서 모양으로 둠. 실제 문서 예시는 아래 -->
 <div class="m2-htmlart htmlart-annotate" data-htmlart="annotate" style="--htmlart-n:5">
 <ul>
 <li class="bullet-dot">target: #&nbsp;제목<br>-&nbsp;목록 &#42;&#42;굵게&#42;&#42;<br>>&nbsp;인용</li>
@@ -2149,8 +2047,8 @@ html.ratio-fill .agenda-frame {
 </ul>
 </div>
 
-<p><!-- 본문 | 미리보기 좌우 대조(2026.10.25 사용자 요청) — VS Code 편집기 탭과 미리보기 탭 모양. 위 범례의 기호 넷(# - ** >)을 예시가 모두 씀.</p>
-<p>     오른쪽은 슬라이드 안에서 # 이 새 장을 만들지 않게 HTML 로 씀 --></p>
+<!-- 본문 | 미리보기 좌우 대조(2026.10.25 사용자 요청) — VS Code 편집기 탭과 미리보기 탭 모양. 위 범례의 기호 넷(# - ** >)을 예시가 모두 씀.
+     오른쪽은 슬라이드 안에서 # 이 새 장을 만들지 않게 HTML 로 씀 -->
 <div class="md-compare" style="display:flex;gap:4%;align-items:flex-start;text-align:left;">
 <div style="flex:0 0 48%;max-width:48%;border:1px solid #d4d4d4;border-radius:8px;overflow:hidden;">
 <div style="font-size:0.5em;background:#ececec;color:#555;padding:4px 14px;border-bottom:1px solid #d4d4d4;">VS Code 편집기 — <b style="color:#333;">회원가입.md</b></div>
@@ -2185,30 +2083,7 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">왜 AI 가 잘 알아듣나</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-hexagon" data-htmlart="hexagon" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">구조가 뚜렷함
-<ul>
-<li class="bullet-dash">기호로 제목·목록·표를 구분</li>
-</ul>
-</li>
-<li class="bullet-dot">텍스트만
-<ul>
-<li class="bullet-dash">서식 없이 내용에 집중</li>
-</ul>
-</li>
-<li class="bullet-dot">그대로 주고받음
-<ul>
-<li class="bullet-dash">AI 의 답변도 같은 기호</li>
-</ul>
-</li>
-<li class="bullet-dot">제목을 달아 요청
-<ul>
-<li class="bullet-dash">목표 · 조건 · 완료 기준</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">구조가 뚜렷함</div><div class="vb-d">기호로 제목·목록·표를 구분</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">텍스트만</div><div class="vb-d">서식 없이 내용에 집중</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">그대로 주고받음</div><div class="vb-d">AI 의 답변도 같은 기호</div></div><div class="vb-card"><div class="vb-n">4</div><div class="vb-t">제목을 달아 요청</div><div class="vb-d">목표 · 조건 · 완료 기준</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/23" class="layout-_contents">
@@ -2219,30 +2094,9 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">워드·한글 파일과 무엇이 다른가</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>워드·한글</strong> / .docx · .hwp
-<ul>
-<li class="bullet-dash">서식이 섞인 파일</li>
-<li class="bullet-dash">변경 비교는 전용 기능으로</li>
-<li class="bullet-dash">AI 와는 복사·변환이 필요</li>
-<li class="bullet-dash">해당 프로그램이 있어야 열림</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>Markdown</strong> / .md
-<ul>
-<li class="bullet-dash">일반 텍스트</li>
-<li class="bullet-dash">Git 으로 줄 단위 비교</li>
-<li class="bullet-dash">AI 가 그대로 읽고 씀</li>
-<li class="bullet-dash">어떤 편집기든 열림</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">.docx · .hwp</div><div class="vb-head">워드·한글</div><div class="vb-it">서식이 섞인 파일</div><div class="vb-it">변경 비교는 전용 기능으로</div><div class="vb-it">AI 와는 복사·변환이 필요</div><div class="vb-it">해당 프로그램이 있어야 열림</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">.md</div><div class="vb-head">Markdown</div><div class="vb-it">일반 텍스트</div><div class="vb-it">Git 으로 줄 단위 비교</div><div class="vb-it">AI 가 그대로 읽고 씀</div><div class="vb-it">어떤 편집기든 열림</div></div></div>
 
-<ul>
-<li class="bullet-dot">문서의 변경도 코드처럼 <strong>Git 으로 추적</strong>됨</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">문서의 변경도 코드처럼 <span class="vb-q">Git 으로 추적</span>됨</div></div>
 </section>
 
 <section data-slide-hash="#/24" class="layout-_contents">
@@ -2253,32 +2107,9 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">어디에 쓰이나</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-matrix" data-htmlart="matrix" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">README
-<ul>
-<li class="bullet-dash">프로젝트를 소개하는 첫 장</li>
-</ul>
-</li>
-<li class="bullet-dot">기획 · 요구사항
-<ul>
-<li class="bullet-dash">AI 에게 주는 요청서</li>
-</ul>
-</li>
-<li class="bullet-dot">AI 지침 파일
-<ul>
-<li class="bullet-dash">ex) CLAUDE.md — 매 대화 시작 때 읽음</li>
-</ul>
-</li>
-<li class="bullet-dot">이슈 · 보고
-<ul>
-<li class="bullet-dash">작업의 기록</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-t">README</div><div class="vb-d">프로젝트를 소개하는 첫 장</div></div><div class="vb-card"><div class="vb-t">기획 · 요구사항</div><div class="vb-d">AI 에게 주는 요청서</div></div><div class="vb-card"><div class="vb-t">AI 지침 파일</div><div class="vb-d">ex) CLAUDE.md — 매 대화 시작 때 읽음</div></div><div class="vb-card"><div class="vb-t">이슈 · 보고</div><div class="vb-d">작업의 기록</div></div></div>
 
-<p><!-- [줄임] 시간이 모자라면 이 장을 접음 --></p></div>
+<!-- [줄임] 시간이 모자라면 이 장을 접음 --></div>
 </section>
 
 <section data-slide-hash="#/25" class="layout-_contents">
@@ -2289,36 +2120,11 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">지침 파일 — AI 에게 맡기는 «프로젝트 사용 설명서»</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">CLAUDE.md 작성
-<ul>
-<li class="bullet-dash">프로젝트의 규칙과 배경</li>
-</ul>
-</li>
-<li class="bullet-dot">AI 가 읽음
-<ul>
-<li class="bullet-dash">매 대화 시작 때</li>
-</ul>
-</li>
-<li class="bullet-dot">설명 반복 없음
-<ul>
-<li class="bullet-dash">대화마다 다시 말하지 않음</li>
-</ul>
-</li>
-<li class="bullet-dot">저장소로 공유
-<ul>
-<li class="bullet-dash">팀이 같은 지침을 씀</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">CLAUDE.md 작성</div><div class="vb-d">프로젝트의 규칙과 배경</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">AI 가 읽음</div><div class="vb-d">매 대화 시작 때</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">설명 반복 없음</div><div class="vb-d">대화마다 다시 말하지 않음</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">저장소로 공유</div><div class="vb-d">팀이 같은 지침을 씀</div></div></div>
 
-<ul>
-<li class="bullet-dot">팀이 같이 쓰는 지침은 <strong>저장소에 두어</strong> 모두가 같은 지침을 씀 — Git 과 이어짐</li>
-</ul>
+<div class="m2-vb m2-answer" data-vb="answer">팀이 같이 쓰는 지침은 <span class="vb-q">저장소에 두어</span> 모두가 같은 지침을 씀 — Git 과 이어짐</div>
 
-<p><!-- [줄임] 어디에 쓰이나 장과 함께 접을 수 있음 --></p></div>
+<!-- [줄임] 어디에 쓰이나 장과 함께 접을 수 있음 --></div>
 </section>
 
 <section data-slide-hash="#/26" class="layout-_contents">
@@ -2328,22 +2134,7 @@ html.ratio-fill .agenda-frame {
   </div>
   <h2 class="title">기획과 요청을 적어 두면 AI 가 정확히 이해함</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>말로만 한 요청</strong> / 흩어짐
-<ul>
-<li class="bullet-dash">대화가 끝나면 사라짐</li>
-<li class="bullet-dash">무엇을 시켰는지 다시 찾기 어려움</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>적어 둔 요청</strong> / 남음
-<ul>
-<li class="bullet-dash">AI 가 정확히 이해함</li>
-<li class="bullet-dash">나중에 다시 읽기 쉬움</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">흩어짐</div><div class="vb-head">말로만 한 요청</div><div class="vb-it">대화가 끝나면 사라짐</div><div class="vb-it">무엇을 시켰는지 다시 찾기 어려움</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">남음</div><div class="vb-head">적어 둔 요청</div><div class="vb-it">AI 가 정확히 이해함</div><div class="vb-it">나중에 다시 읽기 쉬움</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/27" class="layout-_contents">
@@ -2354,28 +2145,9 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">코드를 읽고 쓴 설계 문서의 함정</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>코드 → 문서</strong> / 거꾸로
-<ul>
-<li class="bullet-dash">만들어진 코드를 보고 씀</li>
-<li class="bullet-dash">코드가 기준이 됨</li>
-<li class="bullet-dash">설계가 코드를 이끌지 못함</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>문서 → 코드</strong> / 바로
-<ul>
-<li class="bullet-dash">기준 문서를 먼저 씀</li>
-<li class="bullet-dash">문서가 기준이 됨</li>
-<li class="bullet-dash">설계가 코드를 이끎</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">거꾸로</div><div class="vb-head">코드 → 문서</div><div class="vb-it">만들어진 코드를 보고 씀</div><div class="vb-it">코드가 기준이 됨</div><div class="vb-it">설계가 코드를 이끌지 못함</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">바로</div><div class="vb-head">문서 → 코드</div><div class="vb-it">기준 문서를 먼저 씀</div><div class="vb-it">문서가 기준이 됨</div><div class="vb-it">설계가 코드를 이끎</div></div></div>
 
-<ul>
-<li class="bullet-dot">기준 문서는 코드보다 <strong>먼저</strong> 있어야 함</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">기준 문서는 코드보다 <span class="vb-q">먼저</span> 있어야 함</div></div>
 </section>
 
 <section data-slide-hash="#/28" class="layout-_mg">
@@ -2413,28 +2185,11 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">작업 하나 = 이슈 하나</h2>
   <div class="contents-body">
 
-<ul>
-<li class="bullet-dot">시행착오 사례: <strong>이슈가 0건</strong>인 채로 저장 지점만 쌓임 — 이유 없는 저장 지점은 나중에 따라갈 수 없음</li>
-</ul>
+<div class="m2-vb m2-define" data-vb="define">시행착오 사례: <strong>이슈가 0건</strong>인 채로 저장 지점만 쌓임 — 이유 없는 저장 지점은 나중에 따라갈 수 없음</div>
 
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">이슈 하나 만들기
-<ul>
-<li class="bullet-dash">작업을 시작할 때</li>
-</ul>
-</li>
-<li class="bullet-dot">작업</li>
-<li class="bullet-dot">저장 지점 남기기</li>
-<li class="bullet-dot">이슈에 이어 두기
-<ul>
-<li class="bullet-dash">끝나면 연결</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">이슈 하나 만들기</div><div class="vb-d">작업을 시작할 때</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">작업</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">저장 지점 남기기</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">이슈에 이어 두기</div><div class="vb-d">끝나면 연결</div></div></div>
 
-<p><!-- [줄임] 시간이 모자라면 이 장을 접음 --></p></div>
+<!-- [줄임] 시간이 모자라면 이 장을 접음 --></div>
 </section>
 
 <section data-slide-hash="#/31" class="layout-_contents">
@@ -2445,25 +2200,7 @@ html.ratio-fill .agenda-frame {
   <h2 class="title">Markdown 정리 — 한 장 요약</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-hexagon" data-htmlart="hexagon" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">메모 양식
-<ul>
-<li class="bullet-dash">사람과 AI 가 함께 읽음</li>
-</ul>
-</li>
-<li class="bullet-dot">적어 둔 요청
-<ul>
-<li class="bullet-dash">남고 다시 읽힘</li>
-</ul>
-</li>
-<li class="bullet-dot">요구사항에서 시작
-<ul>
-<li class="bullet-dash">사슬이 변경까지 이어짐</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">메모 양식</div><div class="vb-d">사람과 AI 가 함께 읽음</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">적어 둔 요청</div><div class="vb-d">남고 다시 읽힘</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">요구사항에서 시작</div><div class="vb-d">사슬이 변경까지 이어짐</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/32" class="layout-_mg">
@@ -2516,25 +2253,7 @@ html.ratio-fill .agenda-frame {
 <li class="bullet-dot">프로젝트 폴더 하나를 <strong>저장소(repository)</strong> 로 지정하면, 그 안의 변화가 이력으로 쌓임</li>
 </ul>
 
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">커밋(commit)
-<ul>
-<li class="bullet-dash">저장 지점 하나</li>
-</ul>
-</li>
-<li class="bullet-dot">브랜치(branch)
-<ul>
-<li class="bullet-dash">갈라져 나온 작업 줄기</li>
-</ul>
-</li>
-<li class="bullet-dot">병합(merge)
-<ul>
-<li class="bullet-dash">갈라진 줄기를 하나로 합침</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">커밋(commit)</div><div class="vb-d">저장 지점 하나</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">브랜치(branch)</div><div class="vb-d">갈라져 나온 작업 줄기</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">병합(merge)</div><div class="vb-d">갈라진 줄기를 하나로 합침</div></div></div>
 
 <ul>
 <li class="bullet-dot">코드만의 도구가 아님 — 기획서·문서도 같은 방식으로 관리함</li>
@@ -2615,16 +2334,12 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   </div>
   <h2 class="title">되돌리기 — 망가지면 잘 되던 시점으로</h2>
   <div class="contents-body">
-<div class="m2-cols">
-<div class="m2-col">
-<ul>
-<li class="bullet-dot">결과가 망가지면 <strong>잘 되던 시점</strong>으로 되돌림</li>
-<li class="bullet-dot">AI 가 자율로 고친 뒤에도 마찬가지임</li>
-</ul>
-
-</div>
-<div class="m2-col">
+<div class="m2-cols columns img-nocap">
+<div class="m2-col column" style="flex: 0 0 53.76%; max-width: 53.76%">
 <div class="media-container"><img src="./img/ig-03-rollback.png" alt="되돌리기 — 잘못된 변경에서 정상이던 저장 2 로 되감음"></div>
+</div>
+<div class="m2-col column" style="flex: 0 0 42.24%; max-width: 42.24%">
+<div class="m2-vb m2-points" data-vb="points"><div class="vb-pt">결과가 망가지면 <strong>잘 되던 시점</strong>으로 되돌림</div><div class="vb-pt">AI 가 자율로 고친 뒤에도 마찬가지임</div></div>
 </div>
 </div></div>
 </section>
@@ -2634,31 +2349,12 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
     <div class="contents-head-left">Git</div>
     <div class="contents-head-right"></div>
   </div>
-  <h2 class="title">Git 과 GitHub 는 다름</h2>
+  <h2 class="title">Git 과 GitHub 은 다름</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>Git</strong> / 내 PC 의 프로그램
-<ul>
-<li class="bullet-dash">이력을 관리함</li>
-<li class="bullet-dash">저장 지점 · 브랜치 · 되돌리기</li>
-<li class="bullet-dash">비유: 문서의 버전 기록</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>GitHub</strong> / 웹 서비스
-<ul>
-<li class="bullet-dash">저장소를 올려 두고 공유함</li>
-<li class="bullet-dash">팀 공유 · 이슈</li>
-<li class="bullet-dash">비유: 팀 공유 폴더</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">내 PC 의 프로그램</div><div class="vb-head">Git</div><div class="vb-it">이력을 관리함</div><div class="vb-it">저장 지점 · 브랜치 · 되돌리기</div><div class="vb-it">비유: 문서의 버전 기록</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">웹 서비스</div><div class="vb-head">GitHub</div><div class="vb-it">저장소를 올려 두고 공유함</div><div class="vb-it">팀 공유 · 이슈</div><div class="vb-it">비유: 팀 공유 폴더</div></div></div>
 
-<ul>
-<li class="bullet-dot">혼자 쓰면 Git 만으로 충분하고, <strong>팀이 쓰면 GitHub 같은 공유 공간</strong>이 더해짐</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">혼자 쓰면 Git 만으로 충분하고, <span class="vb-q">팀이 쓰면 GitHub 같은 공유 공간</span>이 더해짐</div></div>
 </section>
 
 <section data-slide-hash="#/39" class="layout-_contents">
@@ -2669,25 +2365,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">모두 코딩하고, 모두 문서 만들고, 모두 리뷰함</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-cycle" data-htmlart="cycle" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">코딩
-<ul>
-<li class="bullet-dash">모두가 함</li>
-</ul>
-</li>
-<li class="bullet-dot">문서 만들기
-<ul>
-<li class="bullet-dash">모두가 함</li>
-</ul>
-</li>
-<li class="bullet-dot">리뷰
-<ul>
-<li class="bullet-dash">모두가 함</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">코딩</div><div class="vb-d">모두가 함</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">문서 만들기</div><div class="vb-d">모두가 함</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">리뷰</div><div class="vb-d">모두가 함</div></div></div>
 
 <ul>
 <li class="bullet-dot">역할을 나눠 맡는 방식이 아님 — 그래서 팀원 모두가 <strong>같은 최신본</strong>을 나눠 가져야 함</li>
@@ -2702,34 +2380,9 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   </div>
   <h2 class="title">같은 줄기에 동시에 올리면 덮어쓰기 위험</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:4">
-<ul>
-<li class="bullet-dot">원래 줄기에 직접
-<ul>
-<li class="bullet-dash">첫 2주, 전부 main 에</li>
-</ul>
-</li>
-<li class="bullet-dot">같은 곳을 동시에
-<ul>
-<li class="bullet-dash">두 사람이 함께 고침</li>
-</ul>
-</li>
-<li class="bullet-dot">한쪽이 사라짐
-<ul>
-<li class="bullet-dash">덮어쓰기</li>
-</ul>
-</li>
-<li class="bullet-dot">줄기를 갈라서
-<ul>
-<li class="bullet-dash">각자 갈래에서 작업</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">원래 줄기에 직접</div><div class="vb-d">첫 2주, 전부 main 에</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">같은 곳을 동시에</div><div class="vb-d">두 사람이 함께 고침</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">한쪽이 사라짐</div><div class="vb-d">덮어쓰기</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">줄기를 갈라서</div><div class="vb-d">각자 갈래에서 작업</div></div></div>
 
-<ul>
-<li class="bullet-dot">시행착오 사례 — 변경이 전부 <strong>원래 줄기(<code>main</code>)에 직접</strong> 올라가던 시기의 일임</li>
-</ul></div>
+<div class="m2-vb m2-answer" data-vb="answer">시행착오 사례 — 변경이 전부 <span class="vb-q">원래 줄기(<code>main</code>)에 직접</span> 올라가던 시기의 일임</div></div>
 </section>
 
 <section data-slide-hash="#/41" class="layout-_contents">
@@ -2740,17 +2393,12 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">브랜치 = 멀티버스</h2>
   <div class="contents-body">
 
-<div class="m2-cols">
-<div class="m2-col">
+<div class="m2-cols columns img-nocap">
+<div class="m2-col column" style="flex: 0 0 53.76%; max-width: 53.76%">
 <div class="media-container"><img src="./img/ig-04-multiverse.png" alt="브랜치 = 멀티버스 — 원래 타임라인에서 평행 우주가 갈라져 실험하고 다시 합쳐짐"></div>
 </div>
-<div class="m2-col">
-
-<ul>
-<li class="bullet-dot"><strong><code>main</code></strong> 은 원래 타임라인, <strong>브랜치</strong>는 갈라진 평행 우주</li>
-<li class="bullet-dot">실험은 갈라진 곳에서 하고, 마음에 들면 <strong>병합</strong>으로 합침</li>
-<li class="bullet-dot">망가져도 원래 타임라인은 그대로임</li>
-</ul>
+<div class="m2-col column" style="flex: 0 0 42.24%; max-width: 42.24%">
+<div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><strong><code>main</code></strong> 은 원래 타임라인, <strong>브랜치</strong>는 갈라진 평행 우주</div><div class="vb-pt">실험은 갈라진 곳에서 하고, 마음에 들면 <strong>병합</strong>으로 합침</div><div class="vb-pt">망가져도 원래 타임라인은 그대로임</div></div>
 </div>
 </div></div>
 </section>
@@ -2762,15 +2410,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   </div>
   <h2 class="title">Git 작업 흐름 — 개요</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:5">
-<ul>
-<li class="bullet-dot">저장소 만들기</li>
-<li class="bullet-dot">저장 지점 남기기</li>
-<li class="bullet-dot">갈라서 실험</li>
-<li class="bullet-dot">병합</li>
-<li class="bullet-dot">공유 공간에 올리기</li>
-</ul>
-</div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">저장소 만들기</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">저장 지점 남기기</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">갈라서 실험</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">4</div><div class="vb-t">병합</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">5</div><div class="vb-t">공유 공간에 올리기</div></div></div>
 
 <ul>
 <li class="bullet-dot">세부 명령보다 <strong>다섯 단계의 순서</strong>가 중요함</li>
@@ -2786,25 +2426,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">접속 토큰 — 비밀번호 대신 쓰는 열쇠</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-hexagon" data-htmlart="hexagon" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">비밀번호 대신
-<ul>
-<li class="bullet-dash">저장소에 접속할 때 토큰을 씀</li>
-</ul>
-</li>
-<li class="bullet-dot">남기지 않음
-<ul>
-<li class="bullet-dash">문서 · 채팅 · 화면에 값을 두지 않음</li>
-</ul>
-</li>
-<li class="bullet-dot">노출되면 새로 발급
-<ul>
-<li class="bullet-dash">한 번 노출되면 폐기함</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">비밀번호 대신</div><div class="vb-d">저장소에 접속할 때 토큰을 씀</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">남기지 않음</div><div class="vb-d">문서 · 채팅 · 화면에 값을 두지 않음</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">노출되면 새로 발급</div><div class="vb-d">한 번 노출되면 폐기함</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/44" class="layout-_contents">
@@ -2854,24 +2476,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   </div>
   <h2 class="title">왜 쓰는가 — 한 장 결론</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>쓰지 않으면</strong> / 흩어짐
-<ul>
-<li class="bullet-dash">VS Code — 복사·붙여넣기로 옮기다 전체를 놓침</li>
-<li class="bullet-dash">Markdown — 말로만 한 요청이 흩어져 사라짐</li>
-<li class="bullet-dash">Git — 무엇이 바뀌었는지 · 되돌릴 곳을 모름</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>쓰면</strong> / 남음
-<ul>
-<li class="bullet-dash">VS Code — 폴더 전체를 보며 AI 에게 직접 시킴</li>
-<li class="bullet-dash">Markdown — 적어 둔 요청이 남고 AI 가 정확히 읽음</li>
-<li class="bullet-dash">Git — 이력이 남고, 망가져도 되돌리고, 공유함</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">흩어짐</div><div class="vb-head">쓰지 않으면</div><div class="vb-it">VS Code — 복사·붙여넣기로 옮기다 전체를 놓침</div><div class="vb-it">Markdown — 말로만 한 요청이 흩어져 사라짐</div><div class="vb-it">Git — 무엇이 바뀌었는지 · 되돌릴 곳을 모름</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">남음</div><div class="vb-head">쓰면</div><div class="vb-it">VS Code — 폴더 전체를 보며 AI 에게 직접 시킴</div><div class="vb-it">Markdown — 적어 둔 요청이 남고 AI 가 정확히 읽음</div><div class="vb-it">Git — 이력이 남고, 망가져도 되돌리고, 공유함</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/46" class="layout-_contents">
@@ -2933,16 +2538,12 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">세 개가 맞물리는 그림</h2>
   <div class="contents-body">
 
-<div class="m2-cols">
-<div class="m2-col">
+<div class="m2-cols columns img-nocap">
+<div class="m2-col column" style="flex: 0 0 53.76%; max-width: 53.76%">
 <div class="media-container"><img src="./img/ig-09-cycle.png" alt="세 톱니바퀴 — VS Code AI 에게 일을 시킴, Markdown 기준을 적음, Git 변경을 지킴, 가운데 AI 를 다루는 습관"></div>
 </div>
-<div class="m2-col">
-
-<ul>
-<li class="bullet-dot"><strong>돌파구는 코딩 실력이 아니라, AI 를 다루는 습관</strong>임</li>
-<li class="bullet-dot">필요성을 <strong>먼저</strong> 따지고 기술을 도입함 — 확정할 것과 미룰 것을 가름</li>
-</ul>
+<div class="m2-col column" style="flex: 0 0 42.24%; max-width: 42.24%">
+<div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><strong>돌파구는 코딩 실력이 아니라, AI 를 다루는 습관</strong>임</div><div class="vb-pt">필요성을 <strong>먼저</strong> 따지고 기술을 도입함 — 확정할 것과 미룰 것을 가름</div></div>
 </div>
 </div></div>
 </section>
@@ -2955,35 +2556,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">돌아가서 할 일 5가지</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:5">
-<ul>
-<li class="bullet-dot">VS Code 에서 폴더 전체를 열기
-<ul>
-<li class="bullet-dash">기능마다 세션을 나눔</li>
-</ul>
-</li>
-<li class="bullet-dot">기획·요구사항을 Markdown 한 장으로
-<ul>
-<li class="bullet-dash">작업마다 이슈 하나를 만듦</li>
-</ul>
-</li>
-<li class="bullet-dot">작업 폴더를 Git 저장소로 만들기
-<ul>
-<li class="bullet-dash">첫 저장 지점을 남김</li>
-</ul>
-</li>
-<li class="bullet-dot">변경은 브랜치를 따서
-<ul>
-<li class="bullet-dash">마음에 들면 병합함</li>
-</ul>
-</li>
-<li class="bullet-dot">이번에 확정할 것과 미룰 것을 가르기
-<ul>
-<li class="bullet-dash">목록으로 정리함</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>VS Code 에서 폴더 전체를 열기<div class="vb-sub">기능마다 세션을 나눔</div></div><div class="vb-pt"><span class="vb-n">2</span>기획·요구사항을 Markdown 한 장으로<div class="vb-sub">작업마다 이슈 하나를 만듦</div></div><div class="vb-pt"><span class="vb-n">3</span>작업 폴더를 Git 저장소로 만들기<div class="vb-sub">첫 저장 지점을 남김</div></div><div class="vb-pt"><span class="vb-n">4</span>변경은 브랜치를 따서<div class="vb-sub">마음에 들면 병합함</div></div><div class="vb-pt"><span class="vb-n">5</span>이번에 확정할 것과 미룰 것을 가르기<div class="vb-sub">목록으로 정리함</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/50" class="layout-_contents">
@@ -2993,25 +2566,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   </div>
   <h2 class="title">질의응답</h2>
   <div class="contents-body">
-<div class="m2-htmlart htmlart-cycle" data-htmlart="cycle" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">어디 있나
-<ul>
-<li class="bullet-dash">VS Code</li>
-</ul>
-</li>
-<li class="bullet-dot">무엇을 시켰나
-<ul>
-<li class="bullet-dash">Markdown</li>
-</ul>
-</li>
-<li class="bullet-dot">무엇이 바뀌었나
-<ul>
-<li class="bullet-dash">Git</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-summary" data-vb="summary"><div class="vb-card"><div class="vb-n">1</div><div class="vb-t">어디 있나</div><div class="vb-d">VS Code</div></div><div class="vb-card"><div class="vb-n">2</div><div class="vb-t">무엇을 시켰나</div><div class="vb-d">Markdown</div></div><div class="vb-card"><div class="vb-n">3</div><div class="vb-t">무엇이 바뀌었나</div><div class="vb-d">Git</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/51" class="layout-_contents">
@@ -3044,25 +2599,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">부록 — 배포 전 보안 점검 3가지</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-numbered" data-htmlart="numbered" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">함수별 권한 확인
-<ul>
-<li class="bullet-dash">빠진 곳이 없는지 점검함</li>
-</ul>
-</li>
-<li class="bullet-dot">외부 호출 한도
-<ul>
-<li class="bullet-dash">한도가 걸려 있는지 점검함</li>
-</ul>
-</li>
-<li class="bullet-dot">외부 라이브러리 버전 고정
-<ul>
-<li class="bullet-dash">버전을 고정함</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-points" data-vb="points"><div class="vb-pt"><span class="vb-n">1</span>함수별 권한 확인<div class="vb-sub">빠진 곳이 없는지 점검함</div></div><div class="vb-pt"><span class="vb-n">2</span>외부 호출 한도<div class="vb-sub">한도가 걸려 있는지 점검함</div></div><div class="vb-pt"><span class="vb-n">3</span>외부 라이브러리 버전 고정<div class="vb-sub">버전을 고정함</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/53" class="layout-_contents">
@@ -3073,21 +2610,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">부록 — 데이터 활용 권한은 보유 주체가 정함</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-process" data-htmlart="process" style="--htmlart-n:3">
-<ul>
-<li class="bullet-dot">보유 주체 확인
-<ul>
-<li class="bullet-dash">누가 보유한 자료인지</li>
-</ul>
-</li>
-<li class="bullet-dot">자료별 표 정리
-<ul>
-<li class="bullet-dash">출처 · 공개 여부 · 근거 · 승인자</li>
-</ul>
-</li>
-<li class="bullet-dot">승인 받기</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-flow" data-vb="flow"><div class="vb-step"><div class="vb-n">1</div><div class="vb-t">보유 주체 확인</div><div class="vb-d">누가 보유한 자료인지</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">2</div><div class="vb-t">자료별 표 정리</div><div class="vb-d">출처 · 공개 여부 · 근거 · 승인자</div></div><div class="vb-arw" aria-hidden="true">›</div><div class="vb-step"><div class="vb-n">3</div><div class="vb-t">승인받기</div></div></div></div>
 </section>
 
 <section data-slide-hash="#/54" class="layout-_contents"><div class="m2-license-badge" data-m2-license="true">Powered by finfra.kr, Made by m2slide</div>
@@ -3098,22 +2621,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
   <h2 class="title">부록 — 막히는 확인 사항은 일찍 담당 부서에</h2>
   <div class="contents-body">
 
-<div class="m2-htmlart htmlart-compare" data-htmlart="compare" style="--htmlart-n:2">
-<ul>
-<li class="bullet-dot"><strong>일찍 물음</strong> / 바로 진행
-<ul>
-<li class="bullet-dash">연결 작업 전체를 막는 사항을 먼저 찾음</li>
-<li class="bullet-dash">ex) 외부 클라우드를 쓸 수 있는지 여부</li>
-</ul>
-</li>
-<li class="bullet-dot"><strong>늦게 물음</strong> / 돌아감
-<ul>
-<li class="bullet-dash">작업 뒤에야 막힘이 드러남</li>
-<li class="bullet-dash">늦게 묻는 만큼 돌아가야 하는 길이 길어짐</li>
-</ul>
-</li>
-</ul>
-</div></div>
+<div class="m2-vb m2-versus" data-vb="versus"><div class="vb-col"><div class="vb-sub">바로 진행</div><div class="vb-head">일찍 물음</div><div class="vb-it">연결 작업 전체를 막는 사항을 먼저 찾음</div><div class="vb-it">ex) 외부 클라우드를 쓸 수 있는지 여부</div></div><div class="vb-vs" aria-hidden="true">vs</div><div class="vb-col"><div class="vb-sub">돌아감</div><div class="vb-head">늦게 물음</div><div class="vb-it">작업 뒤에야 막힘이 드러남</div><div class="vb-it">늦게 묻는 만큼 돌아가야 하는 길이 길어짐</div></div></div></div>
 </section>
 
     </div>
@@ -6132,7 +5640,7 @@ AI 가 일하는 속도가 빠를수록 이력은 더 필요함
                               "children": []
                         },
                         {
-                              "content": "<a href=\"#/38\">Git 과 GitHub 는 다름</a>",
+                              "content": "<a href=\"#/38\">Git 과 GitHub 은 다름</a>",
                               "children": []
                         },
                         {
