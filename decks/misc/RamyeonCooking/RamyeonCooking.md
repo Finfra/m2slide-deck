@@ -3,7 +3,7 @@ title: 라면 끓이는 방법
 subtitle: 5분이면 완성하는 최적의 한 그릇
 author: Finfra
 type: ppt
-release_date: 2026-07-13
+release_date: 2026-11-24
 ---
 
 ## 준비물
@@ -35,7 +35,7 @@ release_date: 2026-07-13
 
 ## 전체 흐름
 
-::: htmlart process
+::: flow
 * 물 550ml 끓이기
 * 스프 먼저 투입
 * 면 투입·타이머 시작
